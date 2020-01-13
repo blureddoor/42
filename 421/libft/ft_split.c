@@ -6,7 +6,7 @@
 /*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 13:49:55 by lvintila          #+#    #+#             */
-/*   Updated: 2020/01/12 14:05:31 by lvintila         ###   ########.fr       */
+/*   Updated: 2020/01/13 21:50:40 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,20 +100,3 @@ char				**ft_split(char const *s, char c)
 	tab[i] = NULL;
 	return (tab);
 }
-
-int				main(void)
-{
-	char	**tab;
-	unsigned int	i;
-
-	i = 0;
-	tab = ft_split("      split       this for   me  !", ' ');
-	if (!tab[0])
-		ft_putendl_fd("ok\n", 1);
-	while (tab[i] != NULL)
-	{
-		ft_putendl_fd(tab[i], 1);
-		i++;
-	}
-}
-
