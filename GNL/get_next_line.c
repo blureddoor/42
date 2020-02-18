@@ -6,7 +6,7 @@
 /*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 19:13:32 by lvintila          #+#    #+#             */
-/*   Updated: 2020/02/16 18:25:38 by lvintila         ###   ########.fr       */
+/*   Updated: 2020/02/18 20:18:53 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	read_file(int fd, char *buf, char **str)
 {
-	int ret;
-	char *temp;
+	int		ret;
+	char	*temp;
 
 	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
@@ -31,14 +31,30 @@ int	read_file(int fd, char *buf, char **str)
 	return (ret);
 }
 
+int	check_line(char **line, char **str, int ret)
+{
+	char *tmp;
+
+	if (ret == 0)
+	{
+		*line = ft_strdup(*str);
+		free(*str);
+		*str = NULL;
+		return (0);
+	}
+	*line = ft_substr(*str, 0, ft_strtab(*str));
+	tmp = *str;
+	*str = ft_substr(tmp, ft_strtab(tmp) + 1, ft_strlen(tmp) - ft_strtab(tmp));
+	free(tmp);
+	return (1);
+}
+
 int	get_next_line(int fd, char **line)
 {
 	static char	*str;
 	char		*buf;
 	int			ret;
-	char		*tmp;
 
-	ret = 42;
 	buf = NULL;
 	if (fd == -1 || line == NULL || BUFFER_SIZE <= 0 || read(fd, buf, 0) == -1)
 		return (-1);
@@ -48,17 +64,7 @@ int	get_next_line(int fd, char **line)
 		str = ft_strdup("");
 	if (ft_strtab(str) == -1)
 		ret = read_file(fd, buf, &str);
-	if (ret == 0)
-	{
-		*line = ft_strdup(str);
-		free(str);
-		str = NULL;
-		return (0);
-	}
-	tmp = NULL;
-	*line = ft_substr(str, 0, ft_strtab(str));
-	tmp = str;
-	str = ft_substr(str, ft_strtab(str) + 1, ft_strlen(str) - ft_strtab(str));
-	free(tmp);
-	return (1);
+	else
+		ret = (ft_strtab(str) + 1);
+	return (check_line(line, &str, ret));
 }
