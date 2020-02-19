@@ -6,7 +6,7 @@
 /*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 19:14:11 by lvintila          #+#    #+#             */
-/*   Updated: 2020/02/18 20:26:46 by lvintila         ###   ########.fr       */
+/*   Updated: 2020/02/19 21:34:14 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 4096
+#  define BUFFER_SIZE 16
 # endif
 
 int		get_next_line(int const fd, char **line);
@@ -25,4 +25,5 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s1);
 int		ft_strtab(const char *s);
+
 #endif
