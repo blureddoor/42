@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_char.c                                      :+:      :+:    :+:   */
+/*   write_char.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 18:19:56 by lvintila          #+#    #+#             */
-/*   Updated: 2020/09/24 18:37:00 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/24 19:46:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	format_percent(t_struct *f)
+void	write_percent(t_struct *f)
 {
 	int	num;
 
@@ -40,7 +40,7 @@ void	format_percent(t_struct *f)
 	}
 }
 
-void	format_char(t_struct *f, va_list ap)
+void	write_char(t_struct *f, va_list ap)
 {
 	int				num;
 	unsigned char	c;

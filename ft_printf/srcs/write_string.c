@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_string.c                                    :+:      :+:    :+:   */
+/*   write_string.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 17:19:38 by lvintila          #+#    #+#             */
-/*   Updated: 2020/09/24 18:39:49 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/24 19:47:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	char_handler(t_struct *f, va_list ap)
 		left_aligned_char(f, c, str, i);
 }
 
-void	format_string(t_struct *f, va_list ap)
+void	write_string(t_struct *f, va_list ap)
 {
 	char_handler(f, ap);
 }

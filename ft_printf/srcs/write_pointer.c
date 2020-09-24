@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_pointer.c                                   :+:      :+:    :+:   */
+/*   write_pointer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 23:17:21 by lvintila          #+#    #+#             */
-/*   Updated: 2020/09/24 18:19:16 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/24 19:48:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		left_aligned(int width_p, int precision_p, int hex_len_p, char *s)
 	return (i);
 }
 
-void	format_pointer(t_struct *f, va_list ap, int p)
+void	write_pointer(t_struct *f, va_list ap, int p)
 {
 	unsigned long long	pointer;
 	int					hex_len_p;
