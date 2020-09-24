@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aux.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila lvintila<@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 17:10:34 by lvintila          #+#    #+#             */
-/*   Updated: 2020/09/24 17:20:27 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/24 18:41:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	write_zeros(int n)
 	}
 }
 
-int	unsigned_nbr_len(uintmax_t n, int base)
+int		unsigned_nbr_len(uintmax_t n, int base)
 {
 	int i;
-	
+
 	i = 0;
 	if (n == 0)
 		return (1);
@@ -52,8 +52,8 @@ char	*ft_add_str(char *a, char *b)
 	if (a != NULL && b != NULL)
 	{
 		temp = ft_strjoin(a, b);
-		free (a);
-		free (b);
+		free(a);
+		free(b);
 	}
 	else
 	{
@@ -67,5 +67,5 @@ char	*ft_add_str(char *a, char *b)
 
 void	write_error(void)
 {
-	write(1,  "", 0);
+	write(1, "", 0);
 }
