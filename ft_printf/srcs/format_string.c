@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   format_string.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/24 17:19:38 by lvintila          #+#    #+#             */
+/*   Updated: 2020/09/24 17:20:12 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	right_aligned_char(t_struct *f, char c, char *s, int i)
@@ -5,7 +17,7 @@ void	right_aligned_char(t_struct *f, char c, char *s, int i)
 	if (f->minus != 0)
 	{
 		c = ' ';
-		if (f->precisiontf && i> f->precision)
+		if (f->precisiontf && i > f->precision)
 			i = f->precision;
 		f->len = f->len + write(1, s, i);
 		f->nprinted = f->nprinted + i;
@@ -20,7 +32,7 @@ void	right_aligned_char(t_struct *f, char c, char *s, int i)
 
 void	left_aligned_char(t_struct *f, char c, char *s, int, i)
 {
-	if (f->minus == =)
+	if (f->minus == 0)
 	{
 		if ( f->precisiontf && i > f->precision)
 			i = f->precision;

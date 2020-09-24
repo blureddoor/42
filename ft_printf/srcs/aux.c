@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   aux.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lvintila lvintila<@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/24 17:10:34 by lvintila          #+#    #+#             */
+/*   Updated: 2020/09/24 17:20:27 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	write_blanks(int n)
@@ -53,7 +65,7 @@ char	*ft_add_str(char *a, char *b)
 	return (temp);
 }
 
-void	error(void)
+void	write_error(void)
 {
 	write(1,  "", 0);
 }

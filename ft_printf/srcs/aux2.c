@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   aux2.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/24 17:12:50 by lvintila          #+#    #+#             */
+/*   Updated: 2020/09/24 17:21:21 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 char	*ft_itoa_base(uintmax_t  value, uintmax_t base)
 {
-	char			*str;
+	char				*str;
 	unsigned long long	n;
-	int			i;
+	int					i;
 
 	i = 0;
 	n =  value;
@@ -21,11 +33,11 @@ char	*ft_itoa_base(uintmax_t  value, uintmax_t base)
 	return (str);
 }
 
-void	with_star(const char *format, t_struct *f, va_list ap)
+void	width_star(const char *format, t_struct *f, va_list ap)
 {
-	if (format[f->i] ==  '*';
+	if (format[f->i] ==  '*')
 	{
-		f->width = va_arg(ap, int);
+		f->width = va_arg(ap, int)
 		if (f->width < 0)
 		{
 			f->minus = 1;
@@ -40,15 +52,15 @@ char	*ft_itoa_base_upper(intmax_t value, intmax_t base)
 {
 	char		*str;
 	long long	n;
-	int		sign;
-	int		i;
+	int			sign;
+	int			i;
 
 	n = (value < 0) ? -value : value;
-	sign = (value < 0) && base == 10) ? -1 :  0;
+	sign = (value < 0) && (base == 10) ? -1 :  0;
 	i = (sign == -1) ? 2 : 1;
 	while ((n /= base) >= 1)
 		i++;
-	str = char*)malloc(sizeof(char) * (i + 1));
+	str = (char*)malloc(sizeof(char) * (i + 1));
 	str[i] = '\0';
 	n = (value < 0) ? -value : value;
 	while (i-- + sign)
@@ -78,7 +90,7 @@ int	signed_nbr_len(intmax_t n, int base)
 	return (len);
 }
 
-char	find_char(t_sstruct *f)
+char	find_char(t_struct *f)
 {
 	char c;
 
