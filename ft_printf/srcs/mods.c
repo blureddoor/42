@@ -40,7 +40,66 @@ void	width(const char *format, t_struct *f, va_list ap)
 		f->width = ft_atoi(&format[f->i]);
 		while (format[f->i] >= '0' && format[f->i] <= '9')
 		{
-			
+			f->i++;
+			if (format[f->i] == '*')
+			{
+				if (f->width < 0)
+				{
+					f->minus = 1;
+					f->width = -(f->width);
+				}
+				while (format[f->i] == '*')
+					f->i++;
+			}
+		}
+	}
+}
+
+void	precision(const char *format, t_Struct*f, va_list ap, int p)
+{
+	int i;
+
+	i = f->i;
+	if (format[i] == '.')
+	{
+		i++;
+		f->precisiontf = 1;
+		if (format[i] >= '0' && format[i] <= '9')
+		{
+			f->precision = ft_atoi(&format[i]);
+			while (format[i] >= '0' && format[i]<='9')
+				i++;
+		}
+		else if (format[f->i] == '*')
+		{
+			p= va_arg(ap, int);
+			if (p >= 0)
+				f->precision = p;
+			else if (p < 0)
+				f->precisiontf = 0;
+			while (format[f->i] == '*')
+				i++;
+		}
+	}
+	f->i = i;
+}
+
+void	length(const char *format, t_struct *f, int i)
+{
+	i = f->i;
+	if (ft_strchr("hlLjz",format[i]))
+	{
+		if (format[i]==  'h')
+		{
+			if (format[i + 1] == 'h')
+				f->length  = HH;
+			else if (format[i - 1]  != 'h')
+				f->length  = H;
+		}
+		if (format[i] == 'l')
+		{
+			if (format[i + 1] == 'l')
+				f->length  = LL;
 		}
 	}
 }
