@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 23:16:07 by lvintila          #+#    #+#             */
-/*   Updated: 2020/09/24 19:58:08 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/25 20:01:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	right_aligned_int(t_struct *f, int int_len, char *str, int sign)
 	while (f->width-- > 0)
 		f->nprinted += write(1, &c, 1);
 	if (f->space != 0)
-		f->nprinted += write(1, &c, 1);
+		f->nprinted += write(1, " ", 1);
 	if (sign != 0 && sign_c != '\0')
 		f->nprinted += write(1, &sign_c, 1);
 	while (f->precision-- > 0)
@@ -112,7 +112,7 @@ void	write_int(t_struct *f, va_list ap, int sign, intmax_t n)
 	else if (f->length == H)
 		n = (short int)va_arg(ap, int);
 	else if (f->length == LL)
-		n = (long long int)va_Arg(ap, long long int);
+		n = (long long int)va_arg(ap, long long int);
 	else if (f->length == L)
 		n = (long int)va_arg(ap, long int);
 	if (f->plus && n >= 0)
@@ -125,7 +125,7 @@ void	write_int(t_struct *f, va_list ap, int sign, intmax_t n)
 	if (n == LLONG_MIN)
 	{
 		f->nprinted += write(1, "-9223372036854775808", 20);
-		return ;
+		return;
 	}
 	format_extraction_int(n, f, sign);
 }

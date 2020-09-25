@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 17:12:50 by lvintila          #+#    #+#             */
-/*   Updated: 2020/09/24 18:44:52 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/25 20:14:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_itoa_base(uintmax_t  value, uintmax_t base)
 	unsigned long long	n;
 	int					i;
 
-	i = 0;
+	i = 1;
 	n = value;
 	while ((n /= base) >= 1)
 		i++;
