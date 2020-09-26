@@ -55,7 +55,7 @@ void	width(const char *format, t_struct *f, va_list ap)
 	}
 }
 
-void	precision(const char *format, t_Struct*f, va_list ap, int p)
+void	precision(const char *format, t_struct *f, va_list ap, int p)
 {
 	int i;
 
@@ -72,7 +72,7 @@ void	precision(const char *format, t_Struct*f, va_list ap, int p)
 		}
 		else if (format[f->i] == '*')
 		{
-			p= va_arg(ap, int);
+			p = va_arg(ap, int);
 			if (p >= 0)
 				f->precision = p;
 			else if (p < 0)
@@ -87,19 +87,34 @@ void	precision(const char *format, t_Struct*f, va_list ap, int p)
 void	length(const char *format, t_struct *f, int i)
 {
 	i = f->i;
-	if (ft_strchr("hlLjz",format[i]))
+	if (ft_strchr("hlLjz", format[i]))
 	{
-		if (format[i]==  'h')
+		if (format[i] == 'h')
 		{
 			if (format[i + 1] == 'h')
 				f->length  = HH;
 			else if (format[i - 1]  != 'h')
-				f->length  = H;
+				f->length = H;
 		}
 		if (format[i] == 'l')
 		{
 			if (format[i + 1] == 'l')
 				f->length  = LL;
+			if (format[i - 1] == 'l')
+				f->length  = L;
 		}
+		if (format[i] == 'L')
+			f->length = BIGL;
 	}
+	while (ft_strchr("hlLjz", format[i]))
+		i++;
+	f->i = i;
+}
+
+void	mods(const char *format, t_struct *f, va_list ap)
+{
+	flags(format, f);
+	width(fotmat, f, ap);
+	precision(format, f, ap, 0);
+	length(format, f, 0);
 }
