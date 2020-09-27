@@ -17,6 +17,8 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdint.h>
+# include <limits.h>
 
 # define H				1
 # define HH				2

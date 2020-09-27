@@ -14,7 +14,7 @@
 # define LIBFT_H
 
 # include <stdlib.h>
-
+# include <unistd.h>
 typedef struct		s_list
 {
 	void			*content;
@@ -71,6 +71,5 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 size_t				ft_intlen(int n);
 size_t				ft_intmaxlen_base(intmax_t n, unsigned int base);
 int					ft_ischarset(int c, const char *charset);
-char				*ft_itoa_base(int n, char *base);
 int					ft_iterative_power(int nb, int power);
 #endif

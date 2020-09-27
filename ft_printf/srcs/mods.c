@@ -114,7 +114,7 @@ void	length(const char *format, t_struct *f, int i)
 void	mods(const char *format, t_struct *f, va_list ap)
 {
 	flags(format, f);
-	width(fotmat, f, ap);
+	width(format, f, ap);
 	precision(format, f, ap, 0);
 	length(format, f, 0);
 }

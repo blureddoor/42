@@ -78,7 +78,7 @@ void	write_pointer(t_struct *f, va_list ap, int p)
 	hex_len_p = hex_count(pointer) + 1;
 	str = ft_itoa_base(pointer, 16);
 	precision_p = f->precision - hex_len_p;
-	width = f->width - hex_len_p - p;
+	width_p = f->width - hex_len_p - p;
 	if (f->precisiontf && f->precision == 0)
 		hex_len_p = 0;
 	if (f->minus)

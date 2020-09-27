@@ -26,6 +26,6 @@ void	converts(char c, va_list ap, t_struct *f)
 		write_udecint(f, ap);
 	else if (c == 'x' || c == 'X')
 		write_hex(f, ap, c);
-	else if (c = '%')
+	else if (c == '%')
 		write_percent(f);
 }

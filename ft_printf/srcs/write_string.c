@@ -30,7 +30,7 @@ void	right_aligned_char(t_struct *f, char c, char *s, int i)
 	}
 }
 
-void	left_aligned_char(t_struct *f, char c, char *s, int, i)
+void	left_aligned_char(t_struct *f, char c, char *s, int i)
 {
 	if (f->minus == 0)
 	{
