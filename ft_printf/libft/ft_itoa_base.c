@@ -6,37 +6,30 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 19:16:52 by lvintila          #+#    #+#             */
-/*   Updated: 2020/09/17 17:56:22 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/25 20:11:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_itoa_base(int n, char *base)
+char	*ft_itoa_base(uintmax_t n, uintmax_t base)
 {
-	int				count;
-	unsigned int	tmp;
-	char			*res;
-	unsigned int	base_len;
+	int					count;
+	unsigned long long	tmp;
+	char				*res;
 
-	base_len = ft_strlen(base);
-	count = (n < 0) ? 2 : 1;
-	tmp = (n < 0) ? -n : n;
-	while (tmp >= base_len && (tmp /= base_len))
-		++count;
-	tmp = (n < 0) ? -n : n;
-	if (!(res = (char*)malloc(sizeof(char) * (count + 1))))
-		return (NULL);
-	if (n < 0)
-		res[0] = '-';
+	count = 1;
+	tmp = n;
+	while ((tmp /= base) >= 1)
+		count++;
+	res = (char*)malloc(sizeof(char) * (i + 1));
 	res[count] = '\0';
-	while (tmp >= base_len)
+	tmp = n;
+	while (count-- > 0)
 	{
-		--count;
-		res[count] = base[tmp % base_len];
-		tmp /= base_len;
+		res[count] = (tmp % base < 10) ? tmp % base + '0' :
+			tmp % base + 'a' - 10;
+		n /= base;
 	}
-	res[--count] = base[tmp % base_len];
 	return (res);
 }
