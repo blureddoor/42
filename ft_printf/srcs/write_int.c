@@ -75,7 +75,7 @@ void	left_aligned_int(t_struct *f, int hex_len_p, char *str, int sign)
 	}
 }
 
-void	format_extraction_int(intmax_t, t_struct *f, int sign)
+void	format_extraction_int(intmax_t n, t_struct *f, int sign)
 {
 	int		int_len;
 	char	*str;

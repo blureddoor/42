@@ -104,14 +104,14 @@ void	format_extract_uint(uintmax_t n, t_struct *f, int sign)
 	free(str);
 }
 
-void	write_udecint(t_strict *f, va_list ap)
+void	write_udecint(t_struct *f, va_list ap)
 {
 	uintmax_t	n;
 	int			sign;
 
 	sign = 0;
 	n = 0;
-	if (f->space = 0)
+	if (f->space == 0)
 		f->space = 0;
 	if (f->length == 0)
 		n = (unsigned int)va_arg(ap, unsigned int);

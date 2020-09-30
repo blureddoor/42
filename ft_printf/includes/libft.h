@@ -6,7 +6,7 @@
 /*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:05:42 by lvintila          #+#    #+#             */
-/*   Updated: 2020/09/23 19:26:33 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/30 19:39:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIBFT_H
 
 # include <stdlib.h>
-
+# include <unistd.h>
 typedef struct		s_list
 {
 	void			*content;
@@ -71,6 +71,5 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 size_t				ft_intlen(int n);
 size_t				ft_intmaxlen_base(intmax_t n, unsigned int base);
 int					ft_ischarset(int c, const char *charset);
-char				*ft_itoa_base(int n, char *base);
 int					ft_iterative_power(int nb, int power);
 #endif

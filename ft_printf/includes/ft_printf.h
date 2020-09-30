@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 19:25:19 by lvintila          #+#    #+#             */
-/*   Updated: 2020/09/30 19:33:00 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/30 19:38:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdint.h>
+# include <limits.h>
 
 # define H				1
 # define HH				2
@@ -51,6 +53,7 @@ typedef struct			s_struct
 }						t_struct;
 
 typedef struct			s_fstruct
+{
 	char				*str1;
 	char				*str2;
 	int					precision;

@@ -37,7 +37,7 @@ void	width_star(const char *format, t_struct *f, va_list ap)
 {
 	if (format[f->i] == '*')
 	{
-		f->width = va_arg(ap, int)
+		f->width = va_arg(ap, int);
 		if (f->width < 0)
 		{
 			f->minus = 1;
@@ -95,7 +95,7 @@ char	find_char(t_struct *f)
 	char c;
 
 	if (f->zero && !f->precisiontf)
-		c = '0'
+		c = '0';
 	else
 		c = ' ';
 	return (c);
