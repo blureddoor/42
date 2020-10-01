@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 19:14:49 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/01 19:31:00 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/01 19:47:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,7 +323,6 @@ int	my_printf(const char *src, ...)
 	void	(*tab_function[8]) (va_list *) = {my_printf_char, my_printf_str,
 		my_printf_p, my_printf_nbr, my_printf_nbr, my_printf_u, my_printf_hex,
 		my_printf_uhex};
-
 	char	tab_index[9] = {'c', 's', 'p', 'd', 'i', 'u', 'x', 'X', 0};
 	va_list my_list;
 	int i;
@@ -346,9 +345,10 @@ int	my_printf(const char *src, ...)
 			write(1, &src[i + 1], 1);
 		i++;
 	}
+	va_end(my_list);
 	return (strlen(src));
 }
-
+/*
 int	main(void)
 
 {
@@ -391,7 +391,7 @@ int	main(void)
 }
 
 
-/*
+
 int main (void) 
 {
 	int ch;
@@ -403,9 +403,9 @@ int main (void)
 	}
 	return(0);
 }
-*/
 
-/*
+
+
 int main()
 {
 	my_printf(":%s:\n", "Hello World!");

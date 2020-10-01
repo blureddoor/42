@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mods.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <@student.42madrid.com>             +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/30 19:48:46 by marvin            #+#    #+#             */
-/*   Updated: 2020/09/30 20:29:10 by marvin           ###   ########.fr       */
+/*   Created: 2020/09/30 19:48:46 by lvintila          #+#    #+#             */
+/*   Updated: 2020/10/01 19:39:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,9 @@ void	precision(const char *format, t_struct *f, va_list ap, int n)// .
 }
 
 
-void	mods()
-{}
+void	mods(const char *format, t_stuct *f, va_list ap)
+{
+	flags(format, f);
+	width(format, f, ap);
+	precision(format, f, ap, 0);b
+}

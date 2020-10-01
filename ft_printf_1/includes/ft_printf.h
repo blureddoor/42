@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 19:31:09 by lvintila          #+#    #+#             */
-/*   Updated: 2020/09/30 20:01:43 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/01 19:58:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 # define POSITIVE		66
 # define NEGATIVE		88
 
-# define CCONVERSIONS	"cspdiux X%"
-# define CFLAGS			"#-+ .*0"
-# define ALLSYMBOLS		"cspdiuxX %#-+ .*0"
+# define CCONVERSIONS	"cspdiuxX%"
+# define CFLAGS			"+0.*"
+# define ALLSYMBOLS		"cspdiuxX%+0.*"
 
 typedef struct	s_struct
 {
