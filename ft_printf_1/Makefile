@@ -12,36 +12,33 @@ DIR_O		=	obj
 
 HEADER		=	includes
 
-SOURCES		=	
+SOURCES		=	aux.c ft_printf.c mods.c \
 
-SRCS		=	$(addprefix $(DIR_S)/ ,$(SOURCES))
+SRCS		=	$(addprefix $(DIR_S)/,$(SOURCES))
 
-OBJS		=	$(addprefix $(DIR_S)/, $(SRCS:.c=.o))
+OBJS		=	$(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 
-OBJS_BONUS	=	${SRCS_BONUS:.c=.o}
+all:			$(NAME)
 
-RM			=	rm -f
-
-$(NAME):	${OBJS}
+$(NAME):	$(OBJS)
 				@make -C $(LIBFT)
 				@cp libft/libft.a ./$(NAME)
-				@ar rc ${NAME} ${OBJS}
-				@ranlib ${NAME}
+				@ar rc $(NAME) $(OBJS)
+				@ranlib $(NAME)
 
-$(DIR_O)/%.o:	$(SRCS)/%.c $(HEADER)/ft_printf.h
+$(DIR_O)/%.o:	$(DIR_S)/%.c $(HEADER)/ft_printf.h
 				@mkdir -p obj
 				@$(CC) $(FLAGS) -I $(HEADER) -o $@ -c $<
 
-all:		${NAME}
 
 clean:
-			${RM} ${OBJS}
+			@rm -f $(OBJS)
 			@rm -rf $(DIR_O)
 			@make clean -C $(LIBFT)
 fclean:		clean
-			${RM} ${NAME}
+			@rm -f $(NAME)
 			@make fclean -C $(LIBFT)
 
-re:			fclean bonus
+re:			fclean all
 
-.PHONY:		bonus all clean fclean re
+.PHONY:		all clean fclean re

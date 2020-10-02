@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 19:14:49 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/01 19:47:47 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/02 18:55:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,191 @@
 #include <stdlib.h>
 #include <math.h>
 
+typedef struct  s_struct
+{
+    char        *format;
+    int         i;
+    int         nprinted;
+    int         minus;
+    int         zero;
+    int         width;
+    int         precision;
+}               t_struct;
+
+void    ft_bzero(void *s, size_t n)
+{
+    memset(s, 0, n);
+}
+
+
+size_t  ft_strlen(const char *str);
+
+void    write_zeros(int n)
+{
+    while (n > 0)
+    {
+        write(1, "0", 1);
+        n--;
+    }
+}
+
+void    write_blanks(int n)
+{
+    while (n > 0)
+    {
+        write(1, " ", 1);
+            n--;
+    }
+}
+
+void    width_star(const char *format, t_struct *f, va_list ap)
+{
+    if (format[f->i] == '*')
+    {
+        f->width = va_arg(ap, int);
+        if (f->width < 0)
+        {
+            f->minus = 1;
+            f->width = -(f->width);
+        }
+        while (format[f->i] == '*')
+            f->i++;
+    }
+}
+
+int ft_isdigit(int c)
+{
+    if (c >= 48 && c <= 57)
+        return (1);
+    return (0);
+}
+
+int ft_atoi(const char *str)
+{
+    int             neg;
+    long long int   res;
+
+    res = 0;
+    while (*str == ' ' || *str == '\t' || *str == '\n'
+            || *str == '\v' || *str == '\f' || *str == '\r')
+        str++;
+    if (*str == '+' || *str == '-')
+    {
+        if (*str == '-')
+            neg = -1;
+        str++;
+        if (!(ft_isdigit(*str) && *str != '-'))
+            return (0);
+    }
+    while (ft_isdigit(*str))
+    {
+        res = res * 10 + *str - 48;
+        str++;
+        if (res > 2147483648 && neg == 1)
+            return (-1);
+        else if (res > 2147483648 && neg == -1)
+            return (0);
+    }
+    return (neg == -1 ? -res : res);
+}
+
+size_t  ft_strlen(const char *str)
+{
+    size_t  len;
+
+    len = 0;
+    while (str[len] != '\0')
+        len++;
+    return (len);
+}
+
+char    *ft_strchr(const char *s, int c)
+{
+    while (*s)
+    {
+        if (*s == c)
+            return ((char*)s);
+        s++;
+    }
+    if (c == '\0')
+        return ((char*)s);
+    return (0);
+}
+
+void    flags(const char *format, t_struct *f) // "-0"
+{
+    while(ft_strchr("-0", format[f->i]))
+    {
+        if (format[f->i] == '-')
+            f->minus = 1;
+        if (format[f->i] == '0')
+            f->zero = 1;
+        f->i++;
+    }
+}
+
+void    width(const char *format, t_struct *f, va_list ap)//  width
+{
+    width_star(format, f, ap);
+    if (format[f->i] >= '0' && format[f->i] <= '9')
+    {
+        f->width = ft_atoi(&format[f->i]);
+        while (format[f->i] >= '0' && format[f->i] <= '9')
+        {
+            f->i++;
+            if (format[f->i] == '*')
+            {
+                if (f->width > 0)
+                {
+                    f->minus = 1;
+                    f->width = -(f->width);
+                }
+                while (format[f->i] == '*')
+                    f->i++;
+            }
+        }
+    }
+}
+
+
+void    precision(const char *format, t_struct *f, va_list ap, int n)// .
+{
+    int i;
+
+    i = f->i;
+    if (format[i] == '.')
+    {
+        i++;
+        f->precision = 1;
+        if (format[i] >= '0' && format[i] <= '9')
+        {
+            f->precision = ft_atoi(&format[i]);
+            while (format[i] >= '0' && format[i] <= '9')
+                i++;
+        }
+        else if (format[f->i] == '*')
+        {
+            n = va_arg(ap, int);
+            if (n >= 0)
+                f->precision = n;
+            else if (n < 0)
+                f->precision = 0;
+            while (format[f->i] == '*')
+                i++;
+        }
+    }
+    f->i = i;
+}
+
+void    mods(const char *format, t_struct *f, va_list ap)
+{
+    flags(format, f);
+    width(format, f, ap);
+    precision(format, f, ap, 0);
+}
+
+/*void	mods(const char *format, t_struct *f, va_list ap);
+
 int		ft_strlen(const char *str)
 {
 	int	i;
@@ -26,7 +211,7 @@ int		ft_strlen(const char *str)
 		i++;
 	return (i);
 }
-
+*/
 char	*ft_strdup(const char *s1)
 {
 	char	*new;
@@ -326,15 +511,25 @@ int	my_printf(const char *src, ...)
 	char	tab_index[9] = {'c', 's', 'p', 'd', 'i', 'u', 'x', 'X', 0};
 	va_list my_list;
 	int i;
+	int j;
 	int	tmp_index;
+	t_struct *f;
 
 	i = 0;
+
+	ft_bzero(f, 0);
 	va_start(my_list, src);
 	while (src[i] != 0)
 	{
 		if (i != 0 && src[i - 1] == '%')
 		{
 			tmp_index = 0;
+			j = 0;
+			while (src[i] != tab_index[j])
+			{
+				mods(src, f, my_list);
+				j++;	
+			}
 			tmp_index = find_index(tab_index, src[i]);
 			if (tmp_index != -1)
 				(*tab_function[tmp_index])(&my_list);
@@ -348,7 +543,7 @@ int	my_printf(const char *src, ...)
 	va_end(my_list);
 	return (strlen(src));
 }
-/*
+
 int	main(void)
 
 {
@@ -389,7 +584,7 @@ int	main(void)
 	printf("Just print the percentage sign:%%\n");
 	my_printf("%d", ft_strlen(str));
 }
-
+/*
 
 
 int main (void) 

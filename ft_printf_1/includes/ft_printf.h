@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 19:31:09 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/01 19:58:07 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/02 21:06:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct	s_struct
 }				t_struct;
 
 void			mods();
+void			width_star(const char *format, t_struct *f, va_list ap);
 void			converts(char c, va_list ap, t_struct *f);
 int				unsigned_nbr_len(uintmax_t n, int base);
 int				signed_nbr_len(intmax_t n, int base);

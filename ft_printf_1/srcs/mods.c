@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 19:48:46 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/01 19:39:00 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/02 21:06:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	flags(const char *format, t_struct *f) // "-0"
 {
-	while(ft_strchr("-0"), format[f->i])
+	while(ft_strchr("-0", format[f->i]))
 	{
 		if (format[f->i] == '-')
 			f->minus = 1;
@@ -30,7 +30,7 @@ void	width(const char *format, t_struct *f, va_list ap)//  width
 	if (format[f->i] >= '0' && format[f->i] <= '9')
 	{
 		f->width = ft_atoi(&format[f->i]);
-		while (format[f->i] >= '0' && foramt[f->i] <= '9')
+		while (format[f->i] >= '0' && format[f->i] <= '9')
 		{
 			f->i++;
 			if (format[f->i] == '*')
@@ -77,9 +77,9 @@ void	precision(const char *format, t_struct *f, va_list ap, int n)// .
 }
 
 
-void	mods(const char *format, t_stuct *f, va_list ap)
+void	mods(const char *format, t_struct *f, va_list ap)
 {
 	flags(format, f);
 	width(format, f, ap);
-	precision(format, f, ap, 0);b
+	precision(format, f, ap, 0);
 }
