@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 19:25:19 by lvintila          #+#    #+#             */
-/*   Updated: 2020/09/23 23:11:33 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/30 19:38:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct			s_fstruct
 	int					beforedecimalnbr;
 	char				c;
 	char				sign;
-	int					signint;
+	int					sign_int;
 	int					hash;
 	int					dot;
 }						t_fstruct;
