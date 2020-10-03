@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-char	*ft_itoa_base(uintmax_t  value, uintmax_t base)
+char	*ft_itoa_base(uintmax_t value, uintmax_t base)
 {
 	char				*str;
 	unsigned long long	n;
@@ -51,9 +51,9 @@ void	width_star(const char *format, t_struct *f, va_list ap)
 char	*ft_itoa_base_upper(intmax_t value, intmax_t base)
 {
 	char		*str;
-	long long	n;
 	int			sign;
 	int			i;
+	long long	n;
 
 	n = (value < 0) ? -value : value;
 	sign = (value < 0) && (base == 10) ? -1 : 0;
@@ -72,7 +72,7 @@ char	*ft_itoa_base_upper(intmax_t value, intmax_t base)
 	return (str);
 }
 
-int		signed_nbr_len(intmax_t n, int base)
+int	signed_nbr_len(intmax_t n, int base)
 {
 	int len;
 
