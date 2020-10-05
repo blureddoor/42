@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_printf_char.c                                   :+:      :+:    :+:   */
+/*   print_nbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/02 20:13:25 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/02 20:35:05 by marvin           ###   ########.fr       */
+/*   Created: 2020/10/02 20:36:48 by lvintila          #+#    #+#             */
+/*   Updated: 2020/10/05 22:26:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	my_printf_char(va_list *my_list)
+/*
+void	print_nbr(va_list *my_list)
 {
-	char c;
+	int num;
 
-	c = va_arg(*my_list, int);
-	write(1, &c, 1);
+	num = va_arg(*my_list, int);
+	ft_putnbr(num);
+
+}
+*/
+
+void	print_nbr(t_struct *f, va_list *my_list)
+{
+	intmax_t	num;
+	int			sign;
+	
+	if (n >= 0)
+		sign = POSITIVE;
+	else if (n < 0)
+		sign = NEGATIVE;
+	num = (int)va_arg(*my_list, int);
+	format extraction_int(num, f, sign);
 }

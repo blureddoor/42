@@ -6,24 +6,24 @@
 /*   By: marvin <@student.42madrid.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 20:06:44 by marvin            #+#    #+#             */
-/*   Updated: 2020/10/01 22:37:08 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/05 18:22:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <unistd.h>
-#include <stdarg.h>
-#include <stdlib.h>
 
-size_t	ft_strlen(const char *str);
-
-void	write_zeros(int n)
+int find_index(char *arr, char element)
 {
-	while (n > 0)
-	{
-		write(1, "0", 1);
-		n--;
-	}
+    int index;
+
+    index = 0;
+    while (arr[index] != 0)
+    {
+        if (arr[index] == element)
+            return (index);
+        index++;
+    }
+    return (-1);
 }
 
 void	write_blanks(int n)

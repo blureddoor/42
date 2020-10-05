@@ -6,21 +6,23 @@
 /*   By: marvin <@student.42madrid.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 20:35:55 by marvin            #+#    #+#             */
-/*   Updated: 2020/10/01 21:45:09 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/05 17:18:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "ft_printf.h"
 
-int	my_printf(const char *src, ...);
+
+/*int	my_printf(const char *src, ...);
 int	ft_strlen(const char *str);
 char	*ft_itoa_base(long int n, char *base);
 char	*ft_ultoa_base(unsigned long long n, char *base);
-
+*/
 int main(void)
 
 {
-    int *ptr;
+ 	int *ptr;
     int a;
     char *str;
 

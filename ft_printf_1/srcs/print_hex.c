@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_printf_u.c                                      :+:      :+:    :+:   */
+/*   print_hex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <@student.42madrid.com>             +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/02 20:39:10 by marvin            #+#    #+#             */
-/*   Updated: 2020/10/02 20:39:39 by marvin           ###   ########.fr       */
+/*   Created: 2020/10/02 20:25:28 by lvintila          #+#    #+#             */
+/*   Updated: 2020/10/05 17:55:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	my_printf_u(va_list *my_list)
+void	print_hex(va_list *my_list)
 {
-	unsigned int ui;
+	char			*base;
+	char			*hex;
+	long int		li;
 
-	ui = va_arg(*my_list, unsigned int);
-	ft_putnbr_ui(ui);
+	li = va_arg(*my_list, long int);
+	base = "0123456789abcdef";
+	hex = ft_itoa_base(li, base);
+	write(1, hex, ft_strlen(hex));
 }

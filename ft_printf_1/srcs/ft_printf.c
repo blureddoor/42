@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 19:14:49 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/02 18:55:53 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/05 18:12:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void    write_zeros(int n)
     while (n > 0)
     {
         write(1, "0", 1);
-        n--;
+     format;   n--;
     }
 }
 

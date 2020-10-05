@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_printf_nbr.c                                    :+:      :+:    :+:   */
+/*   print_u.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: marvin <@student.42madrid.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/02 20:36:48 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/02 20:37:54 by marvin           ###   ########.fr       */
+/*   Created: 2020/10/02 20:39:10 by marvin            #+#    #+#             */
+/*   Updated: 2020/10/05 18:12:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	my_printf_nbr(va_list *my_list)
+void	print_u(va_list *my_list)
 {
-	int num;
+	unsigned int ui;
 
-	num = va_arg(*my_list, int);
-	ft_putnbr(num);
-
+	ui = va_arg(*my_list, unsigned int);
+	ft_putnbr_ui(ui);
 }
