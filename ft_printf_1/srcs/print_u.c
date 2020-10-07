@@ -3,31 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   print_u.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <@student.42madrid.com>             +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/02 20:39:10 by marvin            #+#    #+#             */
-/*   Updated: 2020/10/06 21:35:02 by marvin           ###   ########.fr       */
+/*   Created: 2020/10/02 20:39:10 by lvintila          #+#    #+#             */
+/*   Updated: 2020/10/07 20:13:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/*
-void	print_u(va_list *my_list)
-{
-	unsigned int ui;
-
-	ui = va_arg(*my_list, unsigned int);
-	ft_putnbr_ui(ui);
-}
-*/
 int		zero_width(t_struct *f, char c, int sign, char sign_c)
 {
 	if (f->width > 0 && c == '0')
 	{
 		if (sign != '\0')
 			f->nprinted = f->nprinted + write(1, &sign_c, 1);
-		sign = -sign;
+		sign -= sign;
 	}
 	return (sign);
 }
@@ -44,8 +35,8 @@ void	right_aligned_u(t_struct *f, int len, char *str, int sign)
 		sign = zero_width(f, c, sign, sign_c);
 	else if (f->width <= 0 && sign_c != '\0')
 	{
-		f-nprinted = f->nprinted + write(1, &sign_c, 1);
-		sign = -sign;
+		f->nprinted = f->nprinted + write(1, &sign_c, 1);
+		sign -= sign;
 	}
 	while (f->width-- > 0)
 		f->nprinted = f->nprinted + write(1, &c, 1);
@@ -85,7 +76,7 @@ void	extract_u(uintmax_t n, t_struct *f, int sign)
 		len = 1;
 	if (f->precision && f->precision == 0)
 		len = 0;
-	if (f-precision && f->precision > len)
+	if (f->precision && f->precision > len)
 		f->precision = f->precision - len;
 	else
 		f->precision = 0;
@@ -100,7 +91,7 @@ void	extract_u(uintmax_t n, t_struct *f, int sign)
 	free(str);
 }
 
-void	print_u(t_struct *f, va_list ap);
+void	print_u(t_struct *f, va_list ap)
 {
 	uintmax_t	n;
 	int			sign;

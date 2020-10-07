@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:25:28 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/06 22:25:18 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/07 20:10:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	zero_hex(t_struct *f, int hex_len_p, char *s, char x)
 	c = find_char(f);
 	if (c == '0')
 	{
-		if (x = 'x')
+		if (x == 'x')
 			f->nprinted = f->nprinted + write(1, "0x", 2);
-		else if (x = 'X')
+		else if (x == 'X')
 			f->nprinted = f->nprinted + write(1, "0X", 2);
 		while (f->width-- > 0)
 			f->nprinted = f->nprinted + write(1, &c, 1);
@@ -53,7 +53,7 @@ void	right_aligned_hex(t_struct *f, int hex_len_p, char *str, char x)
 	c = find_char(f);
 	if (c == '0')
 	{
-		zero_hex(f, hex_len_p, s, x);
+		zero_hex(f, hex_len_p, str, x);
 	}
 	while (f->width > 0)
 	{
@@ -114,7 +114,7 @@ void	extract_hex(t_struct *f, uintmax_t n, int hex_len_p, char x)
 		left_aligned_hex(f, hex_len_p, str, x);
 }
 
-void	print_hex(t_struct *f, va_lsit ap, char x)
+void	print_hex(t_struct *f, va_list ap, char x)
 {
 	uintmax_t	n;
 	int			hex_len_p;

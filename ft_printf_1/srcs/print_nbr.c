@@ -6,36 +6,11 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:36:48 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/06 21:19:57 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/07 20:07:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-/*
-void	print_nbr(va_list *my_list)
-{
-	int num;
-
-	num = va_arg(*my_list, int);
-	ft_putnbr(num);
-
-}
-
-
-void	print_nbr(t_struct *f, va_list *my_list)
-{
-	intmax_t	num;
-	int			sign;
-	
-	if (n >= 0)
-		sign = POSITIVE;
-	else if (n < 0)
-		sign = NEGATIVE;
-	num = (int)va_arg(*my_list, int);
-	format extraction_int(num, f, sign);
-}
-*/
 
 int		zero_sign_width(t_struct *f, char c, char sign_c, int sign)
 {
@@ -48,7 +23,7 @@ int		zero_sign_width(t_struct *f, char c, char sign_c, int sign)
 	return (sign);
 }
 
-void	right_aligned_int(t_struct *f,  int len, char *str, int sign)
+void	right_aligned_int(t_struct *f, int len, char *str, int sign)
 {
 	char	sign_char;
 	char	c;
@@ -57,15 +32,15 @@ void	right_aligned_int(t_struct *f,  int len, char *str, int sign)
 		c = '0';
 	else
 		c = ' ';
-	sign_c = '\0';
+	sign_char = '\0';
 	if (sign == NEGATIVE)
-		sign_c = '-';
-	sign = zero_sign_width(f, c, sign_c, sign);
+		sign_char = '-';
+	sign = zero_sign_width(f, c, sign_char, sign);
 	while (f->width-- > 0)
 		f->nprinted = f->nprinted + write(1, &c, 1);
-	if (f->sign != 0 && sign_c != '\0')
-		f->nprinted = f->nprinted + write(1, &sign_c, 1);
-	while (f->preciison-- > 0)
+/*	if (f->sign != 0 && sign_char != '\0')
+		f->nprinted = f->nprinted + write(1, &sign_char, 1);*/
+	while (f->precision-- > 0)
 		f->nprinted = f->nprinted + write(1, "0", 1);
 	f->nprinted = f->nprinted + write(1, str, len);
 }
@@ -122,9 +97,7 @@ void	print_nbr(t_struct *f, va_list ap, int sign, intmax_t n)
 	if (n == LLONG_MIN)
 	{
 		f->nprinted = f->nprinted + write(1, "-9223372036854775808", 20);
-		return;
+		return ;
 	}
 	extract_int(n, f, sign);
 }
-
-	

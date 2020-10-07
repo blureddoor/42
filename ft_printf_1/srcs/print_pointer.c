@@ -6,7 +6,7 @@
 /*   By: marvin <@student.42madrid.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:38:15 by marvin            #+#    #+#             */
-/*   Updated: 2020/10/06 21:51:27 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/07 20:09:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		count_hex(unsigned long long num)
 	len = 0;
 	while (num / 16)
 	{
-		num = num / 16:
+		num = num / 16;
 			len++;
 	}
 	return (len);
@@ -85,6 +85,7 @@ void	print_pointer(t_struct *f, va_list ap, int p)
 	char				*str;
 	int					hex_len_p;
 	int					width_p;
+	int					precision_p;
 	
 	pointer = (unsigned long long)va_arg(ap, void*);
 	p = 2;

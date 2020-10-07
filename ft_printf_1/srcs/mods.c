@@ -6,15 +6,15 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 19:48:46 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/02 21:06:28 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/07 19:54:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	flags(const char *format, t_struct *f) // "-0"
+void	flags(const char *format, t_struct *f)
 {
-	while(ft_strchr("-0", format[f->i]))
+	while (ft_strchr("-0", format[f->i]))
 	{
 		if (format[f->i] == '-')
 			f->minus = 1;
@@ -24,7 +24,7 @@ void	flags(const char *format, t_struct *f) // "-0"
 	}
 }
 
-void	width(const char *format, t_struct *f, va_list ap)//  width
+void	width(const char *format, t_struct *f, va_list ap)
 {
 	width_star(format, f, ap);
 	if (format[f->i] >= '0' && format[f->i] <= '9')
@@ -47,7 +47,7 @@ void	width(const char *format, t_struct *f, va_list ap)//  width
 	}
 }
 
-void	precision(const char *format, t_struct *f, va_list ap, int n)// .
+void	precision(const char *format, t_struct *f, va_list ap, int n)
 {
 	int	i;
 
@@ -75,7 +75,6 @@ void	precision(const char *format, t_struct *f, va_list ap, int n)// .
 	}
 	f->i = i;
 }
-
 
 void	mods(const char *format, t_struct *f, va_list ap)
 {

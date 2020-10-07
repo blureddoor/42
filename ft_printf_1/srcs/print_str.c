@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:35:19 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/05 21:51:50 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/07 20:04:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	left_aligned_string(t_struct *f, char c, char *s, int i)
 		{
 			while ((f->width - 1) > 0)
 			{
-				f->len 0 f->len + write(1, &c, 1);
+				f->len = f->len + write(1, &c, 1);
 				f->nprinted++;
 				f->width--;
 			}
@@ -70,7 +70,7 @@ void	write_str(t_struct *f, va_list ap)
 		c = '0';
 	else
 		c = ' ';
-	src = (char *)va_arg(*my_list, char *);
+	src = (char *)va_arg(ap, char *);
 	if (src == NULL)
 		src = "(null)";
 	i = ft_strlen(src);
@@ -81,7 +81,7 @@ void	write_str(t_struct *f, va_list ap)
 /*	write(1, src, ft_strlen(src));*/
 }
 
-void	print_str(t_struct *f, va_list *my_list)
+void	print_str(t_struct *f, va_list ap)
 {
 	write_str(f, ap);
 }

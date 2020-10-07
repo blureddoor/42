@@ -5,101 +5,82 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <@student.42madrid.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/28 20:06:44 by marvin            #+#    #+#             */
-/*   Updated: 2020/10/06 21:04:17 by marvin           ###   ########.fr       */
+/*   Created: 2020/10/06 19:46:55 by marvin            #+#    #+#             */
+/*   Updated: 2020/10/07 19:52:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int find_index(char *arr, char element)
+char	*ft_itoa_base_upper(intmax_t num, intmax_t base)
 {
-    int index;
+	char		*str;
+	long long	n;
+	int			i;
+	int			sign;
 
-    index = 0;
-    while (arr[index] != 0)
-    {
-        if (arr[index] == element)
-            return (index);
-        index++;
-    }
-    return (-1);
+	n = (num < 0) ? -num : num;
+	sign = (num < 0) && (base == 10) ? -1 : 0;
+	i = (sign == -1) ? 2 : 1;
+	while ((n /= base) >= 1)
+		i++;
+	str = (char*)malloc(sizeof(char) * (i + 1));
+	str[i] = '\0';
+	n = (num < 0 ) ? -num : num;
+	while (i-- + sign)
+	{
+		str[i] = (n % base < 10) ? n % base + '0' : n % base + 'A' - '1';
+		n /= base;
+	}
+	(i == 0) ? str[i] = '-' : 0;
+	return (str);
 }
 
-void	write_blanks(int n)
+int		signed_nbr_len(intmax_t num, int base)
 {
-	while (n > 0)
+	int		len;
+
+	len = 0;
+	if (num < 0)
 	{
-		write(1, " ", 1);
-			n--;
+		num = -num;
+		len++;
 	}
+	while (num)
+	{
+		num = num / base;
+		len++;
+	}
+	return(len);
 }
 
-char	*ft_itoa_base(uintmax_t n, char *base)
+int		unsigned_nbr_len(uintmax_t num, int base)
 {
-	int					count;
-	unsigned int		tmp;
-	char				*res;
-	unsigned int		base_len;
-	
-	base_len = ft_strlen(base);
-	count = (n < 0) ? 2 : 1;
-	tmp = (n < 0) ? -n : n;
-	while (tmp >= base_len && (tmp /= base_len))
-		++count;
-	tmp = (n < 0) ? -n : n;
-	if (!(res = (char*)malloc(sizeof(char) * (count + 1))))
-		return (NULL);
-	if (n < 0)
-		res[0] = '-';
-	res[count] = '\0';
-	while (tmp >= base_len)
+	int len;
+
+	len = 0;
+	if (num == 0)
+		return (1);
+	while (num)
 	{
-		--count;
-		res[count] = base[tmp % base_len];
-		tmp /= base_len;
+		num = num / base;
+		len++;
 	}
-	res[--count] = base[tmp % base_len];
-	return (res);
+	return (len);
 }
 
-void	*ft_ultoa_base(unsigned long long n, char *base)
+char	find_char(t_struct *f)
 {
-	int					count;
-	unsigned long long	tmp;
-	char				*res;
-	unsigned long long	base_len;
-	
-	base_len = ft_strlen(base);
-	count = 1;
-	tmp = n;
-	while (tmp >= base_len && (tmp /= base_len))
-		++count;
-	tmp = n;
-	if (!(res = (char*)malloc(sizeof(char) * (count + 1))))
-		return (NULL);
-	res[count] = '\0';
-	while (tmp >= base_len)
-	{
-		--count;
-		res[count] = base[tmp % base_len];
-		tmp /= base_len;
-	}
-	res[--count] = base[tmp % base_len];
-	return (res);
+	char c;
+
+	if (f->zero && !f->precision)
+		c = '0';
+	else
+		c = ' ';
+	return (c);
 }
 
-void	width_star(const char *format, t_struct *f, va_list ap)
+void	write_error(void)
 {
-	if (format[f->i] == '*')
-	{
-		f->width = va_arg(ap, int);
-		if (f->width < 0)
-		{
-			f->minus = 1;
-			f->width = -(f->width);
-		}
-		while (format[f->i] == '*')
-			f->i++;
-	}
+	write(1, "", 0);
 }

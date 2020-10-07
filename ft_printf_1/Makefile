@@ -12,9 +12,9 @@ DIR_O		=	obj
 
 HEADER		=	includes
 
-SOURCES		=	aux.c converts.c ft_printf.c mods.c parse.c \
-				print_hex.c print_char.c print_nbr.c print_pointer.c \
-				print_str print_u.c print_uhex.c \
+SOURCES		=	aux.c aux_1.c converts.c ft_printf.c mods.c \
+				print_char.c print_str.c print_nbr.c print_pointer.c \
+				print_hex.c print_u.c \
 
 SRCS		=	$(addprefix $(DIR_S)/,$(SOURCES))
 
