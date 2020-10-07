@@ -6,30 +6,16 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:25:28 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/07 20:10:22 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/07 20:37:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/*
-void	print_hex(va_list *my_list)
-{
-	char			*base;
-	char			*hex;
-	long int		li;
-
-	li = va_arg(*my_list, long int);
-	base = "0123456789abcdef";
-	hex = ft_itoa_base(li, base);
-	write(1, hex, ft_strlen(hex));
-}
-*/
-
 void	zero_hex(t_struct *f, int hex_len_p, char *s, char x)
 {
 	char c;
-	
+
 	c = find_char(f);
 	if (c == '0')
 	{

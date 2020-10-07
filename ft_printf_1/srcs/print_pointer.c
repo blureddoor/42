@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_pointer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <@student.42madrid.com>             +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/02 20:38:15 by marvin            #+#    #+#             */
-/*   Updated: 2020/10/07 20:09:36 by marvin           ###   ########.fr       */
+/*   Created: 2020/10/02 20:38:15 by lvintila          #+#    #+#             */
+/*   Updated: 2020/10/07 20:43:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	print_pointer(va_list *my_list)
 	write(1, res, ft_strlen(res));
 }
 */
+
 int		count_hex(unsigned long long num)
 {
 	int	len;
@@ -34,7 +35,7 @@ int		count_hex(unsigned long long num)
 	while (num / 16)
 	{
 		num = num / 16;
-			len++;
+		len++;
 	}
 	return (len);
 }
@@ -86,7 +87,7 @@ void	print_pointer(t_struct *f, va_list ap, int p)
 	int					hex_len_p;
 	int					width_p;
 	int					precision_p;
-	
+
 	pointer = (unsigned long long)va_arg(ap, void*);
 	p = 2;
 	hex_len_p = count_hex(pointer) + 1;
@@ -102,5 +103,4 @@ void	print_pointer(t_struct *f, va_list ap, int p)
 		f->nprinted = f->nprinted + right_aligned_p(width_p,
 				precision_p, hex_len_p, str);
 	free(str);
-
 }

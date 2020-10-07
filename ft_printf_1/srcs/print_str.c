@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:35:19 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/07 20:04:00 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/07 20:46:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	write_str(t_struct *f, va_list ap)
 		right_aligned_string(f, c, src, i);
 	else if (f->minus == 0)
 		left_aligned_string(f, c, src, i);
-/*	write(1, src, ft_strlen(src));*/
 }
+/*	write(1, src, ft_strlen(src));*/
 
 void	print_str(t_struct *f, va_list ap)
 {

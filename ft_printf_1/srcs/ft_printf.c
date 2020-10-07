@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 19:10:09 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/07 19:53:17 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/07 20:35:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void		set_zero_struct2(t_struct *my_list)
 
 int			mods_converts(t_struct *f, int pos, const char *format, va_list ap)
 {
-
 	f->i = pos;
 	if (!ft_strchr("cspdiuxX%", format[pos]))
 		mods(format, f, ap);
@@ -44,7 +43,8 @@ int			mods_converts(t_struct *f, int pos, const char *format, va_list ap)
 	return (f->i - 1);
 }
 
-int		select_format(const char *format, t_struct *list, va_list ap, int pos)
+int			select_format(const char *format, t_struct *list, va_list ap,
+		int pos)
 {
 	while (format[pos] != '\0')
 	{

@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:36:48 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/07 20:07:47 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/07 20:41:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	right_aligned_int(t_struct *f, int len, char *str, int sign)
 	sign = zero_sign_width(f, c, sign_char, sign);
 	while (f->width-- > 0)
 		f->nprinted = f->nprinted + write(1, &c, 1);
-/*	if (f->sign != 0 && sign_char != '\0')
-		f->nprinted = f->nprinted + write(1, &sign_char, 1);*/
+/*	 if (f->sign != 0 && sign_char != '\0')                                   */
+/*	     f->nprinted = f->nprinted + write(1, &sign_char, 1);                 */
 	while (f->precision-- > 0)
 		f->nprinted = f->nprinted + write(1, "0", 1);
 	f->nprinted = f->nprinted + write(1, str, len);

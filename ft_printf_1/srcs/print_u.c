@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:39:10 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/07 20:13:05 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/07 20:47:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	right_aligned_u(t_struct *f, int len, char *str, int sign)
 	}
 	while (f->width-- > 0)
 		f->nprinted = f->nprinted + write(1, &c, 1);
-	if(sign != 0 && sign_c != '\0')
+	if (sign != 0 && sign_c != '\0')
 		f->nprinted = f->nprinted + write(1, &sign_c, 1);
 	while (f->precision-- > 0)
 		f->nprinted = f->nprinted + write(1, "0", 1);
@@ -67,8 +67,8 @@ void	left_aligned_u(t_struct *f, int hex_len_p, char *str, int sign)
 
 void	extract_u(uintmax_t n, t_struct *f, int sign)
 {
-	int len;
-	char *str;
+	int		len;
+	char	*str;
 
 	str = ft_itoa_base(n, 10);
 	len = unsigned_nbr_len(n, 10);

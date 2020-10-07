@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aux.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <@student.42madrid.com>             +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/06 19:46:55 by marvin            #+#    #+#             */
-/*   Updated: 2020/10/07 19:52:06 by marvin           ###   ########.fr       */
+/*   Created: 2020/10/06 19:46:55 by lvintila          #+#    #+#             */
+/*   Updated: 2020/10/07 20:32:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_itoa_base_upper(intmax_t num, intmax_t base)
 		i++;
 	str = (char*)malloc(sizeof(char) * (i + 1));
 	str[i] = '\0';
-	n = (num < 0 ) ? -num : num;
+	n = (num < 0) ? -num : num;
 	while (i-- + sign)
 	{
 		str[i] = (n % base < 10) ? n % base + '0' : n % base + 'A' - '1';
@@ -51,7 +51,7 @@ int		signed_nbr_len(intmax_t num, int base)
 		num = num / base;
 		len++;
 	}
-	return(len);
+	return (len);
 }
 
 int		unsigned_nbr_len(uintmax_t num, int base)
