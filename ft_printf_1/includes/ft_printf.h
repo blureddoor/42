@@ -37,6 +37,7 @@ typedef struct	s_struct
 	int			zero;
 	int			width;
 	int			precision;
+	int			precision_t;
 }				t_struct;
 
 void			mods(const char *format, t_struct *, va_list ap);

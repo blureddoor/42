@@ -12,21 +12,6 @@
 
 #include "ft_printf.h"
 
-/*
-void	print_pointer(va_list *my_list)
-{
-	char	*base;
-	char	*res;
-	unsigned long long p;
-
-	p = (unsigned long long)va_arg(*my_list, void *);
-	base = "0123456789abcdef";
-	res = ft_ultoa_base(p, base);
-	write(1, "0x", 2);
-	write(1, res, ft_strlen(res));
-}
-*/
-
 int		count_hex(unsigned long long num)
 {
 	int	len;
@@ -88,13 +73,13 @@ void	print_pointer(t_struct *f, va_list ap, int p)
 	int					width_p;
 	int					precision_p;
 
-	pointer = (unsigned long long)va_arg(ap, void*);
+	pointer = (unsigned long long)va_arg(ap, void *);
 	p = 2;
 	hex_len_p = count_hex(pointer) + 1;
 	str = ft_itoa_base(pointer, 16);
 	precision_p = f->precision - hex_len_p;
-	width_p = f->width - hex_len_p;
-	if (f->precision && f->precision == 0)
+	width_p = f->width - hex_len_p - p;
+	if (f->precision_t && f->precision == 0)
 		hex_len_p = 0;
 	if (f->minus)
 		f->nprinted = f->nprinted + left_aligned_p(width_p,

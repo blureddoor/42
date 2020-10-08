@@ -55,7 +55,7 @@ void	precision(const char *format, t_struct *f, va_list ap, int n)
 	if (format[i] == '.')
 	{
 		i++;
-		f->precision = 1;
+		f->precision_t = 1;
 		if (format[i] >= '0' && format[i] <= '9')
 		{
 			f->precision = ft_atoi(&format[i]);
@@ -68,7 +68,7 @@ void	precision(const char *format, t_struct *f, va_list ap, int n)
 			if (n >= 0)
 				f->precision = n;
 			else if (n < 0)
-				f->precision = 0;
+				f->precision_t = 0;
 			while (format[f->i] == '*')
 				i++;
 		}

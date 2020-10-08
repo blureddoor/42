@@ -12,11 +12,11 @@
 
 #include "ft_printf.h"
 
-void	left_aligned_string(t_struct *f, char c, char *s, int i)
+void	left_aligned_str(t_struct *f, char c, char *s, int i)
 {
 	if (f->minus == 0)
 	{
-		if (f->precision && i > f->precision)
+		if (f->precision_t && i > f->precision)
 			i = f->precision;
 		if (f->width > i)
 		{
@@ -32,12 +32,12 @@ void	left_aligned_string(t_struct *f, char c, char *s, int i)
 	}
 }
 
-void	right_aligned_string(t_struct *f, char c, char *s, int i)
+void	right_aligned_str(t_struct *f, char c, char *s, int i)
 {
 	if (f->minus != 0)
 	{
 		c = ' ';
-		if (f->precision && i > f->precision)
+		if (f->precision_t && i > f->precision)
 			i = f->precision;
 		f->len = f->len + write(1, s, i);
 		f->nprinted = f->nprinted + i;
@@ -49,7 +49,7 @@ void	right_aligned_string(t_struct *f, char c, char *s, int i)
 		}
 	}
 }
-/*
+
 void if_null(void *s, t_struct *f)
 {
 	if (s == NULL)
@@ -58,7 +58,7 @@ void if_null(void *s, t_struct *f)
 		f->minus = 3;
 	}
 }
-*/
+
 
 void	write_str(t_struct *f, va_list ap)
 {
@@ -75,11 +75,10 @@ void	write_str(t_struct *f, va_list ap)
 		src = "(null)";
 	i = ft_strlen(src);
 	if (f->minus == 1)
-		right_aligned_string(f, c, src, i);
+		right_aligned_str(f, c, src, i);
 	else if (f->minus == 0)
-		left_aligned_string(f, c, src, i);
+		left_aligned_str(f, c, src, i);
 }
-/*	write(1, src, ft_strlen(src));*/
 
 void	print_str(t_struct *f, va_list ap)
 {
