@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 20:06:44 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/07 20:33:02 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/08 20:07:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,19 @@ void	write_zeros(int n)
 	}
 }
 
-char	*ft_itoa_base(uintmax_t value, uintmax_t base)
+char	*ft_itoa_base(uintmax_t num, uintmax_t base)
 {
 	unsigned long long	n;
 	char				*s;
 	int					i;
 
 	i = 1;
-	n = value;
+	n = num;
 	while ((n /= base) >= 1)
 		i++;
 	s = (char*)malloc(sizeof(char) * (i + 1));
 	s[i] = '\0';
-	n = value;
+	n = num;
 	while (i-- > 0)
 	{
 		s[i] = (n % base < 10) ? n % base + '0' : n % base + 'a' - 10;

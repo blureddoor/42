@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:38:15 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/07 20:43:49 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/08 20:45:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ int		right_aligned_p(int width_p, int precision_p, int hex_len_p, char *s)
 	i = 0;
 	while (width_p > 0)
 	{
-		i = i + write(1, " ", 1);
+		i += write(1, " ", 1);
 		width_p--;
 	}
-	i = i + write(1, "0x", 2);
+	i += write(1, "0x", 2);
 	while (precision_p > 0)
 	{
 		i = i + write(1, "0", 1);
 		precision_p--;
 	}
-	i = i + write(1, s, hex_len_p);
+	i += write(1, s, hex_len_p);
 	return (i);
 }
 
@@ -50,16 +50,16 @@ int		left_aligned_p(int width_p, int precision_p, int hex_len_p, char *s)
 	int i;
 
 	i = 0;
-	i = i + write(1, "0x", 2);
+	i += write(1, "0x", 2);
 	while (precision_p > 0)
 	{
-		i = i + write(1, "0", 1);
+		i += write(1, "0", 1);
 		precision_p--;
 	}
-	i = i + write(1, s, hex_len_p);
+	i += write(1, s, hex_len_p);
 	while (width_p > 0)
 	{
-		i = i + write(1, " ", 1);
+		i += write(1, " ", 1);
 		width_p--;
 	}
 	return (i);

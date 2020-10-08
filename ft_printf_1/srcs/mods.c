@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 19:48:46 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/07 19:54:02 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/08 19:35:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	width(const char *format, t_struct *f, va_list ap)
 			f->i++;
 			if (format[f->i] == '*')
 			{
-				if (f->width > 0)
+				if (f->width < 0)
 				{
 					f->minus = 1;
 					f->width = -(f->width);

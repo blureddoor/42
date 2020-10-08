@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:35:19 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/07 20:46:59 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/08 20:27:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	left_aligned_str(t_struct *f, char c, char *s, int i)
 			i = f->precision;
 		if (f->width > i)
 		{
-			while ((f->width - 1) > 0)
+			while ((f->width - i) > 0)
 			{
 				f->len = f->len + write(1, &c, 1);
 				f->nprinted++;
@@ -50,7 +50,7 @@ void	right_aligned_str(t_struct *f, char c, char *s, int i)
 	}
 }
 
-void if_null(void *s, t_struct *f)
+void	if_null(void *s, t_struct *f)
 {
 	if (s == NULL)
 	{
@@ -58,7 +58,6 @@ void if_null(void *s, t_struct *f)
 		f->minus = 3;
 	}
 }
-
 
 void	write_str(t_struct *f, va_list ap)
 {

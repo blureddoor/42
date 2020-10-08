@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 19:31:09 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/07 20:13:51 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/08 20:20:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,16 @@
 # define FT_PRINTF_H
 
 # include "libft.h"
-# include "stdarg.h"
-# include "unistd.h"
-# include "limits.h"
-# include "stdlib.h"
+# include <stdarg.h>
+# include <unistd.h>
+# include <limits.h>
+# include <stdlib.h>
+# include <stdint.h>
 
-
-# define POSITIVE		66
-# define NEGATIVE		88
+# define POSITIVE		1
+# define NEGATIVE		2
 
 # define CCONVERSIONS	"cspdiuxX%"
-# define CFLAGS			"-.*0123456789"
 # define ALLSYMBOLS		"cspdiuxX%-.*0123456789"
 
 typedef struct	s_struct
@@ -40,7 +39,7 @@ typedef struct	s_struct
 	int			precision_t;
 }				t_struct;
 
-void			mods(const char *format, t_struct *, va_list ap);
+void			mods(const char *format, t_struct *f, va_list ap);
 int				mods_converts(t_struct *f, int pos, const char *format,
 				va_list ap);
 int				select_format(const char *format, t_struct *list, va_list ap,

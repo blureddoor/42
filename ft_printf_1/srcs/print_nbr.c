@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:36:48 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/07 20:41:32 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/08 20:24:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	right_aligned_int(t_struct *f, int len, char *str, int sign)
 	sign = zero_sign_width(f, c, sign_c, sign);
 	while (f->width-- > 0)
 		f->nprinted = f->nprinted + write(1, &c, 1);
-	 if (f->sign != 0 && sign_c != '\0')
-	     f->nprinted = f->nprinted + write(1, &sign_c, 1);
+	if (sign != 0 && sign_c != '\0')
+		f->nprinted = f->nprinted + write(1, &sign_c, 1);
 	while (f->precision-- > 0)
 		f->nprinted = f->nprinted + write(1, "0", 1);
 	f->nprinted = f->nprinted + write(1, str, len);
@@ -76,8 +76,8 @@ void	extract_int(intmax_t n, t_struct *f, int sign)
 	if (n == 0)
 		len = 1;
 	if (f->precision_t == 1 && f->precision == 0 && n == 0)
-		len = 1;
-	if (f->precision_t == 1 && f->precision > len)
+		len = 0;
+	if (f->precision_t && f->precision > len)
 		f->precision = f->precision - len;
 	else
 		f->precision = 0;
@@ -95,11 +95,7 @@ void	extract_int(intmax_t n, t_struct *f, int sign)
 void	print_nbr(t_struct *f, va_list ap, int sign, intmax_t n)
 {
 	n = (int)va_arg(ap, int);
-	if (n >= 0)
-	{
-		sign = POSITIVE;
-	}
-	else if (n < 0)
+	if (n < 0)
 	{
 		sign = NEGATIVE;
 		n = n * -1;
