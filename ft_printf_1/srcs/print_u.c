@@ -50,6 +50,8 @@ void	right_aligned_u(t_struct *f, int len, char *str, int sign)
 void	left_aligned_u(t_struct *f, int hex_len_p, char *str, int sign)
 {
 	sign = 0;
+	if (sign == POSITIVE)
+		f->nprinted = f->nprinted + write(1, "+", 1);
 	if (sign == NEGATIVE)
 		f->nprinted = f->nprinted + write(1, "-", 1);
 	while (f->precision > 0)
@@ -74,9 +76,9 @@ void	extract_u(uintmax_t n, t_struct *f, int sign)
 	len = unsigned_nbr_len(n, 10);
 	if (n == 0)
 		len = 1;
-	if (f->precision && f->precision == 0)
+	if (f->precision_t && f->precision == 0)
 		len = 0;
-	if (f->precision && f->precision > len)
+	if (f->precision_t && f->precision > len)
 		f->precision = f->precision - len;
 	else
 		f->precision = 0;

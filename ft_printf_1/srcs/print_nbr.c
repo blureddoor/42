@@ -18,28 +18,30 @@ int		zero_sign_width(t_struct *f, char c, char sign_c, int sign)
 	{
 		if (sign_c != '\0')
 			f->nprinted = f->nprinted + write(1, &sign_c, 1);
-		sign = -sign;
+		sign -= sign;
 	}
 	return (sign);
 }
 
 void	right_aligned_int(t_struct *f, int len, char *str, int sign)
 {
-	char	sign_char;
+	char	sign_c;
 	char	c;
 
-	if (f->zero && !f->precision)
+	if (f->zero && !f->precision_t)
 		c = '0';
 	else
 		c = ' ';
-	sign_char = '\0';
-	if (sign == NEGATIVE)
-		sign_char = '-';
-	sign = zero_sign_width(f, c, sign_char, sign);
+	sign_c = '\0';
+	if (sign == POSITIVE)
+		sign_c = '+';
+	else if (sign == NEGATIVE)
+		sign_c = '-';
+	sign = zero_sign_width(f, c, sign_c, sign);
 	while (f->width-- > 0)
 		f->nprinted = f->nprinted + write(1, &c, 1);
-/*	 if (f->sign != 0 && sign_char != '\0')                                   */
-/*	     f->nprinted = f->nprinted + write(1, &sign_char, 1);                 */
+	 if (f->sign != 0 && sign_c != '\0')
+	     f->nprinted = f->nprinted + write(1, &sign_c, 1);
 	while (f->precision-- > 0)
 		f->nprinted = f->nprinted + write(1, "0", 1);
 	f->nprinted = f->nprinted + write(1, str, len);
@@ -47,7 +49,9 @@ void	right_aligned_int(t_struct *f, int len, char *str, int sign)
 
 void	left_aligned_int(t_struct *f, int hex_len_p, char *str, int sign)
 {
-	if (sign == NEGATIVE)
+	if (sign == POSITIVE)
+		f->nprinted = f->nprinted + write(1, "+", 1);
+	else if (sign == NEGATIVE)
 		f->nprinted = f->nprinted + write(1, "-", 1);
 	while (f->precision > 0)
 	{
@@ -71,7 +75,9 @@ void	extract_int(intmax_t n, t_struct *f, int sign)
 	len = signed_nbr_len(n, 10);
 	if (n == 0)
 		len = 1;
-	if ((f->precision == 1 || f->precision == 0) && n == 0)
+	if (f->precision_t == 1 && f->precision == 0 && n == 0)
+		len = 1;
+	if (f->precision_t == 1 && f->precision > len)
 		f->precision = f->precision - len;
 	else
 		f->precision = 0;
@@ -90,6 +96,10 @@ void	print_nbr(t_struct *f, va_list ap, int sign, intmax_t n)
 {
 	n = (int)va_arg(ap, int);
 	if (n >= 0)
+	{
+		sign = POSITIVE;
+	}
+	else if (n < 0)
 	{
 		sign = NEGATIVE;
 		n = n * -1;

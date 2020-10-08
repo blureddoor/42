@@ -40,12 +40,17 @@ void	right_aligned_hex(t_struct *f, int hex_len_p, char *str, char x)
 	if (c == '0')
 	{
 		zero_hex(f, hex_len_p, str, x);
+		return ;
 	}
 	while (f->width > 0)
 	{
 		f->nprinted = f->nprinted + write(1, &c, 1);
 		f->width--;
 	}
+	if (x== 'x')
+		f->nprinted = f->nprinted + write(1, "0x",2);
+	else if (x == 'X')
+		f->nprinted = f->nprinted + write(1, "0X", 2);
 	while (f->precision > 0)
 	{
 		f->nprinted = f->nprinted + write(1, "0", 1);
@@ -86,10 +91,10 @@ void	extract_hex(t_struct *f, uintmax_t n, int hex_len_p, char x)
 	if (n == 0)
 	{
 		hex_len_p = 1;
-		if (f->precision && f->precision == 0)
+		if (f->precision_t && f->precision == 0)
 			hex_len_p = 0;
 	}
-	if (f->precision && f->precision > hex_len_p)
+	if (f->precision_t && f->precision > hex_len_p)
 		f->precision = f->precision - hex_len_p;
 	else
 		f->precision = 0;
