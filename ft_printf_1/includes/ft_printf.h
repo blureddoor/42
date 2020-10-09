@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 19:31:09 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/08 20:20:23 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/08 22:35:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct	s_struct
 	int			width;
 	int			precision;
 	int			precision_t;
+	int			length;
 }				t_struct;
 
 void			mods(const char *format, t_struct *f, va_list ap);
