@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_pointer.c                                    :+:      :+:    :+:   */
+/*   print_pointer_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:38:15 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/13 22:43:04 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/12 16:53:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	print_pointer(t_struct *f, va_list ap, int p)
 	int					precision_p;
 
 	pointer = (unsigned long long)va_arg(ap, void *);
-	p = 2; 
-/*	if (pointer == 0 && f->witdh == width_p)
+	p = 2;
+	if (pointer == 0)
 	{
 		hex_len_p = count_hex(pointer) + 1;
 		width_p = f->width - hex_len_p - p;
@@ -86,11 +86,10 @@ void	print_pointer(t_struct *f, va_list ap, int p)
 		hex_len_p = count_hex(pointer) + 1;
 		width_p = f->width - hex_len_p - p;
 		precision_p = f->precision - hex_len_p;
-	}*/
-	hex_len_p = count_hex(pointer) + 1;
+	}
 	str = ft_itoa_base(pointer, 16);
-	precision_p = f->precision - hex_len_p;
-	width_p = f->width - hex_len_p - p;
+/*	precision_p = f->precision - hex_len_p;
+	width_p = f->width - hex_len_p - p;*/
 	if (f->precision_t && f->precision == 0)
 		hex_len_p = 0;
 	if (f->minus)
@@ -99,5 +98,4 @@ void	print_pointer(t_struct *f, va_list ap, int p)
 	else
 		f->nprinted = f->nprinted + right_aligned_p(width_p,
 				precision_p, hex_len_p, str);
-	free(str);
 }

@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 19:31:09 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/08 22:35:34 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/13 22:07:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int				mods_converts(t_struct *f, int pos, const char *format,
 int				select_format(const char *format, t_struct *list, va_list ap,
 				int pos);
 void			width_star(const char *format, t_struct *f, va_list ap);
+void			precision_star(const char *format, t_struct *f, va_list ap);
 void			converts(char c, va_list ap, t_struct *f);
 int				unsigned_nbr_len(uintmax_t n, int base);
 int				signed_nbr_len(intmax_t n, int base);

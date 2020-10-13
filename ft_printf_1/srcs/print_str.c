@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:35:19 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/08 20:27:00 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/13 22:06:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	if_null(void *s, t_struct *f)
 	if (s == NULL)
 	{
 		f->nprinted = f->nprinted + write(1, "(null)", 6);
-		f->minus = 3;
+		f->minus = -1;
 	}
 }
 

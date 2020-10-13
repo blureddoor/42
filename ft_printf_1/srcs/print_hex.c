@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:25:28 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/09 20:41:03 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/13 19:50:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	right_aligned_hex(t_struct *f, int hex_len_p, char *str)
 	while (f->precision-- > 0)
 		f->nprinted = f->nprinted + write(1, "0", 1);
 	f->nprinted = f->nprinted + write(1, str, hex_len_p);
+	free(str);
 }
 
 
@@ -44,6 +45,7 @@ void	left_aligned_hex(t_struct *f, int hex_len_p, char *str)
 	f->nprinted = f->nprinted + write(1, str, hex_len_p);
 	while (f->width-- > 0)
 		f->nprinted = f->nprinted + write(1, " ", 1);
+	free(str);
 }
 
 void	extract_hex(uintmax_t n, t_struct *f, char x, int hex_len_p)
