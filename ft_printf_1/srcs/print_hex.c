@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:25:28 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/13 19:50:58 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/14 21:37:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	right_aligned_hex(t_struct *f, int hex_len_p, char *str)
 {
-	
 	char	c;
 
 	c = find_char(f);
@@ -37,7 +36,6 @@ void	right_aligned_hex(t_struct *f, int hex_len_p, char *str)
 	free(str);
 }
 
-
 void	left_aligned_hex(t_struct *f, int hex_len_p, char *str)
 {
 	while (f->precision-- > 0)
@@ -54,7 +52,7 @@ void	extract_hex(uintmax_t n, t_struct *f, char x, int hex_len_p)
 
 	if (x == 'x')
 		str = ft_itoa_base(n, 16);
-	else if (x == 'X') 
+	else if (x == 'X')
 		str = ft_itoa_base_upper(n, 16);
 	if (n == 0)
 	{

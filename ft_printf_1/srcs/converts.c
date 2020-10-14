@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:19:51 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/13 19:30:05 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/14 21:34:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	converts(char c, va_list ap, t_struct *f)
 {
-
 	if (c == 'c')
 		print_char(f, ap);
 	else if (c == 's')
