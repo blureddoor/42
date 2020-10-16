@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 19:10:09 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/13 22:10:26 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/16 20:55:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,17 @@ int			mods_converts(t_struct *f, int pos, const char *format, va_list ap)
 	return (f->i - 1);
 }
 
-int			select_format(const char *format, t_struct *list, va_list ap,
-			int pos)
+int			sel_format(const char *format, t_struct *list, va_list ap, int pos)
 {
 	while (format[pos] != '\0')
 	{
 		if (format[pos] != '%' && format[pos])
 			list->nprinted = list->nprinted + write(1, &format[pos], 1);
-		else if (format[pos] == '%')
+		else if (format[pos] == '%' && format[pos + 1])
 		{
 			if (!ft_strchr(ALLSYMBOLS, format[pos + 1]))
 				break ;
-			while (ft_strchr(ALLSYMBOLS, format[pos + 1]))
+			while (ft_strchr(ALLSYMBOLS, format[pos + 1]) && format[pos + 1])
 			{
 				pos = pos + 1;
 				if (ft_strchr(CCONVERSIONS, format[pos]))
@@ -97,7 +96,7 @@ int			ft_printf(const char *format, ...)
 	if (len == 1 && format[0] == '%')
 		return (0);
 	else
-		nprint = select_format(format, s, ap, 0);
+		nprint = sel_format(format, s, ap, 0);
 	va_end(ap);
 	free(s);
 	return (nprint);

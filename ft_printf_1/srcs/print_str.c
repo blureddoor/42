@@ -6,13 +6,13 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:35:19 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/13 22:06:23 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/16 20:46:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	left_aligned_str(t_struct *f, char c, char *s, int i)
+void	right_aligned_str(t_struct *f, char c, char *s, int i)
 {
 	if (f->minus == 0)
 	{
@@ -32,9 +32,9 @@ void	left_aligned_str(t_struct *f, char c, char *s, int i)
 	}
 }
 
-void	right_aligned_str(t_struct *f, char c, char *s, int i)
+void	left_aligned_str(t_struct *f, char c, char *s, int i)
 {
-	if (f->minus != 0)
+	if (f->minus == 1)
 	{
 		c = ' ';
 		if (f->precision_t && i > f->precision)
@@ -74,9 +74,9 @@ void	write_str(t_struct *f, va_list ap)
 		src = "(null)";
 	i = ft_strlen(src);
 	if (f->minus == 1)
-		right_aligned_str(f, c, src, i);
-	else if (f->minus == 0)
 		left_aligned_str(f, c, src, i);
+	else if (f->minus == 0)
+		right_aligned_str(f, c, src, i);
 }
 
 void	print_str(t_struct *f, va_list ap)

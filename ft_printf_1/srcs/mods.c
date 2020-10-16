@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 19:48:46 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/13 22:43:08 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/16 20:55:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ void	precision(const char *format, t_struct *f, va_list ap, int n)
 			while (format[i] >= '0' && format[i] <= '9')
 				i++;
 		}
-		else if (format[f->i] == '*')
+		else if (format[i] == '*')
 		{
 			n = va_arg(ap, int);
 			if (n >= 0)
 				f->precision = n;
 			else if (n < 0)
 				f->precision_t = 0;
-			while (format[f->i] == '*')
+			while (format[i] == '*')
 				i++;
 		}
 	}
