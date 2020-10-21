@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:13:25 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/21 22:25:14 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/16 20:46:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_percent(t_struct *f)
 		if (f->zero != 0)
 			write_zeros(n);
 		else
-			write_spaces(n);
+			write_blanks(n);
 		write(1, "%", 1);
 		f->nprinted = f->nprinted + n + 1;
 	}
@@ -30,7 +30,7 @@ void	print_percent(t_struct *f)
 	{
 		n = f->width - 1;
 		write(1, "%", 1);
-		write_spaces(n);
+		write_blanks(n);
 		f->nprinted = f->nprinted + n + 1;
 	}
 	else
@@ -53,7 +53,7 @@ void	print_char(t_struct *f, va_list ap)
 		if (f->zero != 0)
 			write_zeros(n);
 		else if (f->zero == 0)
-			write_spaces(n);
+			write_blanks(n);
 		write(1, &c, 1);
 		f->nprinted = f->nprinted + n;
 	}
@@ -61,7 +61,7 @@ void	print_char(t_struct *f, va_list ap)
 	{
 		n = f->width - 1;
 		write(1, &c, 1);
-		write_spaces(n);
+		write_blanks(n);
 		f->nprinted = f->nprinted + n;
 	}
 	else

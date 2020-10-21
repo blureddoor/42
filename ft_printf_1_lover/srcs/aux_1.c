@@ -6,13 +6,13 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 20:06:44 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/21 22:16:02 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/16 20:52:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	write_spaces(int n)
+void	write_blanks(int n)
 {
 	while (n > 0)
 	{

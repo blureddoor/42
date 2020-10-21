@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:35:19 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/21 22:18:58 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/21 21:25:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,15 @@ void	left_aligned_str(t_struct *f, char c, char *s, int i)
 		}
 	}
 }
+/*
+void	if_null(void *s, t_struct *f)
+{
+	if (s == NULL)
+	{
+		f->nprinted = f->nprinted + write(1, "(null)", 6);
+		f->minus = -1;
+	}
+}*/
 
 void	write_str(t_struct *f, va_list ap)
 {

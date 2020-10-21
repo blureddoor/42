@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 19:31:09 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/21 22:16:37 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/19 21:37:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct	s_struct
 	int			width;
 	int			precision;
 	int			precision_t;
+	int			length;
 }				t_struct;
 
 void			mods(const char *format, t_struct *f, va_list ap);
@@ -60,7 +61,7 @@ void			print_hex(t_struct *f, va_list ap, char x);
 void			print_percent(t_struct *f);
 int				ft_printf(const char *format, ...);
 void			write_zeros(int n);
-void			write_spaces(int n);
+void			write_blanks(int n);
 void			write_error(void);
 char			find_char(t_struct *f);
 

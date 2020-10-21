@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:38:15 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/21 19:19:52 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/21 18:09:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	print_pointer(t_struct *f, va_list ap, int p)
 	width_p = f->width - hex_len_p - p;
 	precision_p = f->precision - hex_len_p;
 	if (f->precision_t && pointer == 0)
-		width_p = f->width - 2;
+		width_p = f->width - p;
 	if (f->precision_t && f->precision == 0 && pointer == 0)
 		hex_len_p = 0;
 	if (f->minus)

@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:36:48 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/21 21:45:27 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/16 21:19:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		zero_sign_width(t_struct *f, char c, char sign_c, int sign)
 	return (sign);
 }
 
-void	right_aligned_int(t_struct *f, int len_nbr, char *str, int sign)
+void	right_aligned_int(t_struct *f, int len, char *str, int sign)
 {
 	char	sign_c;
 	char	c;
@@ -44,10 +44,10 @@ void	right_aligned_int(t_struct *f, int len_nbr, char *str, int sign)
 		f->nprinted = f->nprinted + write(1, &sign_c, 1);
 	while (f->precision-- > 0)
 		f->nprinted = f->nprinted + write(1, "0", 1);
-	f->nprinted = f->nprinted + write(1, str, len_nbr);
+	f->nprinted = f->nprinted + write(1, str, len);
 }
 
-void	left_aligned_int(t_struct *f, int len_nbr, char *str, int sign)
+void	left_aligned_int(t_struct *f, int hex_len_p, char *str, int sign)
 {
 	if (sign == POSITIVE)
 		f->nprinted = f->nprinted + write(1, "+", 1);
@@ -58,7 +58,7 @@ void	left_aligned_int(t_struct *f, int len_nbr, char *str, int sign)
 		f->nprinted = f->nprinted + write(1, "0", 1);
 		f->precision--;
 	}
-	f->nprinted = f->nprinted + write(1, str, len_nbr);
+	f->nprinted = f->nprinted + write(1, str, hex_len_p);
 	while (f->width > 0)
 	{
 		f->nprinted = f->nprinted + write(1, " ", 1);
@@ -99,6 +99,11 @@ void	print_nbr(t_struct *f, va_list ap, int sign, intmax_t n)
 	{
 		sign = NEGATIVE;
 		n = n * -1;
+	}
+	if (n == LLONG_MIN)
+	{
+		f->nprinted = f->nprinted + write(1, "-9223372036854775808", 20);
+		return ;
 	}
 	extract_int(n, f, sign);
 }

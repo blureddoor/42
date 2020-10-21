@@ -6,7 +6,7 @@
 /*   By: marvin <@student.42madrid.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 17:46:01 by marvin            #+#    #+#             */
-/*   Updated: 2020/10/16 21:14:06 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/21 19:17:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,5 @@ int main()
 	ft_printf("Unisigned value:%u\n", 150);
 	printf("Just print the percentage sign:%3d%%\n", 10);
 	ft_printf("Just print the percentage sign:%3d%%\n", 10);
-	system("leaks a.out");
 }
 	

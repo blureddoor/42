@@ -6,7 +6,7 @@
 /*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:05:42 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/21 22:16:13 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/21 21:17:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,8 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
+size_t				ft_intlen(int n);
+size_t				ft_intmaxlen_base(intmax_t n, unsigned int base);
 int					ft_ischarset(int c, const char *charset);
+int					ft_iterative_power(int nb, int power);
 #endif
