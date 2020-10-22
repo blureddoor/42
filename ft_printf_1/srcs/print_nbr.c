@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:36:48 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/22 22:01:28 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/22 22:16:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,11 @@ void	print_nbr(t_struct *f, va_list ap, int sign, intmax_t n)
 	{
 		sign = NEGATIVE;
 		n = n * -1;
+	}
+	if (n == LLONG_MIN)
+	{
+		f->nprinted += write(1, "-9223372036854775808", 20);
+		return ;
 	}
 	extract_int(n, f, sign);
 }
