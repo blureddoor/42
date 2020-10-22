@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:25:28 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/22 21:57:01 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/22 22:10:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ void	extract_hex(uintmax_t n, t_struct *f, char x, int hex_len)
 void	print_hex(t_struct *f, va_list ap, char x)
 {
 	uintmax_t	n;
-	int			hex_len_p;
+	int			hex_len;
 
 	n = 0;
 	n = (unsigned int)va_arg(ap, unsigned int);
-	hex_len_p = unsigned_nbr_len(n, 16);
-	extract_hex(n, f, x, hex_len_p);
+	hex_len = unsigned_nbr_len(n, 16);
+	extract_hex(n, f, x, hex_len);
 }
