@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:25:28 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/22 21:36:49 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/22 21:57:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	extract_hex(uintmax_t n, t_struct *f, char x, int hex_len)
 {
 	char	*str;
 
-	str = NULL;
 	if (x == 'x')
 		str = ft_itoa_base(n, 16);
 	else if (x == 'X')

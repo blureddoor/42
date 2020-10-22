@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:39:10 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/22 21:36:54 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/22 22:02:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	right_aligned_u(t_struct *f, int len_u, char *str)
 	while (f->precision-- > 0)
 		f->nprinted = f->nprinted + write(1, "0", 1);
 	f->nprinted = f->nprinted + write(1, str, len_u);
-	free(str);
 }
 
 void	left_aligned_u(t_struct *f, int len_u, char *str)
@@ -38,7 +37,6 @@ void	left_aligned_u(t_struct *f, int len_u, char *str)
 		f->nprinted = f->nprinted + write(1, " ", 1);
 		f->width--;
 	}
-	free(str);
 }
 
 void	extract_u(uintmax_t n, t_struct *f)
@@ -61,6 +59,7 @@ void	extract_u(uintmax_t n, t_struct *f)
 		right_aligned_u(f, len, str);
 	if (f->minus == 1)
 		left_aligned_u(f, len, str);
+	free(str);
 }
 
 void	print_u(t_struct *f, va_list ap)

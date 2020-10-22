@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:38:15 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/22 21:36:52 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/22 22:02:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int		right_aligned_p(int width_p, int precision_p, int hex_len_p, char *s)
 		precision_p--;
 	}
 	i += write(1, s, hex_len_p);
-	free(s);
 	return (i);
 }
 
@@ -63,7 +62,6 @@ int		left_aligned_p(int width_p, int precision_p, int hex_len_p, char *s)
 		i += write(1, " ", 1);
 		width_p--;
 	}
-	free(s);
 	return (i);
 }
 
@@ -91,4 +89,5 @@ void	print_pointer(t_struct *f, va_list ap, int p)
 	else
 		f->nprinted = f->nprinted + right_aligned_p(width_p,
 				precision_p, hex_len_p, str);
+	free(str);
 }
