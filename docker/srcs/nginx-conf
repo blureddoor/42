@@ -1,0 +1,40 @@
+server {
+        listen 80;
+        listen [::]:80;
+		server_name mi_web_42;
+		return 301 https://$host$request_uri;
+}
+
+server{
+		
+		listen 443 ssl ;
+		listen [::]:443 ssl ;
+
+		server_name mi_web_42;
+
+		ssl_certificate /etc/nginx/ssl/mi_web_42.pem;
+		ssl_certificate_key /etc/nginx/ssl/mi_web_42.key;
+
+		root /var/www/mi_web_42;
+		index index.html index.htm index.nginx-debian.html index.php;
+
+#la parte de autoindex
+#comprobar que funciona en https://localhost/wordpress/wp-includes/
+#para desactivarlo modificar el "on" en mi_web_42
+#que se encuentra en el directorio /etc/nginx/sites-available
+#dentro del contenedor
+#despues reiniciar nginx con "service nginx restart"
+
+		location /{
+				autoindex on;
+				autoindex_exact_size on;
+				autoindex_format html;
+				try_files $uri $uri/ =404;
+		}
+
+		location ~ \.php$ {
+				include snippets/fastcgi-php.conf;
+				fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+		}
+}
+
