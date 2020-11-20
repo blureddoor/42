@@ -1,49 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gnl.c                                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/09 19:13:48 by lvintila          #+#    #+#             */
-/*   Updated: 2020/11/09 19:55:33 by marvin           ###   ########.fr       */
+/*   Created: 2020/11/18 19:06:42 by lvintila          #+#    #+#             */
+/*   Updated: 2020/11/18 19:42:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "get_next_line.h"
 
 size_t	ft_strlen(char *str)
 {
-	size_t len;
+	int i;
 
-	len = 0;
-	while(str[len] != '\0')
-		len++;
-	return (len);
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }
 
 char	*ft_strchr(char *str, int c)
 {
 	unsigned int i;
-	unsigned int len;
-
+	
 	i = 0;
-	if (!str)
+	if (!str || !c)
 		return (NULL);
-	len = ft_strlen(str);
-	while(*str != '\0' && *str != c)
+	while (str[i] != '\0')
 	{
-		str++;
+		if (str[i] == c)
+			return (&str[i]);
 		i++;
 	}
-	if (*str != c && i == len)
-		return (NULL);
-	return (str);
+	return (NULL);
 }
+
 char	*ft_strjoin(char *s1, char *s2)
 {
-	char *dest;
 	int i;
+	char *dest;
 
 	i = 0;
 	if (!(dest = malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
@@ -58,8 +56,8 @@ char	*ft_strjoin(char *s1, char *s2)
 
 char	*ft_strdup(char *str)
 {
-	int		i;
-	char	*dest;
+	int i;
+	char *dest;
 
 	i = 0;
 	if (!(dest = malloc(ft_strlen(str) + 1)))
@@ -73,10 +71,10 @@ char	*ft_strdup(char *str)
 	return (dest);
 }
 
-int	get_next_line(char **line)
+int 	get_next_line(char **line)
 {
 	static char *gnl;
-	char		buff[513];
+	char 		buff[513];
 	char		*aux, *aux2;
 	int			n;
 
@@ -88,7 +86,7 @@ int	get_next_line(char **line)
 		if (n < 0)
 			return (-1);
 		else if (!n)
-			break ;
+			break;
 		buff[n] = 0;
 		if (!gnl)
 			gnl = ft_strdup(buff);
@@ -102,7 +100,7 @@ int	get_next_line(char **line)
 	if (!n && !gnl)
 	{
 		*line = ft_strdup("");
-		return (0);
+		return(0);
 	}
 	if ((aux = ft_strchr(gnl, '\n')))
 	{
