@@ -32,7 +32,7 @@ void drawMap2D()
 	int x,y,xo,yo;
 	for(y = 0; y < mapY; y++)
 	{
-		for(x=0;x<mapX;x++)
+		for(x = 0; x < mapX; x++)
 		{
 			if(map[y * mapX + x] == 1)
 			{
@@ -45,10 +45,10 @@ void drawMap2D()
 			xo = x * mapS;
 			yo = y * mapS;
 			glBegin(GL_QUADS);
-			glVertex2i( 0   +xo+1, 0   +yo+1);
-			glVertex2i( 0   +xo+1, mapS+yo-1);
-			glVertex2i( mapS+xo-1, mapS+yo-1);
-			glVertex2i( mapS+xo-1, 0   +yo+1);
+			glVertex2i( 0   + xo + 1, 0   + yo + 1);
+			glVertex2i( 0   + xo + 1, mapS + yo - 1);
+			glVertex2i( mapS + xo - 1, mapS + yo - 1);
+			glVertex2i( mapS + xo - 1, 0   + yo + 1);
 			glEnd();
 		}
 	}
@@ -59,17 +59,17 @@ void drawMap2D()
 //
 float degToRad(int a) 
 {
-	return a*M_PI/180.0;
+	return a * M_PI/180.0;
 }
 int FixAng(int a)
 {
-	if(a>359)
+	if (a > 359)
 	{
-		a-=360;
+		a -= 360;
 	}
-	if(a<0)
+	if(a < 0)
 	{
-		a+=360;
+		a += 360;
 	}
 	return a;
 }
@@ -78,98 +78,98 @@ float px,py,pdx,pdy,pa;
 
 void drawPlayer2D()
 {
-	glColor3f(1,1,0);
+	glColor3f(1, 1, 0);
 	glPointSize(8);
 	glLineWidth(4);
 	glBegin(GL_POINTS);
-	glVertex2i(px,py);
+	glVertex2i(px, py);
 	glEnd();
 	glBegin(GL_LINES);
-	glVertex2i(px,py);
-	glVertex2i(px+pdx*20,py+pdy*20);
+	glVertex2i(px, py);
+	glVertex2i(px + pdx * 20, py + pdy * 20);
 	glEnd();
 }
 
 void Buttons(unsigned char key,int x,int y)
 {
-	if (key=='a')
+	if (key == 'a')
 	{ 
-		pa+=5; 
-		pa=FixAng(pa); 
-		pdx=cos(degToRad(pa)); 
-		pdy=-sin(degToRad(pa));
+		pa += 5; 
+		pa = FixAng(pa); 
+		pdx = cos(degToRad(pa)); 
+		pdy =- sin(degToRad(pa));
 	}
-	if (key=='d')
+	if (key == 'd')
 	{
-		pa-=5; 
-		pa=FixAng(pa); 
-		pdx=cos(degToRad(pa)); 
-		pdy=-sin(degToRad(pa));
+		pa -= 5; 
+		pa = FixAng(pa); 
+		pdx = cos(degToRad(pa)); 
+		pdy =- sin(degToRad(pa));
 	}
-	if (key=='w')
+	if (key == 'w')
 	{
-		px+=pdx*5; 
-		py+=pdy*5;
+		px += pdx * 5; 
+		py += pdy * 5;
 	}
-	if (key=='s')
+	if (key == 's')
 	{
-		px-=pdx*5; 
-		py-=pdy*5;
+		px -= pdx * 5; 
+		py -= pdy * 5;
 	}
 	glutPostRedisplay();
 }//-----------------------------------------------------------------------------
 
 //---------------------------Draw Rays and Walls--------------------------------
-float distance(ax,ay,bx,by,ang)
+float distance(ax, ay, bx, by, ang)
 {
-	return cos(degToRad(ang)) * (bx-ax)-sin(degToRad(ang)) * (by-ay);
+	return cos(degToRad(ang)) * (bx - ax) - sin(degToRad(ang)) * (by - ay);
 }
 
 void drawRays2D()
 {
-	glColor3f(0,1,1);
+	glColor3f(0, 1, 1);
 	glBegin(GL_QUADS);
 	glVertex2i(526,  0);
 	glVertex2i(1006,  0); 
-	glVertex2i(1006,160);
-	glVertex2i(526,160);
+	glVertex2i(1006, 160);
+	glVertex2i(526, 160);
 	glEnd();
-	glColor3f(0,0,1);
+	glColor3f(0, 0, 1);
 	glBegin(GL_QUADS);
-	glVertex2i(526,160);
-	glVertex2i(1006,160);
-	glVertex2i(1006,320);
-	glVertex2i(526,320);
+	glVertex2i(526, 160);
+	glVertex2i(1006, 160);
+	glVertex2i(1006, 320);
+	glVertex2i(526, 320);
 	glEnd();
-	int r,mx,my,mp,dof,side; 
-	float vx,vy,rx,ry,ra,xo,yo,disV,disH;
-	ra=FixAng(pa+30);                                                              //ray set back 30 degrees
+	int r, mx, my, mp, dof, side; 
+	float vx, vy, rx, ry, ra, xo, yo, disV, disH;
+	ra = FixAng(pa + 30);                                                              //ray set back 30 degrees
 	for(r = 0; r < 60; r++)
 	{
 		//---Vertical---
-		dof=0;
-		side=0;
-		disV=100000;
-		float Tan=tan(degToRad(ra));
+		dof = 0;
+		side = 0;
+		disV = 100000;
+		float Tan = tan(degToRad(ra));
 		if(cos(degToRad(ra)) > 0.001)
 		{
-			rx = (((int)px>>6) << 6) + 64;
-	  		ry = (px-rx) * Tan + py;
+			rx = (((int)px >> 6) << 6) + 64;
+	  		ry = (px - rx) * Tan + py;
 			xo = 64; 
 			yo = -xo * Tan;
 		}//looking left
 		else if (cos(degToRad(ra)) < -0.001)
 		{
 			rx = (((int)px >> 6) << 6) -0.0001;
-			ry = (px-rx) * Tan + py;
+			ry = (px - rx) * Tan + py;
 		   	xo = -64; 
 			yo = -xo * Tan;
 		}//looking right
 		else 
 		{ 
-			rx=px;
-			ry=py; 
-			dof=8;
+			rx = px;
+			ry = py; 
+			dof = 8;
 		}                                                  //looking up or down. no hit
 		while(dof<8)
 		{
@@ -178,13 +178,19 @@ void drawRays2D()
 			mp = my * mapX + mx;
 			if (mp > 0 && mp < mapX * mapY && map[mp] == 1)
 			{
-				dof=8; 
+				dof = 8; 
 				disV = cos(degToRad(ra)) * (rx-px) - sin(degToRad(ra)) * (ry-py);
 			}//hit
-			else{ rx+=xo; ry+=yo; dof+=1;}                                               //check next horizontal
+			else
+			{ 
+				rx += xo;
+			   	ry += yo; 
+				dof+=1;
+			}
+			//check next horizontal
 		}
-		vx=rx; 
-		vy=ry;
+		vx = rx; 
+		vy = ry;
 		//---Horizontal---
 		dof = 0;
 		disH = 100000;
@@ -205,9 +211,9 @@ void drawRays2D()
 		}//looking down
 		else
 		{
-			rx=px;
-		   	ry=py; 
-			dof=8;
+			rx = px;
+		   	ry = py; 
+			dof = 8;
 		}                                                   //looking straight left or right
 		while (dof < 8)
 		{
