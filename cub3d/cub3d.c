@@ -1,298 +1,449 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/23 18:33:06 by marvin            #+#    #+#             */
+/*   Updated: 2020/11/27 22:07:03 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <mlx.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
 
-#define mapX	8
-#define mapY	8
-#define mapS	64
-int map[] = 
-{
-	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-	1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1,
-	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-};
+/* #define mapX	8 */
+/* #define mapY	8 */
+/* #define mapS	64 */
 
-void drawMap2D()
+#define KEY_PRESS	2
+#define KEY_RELEASE	3
+
+#define	KEY_EXIT	17
+
+#define KEY_ESC		53
+#define KEY_W		13
+#define KEY_A		0
+#define KEY_S		1
+#define KEY_D		2
+#define KEY_IZQ		123
+#define KEY_DCH		124
+
+#define TILE_SIZE	64
+#define	ROWS		12
+#define	COLS		16
+#define WIDTHS		COLS * TILE_SIZE
+#define	HEIGHTS		ROWS * TILE_SIZE
+
+#define TO_COORD(X, Y)	((int)floor(Y) * WIDTHS + (int)floor(X))
+
+#define PI			3.141592653589793238
+#define P2			PI / 2
+#define	P3			3 * PI / 2
+#define DR			0.0174533 // un grado en radians
+
+
+/*
+double px = 0;
+double py = 0;
+double dirx = -5;
+double diry = 0;
+double angulo;
+double planex = 0;
+double planey = 0.66;
+int posx;
+int posy;
+*/
+
+float paramx = 0;
+float paramy = 0;
+float pviewx = 0;
+float pviewy = 0;
+float camarax = 1;
+float camaray = 0;
+
+int		cam_turn(int entero)
 {
-	int x,y,xo,yo;
-	for(y = 0; y < mapY; y++)
+	int angulo;
+	float oldcamarax;
+	float oldcamaray;
+
+
+	angulo = 1 * entero;
+	oldcamarax = camarax;
+	camarax = camarax * cos(angulo) - camaray * sin(angulo);
+	camaray = oldcamarax * sin(angulo) + camaray * cos(angulo);
+	return (0);
+}
+
+
+/*funcion para cerrar con el boton rojo x 
+
+int	ft_stop(int key, void *param)
+{
+	(void)param;
+	if (key == 0x35 || key == 0x00)
 	{
-		for(x = 0; x < mapX; x++)
+		//freeme();
+		exit(EXIT_SUCCESS);
+	}
+	return (0);
+}
+*/
+/* key_press solo puede recibir un argumento, así que se guarda en una estructura */
+/*typedef struct s_param
+{
+	int x;
+	int y;
+	int z;
+	char str[3];
+}				t_param;
+*/
+
+int imputkey(int key)
+{
+    if (key == KEY_ESC)
+        exit(0);
+    else if (key == KEY_W)
+        paramx--;
+    else if (key == KEY_S)
+        paramx++;
+    else if (key == KEY_A)
+        paramy--;
+    else if (key == KEY_D)
+        paramy++;
+    else if (key == KEY_IZQ)
+        cam_turn(1);
+    else if (key == KEY_DCH)
+        cam_turn(-1);
+    printf("frontal_px: %f\n", paramx);
+    printf("lateral_py: %f\n", paramy);
+    printf("camarax: %f\n", camarax);
+    printf("camaray: %f\n", camaray);
+    return (0);
+}
+
+typedef struct s_img
+{
+	void	*img_ptr;
+	int		*data;
+	int		size_l;
+	int		bpp;
+	int		endian;
+}				t_img;
+typedef struct s_game
+{
+	void *mlx;
+	void *win_ptr;
+	t_img img;
+
+	int map[ROWS][COLS];
+}			t_game;
+/*
+void	param_init(t_param *param)
+{
+	param->x = 0;
+	param->y = 0;
+	param->z = 0;
+}
+
+int	imputkey(int key, t_param *param)
+{
+	static int a = 0;
+
+	if (key == KEY_ESC)
+		exit(0);
+	else if (key == KEY_W)
+		px--;
+	else if (key == KEY_S)
+		param->x--;
+	else if (key == KEY_A)
+		param->y++;
+	else if (key == KEY_D)
+		param->y--;
+	else if (key == KEY_IZQ)
+		param->z++;
+	else if (key == KEY_DCH)
+		param->z--;
+	printf("frontal_x: %d\n", param->x);
+	printf("lateral_y: %d\n", param->y);
+	printf("camara__z: %d\n", param->z);
+	return (0);
+}
+
+*/
+
+/*
+
+void	draw_line(t_game *game, double x1, double y1, double x2, double y2)
+{
+	double deltaX;
+	double deltaY;
+	double step;
+
+	deltaX = x2 - x1;
+	deltaY = y2 - y1;
+	step = (fabs(deltaX) > fabs(deltaY)) ? fabs(deltaX) : fabs(deltaY);
+	deltaX /= step;
+	deltaY /= step;
+	while (fabs(x2 - x1) > 0.01 || fabs(y2 - y1) > 0.01)
+	{
+		game->img.data[TO_COORD(x1, y1)] = 0x8080FF;
+		x1 += deltaX;
+		y1 += deltaY;
+	}
+}
+
+void	draw_lines(t_game *game)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < COLS)
+	{
+		draw_line(game, i * TILE_SIZE, 0, i * TILE_SIZE, HEIGHTS);
+		i++;
+	}
+	draw_line(game, COLS * TILE_SIZE - 1, 0, COLS * TILE_SIZE - 1, HEIGHTS);
+	j = 0;
+	while (j < ROWS)
+	{
+		draw_line(game, 0, j * TILE_SIZE, WIDTHS, j * TILE_SIZE);
+		j++;
+	}
+	draw_line(game, 0, ROWS * TILE_SIZE - 1, WIDTHS, ROWS * TILE_SIZE - 1);
+}
+*/
+
+void	draw_background(t_game *game, int x, int y)
+{
+	int i;
+	int j;
+
+	x *= TILE_SIZE;
+	y *= TILE_SIZE; 
+
+	i = 0;
+	while (i < TILE_SIZE * ROWS)
+	{
+		j = 0;
+		while (j < TILE_SIZE * COLS)
 		{
-			if(map[y * mapX + x] == 1)
-			{
-				glColor3f(1,1,1);
-			}
-			else
-			{
-				glColor3f(0,0,0);
-			}
-			xo = x * mapS;
-			yo = y * mapS;
-			glBegin(GL_QUADS);
-			glVertex2i( 0   + xo + 1, 0   + yo + 1);
-			glVertex2i( 0   + xo + 1, mapS + yo - 1);
-			glVertex2i( mapS + xo - 1, mapS + yo - 1);
-			glVertex2i( mapS + xo - 1, 0   + yo + 1);
-			glEnd();
+			mlx_pixel_put(game->mlx, game->win_ptr, x, y, 0x404040);
+			j++;
 		}
+		i++;
 	}
-}//-----------------------------------------------------------------------------
-
-
-//------------------------PLAYER------------------------------------------------
-//
-float degToRad(int a) 
-{
-	return a * M_PI/180.0;
-}
-int FixAng(int a)
-{
-	if (a > 359)
-	{
-		a -= 360;
-	}
-	if(a < 0)
-	{
-		a += 360;
-	}
-	return a;
 }
 
-float px,py,pdx,pdy,pa;
-
-void drawPlayer2D()
+void	draw_rectangle(t_game *game, int x, int y)
 {
-	glColor3f(1, 1, 0);
-	glPointSize(8);
-	glLineWidth(4);
-	glBegin(GL_POINTS);
-	glVertex2i(px, py);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2i(px, py);
-	glVertex2i(px + pdx * 20, py + pdy * 20);
-	glEnd();
-}
+	int		i;
+	int		j;
 
-void Buttons(unsigned char key,int x,int y)
-{
-	if (key == 'a')
-	{ 
-		pa += 5; 
-		pa = FixAng(pa); 
-		pdx = cos(degToRad(pa)); 
-		pdy =- sin(degToRad(pa));
-	}
-	if (key == 'd')
+	x *= TILE_SIZE;
+	y *= TILE_SIZE;
+	i = 0;
+	while (i < TILE_SIZE - 1)
 	{
-		pa -= 5; 
-		pa = FixAng(pa); 
-		pdx = cos(degToRad(pa)); 
-		pdy =- sin(degToRad(pa));
-	}
-	if (key == 'w')
-	{
-		px += pdx * 5; 
-		py += pdy * 5;
-	}
-	if (key == 's')
-	{
-		px -= pdx * 5; 
-		py -= pdy * 5;
-	}
-	glutPostRedisplay();
-}//-----------------------------------------------------------------------------
-
-//---------------------------Draw Rays and Walls--------------------------------
-float distance(ax, ay, bx, by, ang)
-{
-	return cos(degToRad(ang)) * (bx - ax) - sin(degToRad(ang)) * (by - ay);
-}
-
-void drawRays2D()
-{
-	glColor3f(0, 1, 1);
-	glBegin(GL_QUADS);
-	glVertex2i(526,  0);
-	glVertex2i(1006,  0); 
-	glVertex2i(1006, 160);
-	glVertex2i(526, 160);
-	glEnd();
-	glColor3f(0, 0, 1);
-	glBegin(GL_QUADS);
-	glVertex2i(526, 160);
-	glVertex2i(1006, 160);
-	glVertex2i(1006, 320);
-	glVertex2i(526, 320);
-	glEnd();
-	int r, mx, my, mp, dof, side; 
-	float vx, vy, rx, ry, ra, xo, yo, disV, disH;
-	ra = FixAng(pa + 30);                                                              //ray set back 30 degrees
-	for(r = 0; r < 60; r++)
-	{
-		//---Vertical---
-		dof = 0;
-		side = 0;
-		disV = 100000;
-		float Tan = tan(degToRad(ra));
-		if(cos(degToRad(ra)) > 0.001)
+		j = 0;
+		while (j < TILE_SIZE - 1)
 		{
-			rx = (((int)px >> 6) << 6) + 64;
-	  		ry = (px - rx) * Tan + py;
-			xo = 64; 
-			yo = -xo * Tan;
-		}//looking left
-		else if (cos(degToRad(ra)) < -0.001)
-		{
-			rx = (((int)px >> 6) << 6) -0.0001;
-			ry = (px - rx) * Tan + py;
-		   	xo = -64; 
-			yo = -xo * Tan;
-		}//looking right
-		else 
-		{ 
-			rx = px;
-			ry = py; 
-			dof = 8;
-		}                                                  //looking up or down. no hit
-		while(dof<8)
-		{
-			mx = (int)(rx) >> 6;
-		   	my = (int)(ry) >> 6; 
-			mp = my * mapX + mx;
-			if (mp > 0 && mp < mapX * mapY && map[mp] == 1)
-			{
-				dof = 8; 
-				disV = cos(degToRad(ra)) * (rx-px) - sin(degToRad(ra)) * (ry-py);
-			}//hit
-			else
-			{ 
-				rx += xo;
-			   	ry += yo; 
-				dof+=1;
-			}
-			//check next horizontal
+			game->img.data[(y + i) * (WIDTHS) + x + j] = 0x00FF00;
+			j++;
 		}
-		vx = rx; 
-		vy = ry;
-		//---Horizontal---
-		dof = 0;
-		disH = 100000;
-		Tan = 1.0/Tan;
-		if (sin(degToRad(ra)) > 0.001)
-		{
-			ry = (((int)py>>6) << 6) -0.0001;
-		   	rx = (py-ry) * Tan+px;
-			yo = -64;
-		   	xo = -yo * Tan;
-		}//looking up
-		else if (sin(degToRad(ra)) < -0.001)
-		{
-			ry = (((int)py >> 6) << 6) + 64;
-	  		rx = (py-ry) * Tan + px;
-		   	yo = 64; 
-			xo = -yo * Tan;
-		}//looking down
-		else
-		{
-			rx = px;
-		   	ry = py; 
-			dof = 8;
-		}                                                   //looking straight left or right
-		while (dof < 8)
-		{
-			mx = (int)(rx) >> 6; 
-			my = (int)(ry) >> 6; 
-			mp = my * mapX + mx;
-			if (mp > 0 && mp < mapX * mapY && map[mp] == 1)
-			{
-				dof = 8;
-			   	disH = cos(degToRad(ra)) * (rx-px) - sin(degToRad(ra)) * (ry-py);
-			}
-			//hit
-			else
-			{
-				rx += xo; 
-				ry += yo; 
-				dof += 1;
-			}                                               //check next horizontal
-		}
-		glColor3f(0, 0.8, 0);
-		if (disV < disH)
-		{
-			rx = vx;
-			ry = vy;
-			disH = disV;
-			glColor3f(0, 0.6, 0);
-		}                  //horizontal hit first
-		glLineWidth(2);
-		glBegin(GL_LINES);
-		glVertex2i(px, py);
-		glVertex2i(rx, ry);
-		glEnd();//draw 2D ray
-		int ca = FixAng(pa - ra);
-		disH = disH * cos(degToRad(ca));                            //fix fisheye 
-		int lineH = (mapS * 320) / (disH); 
-		if (lineH > 320)
-		{
-			lineH = 320;
-		}                     //line height and limit
-		int lineOff = 160 - (lineH>>1);                                               //line offset
-		
-		glLineWidth(8);
-		glBegin(GL_LINES);
-		glVertex2i(r * 8 + 530, lineOff);
-		glVertex2i(r * 8 + 530, lineOff + lineH);
-		glEnd();//draw vertical wall  
-		
-		ra = FixAng(ra - 1);                                                              //go to next ray
+		i++;
 	}
-}//-----------------------------------------------------------------------------
-
-void init()
-{
-	glClearColor(0.3, 0.3, 0.3, 0);
-	gluOrtho2D(0, 1024, 510, 0);
-	px = 150; 
-	py = 400; 
-	pa = 90;
-	pdx = cos(degToRad(pa));
-	pdy = -sin(degToRad(pa));
 }
 
-void display()
+void	draw_rectangles(t_game *game)
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	drawMap2D();
-	drawPlayer2D();
-	drawRays2D();
-	glutSwapBuffers();
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < ROWS)
+	{
+		j = 0;
+		while (j < COLS)
+		{
+			if (game->map[i][j] == 1)
+				draw_rectangle(game, j, i);
+			j++;
+		}
+		i++;
+	}
 }
 
-int main(int argc, char* argv[])
+
+void	draw_player(t_game *game, int x, int y)
 {
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowSize(1024,510);
-	glutCreateWindow("YouTube-3DSage");
-	init();
-	glutDisplayFunc(display);
-	glutKeyboardFunc(Buttons);
-	glutMainLoop();
+	int	i;
+	int	j;
+
+	x *= TILE_SIZE;	
+	y *= TILE_SIZE;
+	i = 20;
+	while (i < TILE_SIZE / 1.6) 	// cambia size player
+	{
+		j = 20;
+		while (j < TILE_SIZE / 1.6) // cambia size player
+		{
+			game->img.data[(y + i) * WIDTHS + x + j] = 0xFF0000;
+			j++;
+		}
+		i++;
+	}
+}
+
+void	draw_players(t_game *game)
+{
+	int i;
+	int j;
+
+	i = 0;
+
+	while (i < ROWS)
+	{
+		j = 0;
+		while (j < COLS)
+		{
+			if (game->map[i][j] == 2) // posicion inicial player //guardar en param 
+				draw_player(game, j + paramy, i + paramx); //posicion dibujo player
+			j++;
+		}
+		i++;
+	}
+//	printf("break point\n");
+}
+
+void	draw_pview(t_game *game, int x, int y)
+{
+	int		i;
+	int		j;
+
+	x *= TILE_SIZE;
+	y *= TILE_SIZE;
+	i = 0;
+	while (i < TILE_SIZE)
+	{
+		j = 0;
+		while (j < TILE_SIZE)
+		{
+			game->img.data[(y + i) * WIDTHS + x + j] = 0x404040;
+			j++;
+		}
+		i++;
+	}
+}
+
+void	draw_pviews(t_game *game)
+{
+	int			i;
+	int			j;
+
+	i = 0;
+	while (i < ROWS)
+	{
+		j = 0;
+		while (j < COLS)
+		{
+			if (game->map[i][j] == 2)
+				draw_pview(game, j , i);
+			j++;
+		}
+		i++;
+	}
+}
+
+
+void	 game_init(t_game *game)
+{
+	int map[ROWS][COLS] = {
+	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+	{1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+	{1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+	{1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	{1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	{1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1},
+	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+	};
+	memcpy(game->map, map, sizeof(int) * ROWS * COLS);
+}
+
+// ventana
+
+void window_init(t_game *game)
+{
+	game->mlx = mlx_init();
+	game->win_ptr = mlx_new_window(game->mlx, WIDTHS, HEIGHTS, "=== // -game CUB3D- \\\\ ===");
+}
+// inicia dibujo
+
+void img_init(t_game *game)
+{
+	game->img.img_ptr = mlx_new_image(game->mlx, WIDTHS, HEIGHTS);
+	game->img.data = (int*)mlx_get_data_addr(game->img.img_ptr, &game->img.bpp, &game->img.size_l, &game->img.endian);
+}
+
+//cierra ventana con boton rojo
+
+int close(t_game *game)
+{
+	exit(0);
+}
+
+
+int main_loop(t_game *game)
+{
+	draw_background(game, 0, 0);
+	draw_rectangles(game);
+	draw_players(game);
+	draw_pviews(game);
+/*	draw_lines(game); */
+	mlx_put_image_to_window(game->mlx, game->win_ptr, game->img.img_ptr, 0, 0);
+	return (0);
+}
+
+
+int	main(void)
+{
+	t_game game;
+	
+	game_init(&game);
+	window_init(&game);
+	img_init(&game);
+	mlx_hook(game.win_ptr, KEY_PRESS, 0, &imputkey, &game);
+	mlx_hook(game.win_ptr, KEY_EXIT, 0, &close, &game);
+
+	mlx_loop_hook(game.mlx, &main_loop, &game);
+	mlx_loop(game.mlx);
+
+/*	void	*mlx;
+	void	*mlx_win;
+	t_param	param;
+	void	*img;
+	int		img_width;
+	int		img_height;
+
+
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, 400, 400, "game");
+
+	img = mlx_xpm_file_to_image(mlx, "./textures/wall_e.xpm", &img_width, &img_height);
+	mlx_put_image_to_window(mlx, mlx_win, img, 50, 50);
+
+	mlx_hook(mlx_win, KEY_PRESS, 0, &imputkey, &param);
+	mlx_loop(mlx);
+	return (0);*/
 }

@@ -84,21 +84,3 @@ int ft_printf(char *input, ...)
 	va_end(lst);
 	return (ret);
 }
-
-int main()
-{
-    printf("The color: %s\n", "blue");
-    ft_printf("The color: %s\n", "blue");
-    printf("First number:%d\n", 12345);
-    ft_printf("First number:%d\n", 12345);
-    printf("Second number:%04d\n", 25);
-    ft_printf("Second number:%04d\n", 25);
-    printf("Third number:%i\n", 1234);
-    ft_printf("Third number:%i\n", 1234);
-    printf("Hexadecimal:%x\n", 255);
-    ft_printf("Hexadecimal:%x\n", 255);
-    printf("Unisigned value:%u\n", 150);
-    ft_printf("Unisigned value:%u\n", 150);
-    printf("Just print the percentage sign:%3d%%\n", 10);
-    ft_printf("Just print the percentage sign:%3d%%\n", 10);
-}
