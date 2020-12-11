@@ -4,10 +4,10 @@
 #include <math.h>
 #include <string.h>
 
-#define mapX	8
-#define mapY	8
-#define mapS	64
-int map[] = 
+#define mapX	8 // map width
+#define mapY	8 // map height
+#define mapS	64 // map cub size
+int map[] =  // the map array. Edit to change level but keep the outer walls
 {
 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 	1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1,
@@ -145,7 +145,8 @@ void drawRays2D()
 	glEnd();
 	int r, mx, my, mp, dof, side; 
 	float vx, vy, rx, ry, ra, xo, yo, disV, disH;
-	ra = FixAng(pa + 30);                             //ray set back 30 degrees
+	ra = FixAng(pa + 30);                             
+	//ray set back 30 degrees
 	for(r = 0; r < 60; r++)
 	{
 		//---Vertical---
@@ -174,7 +175,8 @@ void drawRays2D()
 			rx = px;
 			ry = py; 
 			dof = 8;
-		}                                                  //looking up or down. no hit
+		}                                                  
+		//looking up or down. no hit
 		while(dof<8)
 		{
 			mx = (int)(rx) >> 6;

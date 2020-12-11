@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 18:33:06 by marvin            #+#    #+#             */
-/*   Updated: 2020/11/27 22:07:03 by marvin           ###   ########.fr       */
+/*   Updated: 2020/12/09 20:54:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,29 +59,31 @@ int posx;
 int posy;
 */
 
-float paramx = 0;
-float paramy = 0;
+float px = 0;
+float py = 0;
 float pviewx = 0;
 float pviewy = 0;
+float pa;
 float camarax = 1;
 float camaray = 0;
 
-int		cam_turn(int entero)
+
+int	cam_turn(int ent)
 {
 	int angulo;
 	float oldcamarax;
 	float oldcamaray;
 
 
-	angulo = 1 * entero;
+	angulo = 1 * ent;
 	oldcamarax = camarax;
 	camarax = camarax * cos(angulo) - camaray * sin(angulo);
 	camaray = oldcamarax * sin(angulo) + camaray * cos(angulo);
 	return (0);
 }
 
-
-/*funcion para cerrar con el boton rojo x 
+/*
+funcion para cerrar con el boton rojo x 
 
 int	ft_stop(int key, void *param)
 {
@@ -109,23 +111,34 @@ int imputkey(int key)
     if (key == KEY_ESC)
         exit(0);
     else if (key == KEY_W)
-        paramx--;
+        px--;
     else if (key == KEY_S)
-        paramx++;
+		px++;
     else if (key == KEY_A)
-        paramy--;
+		py--;
     else if (key == KEY_D)
-        paramy++;
-    else if (key == KEY_IZQ)
+		py++;
+	else if (key == KEY_IZQ)
         cam_turn(1);
     else if (key == KEY_DCH)
         cam_turn(-1);
-    printf("frontal_px: %f\n", paramx);
-    printf("lateral_py: %f\n", paramy);
+	printf("frontal_px: %f\n", px);
+    printf("lateral_py: %f\n", py);
     printf("camarax: %f\n", camarax);
-    printf("camaray: %f\n", camaray);
+    printf("camaray: %f\n", camaray); 
     return (0);
 }
+/*
+
+typedef struct s_player
+{
+	float px;
+	float py;
+	float pdx;
+	float pdy;
+	float pa;
+}
+*/
 
 typedef struct s_img
 {
@@ -174,10 +187,7 @@ int	imputkey(int key, t_param *param)
 	printf("camara__z: %d\n", param->z);
 	return (0);
 }
-
 */
-
-/*
 
 void	draw_line(t_game *game, double x1, double y1, double x2, double y2)
 {
@@ -192,7 +202,7 @@ void	draw_line(t_game *game, double x1, double y1, double x2, double y2)
 	deltaY /= step;
 	while (fabs(x2 - x1) > 0.01 || fabs(y2 - y1) > 0.01)
 	{
-		game->img.data[TO_COORD(x1, y1)] = 0x8080FF;
+		game->img.data[TO_COORD(x1, y1)] = 0xb3b3b3;
 		x1 += deltaX;
 		y1 += deltaY;
 	}
@@ -209,19 +219,33 @@ void	draw_lines(t_game *game)
 		draw_line(game, i * TILE_SIZE, 0, i * TILE_SIZE, HEIGHTS);
 		i++;
 	}
-	draw_line(game, COLS * TILE_SIZE - 1, 0, COLS * TILE_SIZE - 1, HEIGHTS);
+	draw_line(game, COLS * TILE_SIZE, 0, COLS * TILE_SIZE - 1, HEIGHTS);
 	j = 0;
 	while (j < ROWS)
 	{
 		draw_line(game, 0, j * TILE_SIZE, WIDTHS, j * TILE_SIZE);
 		j++;
 	}
-	draw_line(game, 0, ROWS * TILE_SIZE - 1, WIDTHS, ROWS * TILE_SIZE - 1);
+	draw_line(game, 0, ROWS * TILE_SIZE, WIDTHS, ROWS * TILE_SIZE - 1);
 }
-*/
 
+
+
+/*
 void	draw_background(t_game *game, int x, int y)
 {
+	y = 50;
+	while (y < 150)
+	{
+		x = 50;
+		while (x < 150)
+		{
+			mlx_pixel_put(game->mlx, game->win_ptr, x, y, 0xC0C0C0);
+			x++;
+		}
+		y++;
+	}
+//=======
 	int i;
 	int j;
 
@@ -234,11 +258,53 @@ void	draw_background(t_game *game, int x, int y)
 		j = 0;
 		while (j < TILE_SIZE * COLS)
 		{
-			mlx_pixel_put(game->mlx, game->win_ptr, x, y, 0x404040);
+			mlx_pixel_put(game->mlx, game->win_ptr, x, y, 0xC0C0C0);
 			j++;
 		}
 		i++;
 	}
+}
+*/
+//void	draw_backgrounds()
+
+
+void    draw_back(t_game *game, int x, int y)
+{
+    int     i;
+    int     j;
+
+    x *= TILE_SIZE;
+    y *= TILE_SIZE;
+    i = 0;
+    while (i < TILE_SIZE - 1)
+    {
+        j = 0;
+        while (j < TILE_SIZE - 1)
+        {
+            game->img.data[(y + i) * WIDTHS + x + j] = 0xC0C0C0;
+            j++;
+        }
+        i++;
+    }
+}
+
+void    draw_backgrounds(t_game *game)
+{
+    int         i;
+    int         j;
+
+    i = 0;
+    while (i < ROWS)
+    {
+        j = 0;
+        while (j < COLS)
+        {
+            if (game->map[i][j] == 0 || game->map[i][j] == 2)
+                draw_back(game, j , i);
+            j++;
+        }
+        i++;
+    }
 }
 
 void	draw_rectangle(t_game *game, int x, int y)
@@ -286,13 +352,13 @@ void	draw_player(t_game *game, int x, int y)
 	int	i;
 	int	j;
 
-	x *= TILE_SIZE;	
-	y *= TILE_SIZE;
-	i = 20;
-	while (i < TILE_SIZE / 1.6) 	// cambia size player
+	x *= 10;	
+	y *= 10;
+	i = 0;
+	while (i < TILE_SIZE / 5) 	// cambia size player
 	{
-		j = 20;
-		while (j < TILE_SIZE / 1.6) // cambia size player
+		j = 0;
+		while (j < TILE_SIZE / 5) // cambia size player
 		{
 			game->img.data[(y + i) * WIDTHS + x + j] = 0xFF0000;
 			j++;
@@ -314,7 +380,7 @@ void	draw_players(t_game *game)
 		while (j < COLS)
 		{
 			if (game->map[i][j] == 2) // posicion inicial player //guardar en param 
-				draw_player(game, j + paramy, i + paramx); //posicion dibujo player
+				draw_player(game, j + py, i + px); //posicion dibujo player
 			j++;
 		}
 		i++;
@@ -353,14 +419,44 @@ void	draw_pviews(t_game *game)
 		j = 0;
 		while (j < COLS)
 		{
-			if (game->map[i][j] == 2)
+			if (game->map[i][j] == 3)
 				draw_pview(game, j , i);
 			j++;
 		}
 		i++;
 	}
 }
-
+/*
+void	buttons(unsigned char key, int x, int y)
+{
+	if (key == 'a')
+	{
+		pa -= 0.1;
+		if (pa < 0)
+			pa += 2*PI;
+		pdx = cos (pa)  * 5;
+		pdy = sin (pa) * 5;
+	}
+	if (key == 'd')
+	{
+		pa += 0.1;
+		if (pa > 2 * PI)
+			pa -= 2*PI;
+		pdx = cos (pa)  * 5;
+		pdy = sin (pa) * 5;
+	}
+	if (key == 'w')
+	{
+		px += pdx;
+		py += pdy;
+	}
+	if (key == 's')
+	{
+		px -= pdx;
+		py -= pdy;
+	}
+}
+*/
 
 void	 game_init(t_game *game)
 {
@@ -370,10 +466,10 @@ void	 game_init(t_game *game)
 	{1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0, 1},
 	{1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 	{1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1},
+	{1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1},
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -394,7 +490,7 @@ void img_init(t_game *game)
 {
 	game->img.img_ptr = mlx_new_image(game->mlx, WIDTHS, HEIGHTS);
 	game->img.data = (int*)mlx_get_data_addr(game->img.img_ptr, &game->img.bpp, &game->img.size_l, &game->img.endian);
-}
+};
 
 //cierra ventana con boton rojo
 
@@ -406,11 +502,11 @@ int close(t_game *game)
 
 int main_loop(t_game *game)
 {
-	draw_background(game, 0, 0);
+	draw_backgrounds(game);
 	draw_rectangles(game);
 	draw_players(game);
 	draw_pviews(game);
-/*	draw_lines(game); */
+	draw_lines(game);
 	mlx_put_image_to_window(game->mlx, game->win_ptr, game->img.img_ptr, 0, 0);
 	return (0);
 }
