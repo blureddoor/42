@@ -2,6 +2,7 @@ FROM 	debian:10
 
 LABEL 	mantainer "lvintila lvintila@student.42madrid.com"
 
+ENV		AUTOINDEX on
 RUN		apt-get update && apt-get install; \
 		apt-get upgrade; \
 		apt-get install -y procps curl \
@@ -14,9 +15,12 @@ RUN		apt-get update && apt-get install; \
 
 COPY	./srcs/init_container.sh ./
 COPY 	./srcs/nginx-conf ./tmp/nginx-conf
+COPY	./srcs/nginx-conf-autoindex-off ./tmp/nginx-conf-autoindex-off
 COPY	./srcs/phpmyadmin.inc.php ./tmp/phpmyadmin.inc.php
 COPY 	./srcs/wp-config.php ./tmp/wp-config.php
+COPY    ./srcs/wordpress.sql ./tmp/wordpress.sql
+COPY	./srcs/*.sh ./
 
-CMD		bash init_container.sh
-
+CMD		bash init_container.sh 
+		
 EXPOSE 	80 443

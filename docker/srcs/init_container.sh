@@ -1,3 +1,5 @@
+bash change_autoindex.sh
+
 service mysql start
 
 #config Access
@@ -13,7 +15,7 @@ mkdir /etc/nginx/ssl
 openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out /etc/nginx/ssl/mi_web_42.pem -keyout /etc/nginx/ssl/mi_web_42.key -subj "/C=ES/ST=Madrid/L=Madrid/O=42/OU=lvintila/CN=certified_lvintila_mi_web_42"
 
 #config nginx
-mv ./tmp/nginx-conf /etc/nginx/sites-available/mi_web_42
+cp ./tmp/nginx-conf /etc/nginx/sites-available/mi_web_42
 ln -s /etc/nginx/sites-available/mi_web_42 /etc/nginx/sites-enabled/mi_web_42
 rm -rf /etc/nginx/sites-enabled/default
 
@@ -35,6 +37,8 @@ wget -c https://wordpress.org/latest.tar.gz
 tar -xvzf latest.tar.gz
 mv wordpress/ /var/www/mi_web_42
 mv /tmp/wp-config.php /var/www/mi_web_42/wordpress/wp-config.php
+mv /tmp/wordpress.sql /var/www/mi_web_42/wordpress/wordpress.sql
+mysql wordpress -u root < /var/www/mi_web_42/wordpress/wordpress.sql
 
 service php7.3-fpm start
 service nginx start
