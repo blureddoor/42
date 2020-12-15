@@ -3,6 +3,7 @@ FROM 	debian:10
 LABEL 	mantainer "lvintila lvintila@student.42madrid.com"
 
 ENV		AUTOINDEX on
+
 RUN		apt-get update && apt-get install; \
 		apt-get upgrade; \
 		apt-get install -y procps curl \
