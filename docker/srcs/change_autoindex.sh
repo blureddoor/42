@@ -11,6 +11,6 @@ then
 service nginx reload
 else
     if [ "$AUTOINDEX" = "off" ] ;
-    then mv /tmp/nginx-conf-autoindex-off /etc/nginx/sites-available/mi_web_42 ;
-    else mv /tmp/nginx-conf /etc/nginx/sites-available/mi_web_42 ; fi
+    then cp /tmp/nginx-conf-autoindex-off /etc/nginx/sites-available/mi_web_42 ;
+    else cp /tmp/nginx-conf /etc/nginx/sites-available/mi_web_42 ; fi
 fi

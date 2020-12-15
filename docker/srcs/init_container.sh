@@ -19,6 +19,8 @@ cp ./tmp/nginx-conf /etc/nginx/sites-available/mi_web_42
 ln -s /etc/nginx/sites-available/mi_web_42 /etc/nginx/sites-enabled/mi_web_42
 rm -rf /etc/nginx/sites-enabled/default
 
+
+
 #config mysql
 echo "CREATE DATABASE wordpress;" | mysql -u root --skip-password
 echo "GRANT ALL PRIVILEGES ON wordpress.* TO 'root'@'localhost' WITH GRANT OPTION;" | mysql -u root --skip-password
@@ -41,5 +43,8 @@ mv /tmp/wordpress.sql /var/www/mi_web_42/wordpress/wordpress.sql
 mysql wordpress -u root < /var/www/mi_web_42/wordpress/wordpress.sql
 
 service php7.3-fpm start
+#service nginx start
+cd ..
+bash change_autoindex.sh
 service nginx start
 bash
