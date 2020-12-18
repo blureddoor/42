@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2020/12/10 22:03:51 by marvin           ###   ########.fr       */
+/*   Updated: 2020/12/18 22:00:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,48 +15,111 @@
 #include <mlx.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <vector.h>
-#include <iostream.h>
 
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
-#define MAP_WIDTH 24
-#define MAP_HEIGHT 24
 
-int world_map[MAP_WIDTH][MAP_HEIGHT]=
+#define SCREEN_WIDTH	640
+#define SCREEN_HEIGHT	480
+#define TILE_SIZE		32
+#define COLS			24
+#define ROWS			24
+#define WIDTHS			COLS * TILE_SIZE
+#define HEIGHTS			ROWS * TILE_SIZE
+
+
+typedef struct s_img
 {
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+	void	*img_ptr;
+	int		*data;
+	int		size_l;
+	int		bpp;
+	int		endian;
+}				t_img;
+
+typedef	struct s_game
+{
+	void	*mlx;
+	void	*win_ptr;
+	t_img	img;
+
+	int map[ROWS][COLS];
+}				t_game;
+
+int w, h;
+
+
+void	 game_init(t_game *game)
+{
+	int word_map[map_width][map_height] = {
+	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
+	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+	};
+	memcpy(game->map, map, sizeof(int) * ROWS * COLS);
 };
 
+void	window_init(t_game *game)
+{
+	game->mlx = mlx_init();
+	game->win_ptr = mlx_new_window(game->mlx, WIDTHS, HEIGHTS, "=== // -game CUB3D- \\\\ ===");
+}
+
+void	img_init(t_game *game)
+{
+	game->img.img_ptr = mlx_new_image(game->mlx, WIDTHS, HEIGHTS);
+	game->img.data = (int*)mlx_get_data_addr(game->img.img_ptr, &game->img.bpp, &game->img.size_l, &game->img.endian);
+}
+
+int close(t_game *game)
+{
+	exit (0);
+}
 
 int imputkey(int key)
 {
-    return;
+	if (key == KEY_ESC)
+		exit (0);
+	if (key == KEY_W)
+		;
+	if (key == KEY_S)
+		;
+	if (key == KEY_A)
+		;
+	if (key == KEY_D)
+		;
+	if (key == KEY_IZQ)
+		;
+	if (key == KEY_DCH)
+		;
+    return (0);
 }
 
+
+int main_loop(t_game *game)
+{
+	mlx_put_image_to_window(game->mlx, game->win_ptr, game->img.img_ptr, 0, 0);
+	return (0);
+}
 
 int main(int argc, char **argv)
 {
@@ -64,32 +127,36 @@ int main(int argc, char **argv)
 	double dir_x = -1, dir_y = 0;  // initial direction vector
 	double plane_x = 0, plane_y = 0.66; // the 2d raycaster version of camara plane
 
-	double time = 0; //time o current frame
+	double time = 0; //time of current frame
 	double old_time = 0; // time of previous frame
 
-	screen(SCREEN_WIDTH, SCREEN_HEIGHT, 0, "Raycaster");
-	while (!done())
+/*	screen(SCREEN_WIDTH, SCREEN_HEIGHT, 0, "Raycaster");*/
+	t_game game;
+
+	game_init(&game);
+	window_init(&game);
+	while (1)
 	{
 		int x;
 		x = 0;
 		while (x < w)
 		{
 			// calculate ray position and direction
-			double camara_x = 2 * x / (double)w - 1; // x-coordinate in camera space
-			double ray_dir_x = dir_x + plane_x * camera_x;
-			double ray_dir_y = dir_y + plane_y * camera_x;
+			double camara_x = (2 * x) / ((double)w - 1); // x-coordinate in camera space
+			double ray_dir_x = dir_x + plane_x * camara_x;
+			double ray_dir_y = dir_y + plane_y * camara_x;
 			
 			// which bx of the map we're in
-			int map_x = int (pos_x);
-			int map_y = int (pos_y);
+			int map_x = (int)pos_x;
+			int map_y = (int)pos_y;
 			
 			//length of ray from current position to next x or y-side
 			double side_dist_x;
 			double side_dist_y;
 
 			//length of ray from one x or y-side to next x or y-side
-			double delta_dist_x = std::abs(1 / ray_dir_x);
-			double delta_dist_y = std::abs(1 / ray_dir_y);
+			double delta_dist_x = (1 / ray_dir_x);
+			double delta_dist_y = (1 / ray_dir_y);
 			double perp_wall_dist;
 
 			// what direction to step in x or y-directin (either +1 or -1)
@@ -108,7 +175,7 @@ int main(int argc, char **argv)
 			else
 			{
 				step_x = 1;
-				side_dist_x = (map_x + 1.0 - pos_x) * delta_dist_x
+				side_dist_x = (map_x + 1.0 - pos_x) * delta_dist_x;
 			}
 			if (ray_dir_y < 0)
 			{
@@ -135,7 +202,7 @@ int main(int argc, char **argv)
 				}
 			
 				//check id ray has hit a wall
-				if (world_map[][] > 0)
+				if (game.map[map_x][map_y] > 0)
 					hit = 1;
 			}
 
@@ -157,8 +224,8 @@ int main(int argc, char **argv)
 				draw_end = h  - 1;
 
 			//choose wall color
-			ColorRGB color;
-			switch (world_map[map_x][map_y])
+/*			ColorRGB color;
+			switch (game.map[map_x][map_y])
 			{
 				case 1: color = RGB_Red;
 						break; //red
@@ -170,31 +237,32 @@ int main(int argc, char **argv)
 						break; // white
 				default:color = RGB_Yellow;
 						break; // yellow;
-			}
+			}*/
 			
 			// give x and y sides different brighteness
-			if (side == 1)
+/*			if (side == 1)
 				color = color / 2;
 
-			//draw the pixels of the sstripe as a vertical line
+			//draw the pixels of the stripe as a vertical line
 			ver_line(x, draw_start, draw_end, color);
-			x++;
+			x++; */
 		}
-
+/*
 		//timing for input and FPS couter
 		old_time = time;
 		time = getTicks();
 		double frame_time = (time - old_time) / 1000.0; //frame_time is the time this frame has taken, in seconds
 		print(1.0 / frame_time); // FPS counter
 		redraw();
-		cls();
+		cls(); 
 
 		//speed modifiers
 		double move_speed = frame_time * 5.0; // the constant value is in squares/second
 		double rot_speed = frame_time * 3.0; // the constant value in in radians/second
 		read_keys();
-
+*/
 		// move forward if no wall in front of you
+
 		if (KEY_W)
 		{
 			if (world_map[int(pos_x + dir_x * move_speed)][int(pos_y)] == false)
@@ -202,9 +270,17 @@ int main(int argc, char **argv)
 			if (world_map[int(pos_x)][int(pos_y - dir_y * move_speed)] == false)
 				pos_y += dir_y * move_speed;
 		}
-
+	}
+}
 		// move backwards if no wall behind you
-		if (KEY_S)
+		
+int		imput_key(int key, t_game *game)
+{
+	if (key == KEY_ESC)
+	{
+		system ("
+	}
+	if (key == KEY_S)
 		{
 			if (world_map[int(pos_x - dir_x * move_speed)][int(pos_y)] == false)
 				pos_x -= dir_x * move_speed;
@@ -213,7 +289,7 @@ int main(int argc, char **argv)
 		}
 
 		// rotate to the right
-		if (KEY_DCH)
+		if (imput_key(KEY_DCH))
 		{
 			//both camera direction and camera plane must be rotated
 			double old_dir_x = dir_x;
@@ -225,7 +301,7 @@ int main(int argc, char **argv)
 		}
 
 		// rotate to the left
-		if (KEY_IZQ)
+		if (imput_key(KEY_IZQ))
 		{
 			//both camera direction and camera plane must be rotated
 			double old_dir_x = dir_x;
@@ -235,5 +311,3 @@ int main(int argc, char **argv)
 			plane_x = plane_x * cos(rot_speed) - plane_y * sin(rot_speed);
 			plane_y = old_plane_x * sin(rot_speed) + plane_y * cos(rot_speed);
 		}
-	}
-}
