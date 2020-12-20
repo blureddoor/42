@@ -153,7 +153,7 @@ typedef struct	s_main_loop
 	double			sprite_y;
 	double			step;
 	double			transform_x;
-	double			tramsform_y;
+	double			transform_y;
 	int				sprite_screen_x;
 	int				sprite_screen_x;
 	int				stripe;
