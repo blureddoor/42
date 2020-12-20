@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_lode.c                                        :+:      :+:    :+:   */
+/*   lode.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,42 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
-#include <string.h>
-#include <mlx.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-
-#define SCREEN_WIDTH	640
-#define SCREEN_HEIGHT	480
-#define TILE_SIZE		32
-#define COLS			24
-#define ROWS			24
-#define WIDTHS			COLS * TILE_SIZE
-#define HEIGHTS			ROWS * TILE_SIZE
-
-
-typedef struct s_img
-{
-	void	*img_ptr;
-	int		*data;
-	int		size_l;
-	int		bpp;
-	int		endian;
-}				t_img;
-
-typedef	struct s_game
-{
-	void	*mlx;
-	void	*win_ptr;
-	t_img	img;
-
-	int map[ROWS][COLS];
-}				t_game;
-
-int w, h;
-
+#include "cub.h"
 
 void	 game_init(t_game *game)
 {
@@ -75,24 +40,15 @@ void	 game_init(t_game *game)
 	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 	};
-	memcpy(game->map, map, sizeof(int) * ROWS * COLS);
+	memcpy(game->world_map, world_map, sizeof(int) * MAP_WIDTH * MAP_HEIGHT);
 };
 
-void	window_init(t_game *game)
+int     close(t_game *game)
 {
-	game->mlx = mlx_init();
-	game->win_ptr = mlx_new_window(game->mlx, WIDTHS, HEIGHTS, "=== // -game CUB3D- \\\\ ===");
+    (void)game;
+    exit()0;
 }
 
-void	img_init(t_game *game)
-{
-	game->img.img_ptr = mlx_new_image(game->mlx, WIDTHS, HEIGHTS);
-	game->img.data = (int*)mlx_get_data_addr(game->img.img_ptr, &game->img.bpp, &game->img.size_l, &game->img.endian);
-}
-
-int close(t_game *game)
-{
-	exit (0);
 }
 
 int imputkey(int key)
@@ -114,6 +70,17 @@ int imputkey(int key)
     return (0);
 }
 
+void	window_init(t_game *game)
+{
+	game->mlx = mlx_init();
+	game->win_ptr = mlx_new_window(game->mlx, WIDTHS, HEIGHTS, "=== // -game CUB3D- \\\\ ===");
+}
+
+void	img_init(t_game *game)
+{
+	game->img.img_ptr = mlx_new_image(game->mlx, WIDTHS, HEIGHTS);
+	game->img.data = (int*)mlx_get_data_addr(game->img.img_ptr, &game->img.bpp, &game->img.size_l, &game->img.endian);
+}
 
 int main_loop(t_game *game)
 {
@@ -278,9 +245,19 @@ int		imput_key(int key, t_game *game)
 {
 	if (key == KEY_ESC)
 	{
-		system ("
+		system ("leaks a.out");
+        exit(0);
 	}
-	if (key == KEY_S)
+    //move forward if no wall in front of you
+    else if
+    {
+        if (game->world_map[(int)(game->loop.pos_x + game->loop.dir_x * game->loop.move_speed)][(int)(game->loop.pos_y)] == false)
+            game->loop.pos_x += game->loop.dir_x * game->loop.move_speed;
+        if (game->world_map[][] == false)
+    }
+
+    //move backward if no wall in fronto of you
+    else if (key == KEY_S)
 		{
 			if (world_map[int(pos_x - dir_x * move_speed)][int(pos_y)] == false)
 				pos_x -= dir_x * move_speed;
@@ -311,3 +288,4 @@ int		imput_key(int key, t_game *game)
 			plane_x = plane_x * cos(rot_speed) - plane_y * sin(rot_speed);
 			plane_y = old_plane_x * sin(rot_speed) + plane_y * cos(rot_speed);
 		}
+}
