@@ -28,12 +28,13 @@
 # define TEX_HEIGHT		64
 
 # define NUM_SPRITES	19
+
 # define U_DIV			1
 # define V_DIV			1
 # define V_MOVE			0.0
 
-# define MOVE_SPEED		10
-# define ROT_SPEED		10
+# define MOVE_SPEED		1
+# define ROT_SPEED		1
 
 # define KEY_PRESS		2
 # define KEY_RELEASE	3
@@ -58,42 +59,48 @@
 # define FALSE			0
 # define TRUE			1
 
-typedef struct	s_sprite
+typedef struct  s_sprite
 {
 	double	x;
 	double	y;
 	int		texture;
 }				t_sprite;
 
-typedef			s_img
+typedef	struct  s_img
 {
 	void			*img_ptr;
 	unsigned int	*data;
-	int				size_l;
+    int				size_l;
 	int				bpp;
 	int				endian;
 }				t_img;
+
+typedef struct  s_res
+{
+    int x;
+    int y;
+}               t_res;
 
 typedef struct	s_floor
 {
 	int		y;
 	float	ray_dir_x0;
-	float	ray_dir_y0;
-	float	ray_dir_x1;
-	float	ray_dir_y1;
-	int		p;
-	float	pos_z;
-	float	row_distance;
-	float	floor_step_x;
-	float	floor_step_y;
-	float	floor_x;
-	float	floor_y;
-	int		x;
-	int		tx;
-	int		ty;
-	int		check_board_pattern;
-	int		floor_texture;
-	int		ceiling_texture;
+	float	        ray_dir_y0;
+	float	        ray_dir_x1;
+	float	        ray_dir_y1;
+	int		        p;
+	float	        pos_z;
+	float	        row_distance;
+	float	        floor_step_x;
+	float	        floor_step_y;
+	float	        floor_x;
+	float	        floor_y;
+	int		        x;
+	int		        tx;
+	int		        ty;
+	int		        check_board_pattern;
+	int		        floor_texture;
+	int		        ceiling_texture;
 }				t_floor;
 
 typedef struct	s_main_loop
@@ -120,7 +127,7 @@ typedef struct	s_main_loop
 	double			perp_wall_dist;
 	double			delta_dist_x;
 	double			delta_dist_y;
-	int				lineheight;
+	int				line_height;
 	int				draw_start;
 	int				draw_end;
 	int				h;
@@ -155,7 +162,7 @@ typedef struct	s_main_loop
 	double			transform_x;
 	double			transform_y;
 	int				sprite_screen_x;
-	int				sprite_screen_x;
+	int				sprite_screen_y;
 	int				stripe;
 	int				draw_start_x;
 	int				draw_end_x;
@@ -170,10 +177,10 @@ typedef struct	s_game
 	void		*mlx;
 	void		*win_ptr;
 	t_img		img;
-	t_res		res
+	t_res		res;
 	t_floor		floor;
 	t_main_loop	loop;
-	int			worldmap[WIDTHS][HEIGHTS];
+	int			world_map[WIDTHS][HEIGHTS];
 }				t_game;
 
 #endif

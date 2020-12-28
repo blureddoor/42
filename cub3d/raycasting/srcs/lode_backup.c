@@ -41,67 +41,7 @@ void	 game_init(t_game *game)
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
     };
 	memcpy(game->world_map, world_map, sizeof(int) * WIDTHS * HEIGHTS);
-
-    t_sprite sprite =
-    {
-        {20.5, 11.5, 10}, //green light in front of playerstart
-        //green light in every room
-        {18.5,  4.5, 10},
-        {10.0,  4.5, 10},
-        {10.0, 12.5, 10},
-        { 3.5,  6.5, 10},
-        { 3.5, 20.5, 10},
-        { 3.5, 14.5, 10},
-        {14.5, 20.5, 10},
-        //row of pillars in front of wall: fisheye test
-        {18.5, 10.5, 9},
-        {18.5, 11.5, 9},
-        {18.5, 12.5, 9},
-        //some barrels around the map
-        {21.5,  1.5, 8},
-        {15.5,  1.5, 8},
-        {16.0,  1.8, 8},
-        {16.2,  1.2, 8},
-        { 3.5,  2.5, 8},
-        { 9.5, 15.5, 8},
-        {10.5, 15.1, 8},
-        {10.5, 15.8, 8},
-        // -no se copia a ningún sitio
-    };
-    // game->loop.buffer[SCREENHEIGHT][SCREENWIDTH]; // y-coordinate first because it works per
-    // //1D zbuffer
-    // game->loop.zbuffer[SCREENWIDTH];
-    // //arrays used to sort the sprites
-    // game->loop.spriteorder[NUMSPRITES];
-    // game->loop.spritedistance[NUMSPRITES];
 }
-
-//function used to  the sprites
-// void sortSprites(int *orderm double* dist, int amount);
-
-void        texture_init(t_game *game)
-{
-    int i;
-
-    i = 0;
-    while (1 < 11)
-    {
-        game->loop.txture[i].resize(TEX_WIDTH * TEX_HEIGHT); //resize
-        i++;
-    }
-}
-
-void        load_sprites_And_textures(t_game *game)
-{
-    unsigned long tw;
-    unsigned long th;
-    unsigned long error;
-    error = 0;
-
-    //load texture
-    error |= load
-}
-
 
 int     close(t_game *game)
 {
@@ -122,8 +62,8 @@ int		imput_key(int key, t_game *game)
         if (game->world_map[(int)(game->loop.pos_x + game->loop.dir_x * 
             MOVE_SPEED)][(int)(game->loop.pos_y)] == FALSE)
             game->loop.pos_x += game->loop.dir_x * MOVE_SPEED;
-        if (game->world_map[(int)(game->loop.pos_x)][(int)(game->loop.pos_y + 
-            game->loop.dir_y * MOVE_SPEED)] == FALSE)
+        if (game->world_map[(int)(game->loop.pos_x)][(int)(game->loop.pos_y + game->loop.dir_y * 
+            MOVE_SPEED)] == FALSE)
             game->loop.pos_y += game->loop.dir_y * MOVE_SPEED;
     }
     //move backwards if no wall in fronto of you
@@ -132,8 +72,8 @@ int		imput_key(int key, t_game *game)
 			if (game->world_map[(int)(game->loop.pos_x - game->loop.dir_x * 
                 MOVE_SPEED)][(int)(game->loop.pos_y)] == FALSE)
 				game->loop.pos_x -= game->loop.dir_x * MOVE_SPEED;
-			if (game->world_map[(int)(game->loop.pos_x)][(int)(game->loop.pos_y - 
-                game->loop.dir_y * MOVE_SPEED)] == FALSE)
+			if (game->world_map[(int)(game->loop.pos_x)][(int)(game->loop.pos_y - game->loop.dir_y * 
+                MOVE_SPEED)] == FALSE)
 				game->loop.pos_y -= game->loop.dir_y * MOVE_SPEED;
 	}
 	// rotate to the right
