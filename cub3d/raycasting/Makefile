@@ -1,9 +1,9 @@
 all:
-	gcc -I minilibx -L minilibx -lmlx -framework OpenGL -framework AppKit ./srcs/*.c -o raycast
+	gcc -I minilibx -L minilibx -lmlx -framework OpenGL -framework AppKit ./srcs/lode.c && ./a.out
 
 run:
-	./raycast
+	./a.out
 
 clean:
-	rm -rf raycast
+	rm -rf a.out
 
