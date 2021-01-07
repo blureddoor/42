@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   cub3d_backup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 18:33:06 by marvin            #+#    #+#             */
-/*   Updated: 2020/12/18 21:44:54 by marvin           ###   ########.fr       */
+/*   Updated: 2020/12/17 22:12:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ double planex = 0;
 double planey = 0.66;
 int posx;
 int posy;
-
+*/
 
 float px = 0;
 float py = 0;
@@ -66,25 +66,36 @@ float pviewy = 0;
 float pa;
 float camarax = 1;
 float camaray = 0;
+
+
+int	cam_turn(int ent)
+{
+	int angulo;
+	float oldcamarax;
+	float oldcamaray;
+
+
+	angulo = 1 * ent;
+	oldcamarax = camarax;
+	camarax = camarax * cos(angulo) - camaray * sin(angulo);
+	camaray = oldcamarax * sin(angulo) + camaray * cos(angulo);
+	return (0);
+}
+
+/*
+funcion para cerrar con el boton rojo x 
+
+int	ft_stop(int key, void *param)
+{
+	(void)param;
+	if (key == 0x35 || key == 0x00)
+	{
+		//freeme();
+		exit(EXIT_SUCCESS);
+	}
+	return (0);
+}
 */
-
-
-int fix_ang(int a)
-{
-	if (a > 359)
-		a -= 360;
-	if (a < 0)
-		a += 360;
-	return (a);
-}
-
-float deg_to_rad(int a)
-{
-	return (a * M_PI / 180.0);
-/*	return (a * DR);*/
-}
-float px, py, pdx, pdy, pa;
-
 /* key_press solo puede recibir un argumento, así que se guarda en una estructura */
 /*typedef struct s_param
 {
@@ -95,57 +106,30 @@ float px, py, pdx, pdy, pa;
 }				t_param;
 */
 
-int imputkey(int key, int x, int y)
+int imputkey(int key)
 {
     if (key == KEY_ESC)
         exit(0);
-
-    if (key == KEY_W)
-	{
-/*		px -= pdx * 5;*/
-		px--;
-	}
-    if (key == KEY_S)
-	{
-		px++;
-/*		py += pdy * 5;*/
-	}
-	if (key == KEY_A)
-	{
-		py--;
-/*		py -= 5;*/
-	}
-    if (key == KEY_D)
-	{
-/*		px += 5;*/
-		py++;
-	}
-    if (key == KEY_IZQ)
-	{
-	   	pa += 5;
-		pa = fix_ang(pa);
-		pdx = cos(deg_to_rad(pa));
-		pdy = -sin(deg_to_rad(pa));
-	}
-    if (key == KEY_DCH)
-	{
-	   	pa -= 5;
-		pa = fix_ang(pa);
-		pdx = cos(deg_to_rad(pa));
-		pdy = -sin(deg_to_rad(pa));
-	}
-/*	else if (key == KEY_IZQ)
+    else if (key == KEY_W)
+        px -= 5;
+    else if (key == KEY_S)
+		px += 5;
+    else if (key == KEY_A)
+		py -= 5;
+    else if (key == KEY_D)
+		py += 5;
+	else if (key == KEY_IZQ)
         cam_turn(1);
     else if (key == KEY_DCH)
         cam_turn(-1);
 	printf("frontal_px: %f\n", px);
     printf("lateral_py: %f\n", py);
     printf("camarax: %f\n", camarax);
-    printf("camaray: %f\n", camaray); */
+    printf("camaray: %f\n", camaray); 
     return (0);
 }
-
 /*
+
 typedef struct s_player
 {
 	float px;
@@ -172,8 +156,38 @@ typedef struct s_game
 
 	int map[ROWS][COLS];
 }			t_game;
+/*
+void	param_init(t_param *param)
+{
+	param->x = 0;
+	param->y = 0;
+	param->z = 0;
+}
 
+int	imputkey(int key, t_param *param)
+{
+	static int a = 0;
 
+	if (key == KEY_ESC)
+		exit(0);
+	else if (key == KEY_W)
+		px--;
+	else if (key == KEY_S)
+		param->x--;
+	else if (key == KEY_A)
+		param->y++;
+	else if (key == KEY_D)
+		param->y--;
+	else if (key == KEY_IZQ)
+		param->z++;
+	else if (key == KEY_DCH)
+		param->z--;
+	printf("frontal_x: %d\n", param->x);
+	printf("lateral_y: %d\n", param->y);
+	printf("camara__z: %d\n", param->z);
+	return (0);
+}
+*/
 
 void	draw_line(t_game *game, double x1, double y1, double x2, double y2)
 {
@@ -216,6 +230,42 @@ void	draw_lines(t_game *game)
 }
 
 
+
+/*
+void	draw_background(t_game *game, int x, int y)
+{
+	y = 50;
+	while (y < 150)
+	{
+		x = 50;
+		while (x < 150)
+		{
+			mlx_pixel_put(game->mlx, game->win_ptr, x, y, 0xC0C0C0);
+			x++;
+		}
+		y++;
+	}
+//=======
+	int i;
+	int j;
+
+	x *= TILE_SIZE;
+	y *= TILE_SIZE; 
+
+	i = 0;
+	while (i < TILE_SIZE * ROWS)
+	{
+		j = 0;
+		while (j < TILE_SIZE * COLS)
+		{
+			mlx_pixel_put(game->mlx, game->win_ptr, x, y, 0xC0C0C0);
+			j++;
+		}
+		i++;
+	}
+}
+*/
+//void	draw_backgrounds()
 
 
 void    draw_back(t_game *game, int x, int y)
@@ -302,13 +352,13 @@ void	draw_player(t_game *game, int x, int y)
 	int	i;
 	int	j;
 
-	x *= 25;	
-	y *= 25;
+	x *= 10;	
+	y *= 10;
 	i = 0;
-	while (i < TILE_SIZE / 6) 	// cambia size player
+	while (i < TILE_SIZE / 5) 	// cambia size player
 	{
 		j = 0;
-		while (j < TILE_SIZE / 6) // cambia size player
+		while (j < TILE_SIZE / 5) // cambia size player
 		{
 			game->img.data[(y + i) * WIDTHS + x + j] = 0xFF0000;
 			j++;
@@ -330,13 +380,14 @@ void	draw_players(t_game *game)
 		while (j < COLS)
 		{
 			if (game->map[i][j] == 2) // posicion inicial player //guardar en param 
-				draw_player(game, i + py, j + px); //posicion dibujo player
+				draw_player(game, j + py, i + px); //posicion dibujo player
 			j++;
 		}
 		i++;
 	}
+//	printf("break point\n");
 }
-/*
+
 void	draw_pview(t_game *game, int x, int y)
 {
 	int		i;
@@ -375,7 +426,6 @@ void	draw_pviews(t_game *game)
 		i++;
 	}
 }
-*/
 /*
 void	buttons(unsigned char key, int x, int y)
 {
@@ -419,7 +469,7 @@ void	 game_init(t_game *game)
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0, 1},
 	{1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 	{1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1},
+	{1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1},
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -440,7 +490,7 @@ void img_init(t_game *game)
 {
 	game->img.img_ptr = mlx_new_image(game->mlx, WIDTHS, HEIGHTS);
 	game->img.data = (int*)mlx_get_data_addr(game->img.img_ptr, &game->img.bpp, &game->img.size_l, &game->img.endian);
-}
+};
 
 //cierra ventana con boton rojo
 
@@ -455,7 +505,7 @@ int main_loop(t_game *game)
 	draw_backgrounds(game);
 	draw_rectangles(game);
 	draw_players(game);
-/*	draw_pviews(game);*/
+	draw_pviews(game);
 	draw_lines(game);
 	mlx_put_image_to_window(game->mlx, game->win_ptr, game->img.img_ptr, 0, 0);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2020/12/18 22:40:13 by marvin           ###   ########.fr       */
+/*   Updated: 2020/12/28 20:44:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <math.h>
 # include <string.h>
 
-# define WIDTHS			24
-# define HEIGHTS		24
+# define WIDTHS			32
+# define HEIGHTS		32
 # define SCREEN_WIDTH	640
 # define SCREEN_HEIGHT	480
 
@@ -33,8 +33,8 @@
 # define V_DIV			1
 # define V_MOVE			0.0
 
-# define MOVE_SPEED		1
-# define ROT_SPEED		1
+# define MOVE_SPEED		0.5
+# define ROT_SPEED		0.5
 
 # define KEY_PRESS		2
 # define KEY_RELEASE	3
