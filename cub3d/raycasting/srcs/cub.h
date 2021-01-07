@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <string.h>
+# include <errno.h>
 
 # define WIDTHS			32
 # define HEIGHTS		32
@@ -142,7 +143,7 @@ typedef struct	s_main_loop
 	double			old_plane_x2;
 	unsigned int	color;
 	int				y;
-	int				sprite[NUM_SPRITES];
+	t_sprite		sprite[NUM_SPRITES];
 	double			zbuffer[SCREEN_WIDTH];
 	int				sprite_distance[NUM_SPRITES];
 	double			sprite_order[NUM_SPRITES];
@@ -170,6 +171,7 @@ typedef struct	s_main_loop
 	int				draw_start_y;
 	int				draw_end_y;
 	int				vmove_screen;
+    int             sprite_height;
 }				t_main_loop;
 
 typedef struct	s_game

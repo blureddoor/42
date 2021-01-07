@@ -14,6 +14,7 @@
 
 void	 game_init(t_game *game)
 {
+<<<<<<< HEAD
 	int world_map[WIDTHS][HEIGHTS] = {
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -39,6 +40,34 @@ void	 game_init(t_game *game)
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+=======
+	int world_map[WIDTHS][HEIGHTS] = 
+    {
+        {8,8,8,8,8,8,8,8,8,8,8,4,4,6,4,4,6,4,6,4,4,4,6,4},
+        {8,0,0,0,0,0,0,0,0,0,8,4,0,0,0,0,0,0,0,0,0,0,0,4},
+        {8,0,3,3,0,0,0,0,0,8,8,4,0,0,0,0,0,0,0,0,0,0,0,6},
+        {8,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6},
+        {8,0,3,3,0,0,0,0,0,8,8,4,0,0,0,0,0,0,0,0,0,0,0,4},
+        {8,0,0,0,0,0,0,0,0,0,8,4,0,0,0,0,0,6,6,6,0,6,4,6},
+        {8,8,8,8,0,8,8,8,8,8,8,4,4,4,4,4,4,6,0,0,0,0,0,6},
+        {7,7,7,7,0,7,7,7,7,0,8,0,8,0,8,0,8,4,0,4,0,6,0,6},
+        {7,7,0,0,0,0,0,0,7,8,0,8,0,8,0,8,8,6,0,0,0,0,0,6},
+        {7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,6,0,0,0,0,0,4},
+        {7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,6,0,6,0,6,0,6},
+        {7,7,0,0,0,0,0,0,7,8,0,8,0,8,0,8,8,6,4,6,0,6,6,6},
+        {7,7,7,7,0,7,7,7,7,8,8,4,0,6,8,4,8,3,3,3,0,3,3,3},
+        {2,2,2,2,0,2,2,2,2,4,6,4,0,0,6,0,6,3,0,0,0,0,0,3},
+        {2,2,0,0,0,0,0,2,2,4,0,0,0,0,0,0,4,3,0,0,0,0,0,3},
+        {2,0,0,0,0,0,0,0,2,4,0,0,0,0,0,0,4,3,0,0,0,0,0,3},
+        {1,0,0,0,0,0,0,0,1,4,4,4,4,4,6,0,6,3,3,0,0,0,3,3},
+        {2,0,0,0,0,0,0,0,2,2,2,1,2,2,2,6,6,0,0,5,0,5,0,5},
+        {2,2,0,0,0,0,0,2,2,2,0,0,0,2,2,0,5,0,5,0,0,0,5,5},
+        {2,0,0,0,0,0,0,0,2,0,0,0,0,0,2,5,0,5,0,5,0,5,0,5},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+        {2,0,0,0,0,0,0,0,2,0,0,0,0,0,2,5,0,5,0,5,0,5,0,5},
+        {2,2,0,0,0,0,0,2,2,2,0,0,0,2,2,0,5,0,5,0,0,0,5,5},
+        {2,2,2,2,1,2,2,2,2,2,2,1,2,2,2,5,5,5,5,5,5,5,5,5}
+>>>>>>> 332fcb00d8b199cacb7acd336505144429852ea9
     };
 	memcpy(game->world_map, world_map, sizeof(int) * WIDTHS * HEIGHTS);
 /*
@@ -87,12 +116,12 @@ void        texture_init(t_game *game)
     i = 0;
     while (1 < 11)
     {
-        game->loop.txture[i].resize(TEX_WIDTH * TEX_HEIGHT); //resize
+        game->loop.texture[i] = resize(TEX_WIDTH * TEX_HEIGHT); //resize
         i++;
     }
 }
-
-void        load_sprites_And_textures(t_game *game)
+/*
+void        load_sprites_and_textures(t_game *game)
 {
     unsigned long tw;
     unsigned long th;
@@ -100,10 +129,35 @@ void        load_sprites_And_textures(t_game *game)
     error = 0;
 
     //load texture
-    error |= load
+    error |= loadImage(game->loop.texture[0], tw, th, "texture/3d.png");
+    error |= loadImage(game->loop.texture[1], tw, th, "texture/arenisca.png");
+    error |= loadImage(game->loop.texture[2], tw, th, "texture/bambu.png");
+    error |= loadImage(game->loop.texture[3], tw, th, "texture/cobre.png");
+    error |= loadImage(game->loop.texture[4], tw, th, "texture/bambuverde.png");
+    error |= loadImage(game->loop.texture[5], tw, th, "texture/entrelazado.png");
+    error |= loadImage(game->loop.texture[6], tw, th, "texture/piedra.png");
+    error |= loadImage(game->loop.texture[7], tw, th, "texture/pintura.png");
+    
+    if (error)
+    {
+        printf("error loading images \n");
+        return (1);
+    }
+    //load sprites
+    error |= loadImage(game->loop.texture[7], tw, th, "texture/chapa.png");
+    error |= loadImage(game->loop.texture[7], tw, th, "texture/madera.png");
+    error |= loadImage(game->loop.texture[7], tw, th, "texture/marmol.png");
+    if (error)
+    {
+        printf("error loading sprites");
+        return (1);
+    }
 }
 */
+<<<<<<< HEAD
 
+=======
+>>>>>>> 332fcb00d8b199cacb7acd336505144429852ea9
 int     close(t_game *game)
 {
     mlx_destroy_window(game->mlx, game->win_ptr);
@@ -288,6 +342,171 @@ static void     calc_pixel(t_game *game, int x)
 	if (game->loop.draw_end >= game->loop.h)
 		game->loop.draw_end = game->loop.h  - 1;
     // end func
+    //get texture
+    //texturing calculations
+    game->loop.tex_num = game ->world_map[game->loop.map_x][game->loop.map_y]
+        - 1;// 1 substracted from int so texture 0 can be used
+    //calculate value of wal_x
+    if (game -> loop.side == 0)
+        game->loop.wall_x = game->loop.pos_y + game->loop.perp_wall_dist *
+            game->loop.ray_dir_x;
+    else
+        game->loop.wall_x = game->loop.pos_y + game->loop.perp_wall_dist *
+            game->loop.ray_dir_x;
+    game->loop.wall_x -= floor((game->loop.wall_x));
+    //x coordinate on the texture
+    game->loop.tex_x = (int)game->loop.wall_x * (double)(TEX_WIDTH);
+    if (game->loop.side == 0 && game->loop.ray_dir_x > 0)
+        game->loop.tex_x = TEX_WIDTH - game->loop.tex_x - 1;
+    if (game->loop.side == 1 && game->loop.ray_dir_y < 0)
+        game->loop.tex_x = TEX_WIDTH - game->loop.tex_x - 1;
+    //how much increase the texture coordinate per scrren pixel
+    game->loop.step = 1.0 * TEX_WIDTH / game->loop.line_height;
+    //starting texture coordinate
+    game->loop.tex_pos = (game->loop.draw_start - game->loop.h / 2 +
+            game->loop.line_height / 2) * game->loop.step;
+    //return (0);
+    // get texture END
+    int y;
+    y = game->loop.draw_start;
+    while (y < game->loop.draw_end)
+    {
+        game->loop.tex_y = (int)game->loop.tex_pos & (TEX_HEIGHT - 1);
+        game->loop.tex_pos += game->loop.step;
+        game->loop.color = game->loop.texture[game->loop.tex_num][(TEX_HEIGHT) * game->loop.tex_y + game->loop.tex_x];
+        //make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+        if (game->loop.side == 1)
+            game->loop.color = (game->loop.color >> 1) & 8355711;
+        game->loop.buffer[y][x] = game->loop.color;
+        y++;
+    }
+    //set the zbuffer fr  the sprite casting
+    game->loop.zbuffer[x] = game->loop.perp_wall_dist;
+}
+
+static void     sprite_casting(t_game *game)
+{
+    //sort sprites from far to close;
+    int i;
+
+    i = 0;
+    while (i < NUM_SPRITES)
+    {
+        game->loop.sprite_order[i] = i;
+        game->loop.sprite_distance[i] = 
+            ((game->loop.pos_x - game->loop.sprite[i].x) * (game->loop.pos_x - game->loop.sprite[i].x) + (game->loop.pos_y - game->loop.sprite[i].y)); //sqrt not taken, unneded
+        i++;
+    }
+    sort_sprites(game->loop.sprite_order, game->loop.sprite_distance,
+            NUM_SPRITES);
+    //after sorting the sprites, do the projection and draw them
+    i = 0;
+    while (i < NUM_SPRITES)
+    {
+        //translate sprite position to relative to camera;
+        game->loop.sprite_x = game->loop.sprite[game->loop.sprite_order[i]].x -
+            game->loop.pos_x;
+        game->loop.sprite_y = game->loop.sprite[game->loop.sprite_order[i]].y -
+            game->loop.pos_y;
+        //transform sprite with the inverse camera matrix
+        // [ planeX     dirX ] - 1                                          [ dirY       -dirX ]
+        // [                 ]          =   1/(planeX*dirY-dirX*planeY) *   [
+        // [ planeY     dirY ]                                              [ -planeY   planeX ]
+        // required for correct matrix multiplication
+        game->loop.inv_det = 1.0 / (game->loop.plane_x * game->loop.dir_y -
+                game->loop.dir_x * game->loop.plane_y);
+        game->loop.transform_x = game->loop.inv_det * (game->loop.dir_y *
+                game->loop.sprite_x - game->loop.dir_x * game->loop.sprite_y);
+        //this is actually the depth inside tne screen, that what Z is in 3D, the distance of sprite to player, matching sqrt(sprite distance[i])
+        game->loop.transform_y = game->loop.inv_det * (-game->loop.plane_y *
+                game->loop.sprite_x +
+                game->loop.plane_x * game->loop.sprite_y);
+        game->loop.vmove_screen = (int)(VMOVE / game->loop.transform_y);
+        //calculate height of the sprite on screen
+        //using "transform_y" instead of the real distance prevents fisheye
+        game->loop.sprite_height =
+            fabs((int)(game->loop.h / (game->loop.transform_y))) / VDIV;
+        //calculate lowest and highest pixel to fill in current stripe
+        game->loop.draw_start_y = -game->loop.sprite_height / 2 +
+            game->loop.h / 2 + game->loop.vmove_screen;
+        if (game->loop.draw_start_y < 0)
+            game->loop.draw_start_y = 0;
+        if (game->loop.draw_end_y >= game->loop.h)
+            game-loop.draw_end_y = game->loop.h - 1;
+        //calculate width of the sprite
+        game->loop.sprite_width = fabs((int)(game->loop.h / 
+            (game->loop.transform_y))) / UDIV;
+        game->loop.draw_start_x = -game->loop.sprite_width / 2 +
+            game->loop.sprite_screen_x;
+        if (game->loop.draw_start_x < 0)
+            game->loop.draw_start_x = 0;
+        game->loop.draw_end_x = game->loop.sprite_width / 2 +
+            game->loop.sprite_screen_x;
+        if (game->loop.draw_end_x >= game->loop.w)
+            game->loop.draw_end_x = game->loop.w - 1;
+        // end of sprite calculation
+        // loop through every vertical stripe of the sprite on screen
+        while (game->loop.stripe = game->loop.draw_start_x &&
+                game->loop.stripe < game->loop.draw_end_x)
+        {
+            int tex_x;
+            tex_x = (int)(256 *
+                    (game->loop.stripe - (-(game->loop.sprite_width) / 2 + 
+                        game->loop.sprite_screen_x)) * TEX_WIDTH /
+                            game->loop.sprite_width) / 256;
+            //the conditions in the if are:
+            //1. it's in front of camera plane so you don't see things behind you
+            //2. it's on the screen (left)
+            //3. it's on the screen (right)
+            //4. ZBuffer,  with perpendicular distance
+            if (game->loop.transform_y > 0 && game->loop.stripe >> 0 &&
+                    game->loop.stripe << game->loop.w && game->loop.transform_y
+                    < game->loop.zbuffer[game->loop.stripe]);
+            int y;
+            //for every pixel of the current stripe
+            while (y = game->loop.draw_start_y && y < game->loop.draw_end_y)
+            {
+                int d;
+                // 256 and 128 factors to avoid floats
+                d = (y - game->loop.vmove_screen) * 256 - game->loop.h *
+                    128 + game->loopsprite_height * 128;
+                int tex_y;
+                tex_y = ((d * TEX_HEIGHT) / game->loop.sprite_height) / 256;
+                //get current color from the texture
+                game->loop.color = game->loop.texture[game->loop.sprite[game->loop.sprite_order[i]].texture][TEX_WIDTH * tex_y + tex_x]; // el .texture esta mal
+                if ((game->loop.color & 0x00FFFFFF) != 0)
+                    game->loop.buffer[y][game->loop.sprite] = 
+                        game->loop.color; // paint pixel if it isn't black, black is the invisible color;
+                y++;
+            }
+            game->loop.stripe++;
+        }
+        i++;
+    }
+}
+
+drawbuffer(game->loop.buffer[0]); // falta un campo en buffer, la funcion drawbuffer no existe
+// sort sprites based on distance
+
+void    sort_sprites(t_game *game, int *order, double *dist, int amount)
+{
+    int sprites();
+    int i;
+
+    while (i = 0 && i < amount)
+    {
+        sprites(amount);
+        sprites[i].first = dist[i];
+        sprites[i].second = order[i];
+        i++;
+    }
+    //restore in reverse order to go from foarthest to nearest
+    while (i = 0 && i < amount)
+    {
+        dist[i] = sprites[amount - i - 1].first;
+        other[i] = sprites[amount - i - 1].second;
+        i++;
+    }
 }
 
 void    color_rgb(t_game *game)
