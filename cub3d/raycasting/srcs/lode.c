@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/01/07 22:17:02 by marvin           ###   ########.fr       */
+/*   Updated: 2021/01/28 20:26:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	 game_init(t_game *game)
         {2,2,2,2,1,2,2,2,2,2,2,1,2,2,2,5,5,5,5,5,5,5,5,5}
     };
 	memcpy(game->world_map, world_map, sizeof(int) * WIDTHS * HEIGHTS);
-/*
 
-    t_sprite sprite =
+
+/*  t_sprite sprite =
     {
         {20.5, 11.5, 10}, //green light in front of playerstart
         //green light in every room
@@ -70,16 +70,16 @@ void	 game_init(t_game *game)
         {10.5, 15.8, 8},
         // -no se copia a ningún sitio
     };*/
-    // game->loop.buffer[SCREENHEIGHT][SCREENWIDTH]; // y-coordinate first because it works per
-    // //1D zbuffer
-    // game->loop.zbuffer[SCREENWIDTH];
-    // //arrays used to sort the sprites
-    // game->loop.spriteorder[NUMSPRITES];
-    // game->loop.spritedistance[NUMSPRITES];
+    game->loop.buffer[SCREEN_HEIGHT][SCREEN_WIDTH]; // y-coordinate first because it works per
+    // 1D zbuffer
+    game->loop.zbuffer[SCREEN_WIDTH];
+     //arrays used to sort the sprites
+    game->loop.sprite_order[NUM_SPRITES];
+    game->loop.sprite_distance[NUM_SPRITES];
 }
 
-//function used to  the sprites
-// void sortSprites(int *orderm double* dist, int amount);
+//function used to sort  the sprites
+void sort_sprites(t_game game, int *order, double *dist, int amount);
 /*
 void        texture_init(t_game *game)
 {
@@ -150,7 +150,7 @@ int		imput_key(int key, t_game *game)
             game->loop.dir_y * MOVE_SPEED)] == FALSE)
             game->loop.pos_y += game->loop.dir_y * MOVE_SPEED;
     }
-    //move backwards if no wall in fronto of you
+    //move backwards if no wall in front of you
     else if (key == (KEY_S))
 	{
 			if (game->world_map[(int)(game->loop.pos_x - game->loop.dir_x * 
@@ -313,15 +313,12 @@ static void     calc_pixel(t_game *game, int x)
     // end func
     //get texture
     //texturing calculations
-    game->loop.tex_num = game ->world_map[game->loop.map_x][game->loop.map_y]
-        - 1;// 1 substracted from it so texture 0 can be used
+    game->loop.tex_num = game ->world_map[game->loop.map_x][game->loop.map_y] - 1;// 1 substracted from it so texture 0 can be used
     //calculate value of wal_x
     if (game -> loop.side == 0)
-        game->loop.wall_x = game->loop.pos_y + game->loop.perp_wall_dist *
-            game->loop.ray_dir_y;
+        game->loop.wall_x = game->loop.pos_y + game->loop.perp_wall_dist * game->loop.ray_dir_y;
     else
-        game->loop.wall_x = game->loop.pos_x + game->loop.perp_wall_dist *
-            game->loop.ray_dir_x;
+        game->loop.wall_x = game->loop.pos_x + game->loop.perp_wall_dist * game->loop.ray_dir_x;
     game->loop.wall_x -= floor((game->loop.wall_x));// donde está la funcion "floor"???
     //x coordinate on the texture
     game->loop.tex_x = (int)game->loop.wall_x * (double)(TEX_WIDTH);
@@ -439,12 +436,13 @@ static void     sprite_casting(t_game *game)
             {
                 int d;
                 // 256 and 128 factors to avoid floats
-                d = (y - game->loop.vmove_screen) * 256 - game->loop.h *
-                    128 + game->loop.sprite_height * 128;
+/*		       	d = (y - game->loop.vmove_screen) * 256 - game->loop.h *
+                    128 + game->loop.sprite_height * 128;*/
+				d = ((y) * 256 - (game->loop.h) * 128 + (game->loop.sprite_height) * 128);
                 int tex_y;
                 tex_y = ((d * TEX_HEIGHT) / game->loop.sprite_height) / 256;
                 //get current color from the texture
-                game->loop.color = game->loop.texture[(int)game->loop.sprite[game->loop.sprite_order[i]].texture[TEX_WIDTH * tex_y + tex_x]]; // el .texture esta mal
+                game->loop.color = game->loop.texture[(int)game->loop.sprite[game->loop.sprite_order[i]].texture[TEX_WIDTH * tex_y + tex_x]]; // el .texture esta mal??? ---- // get current color from the texture 
                 if ((game->loop.color & 0x00FFFFFF) != 0)
                     game->loop.buffer[y][game->loop.sprite] = 
                         game->loop.color; // paint pixel if it isn't black, black is the invisible color;
@@ -456,7 +454,7 @@ static void     sprite_casting(t_game *game)
     }
 }
 
-drawbuffer(game->loop.buffer[0]); // falta un campo en buffer, la funcion drawbuffer no existe
+draw_buffer(game->loop.buffer[0]); // falta un campo en buffer, la funcion drawbuffer no existe
 // sort sprites based on distance
 
 void    sort_sprites(t_game *game, int *order, double *dist, int amount)
@@ -464,7 +462,7 @@ void    sort_sprites(t_game *game, int *order, double *dist, int amount)
     int sprites();
     int i;
 
-    while (i = 0 && i < amount)
+    while ((i = 0) && (i < amount))
     {
         sprites(amount);
         sprites[i].first = dist[i];
