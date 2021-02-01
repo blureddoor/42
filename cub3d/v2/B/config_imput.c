@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config_imput.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvillaes <mvillaes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvintila  <lvintila@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/26 18:15:51 by mvillaes          #+#    #+#             */
-/*   Updated: 2021/01/28 20:06:56 by marvin           ###   ########.fr       */
+/*   Created: 2020/08/26 18:15:51 by lvintila          #+#    #+#             */
+/*   Updated: 2021/02/01 20:51:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 static void		s_text1(t_game *game, char *l, int limit, char *pos)
 {
-	if((pos = ft_strnstr(l, "NO", ft_strlen(l))) != NULL &&
-	!limit && *(pos + 2) == ' ')
+	if((pos = ft_strnstr(l, "NO", ft_strlen(l))) != NULL && !limit && *(pos + 2) == ' ')
 	{
 		game->confi.no = s_tex(l);
 		game->confi.used[3] = 1;
@@ -56,7 +55,7 @@ static void		s_text2(t_game *game, char *l, int limit, char *pos)
 	if ((pos = ft_strnstr(l, "R", ft_strlen(l))) != NULL &&
 	!limit && *(pos + 1) == ' ')
 	{
-		game.res = s_res(l); /////////////how to save R?
+		game->res = s_res(l); /////////////how to save R?
 		game->confi.used[0] = 1;
 		limit = 1;
 	}
@@ -103,7 +102,7 @@ int		read_config(char *argv)
 		printf("error opening FD");
 	while (get_next_l(fd, &l) > 0 && g_config.counter < NUM_CONFIG)
 	{
-		save_config(l);
+		save_conf(l);
 		free(l);
 	}
 	while (i < NUM_CONFIG)

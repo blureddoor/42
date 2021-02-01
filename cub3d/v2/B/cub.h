@@ -6,7 +6,7 @@
 /*   By: mvillaes <mvillaes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 20:51:33 by mvillaes          #+#    #+#             */
-/*   Updated: 2021/01/28 20:41:11 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/01 20:51:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define TEXHEIGHT 64
 
 # define NUMSPRITES 19
+# define NUM_CONFIG 
 
 # define UDIV 1
 # define VDIV 1
@@ -58,6 +59,15 @@
 
 # define FALSE 0
 # define TRUE 1
+
+typedef struct	s_config
+{
+	int f;
+	int c;
+	int used;
+	int counter;
+}
+
 
 typedef struct 	s_confi
 {
@@ -204,4 +214,7 @@ int				init(t_game *game);
 int				raycast(t_game *game);
 size_t			ft_strlen(const char *str);
 int				ft_strncmp(char *s1, char *s2, unsigned int n);
+char			*s_tex(char *line);
+char			*ft_strnstr(const char *haystack, const char *needle, size_t len);
+t_res			s_res(char *line);			
 #endif
