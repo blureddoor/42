@@ -6,12 +6,41 @@
 /*   By: lvintila  <lvintila@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:15:51 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/01 20:51:25 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/05 20:23:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
+int		s_texandres(char *l, char *p) // char *line, char *pos
+{
+	if ((p = ft_strchr(l, 'R')) != NULL && *(p + 1) == ' ')
+		g_config.res = s_res(line);
+	else if ((p = ft_strnstr(l, "NO", ft_strlen(l))) != NULL && *(p + 2) == ' ')
+		g_config.no = s_tex(l);
+	else if ((p = ft_strnstr(l, "SO", ft_strlen(l))) != NULL && *(p + 2) == ' ')
+		g_config.so = s_tex(l);
+	else if ((p = ft_strnstr(l, "EA", ft_strlen(l))) != NULL && *(p + 2) == ' ')
+		g_config.ea = s_tex(l);
+	else if ((p = ft_strnstr(l, "WE", ft_strlen(l))) != NULL && *(p + 2) == ' ')
+		g_config.we = s_tex(l);
+	else if ((p = ft_strchr(l, 'S')) != NULL && *(p + 1) == ' ')
+		g_config.s = s_tex(l);
+	else if ((p = ft_strchr(l, 'F')) != NULL && *(p + 1) == ' ' &&
+			++g_config.fch)
+		g_config.floor = s_color(l, p);
+	else if ((p = ft_strchr(l, 'C')) != NULL && *(p + 1) == ' ' &&
+			++g_config.cch)
+		g_config.ceiling = s_color(l, p)
+	else if (l[0])
+		return (1);
+	if (!l[0])
+		return (0);
+	g_config.count++;
+	return (0);
+}
+
+/*
 static void		s_text1(t_game *game, char *l, int limit, char *pos)
 {
 	if((pos = ft_strnstr(l, "NO", ft_strlen(l))) != NULL && !limit && *(pos + 2) == ' ')
@@ -88,14 +117,31 @@ static void		save_conf(char *l)
 		return ;
 	g_config.counter++;
 }
+*/
 
-int		read_config(char *argv)
+int		r_config(char *argv) // int read_config(char *argv)
 {
 	int		fd;
-	int		i;
-	char	*l;
+	char	line;
+	char	*p;
 
-	g_config.counter = 0;
+	p = NULL;
+	(((fd = open(argv, O_RDONLY)) <= 0) && (error(RED"Can't open FD\n"RESET)));
+	while (g_config.count < NUM_CONFI && get_next_line(fd, &line) > 0)
+	{
+		(s_texandres(line, p) && (error(RED"Wrong element in .cub\n"RESET)));
+		((g_config.fch >= 2 || g_config.cch >= 2) &&
+		 (error(RED"FC is rep\n"RESET)));
+		free(line);
+		line = NULL;
+	}
+	r_map(fd);
+	if (line)
+		free(line);
+	close(fd);
+	return (1);
+	
+/*	g_config.counter = 0;
 	i = 0;
 	g_config.used = calloc(NUM_CONFIG, sizeof(int));
 	if ((fd = open(argv, O_RDONLY)) <= 0)
@@ -116,4 +162,5 @@ int		read_config(char *argv)
 	free(l);
 	close(fd);
 	return (1);
+	*/
 }

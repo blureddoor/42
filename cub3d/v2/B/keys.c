@@ -1,17 +1,70 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_and_keys.c                                    :+:      :+:    :+:   */
+/*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvillaes <mvillaes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:15:51 by mvillaes          #+#    #+#             */
-/*   Updated: 2021/01/28 20:41:19 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/05 20:42:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
+int		press(int key, t_game *game)
+{
+	(((key == W) || (key == KEY_UP)) && (game->move.w = 1));
+	(((key == S) || (key == KEY_DOWN)) && (game->move.s = -1));
+	((key == A) && (game->move.a = 1));
+	((key == D) && (game->move.d = -1));
+	((key == KEY_DCH) && (game->move.r_dch = -1));
+	((key == IZQ) && (game->move.r_izq = 1));
+	((key == KEY_ESC) && (closer(game)));
+	((key == KEY_SHIFT) && (game->move.speed = M_SPEED + 0.05));
+	return (0);
+}
+
+int		release(int key, t_game *game)
+{
+	(((key == W) || (key == KEY_UP)) && (game->move.w = 0));
+	(((key == S) || (key == KEY_DOWN)) && (game->move.s = 0));
+	((key == A) && (game->move.a = 0));
+	((key == D) && (game->move.d = 0));
+	((key == KEY_DCH) && (game->move.r_dch = 0));
+	((key == IZQ) && (game->move.r_izq = 0));
+	((key == KEY_SHIFT) && (game->move.speed = M_SPEED));
+	return (0);
+}
+
+void		r_izq(t_game *game)
+{
+	game->loop.olddirx2 = g_config.dirx;
+	g_config.dirx = g_config.dirx * cos(game->move.speed) - g_config.diry *
+		sin(game->move.speed);
+	g_config.diry = game->loop.olddirx2 * sin(game->move.speed) +
+		g_config.diry * cos(game->move.speed);
+	game->loop.oldplanex2 = g_config.planex;
+	g_config.planex = g_config.planex * cos(game->move.speed) -
+		g_config.planey * sin(game->move.speed);
+	g_config.planey = game->loop.oldplanex2 * sin(game->move.speed) +
+		g_config.planey * cos(game->move.speed);
+}
+
+void		r_dch(t_game *game)
+{
+	game->loop.olddirx1 = g_config.dirx;
+	g_config.dirx = g_config.dirx * cos(-game->move.speed) - g_config.diry *
+		sin(-game->move.speed);
+	g_config.diry = game->loop.olddirx1 * sin(-game->move.speed) +
+		g_config.diry * cos(-game->move.speed);
+	game->loop.oldplanex1 = g_config.planex;
+	g_config.planex = g_config.planex * cos(-game->move.speed) -
+		g_config.planey * sin(-game->move.speed);
+	g_config.planey = game->loop.oldplanex1 * sin(-game->move.speed) +
+		g_config.planey * cos(-game->move.speed);
+}
+/*
 int		close(t_game *game)
 {
 	mlx_destroy_window(game->mlx, game->win);
