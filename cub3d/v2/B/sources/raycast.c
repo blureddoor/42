@@ -6,7 +6,7 @@
 /*   By: mvillaes <mvillaes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:15:51 by mvillaes          #+#    #+#             */
-/*   Updated: 2021/02/01 20:23:27 by marvin           ###   ########.fr       */
+/*   Updated: 2021/01/28 20:05:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void		camera_calc(t_game *game, int x)
 {
-	game->loop.camerax = 2 * x / (double)g_config.res.x - 1;
-	game->loop.raydirx = g_config.dirx + g_config.planex * game->loop.camerax;
-	game->loop.raydiry = g.config.diry + g.config.planey * game->loop.camerax;
+	game->loop.camerax = 2 * x / (double)game->loop.w - 1;
+	game->loop.raydirx = game->loop.dirx + game->loop.planex * game->loop.camerax;
+	game->loop.raydiry = game->loop.diry + game->loop.planey * game->loop.camerax;
 	game->loop.mapx = (int)game->loop.posx;
 	game->loop.mapy = (int)game->loop.posy;
 	game->loop.deltadistx = fabs(1 / game->loop.raydirx);
@@ -50,7 +50,7 @@ static void		initial_dist(t_game *game)
 
 static void		dda(t_game *game)
 {
-	while (!game->loop.hit)
+	while (game->loop.hit == 0)
 		{
 			//jump to next map square, or in x-direction, or in y-direction
 			if(game->loop.sidedistx < game->loop.sidedisty)
@@ -66,30 +66,37 @@ static void		dda(t_game *game)
 				game->loop.side = 1;
 			}
 			//check if ray has hit a wall
-			if(g_config.map.w_map[game->loop.mapx][game->loop.mapy] == '1')
+			if(game->worldmap[game->loop.mapx][game->loop.mapy] > 0)
+			{
 				game->loop.hit = 1;
+			}
 		}
 		//Calculate distance projected on camera direction (euclidean distancce will give fisheye effect!)
 		if(game->loop.side == 0)
-			game->loop.perpwalldist = (game->loop.mapx - game->loop.posx + (1 - 
-            game->loop.stepx) / 2) / game->loop.raydirx;
+		{
+			game->loop.perpwalldist = (game->loop.mapx - game->loop.posx + (1 - game->loop.stepx) / 2) / game->loop.raydirx;
+		}
 		else
-			game->loop.perpwalldist = (game->loop.mapy - game->loop.posy + (1 - 
-            game->loop.stepy) / 2) / game->loop.raydiry;
+		{
+			game->loop.perpwalldist = (game->loop.mapy - game->loop.posy + (1 - game->loop.stepy) / 2) / game->loop.raydiry;
+		}
 		//calculate height of line to draw on screen
-		game->loop.lineheight = (int)(g_config.res.y / game->loop.perpwalldist);
+		game->loop.lineheight = (int)(game->loop.h / game->loop.perpwalldist);
 }
 
-void		calcpixel(t_game *game)
+static void		calcpixel(t_game *game, int x)
 {
-	game->loop.drawstart = -game->loop.lineheight / 2 + g_config.res.y / 2;
+	game->loop.drawstart = -(game->loop.lineheight) / 2 + game->loop.h / 2;
 	if(game->loop.drawstart < 0)
+	{
 		game->loop.drawstart = 0;
-	game->loop.drawend = game->loop.lineheight / 2 + g_config.r.es.y / 2;
-	if(game->loop.drawend >= g_config.res.y || game->loop.drawend <= 0)
-		game->loop.drawend = g_config.res.y - 1;
+	}
+	game->loop.drawend = game->loop.lineheight / 2 + game->loop.h / 2;
+	if(game->loop.drawend >= game->loop.h)
+	{
+		game->loop.drawend = game->loop.h - 1;
+	}
 }
-/*
 	//texturing calculations
 int		text_calc(t_game *game, int x)
 {
@@ -118,7 +125,7 @@ int		text_calc(t_game *game, int x)
 	game->loop.step = 1.0 * TEXHEIGHT / game->loop.lineheight;
 	// starting texture coordinate
 	game->loop.texpos = (game->loop.drawstart - game->loop.h / 2 + game->loop.lineheight / 2) * game->loop.step;
-//	return (0);
+/*	return (0);*/
 
 ////////?????
 	int y;
@@ -138,8 +145,8 @@ int		text_calc(t_game *game, int x)
 	}
 	//set the zbuffer fr the sprite casting
 	game->loop.zbuffer[x] = game->loop.perpwalldist; //perpendicular distance is used
-	return (0)
-		return (0);;
+	return (0);
+		//return (0);;
 }
 
 void	colorrgb(t_game *game)
@@ -170,34 +177,9 @@ void	colorrgb(t_game *game)
 		game->loop.color = game->loop.color / 2;
 	}
 }
-*/
 
 void	draw2(t_game *game, int x)
 {
-    int i;
-
-    i = 0;
-    while (i < game->loop.drawstart)
-    {
-        *(game->img.data + (i * g_config.res.x) = g_config.ceiling.rgb_int;
-        i++
-    }
-    while (i < game->loop.drawend)
-    {
-        game->loop.texy = (int)game->loop.texpos &
-        (game->texture[game->loop.texnum].height - 1);
-        game->loop.texpos += game->loop.step;
-        game->color = game->texture[game->loop.texnum].data[(int)(game->texture
-        [game->loop.texnum].height * game->loop.texy + game->loop.texx)];
-        *(game->img.data + (i * g_config.res.x) + x) = game->color;
-        i++;
-    }
-    while (i < g_config.res.y)
-    {
-        *(game->img.data + (i * g_config.res.x) + x) = g_config.floor.rgb_int;
-        i++;
-    }
-    /*
 	//draw the pixels of the stripe as a vertical line
 	game->loop.y = game->loop.drawstart;
 	while (game->loop.y <= game->loop.drawend)
@@ -205,9 +187,8 @@ void	draw2(t_game *game, int x)
 		game->img.data[game->loop.y * SCREENWIDTH + x] = game->loop.color;
 		game->loop.y++;
 	}
-    */
 }
-/*
+
 int		raycast(t_game *game)
 {
 	int x;
@@ -227,5 +208,3 @@ int		raycast(t_game *game)
 	}
 	return (0);
 }
-
-*/
