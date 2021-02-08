@@ -1,76 +1,67 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/08/20 15:02:59 by lvintila          #+#    #+#              #
-#    Updated: 2021/02/01 20:51:22 by marvin           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+YELLOW  =   $(shell tput -Txterm setaf 3)
 
-YELLOW  =       $(shell tput -Txterm setaf 3)
+GREEN   =   $(shell tput -Txterm setaf 2)
 
-GREEN   =       $(shell tput -Txterm setaf 2)
+RED     =   $(shell tput -Txterm setaf 1)
 
-RED     =       $(shell tput -Txterm setaf 1)
+LIBFT   =   ./printf/libft
 
-LIBFT   =       ./libft/
+GNL     =   ./gnl
 
-GNL     =       ./gnl/
+MLX		=	minilibx
 
-PRINTF  =       ./printf/
+PRINTF  =   ./printf
 
-CUB3D   =       srcs/
+CUB3D   =   srcs
 
-SRCS	=		$(wildcard $(GNL)*.c) \
-                $(wildcard $(PRINTF)*.c) \
-                $(wildcard $(CUB3D)*.c) \
+SRCS	=   $(wildcard $(GNL)*.c)
+            $(wildcard $(PRINTF)*.c)
+            $(wildcard $(CUB3D)*.c)
 
-OBJS    =       $(SRCS:%.c=%.o)
+OBJS    =   $(SRCS:%.c=%.o)
 
-NAME	=		cub3D
+NAME	=   cub3D
 
-IMG     =       $(NAME).bmp
+IMG     =   $(NAME).bmp
 
-CC      =       gcc
+CC      =   gcc
 
-CFLAGS	=		-g -Wall -Werror -Wextra -I. -o $(NAME)
+CFLAGS	=   -g -Wall -Werror -Wextra -I. -o $(NAME)
 
-MFLAGS	=		-lmlx -framework OpenGL -framework AppKit -lm
+MFLAGS	=   -lmlx -framework OpenGL -framework AppKit -lm
 
-SANFLAG =       -fsanitize=address
+SANFLAG =   -fsanitize=address
 
-RM		=		rm -rf
+RM		=	rm -rf
 
-all:    libft $(NAME)
+all: libft $(NAME)
 
-$(NAME): $(OBJS) @echo "${YELLOW}compiling cub3D ...${RESET}" $(CC) $(CFLAGS) $(MFLAGS) $(OBJS) -L$(LIBFT) $(LIBFT)/libft.a
+$(NAME): $(OBJS)
+		@echo "${YELLOW}compiling cub3D ...${RESET}"
+		make -C $(MLX)
+		$(CC) -L $(MLX) $(MLX)/libmlx.a $(OBJS) $(CFLAGS) $(MFLAGS) -L $(LIBFT) $(LIBFT)/libft.a
 
 $(%.o): $(%.c)
-        $(CC) -c $^ -o $@
-        @echo "${YELLOW}Compiling cub3D ...${RESET}"
+		$(CC) -c $^ -o $@ 
+		@echo "${YELLOW}Compiling cub3D ...${RESET}"
 
-libft: make -C $(LIBFT)
+libft:
+		make -C $(LIBFT)
 
-clean:	
-				$(RM) $(OBJS)
-				make -C $(LIBFT) clean
-				make -C minilibx/ clean
-                @echo "${GREEN}Cleaned!!!${RESET}"
+clean:
+		make -C $(LIBFT) clean
+		$(RM) $(OBJS)
+		make -C minilibx/ clean 
+		@echo "${GREEN}Cleaned!!!${RESET}"
 
-fclean:			clean
-				$(RM) $(NAME) $(IMG)
-				make -C libft/ fclean
-				make -C minilibx/ fclean
-				$(RM) $(NAME) $(OBJS)
-                @echo "${GREEN}Fcleaned!!!${RESET}"
+fclean:	clean
+		$(RM) $(NAME) $(IMG)
+		make -C $(LIBFT) fclean
+		@echo "${GREEN}Fcleaned!!!${RESET}"
 
-re:				fclean all
-                @echo "${GREEN}Deleted and recompiled${RESET}"
+re:		fclean all @echo "${GREEN}Deleted and recompiled${RESET}"
 
-run:	
-				./${NAME}
+run:
+		./${NAME}
 
 .PHONY:			all clean fclean re libft minilibx debug run
