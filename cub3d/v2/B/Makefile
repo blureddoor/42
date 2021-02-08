@@ -8,15 +8,15 @@ LIBFT   =   ./printf/libft
 
 GNL     =   ./gnl
 
-MLX		=	minilibx
+MLX		=	./minilibx
 
 PRINTF  =   ./printf
 
-CUB3D   =   srcs
+CUB3D   =   ./srcs
 
-SRCS	=   $(wildcard $(GNL)*.c)
-            $(wildcard $(PRINTF)*.c)
-            $(wildcard $(CUB3D)*.c)
+SRCS	=	$(wildcard $(GNL)*.c) \
+			$(wildcard $(PRINTF)*.c ) \
+			$(wildcard $(CUB3D)*.c)
 
 OBJS    =   $(SRCS:%.c=%.o)
 
@@ -39,7 +39,7 @@ all: libft $(NAME)
 $(NAME): $(OBJS)
 		@echo "${YELLOW}compiling cub3D ...${RESET}"
 		make -C $(MLX)
-		$(CC) -L $(MLX) $(MLX)/libmlx.a $(OBJS) $(CFLAGS) $(MFLAGS) -L $(LIBFT) $(LIBFT)/libft.a
+		$(CC) -L $(MLX) $(MLX)/libmlx.a $(OBJS) $(CFLAGS) $(MFLAGS) $(SRCS) -L $(LIBFT) $(LIBFT)/libft.a
 
 $(%.o): $(%.c)
 		$(CC) -c $^ -o $@ 

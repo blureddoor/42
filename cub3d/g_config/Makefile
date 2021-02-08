@@ -17,7 +17,7 @@ RED		:= $(shell tput -Txterm setaf 1)
 LIBFT	:= ./printf/libft/
 GNL		:= ./GNL/
 PRINTF	:= ./printf/
-CUB3D	:= srcs/
+CUB3D	:= ./srcs/
 SRCS 	:=	$(wildcard $(GNL)*.c) \
 			$(wildcard $(PRINTF)*.c) \
 			$(wildcard $(CUB3D)*.c)
