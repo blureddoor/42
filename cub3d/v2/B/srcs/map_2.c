@@ -10,9 +10,9 @@ void        map_fill(char **map)
 
     i =0;
     padding = ' ';
-    while (i < g_config.maps.rows)
+    while (i < g_config.map.rows)
     {
-        len = g_config.maps.cols - ft_strlen(map[i]);
+        len = g_config.map.cols - ft_strlen(map[i]);
         if (len)
         {
             pad = pad_right(padding, len);
@@ -59,7 +59,7 @@ int         check_map(char **map, int rows, int cols)
     c = map[rows][cols];
     if (c == ' ')
         return (1);
-    else if (c = '3' || c == '1')
+    else if (c == '3' || c == '1')
         return (0);
     map[rows][cols] = '3';
     ok = check_map(map, rows, cols - 1);
@@ -76,7 +76,7 @@ char        **map_parse(void)
 
     map = ft_split(g_config.map.buff, '\n');
     map_fill(map);
-    locat_pos(map);
+    locate_pos(map);
     aux = copy_matrix(g_config.map.rows, map);
     if (check_map(aux, g_config.posx, g_config.posy))
         error(RED"Map is not closed \n"RESET);

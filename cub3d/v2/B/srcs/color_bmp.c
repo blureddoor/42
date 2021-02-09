@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 20:44:05 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/05 20:50:36 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/09 20:14:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int			rgb_int(int r, int g, int b)
 {
-	if (r > 255 || g > 255 || b > 255 || r < 0 || g < 0 || b < 0
-			|| r == '\0' || g == '\0' || b == '\0')
+	if (r > 255 || g > 255 || b > 255 || r < 0 || g < 0 || b < 0
+			|| r == '\0' || g == '\0' || b == '\0')
 		error(RED"RGB color is wrong"RESET);
 	return (r << 16 | g << 8 | b);
 }
@@ -71,7 +71,7 @@ int		s_bmp(t_game *game)
 
     file = open("cub3D.bmp", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0666);
     img = define_header();
-    ((write(file, &img, 54)) && (write(file, game->img.data, img.img_size)) &&
+    ((write(file, &img, 54)) && (write(file, game->img.data, img.image_size)) &&
     (close(file)));
     return (1);
 }

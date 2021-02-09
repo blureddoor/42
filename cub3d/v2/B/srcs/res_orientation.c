@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   res_orientation.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/09 20:42:11 by marvin            #+#    #+#             */
+/*   Updated: 2021/02/09 20:43:19 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "cub.h"
 
 t_res   s_res(char *line)
@@ -5,7 +18,7 @@ t_res   s_res(char *line)
     char    **aux;
     t_res   res;
 
-    aux = fT_split(line, ' ');
+    aux = ft_split(line, ' ');
     check_len(aux, 3);
     if (is_digit(aux[1]) && is_digit(aux[2]))
         (res.x = ft_atoi(aux[1])) &&
@@ -27,7 +40,7 @@ void    check_res(t_res *res)
         (res->y = MIN_RES_HEIGHT);
 }
 
-void    orientation_input(double dirx, double diry, double pllx, double ply)
+void    orientation_input(double dirx, double diry, double plx, double ply)
 {
     g_config.dirx = dirx;
     g_config.diry = diry;

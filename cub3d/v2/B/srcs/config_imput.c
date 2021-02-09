@@ -6,7 +6,7 @@
 /*   By: lvintila  <lvintila@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:15:51 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/05 20:23:08 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/09 20:21:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		s_texandres(char *l, char *p) // char *line, char *pos
 {
 	if ((p = ft_strchr(l, 'R')) != NULL && *(p + 1) == ' ')
-		g_config.res = s_res(line);
+		g_config.res = s_res(l);
 	else if ((p = ft_strnstr(l, "NO", ft_strlen(l))) != NULL && *(p + 2) == ' ')
 		g_config.no = s_tex(l);
 	else if ((p = ft_strnstr(l, "SO", ft_strlen(l))) != NULL && *(p + 2) == ' ')
@@ -31,7 +31,7 @@ int		s_texandres(char *l, char *p) // char *line, char *pos
 		g_config.floor = s_color(l, p);
 	else if ((p = ft_strchr(l, 'C')) != NULL && *(p + 1) == ' ' &&
 			++g_config.cch)
-		g_config.ceiling = s_color(l, p)
+		g_config.ceiling = s_color(l, p);
 	else if (l[0])
 		return (1);
 	if (!l[0])
@@ -122,12 +122,12 @@ static void		save_conf(char *l)
 int		r_config(char *argv) // int read_config(char *argv)
 {
 	int		fd;
-	char	line;
+	char	*line;
 	char	*p;
 
 	p = NULL;
 	(((fd = open(argv, O_RDONLY)) <= 0) && (error(RED"Can't open FD\n"RESET)));
-	while (g_config.count < NUM_CONFI && get_next_line(fd, &line) > 0)
+	while (g_config.count < NUM_CONFIG && get_next_line(fd, &line) > 0)
 	{
 		(s_texandres(line, p) && (error(RED"Wrong element in .cub\n"RESET)));
 		((g_config.fch >= 2 || g_config.cch >= 2) &&

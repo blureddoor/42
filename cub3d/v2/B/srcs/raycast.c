@@ -6,17 +6,17 @@
 /*   By: mvillaes <mvillaes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:15:51 by mvillaes          #+#    #+#             */
-/*   Updated: 2021/02/01 20:23:27 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/09 20:40:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static void		camera_calc(t_game *game, int x)
+void			camera_calc(t_game *game, int x)
 {
 	game->loop.camerax = 2 * x / (double)g_config.res.x - 1;
 	game->loop.raydirx = g_config.dirx + g_config.planex * game->loop.camerax;
-	game->loop.raydiry = g.config.diry + g.config.planey * game->loop.camerax;
+	game->loop.raydiry = g_config.diry + g_config.planey * game->loop.camerax;
 	game->loop.mapx = (int)game->loop.posx;
 	game->loop.mapy = (int)game->loop.posy;
 	game->loop.deltadistx = fabs(1 / game->loop.raydirx);
@@ -24,7 +24,7 @@ static void		camera_calc(t_game *game, int x)
 	game->loop.hit = 0;
 }
 
-static void		initial_dist(t_game *game)
+void			initial_dist(t_game *game)
 {
 	if (game->loop.raydirx < 0)
 	{
@@ -48,7 +48,7 @@ static void		initial_dist(t_game *game)
 	}
 }
 
-static void		dda(t_game *game)
+void			dda(t_game *game)
 {
 	while (!game->loop.hit)
 		{
@@ -85,7 +85,7 @@ void		calcpixel(t_game *game)
 	game->loop.drawstart = -game->loop.lineheight / 2 + g_config.res.y / 2;
 	if(game->loop.drawstart < 0)
 		game->loop.drawstart = 0;
-	game->loop.drawend = game->loop.lineheight / 2 + g_config.r.es.y / 2;
+	game->loop.drawend = game->loop.lineheight / 2 + g_config.res.y / 2;
 	if(game->loop.drawend >= g_config.res.y || game->loop.drawend <= 0)
 		game->loop.drawend = g_config.res.y - 1;
 }
@@ -147,7 +147,7 @@ void	colorrgb(t_game *game)
 	if (game->worldmap[game->loop.mapx][game->loop.mapy] == 1)
 	{
 		game->loop.color = RGB_RED;
-	}
+	}	
 	else if (game->worldmap[game->loop.mapx][game->loop.mapy] == 2)
 	{
 		game->loop.color = RGB_GREEN;
@@ -179,8 +179,8 @@ void	draw2(t_game *game, int x)
     i = 0;
     while (i < game->loop.drawstart)
     {
-        *(game->img.data + (i * g_config.res.x) = g_config.ceiling.rgb_int;
-        i++
+        *(game->img.data + (i * g_config.res.x) + x) = g_config.ceiling.rgb_int;
+        i++;
     }
     while (i < game->loop.drawend)
     {

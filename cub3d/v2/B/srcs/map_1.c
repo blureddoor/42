@@ -7,7 +7,7 @@ int         it_is_map(char *l)
     i = 0;
     if (!*l)
         return (0);
-    while (l[i] == 'N' || l[i] == 'S' || l[i] == 'E' || l[i] == 'W'
+    while (l[i] == 'N' || l[i] == 'S' || l[i] == 'E' || l[i] == 'W'
         || l[i] == ' ' || l[i] == '0' || l[i] == '1' || l[i] == '2')
         i++;
     if (i == ft_strlen(l))
@@ -22,9 +22,9 @@ void        map_calc(char *l, char *aux, int len, int fin)
     if (it_is_map(l))
     {
         aux = ft_strjoin(g_config.map.buff, l);
-        free(g_config.map.buff)
+        free(g_config.map.buff);
         g_config.map.buff = aux;
-        if (fin && ++g_config.map.filas)
+        if (fin && ++g_config.map.rows)
         {
             aux = ft_strjoin(g_config.map.buff, "\n");
             free(g_config.map.buff);
@@ -55,7 +55,7 @@ void        r_map(int fd)
         if (first_line)
             map_calc(l, aux, len, end);
         free(l);
-        if (!fin)
+        if (!end)
             break ;
     }
     g_config.map.w_map = map_parse();

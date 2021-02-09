@@ -12,11 +12,12 @@ MLX		=	./minilibx
 
 PRINTF  =   ./printf
 
-CUB3D   =   ./srcs
+CUB3D   =   ./srcs/
 
 SRCS	=	$(wildcard $(GNL)*.c) \
 			$(wildcard $(PRINTF)*.c ) \
-			$(wildcard $(CUB3D)*.c)
+			$(wildcard $(CUB3D)*.c) \
+			./srcs/main.c 
 
 OBJS    =   $(SRCS:%.c=%.o)
 

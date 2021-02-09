@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:15:51 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/05 20:04:12 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/09 20:05:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		init_arg(t_game *game, int argc, char **argv)
 	game->img.img_ptr = mlx_new_image(game->mlx.ptr,
 			g_config.res.x, g_config.res.y);
 	game->img.data = (int*)mlx_get_data_addr(game->img.img_ptr, 
-			&game->img.bpp, &game->img.size:l, &game->img.endian);
+			&game->img.bpp, &game->img.size_l, &game->img.endian);
 	return (1);
 }
 
@@ -55,10 +55,10 @@ int		loop(t_game *game)
 	while (x < g_config.res.x)
 	{
 		camera_calc(game, x);
-		initial_dost(game);
-		perform_dda(game);
+		initial_dist(game);
+		dda(game);
 		calcpixel(game);
-		tex_calc(game);
+		text_calc(game);
 		game->zbuffer[x] = game->loop.perpwalldist;
 		draw2(game, x);
 		x++;
@@ -92,7 +92,7 @@ void		init_vars(t_game *game)
 	game->move.s = 0;
 	game->move.d = 0;
 	game->move.r_dch = 0;
-	game->move.izq = 0;
+	game->move.r_izq = 0;
 	game->move.speed = 0;
 	g_config.fch = 0;
 	g_config.cch = 0;
@@ -105,7 +105,7 @@ int		main(int argc, char **argv)
 
 	r_config(argv[1]);	
 	init_arg(&game, argc, argv);
-	initvars(&game);
+	init_vars(&game);
 //	game_init(&game); ///mapa de lodev
 //	init(&game);
 	mlx_hook(game.mlx.win, 2, 1, press, &game);

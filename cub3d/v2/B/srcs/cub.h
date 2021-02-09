@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 20:51:33 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/05 20:50:41 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/09 20:38:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # define MIN_RES_HEIGHT 240
 # define S_SPACE		0.1
 # define M_SPEED		0.05
-# define 
 # define NUM_CONFIG 8 
 
 # define UDIV 1
@@ -63,16 +62,6 @@ typedef struct		s_mlx
 	void			*win;
 }					t_mlx;
 
-typedef struct		s_config
-{
-	int				f;
-	int 			c;
-	int				used;
-	int				counter;
-}					t_config;
-
-
-
 typedef struct		s_map
 {
 	int				rows;
@@ -80,6 +69,12 @@ typedef struct		s_map
 	char			*buff;
 	char			**w_map;
 }					t_map;
+
+typedef struct		s_res
+{
+	int				x;
+	int				y;
+}					t_res;
 
 typedef struct		s_sprite
 {
@@ -89,7 +84,7 @@ typedef struct		s_sprite
 	int				num;
 }					t_sprite;
 
-typedef struct		s_bmp;
+typedef struct		s_bmp
 {
 	char			type[2];
 	int				reserved;
@@ -105,18 +100,32 @@ typedef struct		s_bmp;
 	int				relevant_colors;
 	int 			color;
 	int				total_color;
+	char			color_planes[2];
+	char			bits_per_pixel[2];
 }					t_bmp;
 
 typedef struct		s_img
 {
 	void			*img_ptr;
-	unsigned int	*data;
+	int				*data;
 	int				size_l;
 	int				bpp;
 	int				endian;
 	int				height;
 	int				width;
 }					t_img;
+
+typedef	struct		s_vector
+{
+	double			x;
+	double			y;
+}					t_vector;
+
+typedef	struct		s_vector_int
+{
+	int				x;
+	int				y;
+}					t_vector_int;
 
 typedef struct		s_floor
 {
@@ -213,7 +222,7 @@ typedef struct	s_main_loop
 	int				drawstartx;
 	int				drawendx;
 	int				stripe;
-	int				num_sprites
+	int				num_sprites;
 }					t_main_loop;
 
 typedef struct 		s_config
@@ -223,6 +232,7 @@ typedef struct 		s_config
 	char			*ea;
 	char			*we;
 	char			*s;
+	int				screenshot;
 	t_map			map;
 	t_color			floor;
 	t_color			ceiling;
@@ -240,7 +250,7 @@ typedef struct 		s_config
 	int				posy;
 }					t_config;
 
-t_conf				g_config;
+t_config			g_config;
 
 typedef struct		s_s_cast
 {
@@ -262,7 +272,7 @@ typedef struct		s_move
 	int				d;
 	int				r_izq;
 	int				r_dch;
-	double			speeed;
+	double			speed;
 }					t_move;
 
 typedef struct	s_game
@@ -272,8 +282,9 @@ typedef struct	s_game
 	t_img			*texture;
 	t_main_loop		loop;
 	t_floor			floor;
-	t_confi			confi;
+	t_config		confi;
 	t_res			res;
+	int				color;
 	char			**worldmap;
 	unsigned int	*zbuffer;
 	t_move			move;
@@ -315,8 +326,8 @@ int				w();
 int				a();
 int				s();
 int				d();
-int				r_izq();
-int				r_dch();
+void			r_izq();
+void			r_dch();
 int				error(const char *str);
 int				s_bmp(t_game *game);
 int				s_texandres(char *l, char *pos);
@@ -324,11 +335,11 @@ t_bmp			define_header(void);
 int				main(int argc, char **argv);
 void			map_fill(char **map);
 void			dda(t_game *game);
-void			locate_pos(char **map, int row, int cols);
+void			locate_pos(char **map);
 char			**map_parse(void);
 int				it_is_map(char *l);
 void			map_calc(char *l, char *aux, int len, int end);
-void			r_map(t_game *game);
+void			r_map(int fd);
 void			check_res(t_res *r);
 void			calcpixel(t_game *game);
 void			draw2(t_game *game, int x);

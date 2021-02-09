@@ -6,7 +6,7 @@
 /*   By: mvillaes <mvillaes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:15:51 by mvillaes          #+#    #+#             */
-/*   Updated: 2021/02/05 20:43:28 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/09 20:26:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		press(int key, t_game *game)
 	((key == A) && (game->move.a = 1));
 	((key == D) && (game->move.d = -1));
 	((key == KEY_DCH) && (game->move.r_dch = -1));
-	((key == IZQ) && (game->move.r_izq = 1));
+	((key == KEY_IZQ) && (game->move.r_izq = 1));
 	((key == KEY_ESC) && (closer(game)));
 	((key == KEY_SHIFT) && (game->move.speed = M_SPEED + 0.05));
 	return (0);
@@ -32,7 +32,7 @@ int		release(int key, t_game *game)
 	((key == A) && (game->move.a = 0));
 	((key == D) && (game->move.d = 0));
 	((key == KEY_DCH) && (game->move.r_dch = 0));
-	((key == IZQ) && (game->move.r_izq = 0));
+	((key == KEY_IZQ) && (game->move.r_izq = 0));
 	((key == KEY_SHIFT) && (game->move.speed = M_SPEED));
 	return (0);
 }
@@ -134,4 +134,4 @@ int		initvars(t_game *game)
 	game->loop.w = SCREENWIDTH;
 	game->loop.h = SCREENHEIGHT;
 	return (0);
-}
+}*/
