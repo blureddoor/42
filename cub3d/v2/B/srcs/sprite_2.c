@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/09 20:44:12 by marvin            #+#    #+#             */
-/*   Updated: 2021/02/09 20:44:17 by marvin           ###   ########.fr       */
+/*   Created: 2021/02/09 20:44:12 by lvintila          #+#    #+#             */
+/*   Updated: 2021/02/10 20:07:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int         num_sprites(void)
 {
     int i;
     int j;
-    eint num;
+    int num;
 
     i = 0;
     num = 0;
@@ -54,7 +54,7 @@ t_sprite    *set_sprites(int num)
 
 int         sprite_casting(t_game *game)
 {
-    int         *sprite;
+    int         sprite;
     int         i;
     t_s_cast    s;
 

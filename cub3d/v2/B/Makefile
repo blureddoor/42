@@ -6,18 +6,17 @@ RED     =   $(shell tput -Txterm setaf 1)
 
 LIBFT   =   ./printf/libft
 
-GNL     =   ./gnl
+GNL     =   ./gnl/
 
-MLX		=	./minilibx
+MLX		=	./minilibx/
 
-PRINTF  =   ./printf
+PRINTF  =   ./printf/
 
 CUB3D   =   ./srcs/
 
 SRCS	=	$(wildcard $(GNL)*.c) \
 			$(wildcard $(PRINTF)*.c ) \
-			$(wildcard $(CUB3D)*.c) \
-			./srcs/main.c 
+			$(wildcard $(CUB3D)*.c)
 
 OBJS    =   $(SRCS:%.c=%.o)
 
@@ -40,6 +39,7 @@ all: libft $(NAME)
 $(NAME): $(OBJS)
 		@echo "${YELLOW}compiling cub3D ...${RESET}"
 		make -C $(MLX)
+		make -C $(PRINTF)
 		$(CC) -L $(MLX) $(MLX)/libmlx.a $(OBJS) $(CFLAGS) $(MFLAGS) $(SRCS) -L $(LIBFT) $(LIBFT)/libft.a
 
 $(%.o): $(%.c)
@@ -51,6 +51,7 @@ libft:
 
 clean:
 		make -C $(LIBFT) clean
+		make -C $(PRINTF) clean
 		$(RM) $(OBJS)
 		make -C minilibx/ clean 
 		@echo "${GREEN}Cleaned!!!${RESET}"
@@ -58,6 +59,7 @@ clean:
 fclean:	clean
 		$(RM) $(NAME) $(IMG)
 		make -C $(LIBFT) fclean
+		make -C $(PRINTF) fclean
 		@echo "${GREEN}Fcleaned!!!${RESET}"
 
 re:		fclean all @echo "${GREEN}Deleted and recompiled${RESET}"

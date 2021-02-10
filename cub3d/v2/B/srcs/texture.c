@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture.c                                        :+:      :+:    :+:   */
+/*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:15:51 by lvintilai          #+#    #+#             */
-/*   Updated: 2021/02/01 20:51:28 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/10 20:17:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int     text_calc(t_game *game)
         game->loop.wallx = game->loop.posy + game->loop.perpwalldist *
         game->loop.raydiry;
     else
-        game-Aloop.wallx = game->loop.posy + game->loop.perpwalldist *
+        game->loop.wallx = game->loop.posy + game->loop.perpwalldist *
         game->loop.raydirx;
     game->loop.wallx -= floor((game->loop.wallx));
     game->loop.texx = (int)(game->loop.wallx * (double)
@@ -104,6 +104,7 @@ t_img       *init_text_and_sprite(t_game *game)
         mlx_xpm_file_to_image(game->mlx.ptr, g_config.no,
         &texture[4].width, &texture[4].height)))
         error(RED"Sprite can't be opened \n"RESET);
+	return (texture);
 }
 
 /*

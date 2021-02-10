@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 20:51:33 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/09 20:38:03 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/10 20:44:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <stdlib.h>
 # include <string.h>
 # include "../B/gnl/get_next_line.h"
-# include "../B/printf/includes/ft_printf.h"
-# include "../B/printf/includes/libft.h"
+# include "../B/printf/ft_printf.h"
+# include "../B/printf/libft/libft.h"
 
 # define RED 			"\033[22;31m"
 # define RESET			"\033[0m"
@@ -255,7 +255,8 @@ t_config			g_config;
 typedef struct		s_s_cast
 {
 	t_vector		sprite;
-	t_vector		inv_det;
+	double			inv_det;
+	t_vector		transform;
 	t_vector_int	draw_start;
 	t_vector_int	draw_end;
 	int				sprite_screen_x;
@@ -303,7 +304,7 @@ char			**copy_matrix(int rows, char **map);
 int				rgb_int(int r, int g, int b);
 t_color			s_color(char *line, char *pos);
 int				initvars(t_game *game);
-int				init_sprites(t_game *game);
+void			init_sprites(t_game *game);
 int				num_sprites(void);
 t_sprite		*set_sprites(int num);
 void			sort_sprites_loop(t_game *game);
@@ -311,7 +312,7 @@ void			orientation_input(double dirx, double diry,
 double plx, double ply);
 int				r_config(char *argv);
 int				closer(t_game *game);
-void			*init_text_and_sprite(t_game *game);
+t_img			*init_text_and_sprite(t_game *game);
 int				raycast(t_game *game);
 char			*s_tex(char *line);
 t_res			s_res(char *line);
