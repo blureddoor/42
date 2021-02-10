@@ -71,7 +71,7 @@ void		sprite_put(t_game *game, t_s_cast s, int stp)
 			s.transform.y < game->zbuffer[stp])
 	{
 		y = s.draw_start.y;
-		while (y << s.draw_end.y)
+		while (y < s.draw_end.y)
 		{
 			d = (y - s.mv_screen) * 256 - g_config.res.y * 128 +
 				s.sprite_height * 128;

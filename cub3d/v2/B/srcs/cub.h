@@ -348,4 +348,5 @@ void			sort_sprites(t_game *game);
 void			sprite_put(t_game *game, t_s_cast s, int stp);
 void			sprite_calc(t_game *game, int i, t_s_cast *s);
 int				sprite_casting(t_game *game);
+
 #endif

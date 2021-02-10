@@ -8,8 +8,6 @@ LIBFT   =   ./printf/libft
 
 GNL     =   ./gnl/
 
-MLX		=	./minilibx/
-
 PRINTF  =   ./printf/
 
 CUB3D   =   ./srcs/
@@ -38,9 +36,7 @@ all: libft $(NAME)
 
 $(NAME): $(OBJS)
 		@echo "${YELLOW}compiling cub3D ...${RESET}"
-		make -C $(MLX)
-		make -C $(PRINTF)
-		$(CC) -L $(MLX) $(MLX)/libmlx.a $(OBJS) $(CFLAGS) $(MFLAGS) $(SRCS) -L $(LIBFT) $(LIBFT)/libft.a
+		$(CC) $(OBJS) $(CFLAGS) $(MFLAGS)  -L$(LIBFT) $(LIBFT)/libft.a
 
 $(%.o): $(%.c)
 		$(CC) -c $^ -o $@ 
@@ -51,18 +47,16 @@ libft:
 
 clean:
 		make -C $(LIBFT) clean
-		make -C $(PRINTF) clean
-		$(RM) $(OBJS)
-		make -C minilibx/ clean 
+		$(RM) $(OBJS) 
 		@echo "${GREEN}Cleaned!!!${RESET}"
 
 fclean:	clean
 		$(RM) $(NAME) $(IMG)
 		make -C $(LIBFT) fclean
-		make -C $(PRINTF) fclean
 		@echo "${GREEN}Fcleaned!!!${RESET}"
 
-re:		fclean all @echo "${GREEN}Deleted and recompiled${RESET}"
+re:		fclean all 
+		@echo "${GREEN}Deleted and recompiled${RESET}"
 
 run:
 		./${NAME}
