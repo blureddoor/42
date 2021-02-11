@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:15:51 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/10 20:28:36 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/11 20:13:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int		init_arg(t_game *game, int argc, char **argv)
 	else
 		game->mlx.ptr = mlx_init();
 	game->mlx.win = mlx_new_window(game->mlx.ptr, g_config.res.x,
-			g_config.res.y, "lvintila cub3D");
+			g_config.res.y, "lvintila cub3D awesome");
 	game->img.img_ptr = mlx_new_image(game->mlx.ptr,
 			g_config.res.x, g_config.res.y);
-	game->img.data = (int*)mlx_get_data_addr(game->img.img_ptr, 
+	game->img.data = (int *)mlx_get_data_addr(game->img.img_ptr, 
 			&game->img.bpp, &game->img.size_l, &game->img.endian);
 	return (1);
 }
@@ -93,7 +93,7 @@ void		init_vars(t_game *game)
 	game->move.d = 0;
 	game->move.r_dch = 0;
 	game->move.r_izq = 0;
-	game->move.speed = 0;
+	game->move.speed = 0.05;
 	g_config.fch = 0;
 	g_config.cch = 0;
 	g_config.count = 0;

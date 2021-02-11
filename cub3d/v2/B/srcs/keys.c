@@ -6,13 +6,13 @@
 /*   By: mvillaes <mvillaes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:15:51 by mvillaes          #+#    #+#             */
-/*   Updated: 2021/02/10 20:28:24 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/11 20:49:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int		press(int key, t_game *game)
+int			press(int key, t_game *game)
 {
 	(((key == W) || (key == KEY_UP)) && (game->move.w = 1));
 	(((key == S) || (key == KEY_DOWN)) && (game->move.s = -1));
@@ -25,7 +25,7 @@ int		press(int key, t_game *game)
 	return (0);
 }
 
-int		release(int key, t_game *game)
+int			release(int key, t_game *game)
 {
 	(((key == W) || (key == KEY_UP)) && (game->move.w = 0));
 	(((key == S) || (key == KEY_DOWN)) && (game->move.s = 0));

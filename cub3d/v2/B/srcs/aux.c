@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 20:11:27 by marvin            #+#    #+#             */
-/*   Updated: 2021/01/28 20:22:35 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/11 20:15:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int         check_len(char **aux, int num)
 
     i = 0;
     while (aux[i] != NULL && i++)
-        ((i != num) && (error(RED""RESET)));
+        ((i != num) && (error(RED"something wrong with arguments in .cub \n"RESET)));
     return (i);
 }
 

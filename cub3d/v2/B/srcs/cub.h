@@ -6,11 +6,11 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 20:51:33 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/10 20:44:49 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/11 20:46:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	CUB_H
+#ifndef CUB_H
 # define CUB_H
 
 # include <mlx.h>
@@ -31,7 +31,7 @@
 # define MIN_RES_HEIGHT 240
 # define S_SPACE		0.1
 # define M_SPEED		0.05
-# define NUM_CONFIG 8 
+# define NUM_CONFIG 8
 
 # define UDIV 1
 # define VDIV 1
@@ -54,7 +54,6 @@
 # define RGB_WHITE 0x00FFFFFF
 # define RGB_YELLOW 0x00FFFF00
 # define RGB_BLACK 0x00000000
-
 
 typedef struct		s_mlx
 {
@@ -98,7 +97,7 @@ typedef struct		s_bmp
 	int				ppm_y;
 	int				image_size;
 	int				relevant_colors;
-	int 			color;
+	int				color;
 	int				total_color;
 	char			color_planes[2];
 	char			bits_per_pixel[2];
@@ -149,14 +148,14 @@ typedef struct		s_floor
 	int				ceilingtexture;
 }					t_floor;
 
-typedef struct		color
+typedef	struct		s_color
 {
 	int				rgb[3];
 	int				rgb_hex;
 	int				rgb_int;
 }					t_color;
 
-typedef struct	s_main_loop
+typedef struct		s_main_loop
 {
 	void			*mlx;
 	void			*mlx_win;
@@ -225,7 +224,7 @@ typedef struct	s_main_loop
 	int				num_sprites;
 }					t_main_loop;
 
-typedef struct 		s_config
+typedef struct		s_config
 {
 	char			*no;
 	char			*so;
@@ -276,7 +275,7 @@ typedef struct		s_move
 	double			speed;
 }					t_move;
 
-typedef struct	s_game
+typedef struct		s_game
 {
 	t_mlx			mlx;
 	t_img			img;
@@ -290,63 +289,63 @@ typedef struct	s_game
 	unsigned int	*zbuffer;
 	t_move			move;
 	t_bmp			bmp;
-}				t_game;
+}					t_game;
 
-int				text_calc(t_game *game);
-int				side(t_game *game);
-void			open_text(t_game *game);
-int				orientation(void);
-void			free_str(char **str);
-int				is_digit(char *str);
-int				check_len(char **aux, int num);
-char			*pad_right(char padding, int len);
-char			**copy_matrix(int rows, char **map);
-int				rgb_int(int r, int g, int b);
-t_color			s_color(char *line, char *pos);
-int				initvars(t_game *game);
-void			init_sprites(t_game *game);
-int				num_sprites(void);
-t_sprite		*set_sprites(int num);
-void			sort_sprites_loop(t_game *game);
-void			orientation_input(double dirx, double diry,
+int					text_calc(t_game *game);
+int					side(t_game *game);
+void				open_text(t_game *game);
+int					orientation(void);
+void				free_str(char **str);
+int					is_digit(char *str);
+int					check_len(char **aux, int num);
+char				*pad_right(char padding, int len);
+char				**copy_matrix(int rows, char **map);
+int					rgb_int(int r, int g, int b);
+t_color				s_color(char *line, char *pos);
+int					initvars(t_game *game);
+void				init_sprites(t_game *game);
+int					num_sprites(void);
+t_sprite			*set_sprites(int num);
+void				sort_sprites_loop(t_game *game);
+void				orientation_input(double dirx, double diry,
 double plx, double ply);
-int				r_config(char *argv);
-int				closer(t_game *game);
-t_img			*init_text_and_sprite(t_game *game);
-int				raycast(t_game *game);
-char			*s_tex(char *line);
-t_res			s_res(char *line);
-int				init_arg(t_game *game, int argc, char **argv);
-void			camera_calc(t_game *game, int x);
-void			initial_dist(t_game *game);
-int				loop(t_game *game);
-int				press(int key, t_game *game);
-int				release(int key, t_game *game);
-int				move(t_game *game);
-int				w();
-int				a();
-int				s();
-int				d();
-void			r_izq();
-void			r_dch();
-int				error(const char *str);
-int				s_bmp(t_game *game);
-int				s_texandres(char *l, char *pos);
-t_bmp			define_header(void);
-int				main(int argc, char **argv);
-void			map_fill(char **map);
-void			dda(t_game *game);
-void			locate_pos(char **map);
-char			**map_parse(void);
-int				it_is_map(char *l);
-void			map_calc(char *l, char *aux, int len, int end);
-void			r_map(int fd);
-void			check_res(t_res *r);
-void			calcpixel(t_game *game);
-void			draw2(t_game *game, int x);
-void			sort_sprites(t_game *game);
-void			sprite_put(t_game *game, t_s_cast s, int stp);
-void			sprite_calc(t_game *game, int i, t_s_cast *s);
-int				sprite_casting(t_game *game);
+int					r_config(char *argv);
+int					closer(t_game *game);
+t_img				*init_text_and_sprite(t_game *game);
+int					raycast(t_game *game);
+char				*s_tex(char *line);
+t_res				s_res(char *line);
+int					init_arg(t_game *game, int argc, char **argv);
+void				camera_calc(t_game *game, int x);
+void				initial_dist(t_game *game);
+int					loop(t_game *game);
+int					press(int key, t_game *game);
+int					release(int key, t_game *game);
+int					move(t_game *game);
+int					w();
+int					a();
+int					s();
+int					d();
+void				r_izq();
+void				r_dch();
+int					error(const char *str);
+int					s_bmp(t_game *game);
+int					s_texandres(char *l, char *pos);
+t_bmp				define_header(void);
+int					main(int argc, char **argv);
+void				map_fill(char **map);
+void				dda(t_game *game);
+void				locate_pos(char **map);
+char				**map_parse(void);
+int					it_is_map(char *l);
+void				map_calc(char *l, char *aux, int len, int end);
+void				r_map(int fd);
+void				check_res(t_res *r);
+void				calcpixel(t_game *game);
+void				draw2(t_game *game, int x);
+void				sort_sprites(t_game *game);
+void				sprite_put(t_game *game, t_s_cast s, int stp);
+void				sprite_calc(t_game *game, int i, t_s_cast *s);
+int					sprite_casting(t_game *game);
 
 #endif

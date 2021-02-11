@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 20:44:05 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/09 20:14:26 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/11 20:51:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ t_color		s_color(char *line, char *pos)
 
 	i = 0;
 	line = pos;
-	((pos[1] == '\0') && (error(RED"Color us empty"RESET)));
+	((pos[1] == '\0') && (error(RED"Color is empty \n"RESET)));
 	while (pos[++i])
 		if (!ft_isdigit(pos[i]) && pos[i] != ',' && pos[i] != ' ')
 			error(RED""RESET);
 	i = 0;
 	while (i < 3)
 	{
-        ((line == NULL) && (error(RED""RESET)));
+        ((line == NULL) && (error(RED"Missing colors \n"RESET)));
         line++;
         color.rgb[i] = ft_atoi(line);
         line = ft_strchr(line, ',');
@@ -64,10 +64,10 @@ t_bmp		define_header(void)
 	return (bmp);
 }
 
-int		s_bmp(t_game *game)
+int			s_bmp(t_game *game)
 {
-    t_bmp   img;
-    int     file;
+    t_bmp	img;
+    int		file;
 
     file = open("cub3D.bmp", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0666);
     img = define_header();

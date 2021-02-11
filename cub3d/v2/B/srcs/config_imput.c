@@ -6,13 +6,13 @@
 /*   By: lvintila  <lvintila@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:15:51 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/10 20:27:50 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/11 20:31:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int		s_texandres(char *l, char *p) // char *line, char *pos
+int		s_texandres(char *l, char *p) /*** char *line, char *pos ***/
 {
 	if ((p = ft_strchr(l, 'R')) != NULL && *(p + 1) == ' ')
 		g_config.res = s_res(l);
@@ -43,7 +43,8 @@ int		s_texandres(char *l, char *p) // char *line, char *pos
 /*
 static void		s_text1(t_game *game, char *l, int limit, char *pos)
 {
-	if((pos = ft_strnstr(l, "NO", ft_strlen(l))) != NULL && !limit && *(pos + 2) == ' ')
+	if((pos = ft_strnstr(l, "NO", ft_strlen(l))) != NULL && !limit
+	&& *(pos + 2) == ' ')
 	{
 		game->confi.no = s_tex(l);
 		game->confi.used[3] = 1;
@@ -97,7 +98,7 @@ static void		save_conf(char *l)
 
 	pos = NULL;
 	limit = 0;
-	if ((pos = ft_strnstr(l, "F", ft_strlen(l))) != NULL && 
+	if ((pos = ft_strnstr(l, "F", ft_strlen(l))) != NULL &&
 	!limit && *(pos + 1) == ' ')
 	{
 		g_config.f = save_color(l, pos);
@@ -131,7 +132,7 @@ int		r_config(char *argv) // int read_config(char *argv)
 	{
 		(s_texandres(line, p) && (error(RED"Wrong element in .cub\n"RESET)));
 		((g_config.fch >= 2 || g_config.cch >= 2) &&
-		 (error(RED"FC is rep\n"RESET)));
+		(error(RED"FC is rep\n"RESET)));
 		free(line);
 		line = NULL;
 	}
@@ -140,7 +141,6 @@ int		r_config(char *argv) // int read_config(char *argv)
 		free(line);
 	close(fd);
 	return (1);
-	
 /*	g_config.counter = 0;
 	i = 0;
 	g_config.used = calloc(NUM_CONFIG, sizeof(int));
