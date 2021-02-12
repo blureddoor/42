@@ -1,21 +1,22 @@
 R 8000 4000
-NO ./textures/NO.xpm
-SO ./textures/SO.xpm
-WE ./textures/WE.xpm
-EA ./textures/EA.xpm
-S ./items/treasure.xpm
-F 182, 192, 182
-C 192, 182, 182
+
+NO ./text_srites/NO.xpm
+SO ./text_sprites/SO.xpm
+WE ./text_sprites/WE.xpm
+EA ./text_sprites/EA.xpm
+
+F 80, 80, 80
+C 50, 50, 50
 
 1
-1 1
-1 0 1
-1 0 0 1
-1 0 0 0 1
-1 0 0 0 1
-1 N 0 0 1
-1 0 0 0 0 1
-1 0 0 0 0 1 1 1 1 1 
-1 0 0 0 0 0 0 0 0 1
-1 0 0 0 2 0 0 1 1 
-1 1 1 1 1 1 1 1 
+11
+101
+1001
+10001
+10001
+1E001
+100001
+1000011111 
+100000001
+1000200011 
+111111111 
