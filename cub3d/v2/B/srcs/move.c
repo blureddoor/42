@@ -27,8 +27,8 @@ int			move(t_game *game)
 
 int			w(t_game *game)
 {
-	if (g_config.map.w_map[(int)(game->loop.posx + g_config.dirx *
-				S_SPACE)][(int)(game->loop.posy)] == '0')
+	if (g_config.map.w_map[(int)(game->loop.posx + g_config.dirx * S_SPACE)]
+			[(int)(game->loop.posy)] == '0')
 		game->loop.posx += g_config.dirx * game->move.speed;
 	if (g_config.map.w_map[(int)(game->loop.posx)]
 			[(int)(game->loop.posy + g_config.diry * S_SPACE)] == '0')
@@ -38,8 +38,8 @@ int			w(t_game *game)
 
 int			s(t_game *game)
 {
-	if (g_config.map.w_map[(int)(game->loop.posx - g_config.dirx *
-				S_SPACE)][(int)(game->loop.posy)] == '0')
+	if (g_config.map.w_map[(int)(game->loop.posx - g_config.dirx * S_SPACE)]
+			[(int)(game->loop.posy)] == '0')
 		game->loop.posx -= g_config.dirx * game->move.speed;
 	if (g_config.map.w_map[(int)(game->loop.posx)]
 			[(int)(game->loop.posy - g_config.diry * S_SPACE)] == '0')
@@ -49,8 +49,8 @@ int			s(t_game *game)
 
 int			a(t_game *game)
 {
-	if (g_config.map.w_map[(int)game->loop.posx][(int)(game->loop.posy +
-				g_config.dirx * S_SPACE)] == '0')
+	if (g_config.map.w_map[(int)game->loop.posx]
+			[(int)(game->loop.posy + g_config.dirx * S_SPACE)] == '0')
 		game->loop.posy += g_config.dirx * game->move.speed;
 	if (g_config.map.w_map[(int)(game->loop.posx - g_config.diry * S_SPACE)]
 			[(int)game->loop.posy] == '0')
@@ -60,8 +60,8 @@ int			a(t_game *game)
 
 int			d(t_game *game)
 {
-	if (g_config.map.w_map[(int)game->loop.posx][(int)(game->loop.posy -
-				g_config.dirx * S_SPACE)] == '0')
+	if (g_config.map.w_map[(int)game->loop.posx]
+			[(int)(game->loop.posy - g_config.dirx * S_SPACE)] == '0')
 		game->loop.posy -= g_config.dirx * game->move.speed;
 	if (g_config.map.w_map[(int)(game->loop.posx + g_config.diry * S_SPACE)]
 			[(int)game->loop.posy] == '0')

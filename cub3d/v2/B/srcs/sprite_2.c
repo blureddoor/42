@@ -46,7 +46,7 @@ t_sprite    *set_sprites(int num)
             ((g_config.map.w_map[i][j] == '2') &&
             (sprites[count].num = g_config.map.w_map[i][j] - '0') &&
             (sprites[count].x = i + 0.6) &&
-        (sprites[count++].y = j + 0.6));
+			(sprites[count++].y = j + 0.6));
         i++;
     }
     return (sprites);

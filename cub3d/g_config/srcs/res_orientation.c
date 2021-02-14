@@ -56,7 +56,7 @@ int		orientation(void)
 	if (dir == 'N' || dir == 'n')
 		orientation_input(-1, 0, 0, 0.66);
 	if (dir == 'S' || dir == 's')
-		orientation_input(1, 0, 0, -0.66);
+		orientation_input(1, 0, 0, 0.66);
 	if (dir == 'E' || dir == 'e')
 		orientation_input(0, 1, 0.66, 0);
 	if (dir == 'W' || dir == 'w')

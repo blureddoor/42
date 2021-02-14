@@ -35,7 +35,7 @@ void    check_res(t_res *res)
     if (res->x > MAX_RES_WIDTH || res->y > MAX_RES_HEIGHT)
         (res->x = MAX_RES_WIDTH) &&
         (res->y = MAX_RES_HEIGHT);
-    if (res->x > MIN_RES_WIDTH || res->y < MIN_RES_HEIGHT)
+    if (res->x < MIN_RES_WIDTH || res->y < MIN_RES_HEIGHT)
         (res->x = MIN_RES_WIDTH) &&
         (res->y = MIN_RES_HEIGHT);
 }

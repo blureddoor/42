@@ -34,7 +34,7 @@ void		sprite_calc(t_game *game, int i, t_s_cast *s)
 {
 	s->sprite.x = game->loop.sprite[game->loop.spriteorder[i]].x - game->loop.posx;
 	s->sprite.y = game->loop.sprite[game->loop.spriteorder[i]].y - game->loop.posy;
-	s->inv_det = 1.0 / (g_config.planex * g_config.diry * g_config.dirx *
+	s->inv_det = 1.0 / (g_config.planex * g_config.diry - g_config.dirx *
 			g_config.planey);
 	s->transform.x = s->inv_det * (g_config.diry * s->sprite.x -
 			g_config.dirx * s->sprite.y);
@@ -48,14 +48,14 @@ void		sprite_calc(t_game *game, int i, t_s_cast *s)
 	if (s->draw_start.y < 0)
 		s->draw_start.y = 0;
 	s->draw_end.y = s->sprite_height / 2 + g_config.res.y / 2 + s->mv_screen;
-	if (s->draw_end.y > g_config.res.y)
+	if (s->draw_end.y >= g_config.res.y)
 		s->draw_end.y = g_config.res.y - 1;
 	s->sprite_width = abs((int)(g_config.res.y / (s->transform.y))) / UDIV;
 	s->draw_start.x = -s->sprite_width / 2 + s->sprite_screen_x;
 	if (s->draw_start.x < 0)
 		s->draw_start.x = 0;
-	s->draw_end.x = -s->sprite_width / 2 + s->sprite_screen_x;
-	if (s->draw_end.x > g_config.res.x)
+	s->draw_end.x = s->sprite_width / 2 + s->sprite_screen_x;
+	if (s->draw_end.x >= g_config.res.x)
 		s->draw_end.x = g_config.res.x - 1;
 }
 

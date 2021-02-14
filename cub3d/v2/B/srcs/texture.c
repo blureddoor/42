@@ -30,7 +30,7 @@ int     text_calc(t_game *game)
         game->loop.wallx = game->loop.posy + game->loop.perpwalldist *
         game->loop.raydiry;
     else
-        game->loop.wallx = game->loop.posy + game->loop.perpwalldist *
+        game->loop.wallx = game->loop.posx + game->loop.perpwalldist *
         game->loop.raydirx;
     game->loop.wallx -= floor((game->loop.wallx));
     game->loop.texx = (int)(game->loop.wallx * (double)
@@ -89,19 +89,19 @@ t_img       *init_text_and_sprite(t_game *game)
         &texture[0].width, &texture[0].height)))
         error(RED"Can't open NO texture \n"RESET);
     if (!(texture[1].img_ptr =
-        mlx_xpm_file_to_image(game->mlx.ptr, g_config.no,
+        mlx_xpm_file_to_image(game->mlx.ptr, g_config.so,
         &texture[1].width, &texture[1].height)))
         error(RED"Can't open SO texture \n"RESET);
     if (!(texture[2].img_ptr =
-        mlx_xpm_file_to_image(game->mlx.ptr, g_config.no,
+        mlx_xpm_file_to_image(game->mlx.ptr, g_config.ea,
         &texture[2].width, &texture[2].height)))
         error(RED"Can't open EA texture \n"RESET);
     if (!(texture[3].img_ptr =
-        mlx_xpm_file_to_image(game->mlx.ptr, g_config.no,
+        mlx_xpm_file_to_image(game->mlx.ptr, g_config.we,
         &texture[3].width, &texture[3].height)))
         error(RED"Can't open WE texture \n"RESET);
     if (!(texture[4].img_ptr =
-        mlx_xpm_file_to_image(game->mlx.ptr, g_config.no,
+        mlx_xpm_file_to_image(game->mlx.ptr, g_config.s,
         &texture[4].width, &texture[4].height)))
         error(RED"Sprite can't be opened \n"RESET);
 	return (texture);
