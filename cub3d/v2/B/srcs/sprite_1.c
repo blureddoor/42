@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/09 20:44:49 by marvin            #+#    #+#             */
-/*   Updated: 2021/02/10 20:02:57 by marvin           ###   ########.fr       */
+/*   Created: 2021/02/09 20:44:49 by lvintila          #+#    #+#             */
+/*   Updated: 2021/02/15 20:17:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void        sort_sprites(t_game *game)
+void		sort_sprites(t_game *game)
 {
-    int i;
-    
-    i = 0;
-    while (i < game->loop.num_sprites)
+	int	i;
+
+	i = 0;
+	while (i < game->loop.num_sprites)
 	{
 		game->loop.spriteorder[i] = i;
 		game->loop.spritedistance[i] =
 			((game->loop.posx - game->loop.sprite[i].x) *
-			 (game->loop.posx - game->loop.sprite[i].x) +
-			 (game->loop.posy - game->loop.sprite[i].y) *
-			 (game->loop.posy - game->loop.sprite[i].y));
+			(game->loop.posx - game->loop.sprite[i].x) +
+			(game->loop.posy - game->loop.sprite[i].y) *
+			(game->loop.posy - game->loop.sprite[i].y));
 		i++;
 	}
 	sort_sprites_loop(game);
@@ -41,7 +41,7 @@ void		sprite_calc(t_game *game, int i, t_s_cast *s)
 	s->transform.y = s->inv_det * (-g_config.planey * s->sprite.x +
 			g_config.planex * s->sprite.y);
 	s->mv_screen = (int)(VMOVE / s->transform.y);
-	s->sprite_screen_x = (int)((g_config.res.x / 2) * 
+	s->sprite_screen_x = (int)((g_config.res.x / 2) *
 			(1 + s->transform.x / s->transform.y));
 	s->sprite_height = abs((int)(g_config.res.y / (s->transform.y))) / VDIV;
 	s->draw_start.y = -s->sprite_height / 2 + g_config.res.y / 2 + s->mv_screen;
@@ -66,7 +66,7 @@ void		sprite_put(t_game *game, t_s_cast s, int stp)
 	int				y;
 
 	tex.x = (int)(256 * (stp - (-s.sprite_width / 2 + s.sprite_screen_x)) *
-			game->texture[4].width  / s.sprite_width)  / 256;
+			game->texture[4].width / s.sprite_width) / 256;
 	if (s.transform.y > 0 && stp > 0 && stp < g_config.res.x &&
 			s.transform.y < game->zbuffer[stp])
 	{

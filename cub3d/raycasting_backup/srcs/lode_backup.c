@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/01/27 19:47:17 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/15 19:23:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		imput_key(int key, t_game *game)
             MOVE_SPEED)] == FALSE)
             game->loop.pos_y += game->loop.dir_y * MOVE_SPEED;
     }
-    //move backwards if no wall in fronto of you
+    //move backwards if no wall in front of you
     else if (key == (KEY_S))
 	{
 			if (game->world_map[(int)(game->loop.pos_x - game->loop.dir_x * 
@@ -201,7 +201,7 @@ static void     perform_dda(t_game *game)
 			game->loop.side = 1;
 		}
 			
-		//check id ray has hit a wall
+		//check if ray has hit a wall
         if (game->world_map[game->loop.map_x][game->loop.map_y] > 0)
 			game->loop.hit = 1;
 	}

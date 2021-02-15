@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/26 18:15:51 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/11 20:13:36 by marvin           ###   ########.fr       */
+/*   Created: 2020/12/14 18:15:51 by lvintila          #+#    #+#             */
+/*   Updated: 2021/02/15 20:47:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int		main(int argc, char **argv)
 {
 	t_game		game;
 
-	r_config(argv[1]);	
+	r_config(argv[1]);
 	init_arg(&game, argc, argv);
 	init_vars(&game);
 //	game_init(&game); ///mapa de lodev
