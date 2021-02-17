@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:15:51 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/16 20:35:34 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/15 20:00:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ int			side(t_game *game)
 	((game->loop.raydiry > 0 && game->loop.side == 1) && (num = 3));
 	return (num);
 }
-//texturing calculations
 
 int			text_calc(t_game *game)
 {
 	game->loop.texnum = side(game);
-//where exactly the wall was hit
 	if (game->loop.side == 0)
 		game->loop.wallx = game->loop.posy + game->loop.perpwalldist *
 			game->loop.raydiry;
@@ -35,7 +33,6 @@ int			text_calc(t_game *game)
 		game->loop.wallx = game->loop.posx + game->loop.perpwalldist *
 			game->loop.raydirx;
 	game->loop.wallx -= floor((game->loop.wallx));
-// x coordinate on the texture
 	game->loop.texx = (int)(game->loop.wallx * (double)
 			(game->texture[game->loop.texnum].width));
 	if (game->loop.side == 0 && game->loop.raydirx > 0)
@@ -44,10 +41,8 @@ int			text_calc(t_game *game)
 	if (game->loop.side == 1 && game->loop.raydiry < 0)
 		game->loop.texx = game->texture[game->loop.texnum].width -
 			game->loop.texx - 1;
-//How much to increase the texture coordinate per screen pixel
 	game->loop.step = 1.0 * game->texture[game->loop.texnum].height /
 		game->loop.lineheight;
-//Starting texture coordinate
 	game->loop.texpos = (game->loop.drawstart - g_config.res.y / 2 +
 			game->loop.lineheight / 2) * game->loop.step;
 	return (0);
@@ -112,3 +107,41 @@ t_img		*init_text_and_sprite(t_game *game)
 		error(RED"Sprite can't be opened \n"RESET);
 	return (texture);
 }
+
+/*
+t_res	s_res(char *line)
+{
+	char	**aux;
+	t_res	res;
+
+	aux = ft_split(line, ' ');
+	check_len(aux, 3);
+	if (is_digit(aux[1]) && is_digit(aux[2]))
+	{
+		res.x = ft_atoi(aux[1]);
+		res.y = ft_atoi(aux[2]);
+	}
+	else
+	{
+		printf("Wrong resolution \n");
+		check_res(&res);
+		free_str(aux);
+		return (res);
+	}
+}
+
+static void		check_res(t_game *game)
+{
+	//MAX AND MIN UNDEFINED
+	if (game->res.x > MAX_WIDTH || game->res.y > MAX_HEIGHT)
+	{
+		game->res.x = MAX_WIDTH;
+		game->res.y = MAX_HEIGHT;
+	}
+	if (game->res.x < MIN_WIDTH || game->res.y < MIN_HEIGHT)
+	{
+		game->res.x = MIN_WIDTH;
+		game->res.y = MIN_HEIGHT;
+	}
+}
+*/

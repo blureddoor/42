@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 20:51:33 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/16 19:41:42 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/17 20:23:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include "../le_cub3d/gnl/get_next_line.h"
-# include "../le_cub3d/printf/includes/ft_printf.h"
-# include "../le_cub3d/printf/libft/libft.h"
+# include "../le_cub3d_backup/gnl/get_next_line.h"
+# include "../le_cub3d_backup/printf/includes/ft_printf.h"
+# include "../le_cub3d_backup/printf/libft/libft.h"
 
 # define RED 			"\033[22;31m"
 # define RESET			"\033[0m"

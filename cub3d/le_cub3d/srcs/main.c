@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 18:15:51 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/16 20:04:30 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/16 19:22:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ int		init_arg(t_game *game, int argc, char **argv)
 	return (1);
 }
 
+/*
+static void		refresh(t_game *game)
+{
+	mlx_destroy_image(game->mlx, game->img.img_ptr);
+	game->img.img_ptr = mlx_new_image(game->mlx, game->loop.w, game->loop.h);
+	game->img.data = (unsigned int*)mlx_get_data_addr(game->img.img_ptr,
+	&game->img.bpp, &game->img.endian, &game->img.size_l);
+}
+*/
+
 int		loop(t_game *game)
 {
 	int x;
@@ -53,9 +63,18 @@ int		loop(t_game *game)
 		draw2(game, x);
 		x++;
 	}
+	//movement
+	//	raycast(game);
+	//sprite
 	sprite_casting(game);
 	mlx_put_image_to_window(game->mlx.ptr, game->mlx.win, game->img.img_ptr, 0, 0);
 	((g_config.screenshot) && (s_bmp(game)) && (closer(game)));
+	//if (save)
+	//{
+		//save
+		//quit
+	//}
+	//refresh(game);
 	move(game);
 	return (0);
 }
@@ -87,6 +106,8 @@ int		main(int argc, char **argv)
 	r_config(argv[1]);
 	init_arg(&game, argc, argv);
 	init_vars(&game);
+//	game_init(&game); ///mapa de lodev
+//	init(&game);
 	mlx_hook(game.mlx.win, 2, 1, press, &game);
 	mlx_hook(game.mlx.win, 3, 2, release, &game);
 	mlx_hook(game.mlx.win, KEY_EXIT, 0, &closer, &game);

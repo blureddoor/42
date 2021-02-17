@@ -1,49 +1,60 @@
-YELLOW  =   $(shell tput -Txterm setaf 3)
+YELLOW  	=   $(shell tput -Txterm setaf 3)
 
-GREEN   =   $(shell tput -Txterm setaf 2)
+GREEN   	=   $(shell tput -Txterm setaf 2)
 
-RED     =   $(shell tput -Txterm setaf 1)
+RED     	=   $(shell tput -Txterm setaf 1)
 
-LIBFT   =   ./printf/libft
+LIBFT   	=   ./printf/libft
 
-GNL     =   ./gnl/
+DIR_S		=	srcs
 
-PRINTF  =   ./printf/srcs/
+DIR_SP		=	./printf/srcs
 
-CUB3D   =   ./srcs/
+DIR_O		=	obj
 
+HEADER		=	includes
 
-#SRCS	=	./gnl/get_next_line.c ./gnl/get_next_line.h \
-#			./gnl/get_next_line_utils.c \
-#			./printf/srcs/aux.c ./printf/srcs/converts.c ./printf/srcs/aux_1.c\
-#			./printf/srcs/ft_printf.c ./printf/srcs/mods.c \
-#			./printf/srcs/print_char.c ./printf/srcs/print_hex.c \
-#			./printf/srcs/print_nbr.c ./printf/srcs/print_pointer.c \
-#			./printf/srcs/print_str.c ./printf/srcs/print_u.c \
-#			./srcs/aux.c ./srcs/color_bmp.c ./srcs/config_imput.c \
-#			./srcs/exit_error.c ./srcs/keys.c ./srcs/main.c ./srcs/map_1.c \
-#			./srcs/map_2.c ./srcs/move.c ./srcs/raycast.c \
-#			./srcs/res_orientation.c ./srcs/sprite_1.c ./srcs/sprite_2.c \
-#			./srcs/texture.c \
+DIR_G     	=   gnl
+
+PRINTF  	=   ./printf/srcs
 
 
-OBJS    =   $(SRCS:%.c=%.o)
+SOURCES_G	=	get_next_line.c get_next_line_utils.c \
+				
+SOURCES_P	=	aux.c converts.c aux_1.c \
+				ft_printf.c mods.c \
+				print_char.c print_hex.c \
+				print_nbr.c print_pointer.c \
+				print_str.c print_u.c \
+				
+SOURCES_C	=	aux.c color_bmp.c config_imput.c \
+				exit_error.c keys.c main.c map_1.c \
+				map_2.c move.c raycast.c \
+				res_orientation.c sprite_1.c sprite_2.c \
+				texture.c
 
-NAME	=   cub3D
+SRCS	=		$(addprefix $(DIR_S)/, $(SOURCES_C))
+				$(addprefix $(DIR_SP)/, $(SOURCES_P))
+				$(addprefix $(DIR_G)/, $(SOURCES_G))
 
-IMG     =   $(NAME).bmp
 
-CC      =   gcc
+OBJS    =   	$(addprefix $(DOR_O)/, $(SOURCES:.c=.o))
 
-CFLAGS	=   -g -Wall -Werror -Wextra -I. -o $(NAME)
+NAME	=   	cub3D
 
-MFLAGS	=   -lmlx -framework OpenGL -framework AppKit -lm
+IMG     =   	$(NAME).bmp
 
-SANFLAG =   -fsanitize=address
+CC      =   	gcc
 
-RM		=	rm -rf
+CFLAGS	=   	-g -Wall -Werror -Wextra -I. -o $(NAME)
 
-all: libft $(NAME)
+MFLAGS	=   	-lmlx -framework OpenGL -framework AppKit -lm
+
+SANFLAG =   	-fsanitize=address
+
+RM		=		rm -rf
+
+all:			$(NAME)
 
 $(NAME): $(OBJS)
 		@echo "${YELLOW}compiling cub3D ...${RESET}"
@@ -72,4 +83,4 @@ re:		fclean all
 run:
 		./${NAME}
 
-.PHONY:			all clean fclean re libft minilibx debug run
+.PHONY:			all clean fclean re libft minilibx debug run srcs
