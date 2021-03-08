@@ -57,7 +57,7 @@ $(NAME):		$(OBJS)
 $(DIR_O)/%.o:	$(DIR_S)/%.c $(HEADER)/cub.h
 				@mkdir -p obj
 				@$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $<
-				@echo "${YELLOW}Compiling $(NAME) ...${RESET}"
+				@echo "${YELLOW}Compiling cub3D_2 ...${RESET}"
 libft:
 				make -C $(LIBFT)
 

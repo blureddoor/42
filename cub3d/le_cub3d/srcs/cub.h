@@ -166,7 +166,6 @@ typedef struct		s_main_loop
 	double			planex;
 	double			planey;
 	double			time;
-	double			oldtime;
 	int				x;
 	int				w;
 	double			camerax;
@@ -192,7 +191,6 @@ typedef struct		s_main_loop
 	double			oldplanex1;
 	double			olddirx2;
 	double			oldplanex2;
-	unsigned int	color;
 	int				y;
 	t_sprite		*sprite;
 	int				*spriteorder;

@@ -75,9 +75,21 @@ int			check_map(char **map, int rows, int cols)
 		return (0);
 	map[rows][cols] = '3';
 	ok = check_map(map, rows, cols - 1);
-	ok = ok == 0 ? check_map(map, rows, cols + 1) : ok;
-	ok = ok == 0 ? check_map(map, rows - 1, cols) : ok;
-	ok = ok == 0 ? check_map(map, rows + 1, cols) : ok;
+//	ok = ok == 0 ? check_map(map, rows, cols + 1) : ok;
+	if (ok == 0)
+		check_map(map, rows, cols + 1);
+//	else
+//		ok = check_map(map, rows, cols - 1);
+//	ok = ok == 0 ? check_map(map, rows - 1, cols) : ok;
+	if (ok == 0)
+		check_map(map, rows - 1, cols);
+//	else
+//		ok = check_map(map, rows, cols - 1);
+//	ok = ok == 0 ? check_map(map, rows + 1, cols) : ok;
+	if (ok == 0)
+		check_map(map, rows + 1, cols);
+//	else
+//		ok = check_map(map, rows, cols - 1);
 	return (ok);
 }
 

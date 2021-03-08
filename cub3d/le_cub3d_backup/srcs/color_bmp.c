@@ -30,7 +30,7 @@ t_color		s_color(char *line, char *pos)
 	((pos[1] == '\0') && (error(RED"Color is empty \n"RESET)));
 	while (pos[++i])
 		if (!ft_isdigit(pos[i]) && pos[i] != ',' && pos[i] != ' ')
-			error(RED""RESET);
+			error(RED"Color is not a number"RESET);
 	i = 0;
 	while (i < 3)
 	{
@@ -53,6 +53,7 @@ t_bmp		define_header(void)
     bmp.type[1] = 'M';
     bmp.byte_size = 54 + 4 * (int)g_config.res.x * (int)g_config.res.y;
     bmp.offset = 54;
+	bmp.header_size = 54 - 14;
     bmp.image_w = (int)g_config.res.x;
     bmp.image_h = -(int)g_config.res.y;
     bmp.color_planes[0] = 1;

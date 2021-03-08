@@ -20,8 +20,7 @@ t_res		s_res(char *line)
 	aux = ft_split(line, ' ');
 	check_len(aux, 3);
 	if (is_digit(aux[1]) && is_digit(aux[2]))
-		(res.x = ft_atoi(aux[1])) &&
-			(res.y = ft_atoi(aux[2]));
+		(res.x = ft_atoi(aux[1])) && (res.y = ft_atoi(aux[2]));
 	else
 		error(RED"Wrong resolution \n"RESET);
 	check_res(&res);
@@ -32,11 +31,9 @@ t_res		s_res(char *line)
 void		check_res(t_res *res)
 {
 	if (res->x > MAX_RES_WIDTH || res->y > MAX_RES_HEIGHT)
-		(res->x = MAX_RES_WIDTH) &&
-			(res->y = MAX_RES_HEIGHT);
+		(res->x = MAX_RES_WIDTH) && (res->y = MAX_RES_HEIGHT);
 	if (res->x < MIN_RES_WIDTH || res->y < MIN_RES_HEIGHT)
-		(res->x = MIN_RES_WIDTH) &&
-			(res->y = MIN_RES_HEIGHT);
+		(res->x = MIN_RES_WIDTH) && (res->y = MIN_RES_HEIGHT);
 }
 
 void		orientation_input(double dirx, double diry, double plx, double ply)
@@ -56,7 +53,7 @@ int			orientation(void)
 	if (dir == 'N' || dir == 'n')
 		orientation_input(-1, 0, 0, 0.66);
 	if (dir == 'S' || dir == 's')
-		orientation_input(1, 0, 0, 0.66);
+		orientation_input(1, 0, 0, -0.66);
 	if (dir == 'E' || dir == 'e')
 		orientation_input(0, 1, 0.66, 0);
 	if (dir == 'W' || dir == 'w')
