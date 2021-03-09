@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 18:15:51 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/15 20:49:42 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/09 21:46:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 
 int			press(int key, t_game *game)
 {
-	(((key == W) || (key == KEY_UP)) && (game->move.w = 1));
-	(((key == S) || (key == KEY_DOWN)) && (game->move.s = -1));
-	((key == A) && (game->move.a = 1));
-	((key == D) && (game->move.d = -1));
-	((key == KEY_DCH) && (game->move.r_dch = -1));
-	((key == KEY_IZQ) && (game->move.r_izq = 1));
-	((key == KEY_ESC) && (closer(game)));
+	(((key == W) || (key == KEY_UP)) && (game->move.w = 1));//init move forward
+	(((key == S) || (key == KEY_DOWN)) && (game->move.s = -1));//init move back
+	((key == A) && (game->move.a = 1));//init move lateral to the left
+	((key == D) && (game->move.d = -1));//init move lateral to the right
+	((key == KEY_DCH) && (game->move.r_dch = -1));//init rotate to the right
+	((key == KEY_IZQ) && (game->move.r_izq = 1));//init rotate t the left
+	((key == KEY_ESC) && (closer(game)));//cerrar programa con tecla esc
 	((key == KEY_SHIFT) && (game->move.speed = M_SPEED + 0.05));
 	return (0);
 }
 
 int			release(int key, t_game *game)
 {
-	(((key == W) || (key == KEY_UP)) && (game->move.w = 0));
-	(((key == S) || (key == KEY_DOWN)) && (game->move.s = 0));
-	((key == A) && (game->move.a = 0));
-	((key == D) && (game->move.d = 0));
-	((key == KEY_DCH) && (game->move.r_dch = 0));
-	((key == KEY_IZQ) && (game->move.r_izq = 0));
+	(((key == W) || (key == KEY_UP)) && (game->move.w = 0));//stop moving ff
+	(((key == S) || (key == KEY_DOWN)) && (game->move.s = 0));// stop moving back
+	((key == A) && (game->move.a = 0));//stop moving  lateral left
+	((key == D) && (game->move.d = 0));// stop moving lateral right
+	((key == KEY_DCH) && (game->move.r_dch = 0));//stop rotate to the left
+	((key == KEY_IZQ) && (game->move.r_izq = 0));//stop
 	((key == KEY_SHIFT) && (game->move.speed = M_SPEED));
 	return (0);
 }
 
-void		r_izq(t_game *game)
+void		r_izq(t_game *game)//rotate to the left
 {
 	game->loop.olddirx2 = g_config.dirx;
 	g_config.dirx = g_config.dirx * cos(game->move.speed) - g_config.diry *
@@ -51,7 +51,7 @@ void		r_izq(t_game *game)
 		g_config.planey * cos(game->move.speed);
 }
 
-void		r_dch(t_game *game)
+void		r_dch(t_game *game)//rotate to the right
 {
 	game->loop.olddirx1 = g_config.dirx;
 	g_config.dirx = g_config.dirx * cos(-game->move.speed) - g_config.diry *

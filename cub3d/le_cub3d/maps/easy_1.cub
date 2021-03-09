@@ -1,4 +1,4 @@
-R   6000 4000
+R   1920  1080
 NO  text_sprites/north.xpm
 SO           text_sprites/south.xpm
 WE      text_sprites/west.xpm

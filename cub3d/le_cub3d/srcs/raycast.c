@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 18:15:51 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/15 20:44:04 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/09 21:46:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 void			camera_calc(t_game *game, int x)
 {
-	game->loop.camerax = 2 * x / (double)g_config.res.x - 1;
+	//calculate ray position and direction
+	game->loop.camerax = 2 * x / (double)g_config.res.x - 1;//x-coordinate in camera space
 	game->loop.raydirx = g_config.dirx + g_config.planex * game->loop.camerax;
 	game->loop.raydiry = g_config.diry + g_config.planey * game->loop.camerax;
+	//which box of the map we're in
 	game->loop.mapx = (int)game->loop.posx;
 	game->loop.mapy = (int)game->loop.posy;
+	//length of the ray from one wx or y-side to next x or y-side
 	game->loop.deltadistx = fabs(1 / game->loop.raydirx);
 	game->loop.deltadisty = fabs(1 / game->loop.raydiry);
 	game->loop.hit = 0;
@@ -26,6 +29,7 @@ void			camera_calc(t_game *game, int x)
 
 void			initial_dist(t_game *game)
 {
+	//calculate step and initial side_dist
 	if (game->loop.raydirx < 0)
 	{
 		game->loop.stepx = -1;
@@ -57,6 +61,7 @@ void			dda(t_game *game)
 {
 	while (!game->loop.hit)
 	{
+		//jump to next map square, or in x-direction, or in y-direction
 		if (game->loop.sidedistx < game->loop.sidedisty)
 		{
 			game->loop.sidedistx += game->loop.deltadistx;
@@ -86,6 +91,7 @@ void			dda(t_game *game)
 
 void			calcpixel(t_game *game)
 {
+	//calculate ñowest and heighest pizel to fill in current stripe
 	game->loop.drawstart = -game->loop.lineheight / 2 + g_config.res.y / 2;
 	if (game->loop.drawstart < 0)
 		game->loop.drawstart = 0;

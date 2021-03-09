@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/02/15 20:50:42 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/09 21:46:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int     init_vars(t_game *game)
     game->loop.dir_x = -1.0;
     game->loop.dir_y = 0.0;
     game->loop.plane_x = 0.0;
-    game->loop.plane_y = 0.66;
+    game->loop.plane_y = 0.66i;
     game->loop.w = SCREEN_WIDTH;
     game->loop.h = SCREEN_HEIGHT;
     return (0);

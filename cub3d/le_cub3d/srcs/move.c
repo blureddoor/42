@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 18:15:51 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/15 20:44:53 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/09 21:46:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int			move(t_game *game)
 	return (0);
 }
 
+//move forward if no wall in front of you
+
 int			w(t_game *game)
 {
 	if (g_config.map.w_map[(int)(game->loop.posx + g_config.dirx * S_SPACE)]
@@ -36,6 +38,8 @@ int			w(t_game *game)
 	return (0);
 }
 
+//move backwards if no wall behind you
+
 int			s(t_game *game)
 {
 	if (g_config.map.w_map[(int)(game->loop.posx - g_config.dirx * S_SPACE)]
@@ -46,7 +50,7 @@ int			s(t_game *game)
 		game->loop.posy -= g_config.diry * game->move.speed;
 	return (0);
 }
-
+//rotate to the left
 int			a(t_game *game)
 {
 	if (g_config.map.w_map[(int)game->loop.posx]
@@ -57,6 +61,8 @@ int			a(t_game *game)
 		game->loop.posx -= g_config.diry * game->move.speed;
 	return (0);
 }
+
+//rotate to the right
 
 int			d(t_game *game)
 {
