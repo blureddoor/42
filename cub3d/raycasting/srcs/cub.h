@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2020/12/28 20:44:55 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/15 21:28:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define SCREEN_WIDTH	640
 # define SCREEN_HEIGHT	480
 
+# define S_SPACE		0.1
 # define TEX_WIDTH		64
 # define TEX_HEIGHT		64
 
@@ -32,10 +33,10 @@
 
 # define U_DIV			1
 # define V_DIV			1
-# define V_MOVE			0.0
+# define V_MOVE			0.5
 
-# define MOVE_SPEED		0.5
-# define ROT_SPEED		0.5
+# define	M_SPEED		0.2
+# define 	ROT_SPEED	0.5
 
 # define KEY_PRESS		2
 # define KEY_RELEASE	3
@@ -43,10 +44,18 @@
 # define KEY_EXIT		17
 
 # define KEY_ESC		53
-# define KEY_W			13
-# define KEY_A			0
-# define KEY_S			1
-# define KEY_D			2
+//# define KEY_W			13
+//# define KEY_A			0
+//# define KEY_S			1
+//# define KEY_D			2
+# define W				13
+# define A				0
+# define S				1
+# define D				2
+
+# define KEY_UP			126
+# define KEY_DOWN		125
+# define KEY_SHIFT		257
 # define KEY_IZQ		123
 # define KEY_DCH		124
 
@@ -174,6 +183,31 @@ typedef struct	s_main_loop
     int             sprite_height;
 }				t_main_loop;
 
+
+/*
+typedef	struct		s_config
+{
+	int				count;
+	int				dirx;
+	int				diry;
+	int				planex;
+	int				planey;
+	int				posx;
+	int				posy;
+	t_res			res;
+}					t_config;
+
+t_config			g_config;
+*/
+
+
+typedef	struct	s_move
+{
+	double			x;
+	double			y;
+	double			rot;;
+}				t_move;
+
 typedef struct	s_game
 {
 	void		*mlx;
@@ -182,6 +216,7 @@ typedef struct	s_game
 	t_res		res;
 	t_floor		floor;
 	t_main_loop	loop;
+	t_move		move;
 	int			world_map[WIDTHS][HEIGHTS];
 }				t_game;
 

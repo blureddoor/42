@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/12 21:08:02 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/12 20:46:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,29 +49,6 @@ int     close(t_game *game)
     exit(0);
 }
 
-int		imput_key(int key, t_game *game)
-{
-	if (key == KEY_ESC)
-	{
-		system ("leaks a.out");
-		exit(0);
-	}
-	if (key == (W))
-		g_config->axis.x = 1;
-	if (key == (S))
-		g_config->axis.x = -1;
-	if (key == (KEY_IZQ))
-		g_config->axis.rot = 1;
-	if (key == (KEY_DCH))
-		g_config->axis.rot = -1;
-	if (key == (A))
-		g_config->axis.y = -1;
-	if (key == (D))
-		g_config->axis.y = -1;
-	return (0);
-}
-
-/*
 int		imput_key(int key, t_game *game)
 {
 	if (key == KEY_ESC)
@@ -131,7 +108,7 @@ int		imput_key(int key, t_game *game)
 	}
     return (0);
 }
-*/
+
 int     init(t_game *game)
 {
 	game->mlx = mlx_init();

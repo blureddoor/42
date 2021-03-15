@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/12 21:08:02 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/15 19:22:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,89 +49,166 @@ int     close(t_game *game)
     exit(0);
 }
 
-int		imput_key(int key, t_game *game)
+
+
+void     init_vars(t_game *game)
 {
-	if (key == KEY_ESC)
-	{
-		system ("leaks a.out");
-		exit(0);
-	}
-	if (key == (W))
-		g_config->axis.x = 1;
-	if (key == (S))
-		g_config->axis.x = -1;
-	if (key == (KEY_IZQ))
-		g_config->axis.rot = 1;
-	if (key == (KEY_DCH))
-		g_config->axis.rot = -1;
-	if (key == (A))
-		g_config->axis.y = -1;
-	if (key == (D))
-		g_config->axis.y = -1;
+    game->loop.pos_x = 22.0;
+    game->loop.pos_y = 11.5;
+    game->loop.hit = 0;
+    game->loop.dir_x = -1.0;
+    game->loop.dir_y = 0.0;
+    game->loop.plane_x = 0.0;
+    game->loop.plane_y = 0.66;
+    game->loop.w = SCREEN_WIDTH;
+    game->loop.h = SCREEN_HEIGHT;
+	game->move.w = 0;
+	printf("move.w iniciado\n");
+	game->move.a = 0;
+	printf("move.a iniciado\n");
+	game->move.s = 0;
+	printf("move.s iniciado\n");
+	game->move.d = 0;
+	printf("move.d iniciado\n");
+	game->move.r_left = 0;
+	printf("move.r_left iniciado\n");
+	game->move.r_right = 0;
+	printf("move.r_right iniciado\n");
+	game->move.speed = 0.05;
+	printf("move.speed iniciado\n");
+}
+
+
+int         press(int key, t_game *game)
+{
+	(((key == W) || (key == KEY_UP)) && (game->move.w = 1));
+	printf("press W\n");
+	(((key == S) || (key == KEY_DOWN)) && (game->move.s = -1));
+	printf("press S\n");
+	((key == A) && (game->move.a = 1));
+	printf("press A\n");
+	((key == D) && (game->move.d = -1));
+	printf("press D\n");
+	((key == KEY_DCH) && (game->move.r_right = -1));
+	((key == KEY_IZQ) && (game->move.r_left = 1));
+	((key == KEY_ESC) && (close(game)));
+	printf("press ESC\n");
+	((key == KEY_SHIFT) && (game->move.speed = M_SPEED + 0.05));
 	return (0);
 }
 
-/*
-int		imput_key(int key, t_game *game)
+int         release(int key, t_game *game)
 {
-	if (key == KEY_ESC)
-	{
-		system ("leaks a.out");
-        exit(0);
+	(((key == W) || (key == KEY_UP)) && (game->move.w = 0));
+	(((key == S) || (key == KEY_DOWN)) && (game->move.s = 0));
+	((key == A) && (game->move.a = 0));
+	((key == D) && (game->move.d = 0));
+	((key == KEY_DCH) && (game->move.r_right = 0));
+	((key == KEY_IZQ) && (game->move.r_left = 0));
+	((key == KEY_SHIFT) && (game->move.speed = M_SPEED));
+	return (0);
 	}
-    //move forward if no wall in front of you
-    else if (key == (KEY_W))
-    {
-        if (game->world_map[(int)(game->loop.pos_x + game->loop.dir_x * 
-            MOVE_SPEED)][(int)(game->loop.pos_y)] == FALSE)
-            game->loop.pos_x += game->loop.dir_x * MOVE_SPEED;
-        if (game->world_map[(int)(game->loop.pos_x)][(int)(game->loop.pos_y + game->loop.dir_y * 
-            MOVE_SPEED)] == FALSE)
-            game->loop.pos_y += game->loop.dir_y * MOVE_SPEED;
-    }
-    //move backwards if no wall in fronto of you
-    else if (key == (KEY_S))
-	{
-			if (game->world_map[(int)(game->loop.pos_x - game->loop.dir_x * 
-                MOVE_SPEED)][(int)(game->loop.pos_y)] == FALSE)
-				game->loop.pos_x -= game->loop.dir_x * MOVE_SPEED;
-			if (game->world_map[(int)(game->loop.pos_x)][(int)(game->loop.pos_y - game->loop.dir_y * 
-                MOVE_SPEED)] == FALSE)
-				game->loop.pos_y -= game->loop.dir_y * MOVE_SPEED;
-	}
-	// rotate to the right
-	else if (key == (KEY_D))
-	{
-		//both camera direction and camera plane must be rotated
-		game->loop.old_dir_x1 = game->loop.dir_x;
-		game->loop.dir_x = game->loop.dir_x * cos(-ROT_SPEED) - game->loop.dir_y * 
-        sin(-ROT_SPEED);
-		game->loop.dir_y = game->loop.old_dir_x1 * sin(-ROT_SPEED) + game->loop.dir_y * 
-        cos(-ROT_SPEED);
-		game->loop.old_plane_x1 = game->loop.plane_x;
-		game->loop.plane_x = game->loop.plane_x * cos(-ROT_SPEED) - game->loop.plane_y * 
-        sin(-ROT_SPEED);
-		game->loop.plane_y = game->loop.old_plane_x1 * sin(-ROT_SPEED) + game->loop.plane_y 
-        * cos(-ROT_SPEED);
-	}
-	// rotate to the left
-    else if (key == (KEY_A))
-	{
-		//both camera direction and camera plane must be rotated
-		game->loop.old_dir_x2 = game->loop.dir_x;
-		game->loop.dir_x = game->loop.dir_x * cos(ROT_SPEED) - game->loop.dir_y * 
-        sin(ROT_SPEED);
-		game->loop.dir_y = game->loop.old_dir_x2 * sin(ROT_SPEED) + game->loop.dir_y * 
-        cos(ROT_SPEED);
-		game->loop.old_plane_x2 = game->loop.plane_x;
-		game->loop.plane_x = game->loop.plane_x * cos(ROT_SPEED) - game->loop.plane_y * 
-        sin(ROT_SPEED);
-		game->loop.plane_y = game->loop.old_plane_x2 * sin(ROT_SPEED) + game->loop.plane_y * 
-        cos(ROT_SPEED);
-	}
-    return (0);
+
+void        r_left(t_game *game)
+{
+	game->loop.old_dir_x2 = g_config.dirx;
+	g_config.dirx = g_config.dirx * cos(game->move.speed) - g_config.diry *
+		sin(game->move.speed);
+	g_config.diry = game->loop.old_dir_x2 * sin(game->move.speed) +
+		g_config.diry * cos(game->move.speed);
+	game->loop.old_plane_x2 = g_config.planex;
+	g_config.planex = g_config.planex * cos(game->move.speed) -
+		g_config.planey * sin(game->move.speed);
+	g_config.planey = game->loop.old_plane_x2 * sin(game->move.speed) +
+		g_config.planey * cos(game->move.speed);
 }
-*/
+
+void        r_right(t_game *game)
+{
+	game->loop.old_dir_x1 = g_config.dirx;
+	g_config.dirx = g_config.dirx * cos(-game->move.speed) - g_config.diry *
+		sin(-game->move.speed);
+	g_config.diry = game->loop.old_dir_x1 * sin(-game->move.speed) +
+		g_config.diry * cos(-game->move.speed);
+	game->loop.old_plane_x1 = g_config.planex;
+	g_config.planex = g_config.planex * cos(-game->move.speed) -
+		g_config.planey * sin(-game->move.speed);
+	g_config.planey = game->loop.old_plane_x1 * sin(-game->move.speed) +
+		g_config.planey * cos(-game->move.speed);
+}
+
+int         w(t_game *game)
+{
+	if (game->world_map[(int)(game->loop.pos_x + g_config.dirx * S_SPACE)]
+			[(int)(game->loop.pos_y)] == '0')
+		game->loop.pos_x += g_config.dirx * game->move.speed;
+	printf("inside w function-1-if\n");
+	if (game->world_map[(int)(game->loop.pos_x)]
+			[(int)(game->loop.pos_y + g_config.diry * S_SPACE)] == '0')
+		game->loop.pos_y += g_config.diry * game->move.speed;
+	printf("inside w function-2-if\n");
+	return (0);
+}
+
+int         s(t_game *game)
+{
+	if (game->world_map[(int)(game->loop.pos_x - g_config.dirx * S_SPACE)]
+			[(int)(game->loop.pos_y)] == '0')
+		game->loop.pos_x -= g_config.dirx * game->move.speed;
+	printf("inside s function-1-if\n");
+	if (game->world_map[(int)(game->loop.pos_x)]
+			[(int)(game->loop.pos_y - g_config.diry * S_SPACE)] == '0')
+		game->loop.pos_y -= g_config.diry * game->move.speed;
+	printf("inside s function-2-if\n");
+	return (0);
+}
+int         a(t_game *game)
+{
+	if (game->world_map[(int)game->loop.pos_x]
+			[(int)(game->loop.pos_y + g_config.dirx * S_SPACE)] == '0')
+		game->loop.pos_y += g_config.dirx * game->move.speed;
+	printf("inside a function-1-if\n");
+	if (game->world_map[(int)(game->loop.pos_x - g_config.diry * S_SPACE)]
+		[(int)game->loop.pos_y] == '0')
+		game->loop.pos_x -= g_config.diry * game->move.speed;
+	printf("inside a function-2-if\n");
+	return (0);
+}
+
+int         d(t_game *game)
+{
+	if (game->world_map[(int)game->loop.pos_x]
+			[(int)(game->loop.pos_y - g_config.dirx * S_SPACE)] == '0')
+ 		game->loop.pos_y -= g_config.dirx * game->move.speed;
+	printf("inside d function-1-if\n");
+ 	if (game->world_map[(int)(game->loop.pos_x + g_config.diry * S_SPACE)]
+ 			[(int)game->loop.pos_y] == '0')
+ 		game->loop.pos_x += g_config.diry * game->move.speed;
+	printf("inside d function-2-if\n");
+ 	return (0);
+ }
+
+
+int         move(t_game *game)
+{
+	((game->move.w) && (w(game)));
+	printf("inside move-w\n");
+	((game->move.a) && (a(game)));
+	printf("inside move-a\n");
+	((game->move.s) && (s(game)));
+	printf("inside move-s\n");
+	((game->move.d) && (d(game)));
+	printf("inside move-d\n");
+	if (game->move.r_left)
+		r_left(game);
+	printf("inside move-r-right\n");
+	if (game->move.r_right)
+		r_right(game);
+	printf("inside move-r-left\n");
+	return (0);
+}
+
+
 int     init(t_game *game)
 {
 	game->mlx = mlx_init();
@@ -143,19 +220,6 @@ int     init(t_game *game)
     return (0);
 }
 
-int     init_vars(t_game *game)
-{
-    game->loop.pos_x = 22.0;
-    game->loop.pos_y = 11.5;
-    game->loop.hit = 0;
-    game->loop.dir_x = -1.0;
-    game->loop.dir_y = 0.0;
-    game->loop.plane_x = 0.0;
-    game->loop.plane_y = 0.66;
-    game->loop.w = SCREEN_WIDTH;
-    game->loop.h = SCREEN_HEIGHT;
-    return (0);
-}
 
 static void     camera_calc(t_game *game, int x)
 {
@@ -224,7 +288,7 @@ static void     perform_dda(t_game *game)
 			game->loop.side = 1;
 		}
 			
-		//check id ray has hit a wall
+		//check if ray has hit a wall
         if (game->world_map[game->loop.map_x][game->loop.map_y] > 0)
 			game->loop.hit = 1;
 	}
@@ -283,7 +347,15 @@ void        draw2(t_game *game, int x)
     }
 }
 
-int     raycast(t_game *game)
+static void     refresh(t_game *game)
+{
+    mlx_destroy_image(game->mlx, game->img.img_ptr);
+    game->img.img_ptr = mlx_new_image(game->mlx, game->loop.w, game->loop.h);
+    game->img.data = (unsigned int*)mlx_get_data_addr(game->img.img_ptr,
+    &game->img.bpp, &game->img.endian, &game->img.size_l);
+}
+
+int     loop(t_game *game)
 {
     int x;
 
@@ -298,27 +370,91 @@ int     raycast(t_game *game)
         draw2(game, x);
         x++;
     }
+	printf("Estoy en el loop\n");
+	mlx_put_image_to_window(game->mlx, game->win_ptr, game->img.img_ptr, 0, 0);
+	printf("mlx_put_image\n");
+	refresh(game);
+	printf("Refresh\n");
+	move(game);
+	printf("movimiento\n");
     return (0);
+
 }
 
 
-static void     refresh(t_game *game)
-{
-    mlx_destroy_image(game->mlx, game->img.img_ptr);
-    game->img.img_ptr = mlx_new_image(game->mlx, game->loop.w, game->loop.h);
-    game->img.data = (unsigned int*)mlx_get_data_addr(game->img.img_ptr,
-    &game->img.bpp, &game->img.endian, &game->img.size_l);
-}
-
-
+/*
 int     loop(t_game *game)
 {
+    raycast(game);
     mlx_put_image_to_window(game->mlx, game->win_ptr, game->img.img_ptr, 0, 0);
-    refresh(game);
-	raycast(game);
+	refresh(game);
+	move(game);
     return (0);
 }
 
+*/
+/*
+int		imput_key(int key, t_game *game)
+{
+	if (key == KEY_ESC)
+	{
+		system ("leaks a.out");
+        exit(0);
+	}
+    //move forward if no wall in front of you
+    else if (key == (KEY_W))
+    {
+        if (game->world_map[(int)(game->loop.pos_x + game->loop.dir_x * 
+            MOVE_SPEED)][(int)(game->loop.pos_y)] == FALSE)
+            game->loop.pos_x += game->loop.dir_x * MOVE_SPEED;
+        if (game->world_map[(int)(game->loop.pos_x)][(int)(game->loop.pos_y + game->loop.dir_y * 
+            MOVE_SPEED)] == FALSE)
+            game->loop.pos_y += game->loop.dir_y * MOVE_SPEED;
+    }
+    //move backwards if no wall in front of you
+    else if (key == (KEY_S))
+	{
+			if (game->world_map[(int)(game->loop.pos_x - game->loop.dir_x * 
+                MOVE_SPEED)][(int)(game->loop.pos_y)] == FALSE)
+				game->loop.pos_x -= game->loop.dir_x * MOVE_SPEED;
+			if (game->world_map[(int)(game->loop.pos_x)][(int)(game->loop.pos_y - game->loop.dir_y * 
+                MOVE_SPEED)] == FALSE)
+				game->loop.pos_y -= game->loop.dir_y * MOVE_SPEED;
+	}
+	// rotate to the right
+	else if (key == (KEY_D))
+	{
+		//both camera direction and camera plane must be rotated
+		game->loop.old_dir_x1 = game->loop.dir_x;
+		game->loop.dir_x = game->loop.dir_x * cos(-ROT_SPEED) - game->loop.dir_y * 
+        sin(-ROT_SPEED);
+		game->loop.dir_y = game->loop.old_dir_x1 * sin(-ROT_SPEED) + game->loop.dir_y * 
+        cos(-ROT_SPEED);
+		game->loop.old_plane_x1 = game->loop.plane_x;
+		game->loop.plane_x = game->loop.plane_x * cos(-ROT_SPEED) - game->loop.plane_y * 
+        sin(-ROT_SPEED);
+		game->loop.plane_y = game->loop.old_plane_x1 * sin(-ROT_SPEED) + game->loop.plane_y 
+        * cos(-ROT_SPEED);
+	}
+	// rotate to the left
+    else if (key == (KEY_A))
+	{
+		//both camera direction and camera plane must be rotated
+		game->loop.old_dir_x2 = game->loop.dir_x;
+		game->loop.dir_x = game->loop.dir_x * cos(ROT_SPEED) - game->loop.dir_y * 
+        sin(ROT_SPEED);
+		game->loop.dir_y = game->loop.old_dir_x2 * sin(ROT_SPEED) + game->loop.dir_y * 
+        cos(ROT_SPEED);
+		game->loop.old_plane_x2 = game->loop.plane_x;
+		game->loop.plane_x = game->loop.plane_x * cos(ROT_SPEED) - game->loop.plane_y * 
+        sin(ROT_SPEED);
+		game->loop.plane_y = game->loop.old_plane_x2 * sin(ROT_SPEED) + game->loop.plane_y * 
+        cos(ROT_SPEED);
+	}
+    return (0);
+}
+
+*/
 /*
 
 void	img_init(t_game *game)
@@ -512,11 +648,19 @@ int main(int argc, char **argv)
 {
 	t_game game;
     init_vars(&game);
+	printf("main init_vars\n");
 	game_init(&game);
+	printf("main game_init\n");
 	init(&game);
-    mlx_hook(game.win_ptr, KEY_PRESS, 0, imput_key, &game);
-    mlx_hook(game.win_ptr, KEY_EXIT, 0, close, &game);
+	printf("main init\n");
+    mlx_hook(game.win_ptr, 2, 1, press, &game);
+	printf("main hook press\n");
+    mlx_hook(game.win_ptr, 3, 2, release, &game);
+	printf("main hook release\n");
+    mlx_hook(game.win_ptr, KEY_EXIT, 0, &close, &game);
+	printf("main hook exit-close\n");
     mlx_loop_hook(game.mlx, loop, &game);
+	printf("main hook loop\n");
     mlx_loop(game.mlx);
     return (0);
 }

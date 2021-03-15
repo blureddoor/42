@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 20:51:33 by lvintila          #+#    #+#             */
-/*   Updated: 2021/02/17 20:23:29 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/15 20:38:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,7 +247,7 @@ typedef struct		s_config
 	int				posy;
 }					t_config;
 
-t_config			g_config;
+//t_config			g_config;
 
 typedef struct		s_s_cast
 {
@@ -287,6 +287,7 @@ typedef struct		s_game
 	unsigned int	*zbuffer;
 	t_move			move;
 	t_bmp			bmp;
+	t_config		g_config;
 }					t_game;
 
 int					text_calc(t_game *game);
