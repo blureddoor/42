@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/03/15 19:31:07 by marvin           ###   ########.fr       */
+/*   Updated: 2020/12/28 20:44:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <mlx.h>
 # include <stdio.h>
-# include <fcntl.h>
 # include <stdlib.h>
 # include <math.h>
 # include <string.h>
@@ -36,8 +35,7 @@
 # define V_MOVE			0.0
 
 # define MOVE_SPEED		0.5
-# define S_SPACE		0.1
-# define ROT_SPEED		0.3
+# define ROT_SPEED		0.5
 
 # define KEY_PRESS		2
 # define KEY_RELEASE	3
@@ -45,16 +43,12 @@
 # define KEY_EXIT		17
 
 # define KEY_ESC		53
-# define KEY_W				13
-# define KEY_A				0
-# define KEY_S				1
-# define KEY_D				2
+# define KEY_W			13
+# define KEY_A			0
+# define KEY_S			1
+# define KEY_D			2
 # define KEY_IZQ		123
 # define KEY_DCH		124
-# define KEY_UP			126
-# define KEY_DOWN		125
-# define KEY_SHIFT		257
-
 
 # define RGB_RED		0x00FF0000
 # define RGB_GREEN		0x00008000
@@ -180,25 +174,6 @@ typedef struct	s_main_loop
     int             sprite_height;
 }				t_main_loop;
 
-typedef	struct	s_config
-{
-	int			count;
-	double		dirx;
-}
-
-t_config		g_config;
-
-typedef	struct	s_move
-{
-	int			w;
-	int			a;
-	int			s;
-	int			d;
-	int			r_izq;
-	int			r_dch;
-	double		speed;
-}
-
 typedef struct	s_game
 {
 	void		*mlx;
@@ -207,7 +182,6 @@ typedef struct	s_game
 	t_res		res;
 	t_floor		floor;
 	t_main_loop	loop;
-	t_move		move;
 	int			world_map[WIDTHS][HEIGHTS];
 }				t_game;
 

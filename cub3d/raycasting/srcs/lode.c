@@ -94,15 +94,15 @@ int         release(int key, t_game *game)
 void        rot(t_game *game)
 {
 	game->loop.old_dir_x2 = game->loop.dir_x;
-	game->loop.dir_x = game->loop.dir_x * cos(M_SPEED * game->move.rot) - game->loop.dir_y *
-		sin(M_SPEED * game->move.rot);
-	game->loop.dir_y = game->loop.old_dir_x2 * sin(M_SPEED * game->move.rot) +
-		game->loop.dir_y * cos(M_SPEED * game->move.rot);
+	game->loop.dir_x = game->loop.dir_x * cos(R_SPEED * game->move.rot) - game->loop.dir_y *
+		sin(R_SPEED * game->move.rot);
+	game->loop.dir_y = game->loop.old_dir_x2 * sin(R_SPEED * game->move.rot) +
+		game->loop.dir_y * cos(R_SPEED * game->move.rot);
 	game->loop.old_plane_x2 = game->loop.plane_x;
-	game->loop.plane_x = game->loop.plane_x * cos(M_SPEED * game->move.rot) -
-		game->loop.plane_y * sin(M_SPEED * game->move.rot);
-	game->loop.plane_y = game->loop.old_plane_x2 * sin(M_SPEED * game->move.rot) +
-		game->loop.plane_y * cos(M_SPEED * game->move.rot);
+	game->loop.plane_x = game->loop.plane_x * cos(R_SPEED * game->move.rot) -
+		game->loop.plane_y * sin(R_SPEED * game->move.rot);
+	game->loop.plane_y = game->loop.old_plane_x2 * sin(R_SPEED * game->move.rot) +
+		game->loop.plane_y * cos(R_SPEED * game->move.rot);
 }
 
 int         mv(t_game *game)
@@ -118,26 +118,27 @@ int         mv(t_game *game)
 
 int         lat_mv(t_game *game)
 {
-	double normalx;
+/*	double normalx;
 	double normaly;
 
-	normalx = game->loop.dir_x * cos(90 * M_PI / 180) - game->loop.dir_y * sin(90 * M_PI / 180); 
-	normaly = game->loop.dir_y * sin(90 * M_PI / 180) + game->loop.dir_x * cos(90 * M_PI / 180);
-
+	normalx = game->loop.dir_x * cos(90 * M_PI / 180) + game->loop.dir_y * sin(90 * M_PI / 180); 
+	normaly = game->loop.dir_y * sin(90 * M_PI / 180) - game->loop.dir_x * cos(90 * M_PI / 180);
+*/
 	if (game->world_map[(int)game->loop.pos_x]
-			[(int)(game->loop.pos_y + normalx * M_SPEED * game->move.y)] == 0)
-		game->loop.pos_y += normalx * M_SPEED * game->move.y;
-	if (game->world_map[(int)(game->loop.pos_x - normaly * M_SPEED * game->move.y)]
+			[(int)(game->loop.pos_y + game->loop.dir_x * M_SPEED * game->move.y)] == 0)
+		game->loop.pos_y += game->loop.dir_x * M_SPEED * game->move.y;
+	if (game->world_map[(int)(game->loop.pos_x - game->loop.dir_y * M_SPEED * game->move.y)]
 		[(int)game->loop.pos_y] == 0)
-		game->loop.pos_x -= normaly * M_SPEED * game->move.y;
+		game->loop.pos_x -= game->loop.dir_y * M_SPEED * game->move.y;
 	return (0);
 }
 
 int         move(t_game *game)
 {
-	mv(game);
-	lat_mv(game);
-	rot(game);
+	((game->move.x) && (mv(game)));
+	((game->move.y) && (lat_mv(game)));
+	if (game->move.rot)
+		rot(game);
 	return (0);
 }
 
@@ -253,7 +254,7 @@ void    color_rgb(t_game *game)
 {
     if (game->world_map[game->loop.map_x][game->loop.map_y] == 1)
     {
-        game->loop.color = RGB_WHITE;
+        game->loop.color = RGB_YELLOW;
 //        printf("debug: %x\n", game->loop.color);
     }
     else if (game->world_map[game->loop.map_x][game->loop.map_y] == 2)
@@ -305,13 +306,7 @@ int     loop(t_game *game)
         draw2(game, x);
         x++;
     }
-/*	printf("Estoy en el loop\n");*/
 	mlx_put_image_to_window(game->mlx, game->win_ptr, game->img.img_ptr, 0, 0);
-/*	printf("mlx_put_image\n");
-	refresh(game);
-	printf("Refresh\n");
-	move(game);
-	printf("movimiento\n");*/
     return (0);
 
 }

@@ -35,8 +35,8 @@
 # define V_DIV			1
 # define V_MOVE			0.5
 
-# define	M_SPEED		0.2
-# define 	ROT_SPEED	0.5
+# define	M_SPEED		0.15
+# define 	R_SPEED		0.03
 
 # define KEY_PRESS		2
 # define KEY_RELEASE	3
