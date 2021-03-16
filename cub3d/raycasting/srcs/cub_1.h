@@ -15,11 +15,17 @@
 
 # include <mlx.h>
 # include <stdio.h>
+# include <fcntl.h>
 # include <stdlib.h>
 # include <math.h>
 # include <string.h>
 # include <errno.h>
+//# include "get_next_line.h"
+//# include "ft_printf.h"
+//# include "libft.h"
 
+# define RED        "\033[22;31M"
+# define RESET      "\033[0m"
 # define WIDTHS			32
 # define HEIGHTS		32
 # define SCREEN_WIDTH	640
@@ -219,5 +225,23 @@ typedef struct	s_game
 	t_move		move;
 	int			world_map[WIDTHS][HEIGHTS];
 }				t_game;
+
+void            game_init(t_game *game);
+int             closer(t_game *game);
+int             press(int key, t_game *game);
+int             release(int key, t_game *game);
+void            rot(t_game *game);
+int             mv(t_game *game);
+int             lat_mv(t_game *game);
+int             move(t_game *game);
+int             init(t_game *game);
+static void     camera_calc(t_game *game, int x);
+//static void     steps_inital_dist(t_game *game);
+static void     perform_dda(t_game *game);
+static void     calc_pixel(t_game *game);
+void            color_rgb(t_game *game);
+void            draw2(t_game *game, int x);
+static void     refresh(t_game *game);
+int             loop(t_game *game);
 
 #endif
