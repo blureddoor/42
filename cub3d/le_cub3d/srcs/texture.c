@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:15:51 by lvintila          #+#    #+#             */
-/*   Updated: 2021/03/09 21:46:26 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/16 20:28:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ t_res	s_res(char *line)
 		res.y = ft_atoi(aux[2]);
 	}
 	else
-	{
+{
 		printf("Wrong resolution \n");
 		check_res(&res);
 		free_str(aux);

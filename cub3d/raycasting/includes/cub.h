@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/03/15 21:28:38 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/16 20:28:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,13 +235,14 @@ int             mv(t_game *game);
 int             lat_mv(t_game *game);
 int             move(t_game *game);
 int             init(t_game *game);
-static void     camera_calc(t_game *game, int x);
+//static void     camera_calc(t_game *game, int x);
 //static void     steps_inital_dist(t_game *game);
-static void     perform_dda(t_game *game);
-static void     calc_pixel(t_game *game);
+//static void     perform_dda(t_game *game);
+//static void     calc_pixel(t_game *game);
 void            color_rgb(t_game *game);
 void            draw2(t_game *game, int x);
-static void     refresh(t_game *game);
+//static void     refresh(t_game *game);
 int             loop(t_game *game);
+void			init_vars(t_game *game);
 
 #endif

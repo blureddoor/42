@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/15 21:52:44 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/16 19:54:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	 game_init(t_game *game)
 int     closer(t_game *game)
 {
     mlx_destroy_window(game->mlx, game->win_ptr);
-    exit(0);
+    system("leaks cub3D");
+	exit(0);
 }
 
 
@@ -66,8 +67,7 @@ void     init_vars(t_game *game)
 	game->move.y = 0;
 	game->move.rot = 0;
 }
-
-
+/*
 int         press(int key, t_game *game)
 {
 	(((key == W) || (key == KEY_UP)) && (game->move.x = 1));
@@ -118,12 +118,12 @@ int         mv(t_game *game)
 
 int         lat_mv(t_game *game)
 {
-/*	double normalx;
-	double normaly;
-
-	normalx = game->loop.dir_x * cos(90 * M_PI / 180) + game->loop.dir_y * sin(90 * M_PI / 180); 
-	normaly = game->loop.dir_y * sin(90 * M_PI / 180) - game->loop.dir_x * cos(90 * M_PI / 180);
-*/
+//	double normalx;
+//	double normaly;
+//
+//	normalx = game->loop.dir_x * cos(90 * M_PI / 180) + game->loop.dir_y * sin(90 * M_PI / 180); 
+//	normaly = game->loop.dir_y * sin(90 * M_PI / 180) - game->loop.dir_x * cos(90 * M_PI / 180);
+//
 	if (game->world_map[(int)game->loop.pos_x]
 			[(int)(game->loop.pos_y + game->loop.dir_x * M_SPEED * game->move.y)] == 0)
 		game->loop.pos_y += game->loop.dir_x * M_SPEED * game->move.y;
@@ -142,6 +142,7 @@ int         move(t_game *game)
 	return (0);
 }
 
+*/
 
 int     init(t_game *game)
 {

@@ -4,7 +4,8 @@ DIR_O		=	obj
 
 HEADER		=	includes
 
-SOURCES_C	=	lode.c \
+SOURCES_C	=	 main.c \
+				 move.c \
 
 SRCS		=	$(addprefix $(DIR_S)/, $(SOURCES_C))
 
