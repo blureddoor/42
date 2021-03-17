@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/03/16 20:28:25 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/17 21:45:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define S_SPACE		0.1
 # define TEX_WIDTH		64
 # define TEX_HEIGHT		64
+# define NUM_CONFIG		8
 
 # define NUM_SPRITES	19
 
@@ -85,10 +86,12 @@ typedef struct  s_sprite
 typedef	struct  s_img
 {
 	void			*img_ptr;
-	unsigned int	*data;
+	int				*data;
     int				size_l;
 	int				bpp;
 	int				endian;
+	int				height;
+	int				width;
 }				t_img;
 
 typedef struct  s_res
@@ -140,10 +143,10 @@ typedef struct	s_main_loop
 	int				map_y;
 	double			side_dist_x;
 	double			side_dist_y;
-	double			perp_wall_dist;
+	double			perpwalldist;
 	double			delta_dist_x;
 	double			delta_dist_y;
-	int				line_height;
+	int				lineheight;
 	int				draw_start;
 	int				draw_end;
 	int				h;
@@ -166,7 +169,7 @@ typedef struct	s_main_loop
 	int				cell_x;
 	int				cell_y;
 	int				buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
-	int				tex_num;
+	int				texnum;
 	double			wall_x;
 	int				tex_y;
 	int				tex_x;
@@ -190,21 +193,18 @@ typedef struct	s_main_loop
 }				t_main_loop;
 
 
-/*
+
 typedef	struct		s_config
 {
+	char			*no;
+	char			*so;
+	char			*ea;
+	char			*we;
 	int				count;
-	int				dirx;
-	int				diry;
-	int				planex;
-	int				planey;
-	int				posx;
-	int				posy;
-	t_res			res;
 }					t_config;
 
 t_config			g_config;
-*/
+
 
 
 typedef	struct	s_move
@@ -224,6 +224,7 @@ typedef struct	s_game
 	t_main_loop	loop;
 	t_move		move;
 	int			world_map[WIDTHS][HEIGHTS];
+	t_img		*texture;
 }				t_game;
 
 void            game_init(t_game *game);
@@ -234,7 +235,7 @@ void            rot(t_game *game);
 int             mv(t_game *game);
 int             lat_mv(t_game *game);
 int             move(t_game *game);
-int             init(t_game *game);
+int             init_arg(t_game *game, int argc);
 //static void     camera_calc(t_game *game, int x);
 //static void     steps_inital_dist(t_game *game);
 //static void     perform_dda(t_game *game);
@@ -244,5 +245,21 @@ void            draw2(t_game *game, int x);
 //static void     refresh(t_game *game);
 int             loop(t_game *game);
 void			init_vars(t_game *game);
+int				r_config(char *argv);
+int				s_texandres(char *l, char *p);
+void			free_str(char **str);
+int 			check_len(char **aux, int num);
+int				side(t_game *game);
+int				tex_calc(t_game *game);
+void			open_text(t_game *game);
+char 			*s_tex(char *line);
+t_img			*init_texture(t_game *game);
+int				s_texandres(char *l, char *p);
+int				r_config(char *argv);
+int				error(const char *str);
+void			free_str(char **str);
+int				check_len(char **auz, int num);
+//t_res			s_res(char *line);
+//void			check_res(t_res *res);
 
 #endif

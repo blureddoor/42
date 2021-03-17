@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 18:15:51 by lvintila          #+#    #+#             */
-/*   Updated: 2021/03/16 20:24:01 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/17 21:43:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void		init_vars(t_game *game)
 	orientation();
 	game->texture = init_text_and_sprite(game);
 	open_text(game);
-	init_sprites(game);
+	init_sprites(game); 
 	game->move.w = 0;
 	game->move.a = 0;
 	game->move.s = 0;

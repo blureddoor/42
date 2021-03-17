@@ -6,17 +6,15 @@
 /*   By: lvintila  <lvintila@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:15:51 by lvintila          #+#    #+#             */
-/*   Updated: 2021/03/17 21:08:45 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/17 21:45:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../raycasting/includes/cub.h"
 
 int		s_texandres(char *l, char *p) /*** char *line, char *pos ***/
 {
-	if ((p = ft_strchr(l, 'R')) != NULL && *(p + 1) == ' ')
-		g_config.res = s_res(l);
-	else if ((p = ft_strnstr(l, "NO", ft_strlen(l))) != NULL && *(p + 2) == ' ')
+	if ((p = ft_strnstr(l, "NO", ft_strlen(l))) != NULL && *(p + 2) == ' ')
 		g_config.no = s_tex(l);
 	else if ((p = ft_strnstr(l, "SO", ft_strlen(l))) != NULL && *(p + 2) == ' ')
 		g_config.so = s_tex(l);
@@ -24,14 +22,6 @@ int		s_texandres(char *l, char *p) /*** char *line, char *pos ***/
 		g_config.ea = s_tex(l);
 	else if ((p = ft_strnstr(l, "WE", ft_strlen(l))) != NULL && *(p + 2) == ' ')
 		g_config.we = s_tex(l);
-	else if ((p = ft_strchr(l, 'S')) != NULL && *(p + 1) == ' ')
-		g_config.s = s_tex(l);
-	else if ((p = ft_strchr(l, 'F')) != NULL && *(p + 1) == ' ' &&
-			++g_config.fch)
-		g_config.floor = s_color(l, p);
-	else if ((p = ft_strchr(l, 'C')) != NULL && *(p + 1) == ' ' &&
-			++g_config.cch)
-		g_config.ceiling = s_color(l, p);
 	else if (l[0])
 		return (1);
 	if (!l[0])
@@ -131,12 +121,10 @@ int		r_config(char *argv) // int read_config(char *argv)
 	while (g_config.count < NUM_CONFIG && get_next_line(fd, &line) > 0)
 	{
 		(s_texandres(line, p) && (error(RED"Wrong element in .cub\n"RESET)));
-		((g_config.fch >= 2 || g_config.cch >= 2) &&
-		(error(RED"FC is rep\n"RESET)));
 		free(line);
 		line = NULL;
 	}
-	r_map(fd);
+//	r_map(fd);
 	if (line)
 		free(line);
 	close(fd);
