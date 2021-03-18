@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:56:58 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/17 21:45:26 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/18 21:35:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void		open_text(t_game *game)
 	game->texture[0].data = (int*)mlx_get_data_addr
 		(game->texture[0].img_ptr, &game->texture[0].bpp,
 		 &game->texture[0].size_l, &game->texture[0].endian);
+	ft_printf("open_text[0]");
 	game->texture[1].data = (int*)mlx_get_data_addr
 		(game->texture[1].img_ptr, &game->texture[1].bpp,
 		 &game->texture[1].size_l, &game->texture[1].endian);
@@ -117,19 +118,19 @@ t_img		*init_texture(t_game *game)
 	texture = malloc(sizeof(t_img) * 5);
 	ft_bzero(texture, sizeof(t_img));
 	if (!(texture[0].img_ptr =
-				mlx_xpm_file_to_image(game->mlx, g_config.no,
+				mlx_xpm_file_to_image(game->mlx, "../raycasting/textures/NO.xpm",
 					&texture[0].width, &texture[0].height)))
 		error(RED"Can't open NO texture"RESET);
 	if (!(texture[1].img_ptr =
-				mlx_xpm_file_to_image(game->mlx, g_config.so,
+				mlx_xpm_file_to_image(game->mlx, "../raycasting/textures/SO.xpm",
 					&texture[1].width, &texture[1].height)))
 		error(RED"Can't open SO texture"RESET);
 	if (!(texture[2].img_ptr =
-				mlx_xpm_file_to_image(game->mlx, g_config.ea,
+				mlx_xpm_file_to_image(game->mlx, "../raycasting/textures/EA.xpm",
 					&texture[2].width, &texture[2].height)))
 		error(RED"Can't open EA texture"RESET);
 	if (!(texture[3].img_ptr =
-				mlx_xpm_file_to_image(game->mlx, g_config.we,
+				mlx_xpm_file_to_image(game->mlx, "../raycasting/textures/WE.xpm",
 					&texture[3].width, &texture[3].height)))
 		error(RED"Can't open WE texture"RESET);
 	return (texture);

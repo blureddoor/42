@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/03/17 21:45:37 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/18 20:12:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@
 # define HEIGHTS		32
 # define SCREEN_WIDTH	640
 # define SCREEN_HEIGHT	480
+# define MAX_RES_WIDTH	1080
+# define MAX_RES_HEIGHT	720
+# define MIN_RES_WIDTH	320
+# define MIN_RES_HEIGHT	240
 
 # define S_SPACE		0.1
 # define TEX_WIDTH		64
@@ -201,6 +205,7 @@ typedef	struct		s_config
 	char			*ea;
 	char			*we;
 	int				count;
+	t_res			res;
 }					t_config;
 
 t_config			g_config;
@@ -235,7 +240,7 @@ void            rot(t_game *game);
 int             mv(t_game *game);
 int             lat_mv(t_game *game);
 int             move(t_game *game);
-int             init_arg(t_game *game, int argc);
+int             init_arg(t_game *game);
 //static void     camera_calc(t_game *game, int x);
 //static void     steps_inital_dist(t_game *game);
 //static void     perform_dda(t_game *game);
@@ -245,21 +250,23 @@ void            draw2(t_game *game, int x);
 //static void     refresh(t_game *game);
 int             loop(t_game *game);
 void			init_vars(t_game *game);
-int				r_config(char *argv);
-int				s_texandres(char *l, char *p);
-void			free_str(char **str);
-int 			check_len(char **aux, int num);
-int				side(t_game *game);
-int				tex_calc(t_game *game);
-void			open_text(t_game *game);
-char 			*s_tex(char *line);
-t_img			*init_texture(t_game *game);
-int				s_texandres(char *l, char *p);
-int				r_config(char *argv);
-int				error(const char *str);
-void			free_str(char **str);
-int				check_len(char **auz, int num);
+//int				r_config(char *argv);
+//int				s_texandres(char *l, char *p);
+//void			free_str(char **str);
+//int 			check_len(char **aux, int num);
+//int				side(t_game *game);
+//int				tex_calc(t_game *game);
+//void			open_text(t_game *game);
+//char 			*s_tex(char *line);
+//t_img			*init_texture(t_game *game);
+//int				s_texandres(char *l, char *p);
+//int				r_config(char *argv);
+//int				error(const char *str);
+//void			free_str(char **str);
+//int				check_len(char **auz, int num);
 //t_res			s_res(char *line);
 //void			check_res(t_res *res);
+//int			is_digit(char *str);
+
 
 #endif

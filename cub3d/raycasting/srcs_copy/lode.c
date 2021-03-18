@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/15 21:52:44 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/18 20:30:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int     init(t_game *game)
 	game->win_ptr = mlx_new_window(game->mlx, game->loop.w, game->loop.h,
     "=== // -game CUB3D- \\\\ ===");
     game->img.img_ptr = mlx_new_image(game->mlx, game->loop.w, game->loop.h);
-    game->img.data = (unsigned int *)mlx_get_data_addr(game->img.img_ptr, &game->img.bpp,
+    game->img.data = (int *)mlx_get_data_addr(game->img.img_ptr, &game->img.bpp,
     &game->img.size_l, &game->img.endian);
     return (0);
 }
@@ -228,23 +228,23 @@ static void     perform_dda(t_game *game)
 	}
     //Calculate distance projected on camera direction(Euclidean distance will give a fisheye)
 	if (game->loop.side == 0)
-		game->loop.perp_wall_dist = (game->loop.map_x - game->loop.pos_x + (1 -
+		game->loop.perpwalldist = (game->loop.map_x - game->loop.pos_x + (1 -
         game->loop.step_x) / 2) / game->loop.ray_dir_x;
 	else
-		game->loop.perp_wall_dist = (game->loop.map_y - game->loop.pos_y + (1 -
+		game->loop.perpwalldist = (game->loop.map_y - game->loop.pos_y + (1 -
         game->loop.step_y) / 2) / game->loop.ray_dir_y;
 			
 	//Calculate height of line to draw on screen
-	game->loop.line_height = (int)(game->loop.h / game->loop.perp_wall_dist);
+	game->loop.lineheight = (int)(game->loop.h / game->loop.perpwalldist);
 }
 
 static void     calc_pixel(t_game *game)
 {
     //Calculate lowest and heighest pixel to fill in current stripe
-	game->loop.draw_start = -(game->loop.line_height) / 2 + game->loop.h / 2;
+	game->loop.draw_start = -(game->loop.lineheight) / 2 + game->loop.h / 2;
 	if (game->loop.draw_start < 0 )
 		game->loop.draw_start = 0;
-	game->loop.draw_end = game->loop.line_height / 2 + game->loop.h / 2;
+	game->loop.draw_end = game->loop.lineheight / 2 + game->loop.h / 2;
 	if (game->loop.draw_end >= game->loop.h)
 		game->loop.draw_end = game->loop.h  - 1;
     // end func
@@ -264,7 +264,7 @@ void    color_rgb(t_game *game)
     else if (game->world_map[game->loop.map_x][game->loop.map_y] == 4)
         game->loop.color = RGB_RED;
     else
-        game->loop.color = RGB_YELLOW;
+        game->loop.color = RGB_WHITE;
     // give x and y sides different brightness
     if (game->loop.side == 1)
         game->loop.color = game->loop.color / 1.25;
@@ -285,7 +285,7 @@ static void     refresh(t_game *game)
 {
     mlx_destroy_image(game->mlx, game->img.img_ptr);
     game->img.img_ptr = mlx_new_image(game->mlx, game->loop.w, game->loop.h);
-    game->img.data = (unsigned int*)mlx_get_data_addr(game->img.img_ptr,
+    game->img.data = (int*)mlx_get_data_addr(game->img.img_ptr,
     &game->img.bpp, &game->img.endian, &game->img.size_l);
 }
 

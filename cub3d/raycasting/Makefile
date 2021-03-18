@@ -10,9 +10,7 @@ DIR_G		=	gnl
 
 HEADER		=	includes
 
-SOURCES_C	=	 main.c \
-				 move.c \
-				 texture.c config_imput.c \
+SOURCES_C	=	 main.c move.c \
 
 SOURCES_P	=	aux.c aux_1.c converts.c ft_printf.c mods.c \
 				print_char.c print_hex.c print_nbr.c print_pointer.c \

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/17 21:45:28 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/18 21:45:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void     init_vars(t_game *game)
 {
     game->loop.pos_x = 22.0;
     game->loop.pos_y = 11.5;
-	game->texture = init_texture(game);
-	open_text(game);
+//	game->texture = init_texture(game);
+//	open_text(game);
     game->loop.hit = 0;
     game->loop.dir_x = -1.0;
     game->loop.dir_y = 0.0;
@@ -68,7 +68,7 @@ void     init_vars(t_game *game)
 	game->move.x = 0;
 	game->move.y = 0;
 	game->move.rot = 0;
-	g_config.count = 0;
+//	g_config.count = 0;
 }
 /*
 int         press(int key, t_game *game)
@@ -84,7 +84,7 @@ int         press(int key, t_game *game)
 }
 
 int         release(int key, t_game *game)
-{
+c{
 	(((key == W) || (key == KEY_UP)) && (game->move.x = 0));
 	(((key == S) || (key == KEY_DOWN)) && (game->move.x = 0));
 	((key == A) && (game->move.y = 0));
@@ -147,21 +147,16 @@ int         move(t_game *game)
 
 */
 
-int     init_arg(t_game *game, int argc)
+int     init_arg(t_game *game)
 {
-	if ((argc > 3) || (argc <= 1))
-		return (-1);
-	else
-	{
-		game->mlx = mlx_init();
-		game->win_ptr = mlx_new_window(game->mlx, game->loop.w, game->loop.h,
-    	"=== // -game CUB3D- \\\\ ===");
-    	game->img.img_ptr = mlx_new_image(game->mlx,
-				game->loop.w, game->loop.h);
-    	game->img.data = (int *)mlx_get_data_addr(game->img.img_ptr,
-				&game->img.bpp, &game->img.size_l, &game->img.endian);
-	}
-    return (1);
+	game->mlx = mlx_init();
+	game->win_ptr = mlx_new_window(game->mlx, game->loop.w, game->loop.h,
+    "=== // -game CUB3D- \\\\ ===");
+    game->img.img_ptr = mlx_new_image(game->mlx,
+			game->loop.w, game->loop.h);
+    game->img.data = (int *)mlx_get_data_addr(game->img.img_ptr,
+			&game->img.bpp, &game->img.size_l, &game->img.endian);
+    return (0);
 }
 
 
@@ -276,11 +271,59 @@ void    color_rgb(t_game *game)
     else if (game->world_map[game->loop.map_x][game->loop.map_y] == 4)
         game->loop.color = RGB_RED;
     else
-        game->loop.color = RGB_YELLOW;
+        game->loop.color = RGB_WHITE;
     // give x and y sides different brightness
     if (game->loop.side == 1)
         game->loop.color = game->loop.color / 1.25;
 }
+
+//texture generator
+
+void		tex_gen(t_game *game)
+{
+	game->texture[0].img_ptr = mlx_xpm_file_to_image(game->mlx, "textures/NO.xpm", 
+			&game->texture[0].width, &game->texture[0].height);
+	game->texture[0].data = (int*)mlx_get_data_addr(game->texture[0].img_ptr, 
+			&game->texture[0].bpp, &game->texture[0].size_l, &game->texture[0].endian);
+}
+
+int			tex_calc(t_game *game)
+{
+	//texturing calculations
+	game->loop.texnum = game->world_map[game->loop.map_x][game->loop.map_y] - 1;// 1 substracted from it so that texture 0 can be used
+	//calculate value of wall_x
+	if (game->loop.side == 0)
+		game->loop.wall_x = game->loop.pos_y + game->loop.perpwalldist *
+			game->loop.ray_dir_y;
+	else
+		game->loop.wall_x = game->loop.pos_x + game->loop.perpwalldist *
+			game->loop.ray_dir_x;
+	game->loop.wall_x -= floor((game->loop.wall_x));
+	//x coordinate on the texture
+	game->loop.tex_x = (int)game->loop.wall_x * (double)(TEX_WIDTH);
+	if (game->loop.side == 0 && game->loop.ray_dir_x > 0)
+		game->loop.tex_x = TEX_WIDTH - game->loop.tex_x - 1;
+	if (game->loop.side == 1 && game->loop.ray_dir_y < 0)
+		game->loop.tex_x = TEX_WIDTH - game->loop.tex_x - 1;
+	// How much to increase the texture coordinate per screen pixel
+	game->loop.step = 1.0 * TEX_HEIGHT / game->loop.lineheight;
+	game->loop.tex_pos = (game->loop.draw_start - game->loop.h / 2) *
+		game->loop.step;
+	while (game->loop.draw_start < game->loop.draw_end)
+	{
+		game->loop.tex_y = (int)(game->loop.tex_pos) & (TEX_HEIGHT - 1);
+		game->loop.tex_pos += game->loop.step;
+		game->loop.color = game->texture[game->loop.texnum][TEX_HEIGHT * game->loop.tex_y + game->loop.tex_x];/////////???
+		//make color darker for y-sides R, G and B byte each divided through
+		//two with a "shift" and an "and"
+		if (game->loop.side == 1)
+			game->loop.color = (game->loop.color >> 1) & 8355711;
+		game->loop.buffer[SCREEN_HEIGHT][SCREEN_WIDTH] = game->loop.color;
+		game->loop.draw_start++;
+	}
+	return (0);
+}
+
 
 void        draw2(t_game *game, int x)
 {
@@ -315,23 +358,26 @@ int     loop(t_game *game)
         perform_dda(game);
         calc_pixel(game);
 		tex_calc(game);
-        color_rgb(game);
+		color_rgb(game);
         draw2(game, x);
         x++;
     }
 	mlx_put_image_to_window(game->mlx, game->win_ptr, game->img.img_ptr, 0, 0);
-    return (0);
+//	move(game);
+//	refresh(game);
+	return (0);
 
 }
 
-int main(int argc, char **argv)
+int main()
 {
 	t_game game;
 
-	r_config(argv[1]);
+//	r_config(argv[1]);
+//	init_arg(&game);
 	init_vars(&game);
 	game_init(&game);
-	init_arg(&game, argc);
+	init_arg(&game);
     mlx_hook(game.win_ptr, KEY_PRESS, 0, &press, &game);
     mlx_hook(game.win_ptr, KEY_RELEASE, 0, &release, &game);
     mlx_hook(game.win_ptr, KEY_EXIT, 0, &closer, &game);
