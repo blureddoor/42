@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/18 21:45:27 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/19 13:24:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void     init_vars(t_game *game)
 {
     game->loop.pos_x = 22.0;
     game->loop.pos_y = 11.5;
+	game->loop.texnum = game->world_map[game->loop.map_x][game->loop.map_y] - 1;// 1 substracted from it so that texture 0 can be used
 //	game->texture = init_texture(game);
 //	open_text(game);
     game->loop.hit = 0;
@@ -256,7 +257,7 @@ static void     calc_pixel(t_game *game)
 		game->loop.draw_end = game->loop.h  - 1;
     // end func
 }
-
+/*
 void    color_rgb(t_game *game)
 {
     if (game->world_map[game->loop.map_x][game->loop.map_y] == 1)
@@ -276,18 +277,19 @@ void    color_rgb(t_game *game)
     if (game->loop.side == 1)
         game->loop.color = game->loop.color / 1.25;
 }
-
+*/
 //texture generator
 
 void		tex_gen(t_game *game)
 {
-	game->texture[0].img_ptr = mlx_xpm_file_to_image(game->mlx, "textures/NO.xpm", 
-			&game->texture[0].width, &game->texture[0].height);
-	game->texture[0].data = (int*)mlx_get_data_addr(game->texture[0].img_ptr, 
-			&game->texture[0].bpp, &game->texture[0].size_l, &game->texture[0].endian);
+	game->texture[game->loop.texnum].img_ptr = mlx_xpm_file_to_image(game->mlx, "../raycasting/textures/NO.xpm", 
+			&game->texture[game->loop.texnum].width, &game->texture[game->loop.texnum].height);
+	ft_printf("AAA");
+	game->texture[game->loop.texnum].data = (int*)mlx_get_data_addr(game->texture[game->loop.texnum].img_ptr, 
+			&game->texture[game->loop.texnum].bpp, &game->texture[game->loop.texnum].size_l, &game->texture[game->loop.texnum].endian);
 }
 
-int			tex_calc(t_game *game)
+static void		tex_calc(t_game *game)
 {
 	//texturing calculations
 	game->loop.texnum = game->world_map[game->loop.map_x][game->loop.map_y] - 1;// 1 substracted from it so that texture 0 can be used
@@ -300,7 +302,7 @@ int			tex_calc(t_game *game)
 			game->loop.ray_dir_x;
 	game->loop.wall_x -= floor((game->loop.wall_x));
 	//x coordinate on the texture
-	game->loop.tex_x = (int)game->loop.wall_x * (double)(TEX_WIDTH);
+	game->loop.tex_x = (int)((game->loop.wall_x) * (double)(TEX_WIDTH));
 	if (game->loop.side == 0 && game->loop.ray_dir_x > 0)
 		game->loop.tex_x = TEX_WIDTH - game->loop.tex_x - 1;
 	if (game->loop.side == 1 && game->loop.ray_dir_y < 0)
@@ -309,31 +311,46 @@ int			tex_calc(t_game *game)
 	game->loop.step = 1.0 * TEX_HEIGHT / game->loop.lineheight;
 	game->loop.tex_pos = (game->loop.draw_start - game->loop.h / 2) *
 		game->loop.step;
-	while (game->loop.draw_start < game->loop.draw_end)
+/*	while (game->loop.draw_start < game->loop.draw_end)
 	{
 		game->loop.tex_y = (int)(game->loop.tex_pos) & (TEX_HEIGHT - 1);
 		game->loop.tex_pos += game->loop.step;
-		game->loop.color = game->texture[game->loop.texnum][TEX_HEIGHT * game->loop.tex_y + game->loop.tex_x];/////////???
+		game->color = game->texture[game->loop.texnum].data[(int)(game->texture
+				[game->loop.texnum].height * game->loop.tex_y + game->loop.tex_x)];/////////???
+
 		//make color darker for y-sides R, G and B byte each divided through
 		//two with a "shift" and an "and"
 		if (game->loop.side == 1)
 			game->loop.color = (game->loop.color >> 1) & 8355711;
 		game->loop.buffer[SCREEN_HEIGHT][SCREEN_WIDTH] = game->loop.color;
 		game->loop.draw_start++;
-	}
-	return (0);
+	}*/
 }
 
 
 void        draw2(t_game *game, int x)
 {
     //draw the pixels of the stripe as a vertical line
-    game->loop.y = game->loop.draw_start;
-    while (game->loop.y <= game->loop.draw_end)
+//	game->loop.texnum = game->world_map[game->loop.map_x][game->loop.map_y] - 1;// 1 substracted from it so that texture 0 can be used
+//	 game->loop.y = game->loop.draw_start;
+
+    while (game->loop.draw_start < game->loop.draw_end)
     {
-        game->img.data[game->loop.y * SCREEN_WIDTH + x] = game->loop.color;
-        game->loop.y++;
-    }
+		game->loop.tex_y = (int)(game->loop.tex_pos) & (TEX_HEIGHT - 1);
+		game->loop.tex_pos += game->loop.step;
+		ft_printf("6666666");
+		game->color = game->texture[game->loop.texnum].data[(int)(game->texture[game->loop.texnum].height * game->loop.tex_y + game->loop.tex_x)];/////////???
+		ft_printf("77777777");
+		//make color darker for y-sides R, G and B byte each divided through
+		//two with a "shift" and an "and"
+		if (game->loop.side == 1)
+			game->loop.color = (game->loop.color >> 1) & 8355711;
+//		game->loop.buffer[SCREEN_HEIGHT][SCREEN_WIDTH] = game->color;
+//		game->loop.draw_start++;
+        game->img.data[game->loop.y * SCREEN_WIDTH + x] = game->color;
+        game->loop.draw_start++;
+		ft_printf("888888");
+	}
 }
 
 static void     refresh(t_game *game)
@@ -357,9 +374,12 @@ int     loop(t_game *game)
         steps_initial_dist(game);
         perform_dda(game);
         calc_pixel(game);
+		tex_gen(game);
+		ft_printf("AAA");
 		tex_calc(game);
-		color_rgb(game);
+//		color_rgb(game);
         draw2(game, x);
+		ft_printf("92222");
         x++;
     }
 	mlx_put_image_to_window(game->mlx, game->win_ptr, game->img.img_ptr, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/03/18 20:12:12 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/19 13:24:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,12 @@ typedef struct	s_floor
 	int		        ceiling_texture;
 }				t_floor;
 
+typedef struct	color
+{
+	int			rgb[3];
+	int			rgb_hex;
+	int			rgb_int;
+}				t_color;
 typedef struct	s_main_loop
 {
 	void			*mlx;
@@ -230,6 +236,7 @@ typedef struct	s_game
 	t_move		move;
 	int			world_map[WIDTHS][HEIGHTS];
 	t_img		*texture;
+	int			color;
 }				t_game;
 
 void            game_init(t_game *game);
@@ -245,7 +252,7 @@ int             init_arg(t_game *game);
 //static void     steps_inital_dist(t_game *game);
 //static void     perform_dda(t_game *game);
 //static void     calc_pixel(t_game *game);
-void            color_rgb(t_game *game);
+//void            color_rgb(t_game *game);
 void            draw2(t_game *game, int x);
 //static void     refresh(t_game *game);
 int             loop(t_game *game);
@@ -267,6 +274,6 @@ void			init_vars(t_game *game);
 //t_res			s_res(char *line);
 //void			check_res(t_res *res);
 //int			is_digit(char *str);
-
+void			tex_gen(t_game *game);
 
 #endif
