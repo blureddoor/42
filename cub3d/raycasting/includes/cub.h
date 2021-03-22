@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/03/19 13:24:45 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/22 21:47:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ typedef struct	color
 	int			rgb_hex;
 	int			rgb_int;
 }				t_color;
+
 typedef struct	s_main_loop
 {
 	void			*mlx;
@@ -235,8 +236,7 @@ typedef struct	s_game
 	t_main_loop	loop;
 	t_move		move;
 	int			world_map[WIDTHS][HEIGHTS];
-	t_img		*texture;
-	int			color;
+	t_img		texture;
 }				t_game;
 
 void            game_init(t_game *game);
@@ -274,6 +274,6 @@ void			init_vars(t_game *game);
 //t_res			s_res(char *line);
 //void			check_res(t_res *res);
 //int			is_digit(char *str);
-void			tex_gen(t_game *game);
-
+int				tex_gen(t_game *game);
+int				side(t_game *game);
 #endif
