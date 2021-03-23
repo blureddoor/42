@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/03/23 21:03:25 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/23 21:35:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,7 @@ typedef struct	s_game
 	t_main_loop	loop;
 	t_move		move;
 	int			world_map[WIDTHS][HEIGHTS];
-	t_img		texture;
+	t_img		*texture;
 }				t_game;
 
 void            game_init(t_game *game);

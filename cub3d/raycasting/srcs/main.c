@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/23 21:03:21 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/23 21:35:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,7 @@ void     init_vars(t_game *game)
 {
     game->loop.pos_x = 22.0;
     game->loop.pos_y = 11.5;
-//	game->texture = init_tex(game);
-	ft_printf("BBBxxAAA\n");
-//	tex_gen(game);
-	ft_printf("init_vars_tex_gen\n");
+	game->texture = init_tex(game);
     game->loop.hit = 0;
     game->loop.dir_x = -1.0;
     game->loop.dir_y = 0.0;
@@ -220,17 +217,33 @@ int		tex_calc(t_game *game)
 	return (0);
 }
 
-void		tex_gen(t_game *game)
+t_img		*init_tex(t_game *game)
 {
-	game->texture.height = TEX_HEIGHT;
-	game->texture.height = TEX_WIDTH;
+	t_img	*texture;
+
+	texture	= malloc(sizeof(t_img) * 5);
+	ft_bzero(texture, sizeof(t_img));
+	ft_printf("CCCxxAAA\n");
+	game->texture[0].height = TEX_HEIGHT;
+	game->texture[0].height = TEX_WIDTH;
 //	int i;
 
 //	i = 0;
 //	while (i <= 4)
 //	{	
-	game->texture.data = (int*)mlx_get_data_addr(game->texture.img_ptr, 
-			&game->texture.bpp, &game->texture.size_l, &game->texture.endian);
+//	game->texture.img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, "../raycasting/textures/east.xpm", 
+//			&game->texture.width, &game->texture.height);
+	texture[0].img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, "../raycasting/textures/north.xpm", 
+			&texture[0].width, &texture[0].height);
+	ft_printf("DDDxxAAA\n");
+	return (texture);
+}
+
+void		tex_gen(t_game *game)
+{	
+	game->texture[0].data = (int*)mlx_get_data_addr(game->texture[0].img_ptr, 
+			&game->texture[0].bpp, &game->texture[0].size_l, &game->texture[0].endian);
+}
 //	game->texture[1].data = (int*)mlx_get_data_addr(game->texture[1].img_ptr, 
 //			&game->texture[1].bpp, &game->texture[1].size_l, &game->texture[1].endian);
 //	game->texture[2].data = (int*)mlx_get_data_addr(game->texture[2].img_ptr, 
@@ -249,9 +262,6 @@ void		tex_gen(t_game *game)
 //	texture	= malloc(sizeof(t_img) * 5);
 //	ft_bzero(texture, sizeof(t_img));
 //	ft_printf("CCCxxAAA\n");
-	game->texture.img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, "../raycasting/textures/east.xpm", 
-			&game->texture.width, &game->texture.height);
-	ft_printf("DDDxxAAA\n");
 /*	texture[1].img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, "../raycasting/textures/north.xpm", 
 			&texture[1].width, &texture[1].height);
 	texture[2].img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, "../raycasting/textures/west.xpm", 
@@ -261,7 +271,6 @@ void		tex_gen(t_game *game)
 	texture[4].img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, "../raycasting/textures/spoth.xpm", 
 			&texture[4].width, &texture[4].height);
 	return (texture);*/	
-}
 
 
 void        draw2(t_game *game, int x)
@@ -276,7 +285,7 @@ void        draw2(t_game *game, int x)
     {
 		game->loop.tex_y = (int)(game->loop.tex_pos) & (TEX_HEIGHT - 1);
 		game->loop.tex_pos += game->loop.step;
-		color = game->texture.data[(int)((TEX_HEIGHT) * game->loop.tex_y + game->loop.tex_x)];/////////???
+		color = game->texture[game->loop.texnum].data[(int)((TEX_HEIGHT) * game->loop.tex_y + game->loop.tex_x)];/////////???
 		//make color darker for y-sides R, G and B byte each divided through
 		//two with a "shift" and an "and"
 		if (game->loop.side == 1)
@@ -302,7 +311,9 @@ int     loop(t_game *game)
     x = 0;
 	refresh(game);
 	move(game);
+	init_tex(game);
 	tex_gen(game);
+	ft_printf("KKKxxAAA\n");
     while (x < game->loop.w)
     {
         camera_calc(game, x); //o camera_calc
@@ -331,7 +342,6 @@ int main()
     mlx_hook(game.mlx.win, KEY_RELEASE, 0, &release, &game);
     mlx_hook(game.mlx.win, KEY_EXIT, 0, &closer, &game);
     mlx_loop_hook(game.mlx.ptr, loop, &game);
-	ft_printf("KKKxxAAA\n");
     mlx_loop(game.mlx.ptr);
     return (0);
 }
