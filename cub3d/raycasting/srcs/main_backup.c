@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/23 21:03:21 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/23 19:10:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	 game_init(t_game *game)
 
 int     closer(t_game *game)
 {
-    mlx_destroy_window(game->mlx.ptr, game->mlx.win);
+    mlx_destroy_window(game->mlx, game->win_ptr);
     system("leaks cub3D");
 	exit(0);
 }
@@ -56,10 +56,8 @@ void     init_vars(t_game *game)
 {
     game->loop.pos_x = 22.0;
     game->loop.pos_y = 11.5;
-//	game->texture = init_tex(game);
-	ft_printf("BBBxxAAA\n");
-//	tex_gen(game);
-	ft_printf("init_vars_tex_gen\n");
+//	game->texture = tex_gen(game);
+//	open_text(game);
     game->loop.hit = 0;
     game->loop.dir_x = -1.0;
     game->loop.dir_y = 0.0;
@@ -75,11 +73,10 @@ void     init_vars(t_game *game)
 
 int     init_arg(t_game *game)
 {
-	ft_printf("init_arg\n");
-	game->mlx.ptr = mlx_init();
-	game->mlx.win = mlx_new_window(game->mlx.ptr, game->loop.w, game->loop.h,
+	game->mlx = mlx_init();
+	game->win_ptr = mlx_new_window(game->mlx, game->loop.w, game->loop.h,
     "=== // -game CUB3D- \\\\ ===");
-    game->img.img_ptr = mlx_new_image(game->mlx.ptr,
+    game->img.img_ptr = mlx_new_image(game->mlx,
 			game->loop.w, game->loop.h);
     game->img.data = (int *)mlx_get_data_addr(game->img.img_ptr,
 			&game->img.bpp, &game->img.size_l, &game->img.endian);
@@ -184,6 +181,16 @@ static void     calc_pixel(t_game *game)
 
 //texture generator
 
+int		tex_gen(t_game *game)
+{
+	game->texture.height = TEX_HEIGHT;
+	game->texture.width = TEX_WIDTH;
+	game->texture.img_ptr = mlx_xpm_file_to_image(game->mlx, "../raycasting/textures/east.xpm", 
+			&game->texture.width, &game->texture.height);
+	game->texture.data = (int*)mlx_get_data_addr(game->texture.img_ptr, 
+			&game->texture.bpp, &game->texture.size_l, &game->texture.endian);
+	return (0);
+}
 
 int		side(t_game *game)
 {
@@ -210,7 +217,7 @@ int		tex_calc(t_game *game)
 	//x coordinate on the texture
 	game->loop.tex_x = (int)((game->loop.wall_x) * (double)(TEX_WIDTH));
 	if (game->loop.side == 0 && game->loop.ray_dir_x > 0)
-		game->loop.tex_x =  TEX_WIDTH - game->loop.tex_x - 1;
+		game->loop.tex_x = TEX_WIDTH - game->loop.tex_x - 1;
 	if (game->loop.side == 1 && game->loop.ray_dir_y < 0)
 		game->loop.tex_x = TEX_WIDTH - game->loop.tex_x - 1;
 	// How much to increase the texture coordinate per screen pixel
@@ -218,49 +225,6 @@ int		tex_calc(t_game *game)
 	game->loop.tex_pos = (game->loop.draw_start - game->loop.h / 2) *
 		game->loop.step;
 	return (0);
-}
-
-void		tex_gen(t_game *game)
-{
-	game->texture.height = TEX_HEIGHT;
-	game->texture.height = TEX_WIDTH;
-//	int i;
-
-//	i = 0;
-//	while (i <= 4)
-//	{	
-	game->texture.data = (int*)mlx_get_data_addr(game->texture.img_ptr, 
-			&game->texture.bpp, &game->texture.size_l, &game->texture.endian);
-//	game->texture[1].data = (int*)mlx_get_data_addr(game->texture[1].img_ptr, 
-//			&game->texture[1].bpp, &game->texture[1].size_l, &game->texture[1].endian);
-//	game->texture[2].data = (int*)mlx_get_data_addr(game->texture[2].img_ptr, 
-//			&game->texture[2].bpp, &game->texture[2].size_l, &game->texture[2].endian);
-//	game->texture[3].data = (int*)mlx_get_data_addr(game->texture[3].img_ptr, 
-//			&game->texture[3].bpp, &game->texture[3].size_l, &game->texture[3].endian);
-//	game->texture[4].data = (int*)mlx_get_data_addr(game->texture[4].img_ptr, 
-//			&game->texture[4].bpp, &game->texture[4].size_l, &game->texture[4].endian);
-//		i++;
-//	}
-
-//t_img		*init_tex(t_game *game)
-//{
-//	t_img	*texture;
-//
-//	texture	= malloc(sizeof(t_img) * 5);
-//	ft_bzero(texture, sizeof(t_img));
-//	ft_printf("CCCxxAAA\n");
-	game->texture.img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, "../raycasting/textures/east.xpm", 
-			&game->texture.width, &game->texture.height);
-	ft_printf("DDDxxAAA\n");
-/*	texture[1].img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, "../raycasting/textures/north.xpm", 
-			&texture[1].width, &texture[1].height);
-	texture[2].img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, "../raycasting/textures/west.xpm", 
-			&texture[2].width, &texture[2].height);
-	texture[3].img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, "../raycasting/textures/south.xpm", 
-			&texture[3].width, &texture[3].height);
-	texture[4].img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, "../raycasting/textures/spoth.xpm", 
-			&texture[4].width, &texture[4].height);
-	return (texture);*/	
 }
 
 
@@ -274,9 +238,9 @@ void        draw2(t_game *game, int x)
 	y = game->loop.draw_start;
     while (y < game->loop.draw_end)
     {
-		game->loop.tex_y = (int)(game->loop.tex_pos) & (TEX_HEIGHT - 1);
+		game->loop.tex_y = (int)(game->loop.tex_pos) & (game->texture.height - 1);
 		game->loop.tex_pos += game->loop.step;
-		color = game->texture.data[(int)((TEX_HEIGHT) * game->loop.tex_y + game->loop.tex_x)];/////////???
+		color = game->texture.data[(int)(game->texture.height * game->loop.tex_y + game->loop.tex_x)];/////////???
 		//make color darker for y-sides R, G and B byte each divided through
 		//two with a "shift" and an "and"
 		if (game->loop.side == 1)
@@ -289,8 +253,8 @@ void        draw2(t_game *game, int x)
 
 static void     refresh(t_game *game)
 {
-    mlx_destroy_image(game->mlx.ptr, game->img.img_ptr);
-    game->img.img_ptr = mlx_new_image(game->mlx.ptr, game->loop.w, game->loop.h);
+    mlx_destroy_image(game->mlx, game->img.img_ptr);
+    game->img.img_ptr = mlx_new_image(game->mlx, game->loop.w, game->loop.h);
     game->img.data = (int*)mlx_get_data_addr(game->img.img_ptr,
     &game->img.bpp, &game->img.endian, &game->img.size_l);
 }
@@ -313,7 +277,7 @@ int     loop(t_game *game)
         draw2(game, x);
         x++;
     }
-	mlx_put_image_to_window(game->mlx.ptr, game->mlx.win, game->img.img_ptr, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win_ptr, game->img.img_ptr, 0, 0);
 	return (0);
 
 }
@@ -322,16 +286,13 @@ int main()
 {
 	t_game game;
 
-	ft_printf("AAAxxAAA\n");
 	init_vars(&game);
 	game_init(&game);
 	init_arg(&game);
-    mlx_hook(game.mlx.win, KEY_PRESS, 0, &press, &game);
-	ft_printf("QQQxxAAA\n");
-    mlx_hook(game.mlx.win, KEY_RELEASE, 0, &release, &game);
-    mlx_hook(game.mlx.win, KEY_EXIT, 0, &closer, &game);
-    mlx_loop_hook(game.mlx.ptr, loop, &game);
-	ft_printf("KKKxxAAA\n");
-    mlx_loop(game.mlx.ptr);
+    mlx_hook(game.win_ptr, KEY_PRESS, 0, &press, &game);
+    mlx_hook(game.win_ptr, KEY_RELEASE, 0, &release, &game);
+    mlx_hook(game.win_ptr, KEY_EXIT, 0, &closer, &game);
+    mlx_loop_hook(game.mlx, loop, &game);
+    mlx_loop(game.mlx);
     return (0);
 }

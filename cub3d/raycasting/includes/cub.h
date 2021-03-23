@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/03/22 21:47:02 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/23 21:03:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,12 @@
 # define FALSE			0
 # define TRUE			1
 
+
+typedef struct	s_mlx
+{
+	void	*ptr;
+	void	*win;
+}				t_mlx;
 typedef struct  s_sprite
 {
 	double	x;
@@ -228,8 +234,8 @@ typedef	struct	s_move
 
 typedef struct	s_game
 {
-	void		*mlx;
-	void		*win_ptr;
+	t_mlx		mlx;
+//	void		*win_ptr;
 	t_img		img;
 	t_res		res;
 	t_floor		floor;
@@ -265,7 +271,7 @@ void			init_vars(t_game *game);
 //int				tex_calc(t_game *game);
 //void			open_text(t_game *game);
 //char 			*s_tex(char *line);
-//t_img			*init_texture(t_game *game);
+t_img			*init_tex(t_game *game);
 //int				s_texandres(char *l, char *p);
 //int				r_config(char *argv);
 //int				error(const char *str);
@@ -274,6 +280,6 @@ void			init_vars(t_game *game);
 //t_res			s_res(char *line);
 //void			check_res(t_res *res);
 //int			is_digit(char *str);
-int				tex_gen(t_game *game);
+void			tex_gen(t_game *game);
 int				side(t_game *game);
 #endif
