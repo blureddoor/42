@@ -1,5 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -235,9 +233,11 @@ typedef	struct	s_move
 typedef struct	s_game
 {
 	t_mlx		mlx;
-//	void		*win_ptr;
+//	void        *mlx;
+//  void		*win_ptr;
 	t_img		img;
 	t_res		res;
+    int         color;
 	t_floor		floor;
 	t_main_loop	loop;
 	t_move		move;
@@ -280,6 +280,6 @@ t_img			*init_tex(t_game *game);
 //t_res			s_res(char *line);
 //void			check_res(t_res *res);
 //int			is_digit(char *str);
-void			tex_gen(t_game *game);
+void 			tex_gen(t_game *game);
 int				side(t_game *game);
 #endif

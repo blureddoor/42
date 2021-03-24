@@ -1,5 +1,7 @@
 LIBFT		=	printf/libft
 
+MINILIBX	=	minilibx
+
 DIR_S		=	srcs
 
 DIR_O		=	obj
@@ -38,7 +40,7 @@ all:			libft $(NAME)
 
 $(NAME):		$(OBJS)
 				@echo "${YELLOW}... compiling cub3D ...${RESET}"
-				$(CC) $(OBJS) $(CFLAGS) $(MFLAGS) -L $(LIBFT) $(LIBFT)/libft.a
+				$(CC) $(OBJS) $(CFLAGS) $(MFLAGS) -L $(LIBFT) $(LIBFT)/libft.a -L $(MINILIBX) $(MINILIBX)/libmlx.a
 
 $(DIR_O)/%.o:	$(DIR_S)/%.c $(HEADER)/cub.h
 				@mkdir -p obj

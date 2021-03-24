@@ -30,7 +30,7 @@ SOURCES_C	=	aux.c color_bmp.c config_imput.c \
 
 SRCS	=		$(addprefix $(DIR_S)/,$(SOURCES_C)) \
 				$(addprefix $(DIR_SP)/,$(SOURCES_P)) \
-				$(addprefix $(DIR_G)/,$(SOURCES_G))
+				$(addprefix $(DIR_G)/,$(SOURCES_G)) \
 
 OBJS    =   	$(SRCS:%.c=%.o)
 

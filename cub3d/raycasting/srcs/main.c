@@ -54,9 +54,12 @@ int     closer(t_game *game)
 
 void     init_vars(t_game *game)
 {
+    game->loop.texnum = side(game);
     game->loop.pos_x = 22.0;
     game->loop.pos_y = 11.5;
+	ft_printf("game->texture = init_tex\n");
 	game->texture = init_tex(game);
+//    tex_gen(game);
     game->loop.hit = 0;
     game->loop.dir_x = -1.0;
     game->loop.dir_y = 0.0;
@@ -80,6 +83,7 @@ int     init_arg(t_game *game)
 			game->loop.w, game->loop.h);
     game->img.data = (int *)mlx_get_data_addr(game->img.img_ptr,
 			&game->img.bpp, &game->img.size_l, &game->img.endian);
+	ft_printf("fin_init_arg\n");
     return (0);
 }
 
@@ -220,12 +224,13 @@ int		tex_calc(t_game *game)
 t_img		*init_tex(t_game *game)
 {
 	t_img	*texture;
+	game->loop.texnum = side(game);
 
 	texture	= malloc(sizeof(t_img) * 5);
 	ft_bzero(texture, sizeof(t_img));
+//	texture[0].height = TEX_HEIGHT;
+//	texture[0].height = TEX_WIDTH;
 	ft_printf("CCCxxAAA\n");
-	game->texture[0].height = TEX_HEIGHT;
-	game->texture[0].height = TEX_WIDTH;
 //	int i;
 
 //	i = 0;
@@ -233,16 +238,23 @@ t_img		*init_tex(t_game *game)
 //	{	
 //	game->texture.img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, "../raycasting/textures/east.xpm", 
 //			&game->texture.width, &game->texture.height);
-	texture[0].img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, "../raycasting/textures/north.xpm", 
-			&texture[0].width, &texture[0].height);
-	ft_printf("DDDxxAAA\n");
+    if (game->loop.side != 0)
+    {
+        texture[game->loop.texnum].img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, "../raycasting/textures/north.xpm", 
+			&texture[game->loop.texnum].width, &texture[game->loop.texnum].height);
+	    ft_printf("DDDxxAAA\n");
+    }
+    ft_printf("GGGxxAAA\n");
 	return (texture);
 }
 
 void		tex_gen(t_game *game)
-{	
-	game->texture[0].data = (int*)mlx_get_data_addr(game->texture[0].img_ptr, 
-			&game->texture[0].bpp, &game->texture[0].size_l, &game->texture[0].endian);
+{
+    game->loop.texnum = side(game);
+    ft_printf("HHHxxAAA\n");
+	if (game->loop.side != 0)
+        game->texture[game->loop.texnum].data = (int*)mlx_get_data_addr(game->texture[game->loop.texnum].img_ptr,
+			&game->texture[game->loop.texnum].bpp, &game->texture[game->loop.texnum].size_l, &game->texture[game->loop.texnum].endian);
 }
 //	game->texture[1].data = (int*)mlx_get_data_addr(game->texture[1].img_ptr, 
 //			&game->texture[1].bpp, &game->texture[1].size_l, &game->texture[1].endian);
@@ -283,14 +295,19 @@ void        draw2(t_game *game, int x)
 	y = game->loop.draw_start;
     while (y < game->loop.draw_end)
     {
-		game->loop.tex_y = (int)(game->loop.tex_pos) & (TEX_HEIGHT - 1);
+		game->loop.tex_y = (int)(game->loop.tex_pos) & (game->texture[game->loop.texnum].height - 1);
+    	ft_printf("draw-1\n");
 		game->loop.tex_pos += game->loop.step;
-		color = game->texture[game->loop.texnum].data[(int)((TEX_HEIGHT) * game->loop.tex_y + game->loop.tex_x)];/////////???
+	    ft_printf("draw-2\n");
+		color = *(game->texture[1].data);//[(int)((game->texture[game->loop.texnum].height) * game->loop.tex_y + game->loop.tex_x)];/////////???
+	    ft_printf("draw-3\n");
 		//make color darker for y-sides R, G and B byte each divided through
 		//two with a "shift" and an "and"
 		if (game->loop.side == 1)
 			color = (color >> 1) & 8355711;
+	    ft_printf("draw-4\n");
         *(game->img.data + (y * game->loop.w) + x) = color;// !!!!!!!
+	    ft_printf("draw-5\n");
         y++;
 	}
 }
@@ -317,13 +334,20 @@ int     loop(t_game *game)
     while (x < game->loop.w)
     {
         camera_calc(game, x); //o camera_calc
+	    ft_printf("K-1xxAAA\n");
         steps_initial_dist(game);
+	    ft_printf("K-2xxAAA\n");
         perform_dda(game);
+	    ft_printf("K-3xxAAA\n");
         calc_pixel(game);
+	    ft_printf("K-4xxAAA\n");
 		tex_calc(game);
+	    ft_printf("K-5xxAAA\n");
         draw2(game, x);
+	    ft_printf("K-6xxAAA\n");
         x++;
     }
+	ft_printf("WWWxxxAAA\n");
 	mlx_put_image_to_window(game->mlx.ptr, game->mlx.win, game->img.img_ptr, 0, 0);
 	return (0);
 
@@ -335,8 +359,11 @@ int main()
 
 	ft_printf("AAAxxAAA\n");
 	init_vars(&game);
+	ft_printf("inti_vars_main\n");
 	game_init(&game);
+	ft_printf("game_init_main\n");
 	init_arg(&game);
+	ft_printf("init_arg_main\n");
     mlx_hook(game.mlx.win, KEY_PRESS, 0, &press, &game);
 	ft_printf("QQQxxAAA\n");
     mlx_hook(game.mlx.win, KEY_RELEASE, 0, &release, &game);
