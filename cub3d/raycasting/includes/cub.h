@@ -232,9 +232,9 @@ typedef	struct	s_move
 
 typedef struct	s_game
 {
-	t_mlx		mlx;
-//	void        *mlx;
-//  void		*win_ptr;
+//	t_mlx		mlx;
+	void        *mlx;
+	void		*win_ptr;
 	t_img		img;
 	t_res		res;
     int         color;
@@ -242,7 +242,7 @@ typedef struct	s_game
 	t_main_loop	loop;
 	t_move		move;
 	int			world_map[WIDTHS][HEIGHTS];
-	t_img		*texture;
+	t_img		texture;
 }				t_game;
 
 void            game_init(t_game *game);
@@ -268,10 +268,10 @@ void			init_vars(t_game *game);
 //void			free_str(char **str);
 //int 			check_len(char **aux, int num);
 //int				side(t_game *game);
-//int				tex_calc(t_game *game);
+int				tex_calc(t_game *game);
 //void			open_text(t_game *game);
 //char 			*s_tex(char *line);
-t_img			*init_tex(t_game *game);
+//t_img			*init_tex(t_game *game);
 //int				s_texandres(char *l, char *p);
 //int				r_config(char *argv);
 //int				error(const char *str);
@@ -280,6 +280,7 @@ t_img			*init_tex(t_game *game);
 //t_res			s_res(char *line);
 //void			check_res(t_res *res);
 //int			is_digit(char *str);
-void 			tex_gen(t_game *game);
+int				tex_gen(t_game *game);
 int				side(t_game *game);
+
 #endif
