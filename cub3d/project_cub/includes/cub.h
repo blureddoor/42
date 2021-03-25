@@ -120,12 +120,13 @@ typedef struct	s_main_loop
 	int				texy;
 	int				texx;
 	double			inv_det;
-	double			tex_pos;
+	double			texpos;
 	double			step;
 	int				drawstartx;
 	int				drawendx;
 	int				drawstarty;
 	int				drawendy;
+	int				texnum;
 }				t_main_loop;
 
 typedef	struct	s_move
@@ -140,8 +141,6 @@ typedef struct	s_g
 	void        *mlx;
 	void		*win_ptr;
 	t_img		img;
-	t_res		res;
-	t_floor		floor;
 	t_main_loop	loop;
 	t_move		move;
 	int			world_map[WIDTHS][HEIGHTS];
@@ -152,15 +151,21 @@ void            game_init(t_g *g);
 int             closer(t_g *g);
 int             press(int key, t_g *g);
 int             release(int key, t_g *g);
-void            rot(t_game *g);
+void            rot(t_g *g);
 int             mv(t_g *g);
 int             lat_mv(t_g *g);
 int             move(t_g *g);
 int             init_arg(t_g *g);
-void            draw2(t_game *g, int x);
-int             loop(t_game *g);
+void            draw2(t_g *g, int x);
+int             loop(t_g *g);
 void			init_vars(t_g *g);
 int				tex_calc(t_g *g);
 int				tex_gen(t_g *g);
+void			camera_calc(t_g *g, int x);
+void			steps_initial_dist(t_g *g);
+void			dda(t_g *g);
+void			calc_pixel(t_g *g);
+void			draw2(t_g *g, int x);
+int				error(const char *str);
 
 #endif

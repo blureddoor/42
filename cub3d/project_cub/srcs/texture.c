@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:56:58 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/24 20:12:16 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/25 21:29:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../raycasting/includes/cub.h"
+#include "../project_cub/includes/cub.h"
 
 int		error(const char *str)
 {
@@ -44,45 +44,45 @@ int		check_len(char **aux, int num)
 	return (i);
 }
 
-int		side(t_game *game)
+int		side(t_g *g)
 {
 	int num;
-	((game->loop.ray_dir_x < 0 && game->loop.side == 0) && (num = 0));
-	((game->loop.ray_dir_x > 0 && game->loop.side == 0) && (num = 1));
-	((game->loop.ray_dir_x < 0 && game->loop.side == 1) && (num = 2));
-	((game->loop.ray_dir_x > 0 && game->loop.side == 1) && (num = 3));
+	((g->loop.raydirx < 0 && g->loop.side == 0) && (num = 0));
+	((g->loop.raydirx > 0 && g->loop.side == 0) && (num = 1));
+	((g->loop.raydirx < 0 && g->loop.side == 1) && (num = 2));
+	((g->loop.raydirx > 0 && g->loop.side == 1) && (num = 3));
 	return (num);
 }
 
-int		tex_calc(t_game *game)
+int		tex_calc(t_g *g)
 {
-	game->loop.texnum = side(game);
-	if (game->loop.side == 0)
-		game->loop.wall_x = game->loop.pos_y + game->loop.perpwalldist *
-			game->loop.ray_dir_y;
+	g->loop.texnum = side(g);
+	if (g->loop.side == 0)
+		g->loop.wallx = g->loop.posy + g->loop.perpwalldist *
+			g->loop.raydiry;
 	else
-		game->loop.wall_x = game->loop.pos_x + game->loop.perpwalldist *
-			game->loop.ray_dir_x;
-	game->loop.wall_x -= floor((game->loop.wall_x));
-	game->loop.tex_x = (int)(game->loop.wall_x * (double)(TEX_WIDTH));
-	if (game->loop.side == 0 && game->loop.ray_dir_x > 0)
-		game->loop.tex_x = TEX_WIDTH - game->loop.tex_x - 1;
-	if (game->loop.side == 1 && game->loop.ray_dir_y < 0)
-		game->loop.tex_x = TEX_WIDTH - game->loop.tex_x - 1;
-	game->loop.step = 1.0 * TEX_HEIGHT / game->loop.lineheight;
-	game->loop.tex_pos = (game->loop.draw_start - game->loop.h / 2 +
-			game->loop.lineheight / 2) * game->loop.step;
+		g->loop.wallx = g->loop.posx + g->loop.perpwalldist *
+			g->loop.raydirx;
+	g->loop.wallx -= floor((g->loop.wallx));
+	g->loop.texx = (int)(g->loop.wallx * (double)(TEX_WIDTH));
+	if (g->loop.side == 0 && g->loop.raydirx > 0)
+		g->loop.texx = TEX_WIDTH - g->loop.texx - 1;
+	if (g->loop.side == 1 && g->loop.raydiry < 0)
+		g->loop.texx = TEX_WIDTH - g->loop.texx - 1;
+	g->loop.step = 1.0 * TEX_HEIGHT / g->loop.lineheight;
+	g->loop.texpos = (g->loop.drawstart - g->loop.h / 2 +
+			g->loop.lineheight / 2) * g->loop.step;
 	return (0);
 }
 
-int		tex_gen(t_game *game)
+int		tex_gen(t_g *g)
 {
-	game->texture.height = TEX_HEIGHT;
-	game->texture.width = TEX_WIDTH;
-	game->texture.img_ptr = mlx_xpm_file_to_image(game->mlx, "../raycasting/textures/east.xpm",
-			&game->texture.width, &game->texture.height);
-	game->texture.data = (int*)mlx_get_data_addr(game->texture.img_ptr,
-			&game->texture.bpp, &game->texture.size_l, &game->texture.endian);
+	g->tex.height = TEX_HEIGHT;
+	g->tex.width = TEX_WIDTH;
+	g->tex.img_ptr = mlx_xpm_file_to_image(g->mlx, "../raycasting/textures/east.xpm",
+			&g->tex.width, &g->tex.height);
+	g->tex.data = (int*)mlx_get_data_addr(g->tex.img_ptr,
+			&g->tex.bpp, &g->tex.size_l, &g->tex.endian);
 	return (0);
 }
 /*
