@@ -6,13 +6,13 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 20:05:15 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/24 20:12:13 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/26 20:45:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raycasting/includes/cub.h"
 
-void		r_map(int fd)
+void		read_map(int fd)
 {
 	char	*l;
 	char	*aux;

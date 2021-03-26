@@ -6,12 +6,12 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:56:58 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/25 21:29:09 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/26 20:11:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../project_cub/includes/cub.h"
-
+/*
 int		error(const char *str)
 {
 	char	*show_error;
@@ -43,7 +43,7 @@ int		check_len(char **aux, int num)
 		 (error(RED"something got wrong with arguments in .cub \n"RESET)));
 	return (i);
 }
-
+*/
 int		side(t_g *g)
 {
 	int num;

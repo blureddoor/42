@@ -6,43 +6,11 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:56:58 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/24 20:12:16 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/26 21:04:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raycasting/includes/cub.h"
-
-int		error(const char *str)
-{
-	char	*show_error;
-
-	show_error = ft_strjoin(RED"Error\n"RESET, str);
-	ft_printf(show_error);
-	free(show_error);
-	exit(1);
-}
-
-void	free_str(char **str)
-{
-	int i;
-
-	i = -1;
-	while (str[++i])
-		free(str[i]);
-	free(str);
-	str = NULL;
-}
-
-int		check_len(char **aux, int num)
-{
-	int i;
-
-	i = 0;
-	while (aux[i] != NULL && i++)
-		((i != num) &&
-		 (error(RED"something got wrong with arguments in .cub \n"RESET)));
-	return (i);
-}
 
 int		side(t_game *game)
 {
@@ -105,7 +73,7 @@ void		open_text(t_game *game)
 		(game->texture[4].img_ptr, &game->texture[4].bpp,
 		 &game->texture[4].size_l, &game->texture[4].endian);
 }
-
+*/
 char		*s_tex(char *line)
 {
 	char	**n_str;
@@ -117,7 +85,7 @@ char		*s_tex(char *line)
 	free_str(n_str);
 	return (f_name);
 }
-
+/*
 t_img		*init_texture(t_game *game)
 {
 	t_img	*texture;

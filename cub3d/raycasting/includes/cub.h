@@ -78,17 +78,32 @@
 # define FALSE			0
 # define TRUE			1
 
+typedef struct	s_check
+{
+	int			init_m;
+	char		flag[9];
+	t_list		*first;
+}				t_check;
 
 typedef struct	s_mlx
 {
-	void	*ptr;
-	void	*win;
+	void		*ptr;
+	void		*win;
 }				t_mlx;
+
+typedef struct		s_map
+{
+	int				rows;
+	int				cols;
+	char			*buf;
+	char			*w_map;
+}					t_map;
+
 typedef struct  s_sprite
 {
-	double	x;
-	double	y;
-	int		texture;
+	double		x;
+	double		y;
+	int			texture;
 }				t_sprite;
 
 typedef	struct  s_img
@@ -217,6 +232,7 @@ typedef	struct		s_config
 	char			*we;
 	int				count;
 	t_res			res;
+	t_map			map;
 }					t_config;
 
 t_config			g_config;
@@ -254,33 +270,19 @@ int             mv(t_game *game);
 int             lat_mv(t_game *game);
 int             move(t_game *game);
 int             init_arg(t_game *game);
-//static void     camera_calc(t_game *game, int x);
-//static void     steps_inital_dist(t_game *game);
-//static void     perform_dda(t_game *game);
-//static void     calc_pixel(t_game *game);
-//void            color_rgb(t_game *game);
 void            draw2(t_game *game, int x);
-//static void     refresh(t_game *game);
 int             loop(t_game *game);
 void			init_vars(t_game *game);
-//int				r_config(char *argv);
-//int				s_texandres(char *l, char *p);
-//void			free_str(char **str);
-//int 			check_len(char **aux, int num);
-//int				side(t_game *game);
 int				tex_calc(t_game *game);
-//void			open_text(t_game *game);
-//char 			*s_tex(char *line);
-//t_img			*init_tex(t_game *game);
-//int				s_texandres(char *l, char *p);
-//int				r_config(char *argv);
-//int				error(const char *str);
-//void			free_str(char **str);
-//int				check_len(char **auz, int num);
-//t_res			s_res(char *line);
-//void			check_res(t_res *res);
-//int			is_digit(char *str);
 int				tex_gen(t_game *game);
 int				side(t_game *game);
+void			camera_calc(t_game *game, int x);
+void			initial_dist(t_game *game);
+void			dda(t_game *game);
+void			calc_pixel(t_game *game);
+void			draw2(t_game *game, int x);
+int				error(const char *str);
+void			free_str(char **str);
+int				space_skip(char *line, int i);
 
 #endif
