@@ -70,7 +70,7 @@ int     init_arg(t_game *game, int argc, char **argv)
     return (1);
 }
 
-/*
+
 static void     refresh(t_game *game)
 {
     mlx_destroy_image(game->mlx.ptr, game->img.img_ptr);
@@ -79,7 +79,7 @@ static void     refresh(t_game *game)
     game->img.data = (int*)mlx_get_data_addr(game->img.img_ptr,
     &game->img.bpp, &game->img.endian, &game->img.size_l);
 }
-*/
+
 
 int     loop(t_game *game)
 {
@@ -97,7 +97,7 @@ int     loop(t_game *game)
         x++;
     }
 	mlx_put_image_to_window(game->mlx.ptr, game->mlx.win, game->img.img_ptr, 0, 0);
-//	refresh(game);
+	refresh(game);
 	move(game);
 	return (1);
 
@@ -113,7 +113,7 @@ void     init_vars(t_game *game)
 	game->texture = init_texture(game);
 	ft_printf("-3- init_vars\n");
 	open_tex(game);
-//	g_config.map.world_map[(int)g_config.posx][(int)g_config.posy] = '0';
+	g_config.map.world_map[(int)g_config.posx][(int)g_config.posy] = '0';
 //  game->loop.hit = 0;
 	ft_printf("-4-init_vars\n");
 //	g_config.dirx = -1.0;
@@ -122,16 +122,11 @@ void     init_vars(t_game *game)
 //	g_config.planey = 0.66;
 //  game->loop.w = SCREEN_WIDTH;
 //  game->loop.h = SCREEN_HEIGHT;
-	game->move.a = 0;
-	game->move.s = 0;
-	game->move.d = 0;
-	game->move.w = 0;
+	game->move.x = 0;
+	game->move.y = 0;
 	ft_printf("-5- init_vars\n");
-	game->move.r_right = 0;
-	game->move.r_left = 0;
+	game->move.rot = 0;
 	game->move.speed = 0.05;
-	g_config.fch = 0;
-	g_config.cch = 0;
 	g_config.count = 0;
 	ft_printf("fin init_vars\n");
 }

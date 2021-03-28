@@ -24,8 +24,8 @@
 
 # define RED        "\033[22;31m"
 # define RESET      "\033[0m"
-//# define WIDTHS		32
-//# define HEIGHTS		32
+# define WIDTHS			32
+# define HEIGHTS		32
 # define SCREEN_WIDTH	640
 # define SCREEN_HEIGHT	480
 # define MAX_RES_WIDTH	1080
@@ -33,19 +33,19 @@
 # define MIN_RES_WIDTH	320
 # define MIN_RES_HEIGHT	240
 
-//# define S_SPACE		0.1
-//# define TEX_WIDTH		64
-//# define TEX_HEIGHT		64
-# define NUM_FLAGS		8
+# define S_SPACE		0.1
+# define TEX_WIDTH		64
+# define TEX_HEIGHT		64
+# define NUM_CONFIG		8
 
 # define NUM_SPRITES	19
 
-//# define U_DIV			1
-//# define V_DIV			1
-//# define V_MOVE			0.5
+# define U_DIV			1
+# define V_DIV			1
+# define V_MOVE			0.5
 
-# define	M_SPEED		0.1
-//# define 	R_SPEED		0.03
+# define	M_SPEED		0.15
+# define 	R_SPEED		0.03
 
 # define KEY_PRESS		2
 # define KEY_RELEASE	3
@@ -75,8 +75,8 @@
 # define RGB_YELLOW		0x00FFFF00
 # define RGB_WHITE		0x00FFFFFF
 
-//# define FALSE			0
-//# define TRUE			1
+# define FALSE			0
+# define TRUE			1
 
 typedef struct	s_check
 {
@@ -95,8 +95,8 @@ typedef struct		s_map
 {
 	int				rows;
 	int				cols;
-	char			*buff;
-	char			**world_map;
+	char			*buf;
+	char			**w_map;
 }					t_map;
 
 typedef struct  s_sprite
@@ -145,7 +145,7 @@ typedef struct	s_floor
 	int		        ceiling_texture;
 }				t_floor;
 
-typedef struct	s_color
+typedef struct	color
 {
 	int			rgb[3];
 	int			rgb_hex;
@@ -230,20 +230,11 @@ typedef	struct		s_config
 	char			*so;
 	char			*ea;
 	char			*we;
-	char			*s;
-	int				cch;
-	int				fch;
 	int				count;
 	t_res			res;
 	t_map			map;
-	t_color			floor;
-	t_color			ceiling;
-	int				posx;
-	int				posy;
-	double			dirx;
-	double			diry;
-	double			planex;
-	double			planey;
+	double			posx;
+	double			posy;
 }					t_config;
 
 t_config			g_config;
@@ -252,28 +243,24 @@ t_config			g_config;
 
 typedef	struct	s_move
 {
-	double			a;
-	double			s;
-	double			w;
-	double			d;
-	double			r_left;
-	double			r_right;
-	double			speed;
+	double			x;
+	double			y;
+	double			rot;;
 }				t_move;
 
 typedef struct	s_game
 {
-	t_mlx		mlx;
-//	void        *mlx;
-//	void		*win_ptr;
+//	t_mlx		mlx;
+	void        *mlx;
+	void		*win_ptr;
 	t_img		img;
-	t_img		*texture;
-	t_main_loop	loop;
-	t_floor		floor;
 	t_res		res;
-	char		**world_map;
     int         color;
+	t_floor		floor;
+	t_main_loop	loop;
 	t_move		move;
+	int			world_map[WIDTHS][HEIGHTS];
+	t_img		*texture;
 }				t_game;
 
 int             closer(t_game *game);
@@ -300,12 +287,12 @@ void			free_str(char **str);
 int				space_skip(char *line, int i);
 char			*s_tex(char *line);
 int				check_len(char **aux, int num);
-void			read_map(int fd);
+int				read_map(int fd);
 char			**map_parse(void);
 int				check_map(char **map, int rows, int cols);
 void			locate_player_pos(char **map);
 void			map_fill(char **map);
-int				it_is_map(char *l);
+int				it_is_map(char *line);
 void			open_tex(t_game *game);
 t_img			*init_texture(t_game *game);
 int				is_digit(char *str);
@@ -313,12 +300,4 @@ void			check_res(t_res *res);
 t_res			s_res(char *line);
 void			open_tex(t_game *game);
 int				read_config(char *argv);
-char			*pad_right(char pad, int len);
-char			**copy_matrix(int rows, char **map);
-void			map_calc(char *l, char *aux, int len, int end);
-t_color			s_color(char *line, char *pos);
-int				rgb_int(int r, int g, int b);
-int				orientation(void);
-void			orientation_input(double dirx, double diry,
-				double plx, double ply);
 #endif

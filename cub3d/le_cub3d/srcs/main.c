@@ -67,7 +67,8 @@ int		loop(t_game *game)
 	//	raycast(game);
 	//sprite
 	sprite_casting(game);
-	mlx_put_image_to_window(game->mlx.ptr, game->mlx.win, game->img.img_ptr, 0, 0);
+	mlx_put_image_to_window(game->mlx.ptr, game->mlx.win,
+		game->img.img_ptr, 0, 0);
 	((g_config.screenshot) && (s_bmp(game)) && (closer(game)));
 	//if (save)
 	//{

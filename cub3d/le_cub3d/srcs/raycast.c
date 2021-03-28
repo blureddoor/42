@@ -33,22 +33,26 @@ void			initial_dist(t_game *game)
 	if (game->loop.raydirx < 0)
 	{
 		game->loop.stepx = -1;
-		game->loop.sidedistx = (game->loop.posx - game->loop.mapx) * game->loop.deltadistx;
+		game->loop.sidedistx = (game->loop.posx - game->loop.mapx) *
+			game->loop.deltadistx;
 	}
 	else
 	{
 		game->loop.stepx = 1;
-		game->loop.sidedistx = (game->loop.mapx + 1.0 - game->loop.posx) * game->loop.deltadistx;
+		game->loop.sidedistx = (game->loop.mapx + 1.0 - game->loop.posx) *
+			game->loop.deltadistx;
 	}
 	if (game->loop.raydiry < 0)
 	{
 		game->loop.stepy = -1;
-		game->loop.sidedisty = (game->loop.posy - game->loop.mapy) * game->loop.deltadisty;
+		game->loop.sidedisty = (game->loop.posy - game->loop.mapy) *
+			game->loop.deltadisty;
 	}
 	else
 	{
 		game->loop.stepy = 1;
-		game->loop.sidedisty = (game->loop.mapy + 1.0 - game->loop.posy) * game->loop.deltadisty;
+		game->loop.sidedisty = (game->loop.mapy + 1.0 - game->loop.posy) *
+			game->loop.deltadisty;
 	}
 }
 

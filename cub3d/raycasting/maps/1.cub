@@ -1,5 +1,16 @@
 R 1980 1200
-NO  ../raycasting/textures/NO.xpm
-SO           ../raycasting/textures/SO.xpm
-WE      ../raycasting/textures/SO.xpm
-EA                    ../raycasting/textures/EA.xpm
+NO  textures/NO.xpm
+SO  textures/SO.xpm
+WE  textures/SO.xpm
+EA  textures/EA.xpmi
+S	textures/migu/cat.xpm
+F 200, 110, 50
+C 255, 0, 120
+
+11111111
+100N0001
+10000111
+10000001
+10000001
+10001001
+11111111

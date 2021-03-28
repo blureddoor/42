@@ -46,3 +46,29 @@ t_res		s_res(char *line)
 	free_str(aux);
 	return (res);
 }
+
+void		orientation_input(double dirx, double diry, double plx, double ply)
+{
+	g_config.dirx = dirx;
+	g_config.diry = diry;
+	g_config.planex = plx;
+	g_config.planey = ply;
+}
+
+int			orientation(void)
+{
+	char    dir;
+
+	dir = g_config.map.world_map[g_config.posx][g_config.posy];
+	g_config.map.world_map[g_config.posx][g_config.posy] = '0';
+	if (dir == 'N' || dir == 'n')
+		orientation_input(-1, 0, 0, 0.66);
+	if (dir == 'S' || dir == 's')
+		orientation_input(1, 0, 0, -0.66);
+	if (dir == 'E' || dir == 'e')
+		orientation_input(0, 1, 0.66, 0);
+	if (dir == 'W' || dir == 'w')
+		orientation_input(0, -1, -0.66, 0);
+	return (0);
+}
+
