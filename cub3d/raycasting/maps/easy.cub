@@ -1,12 +1,12 @@
 R      6000 4000
 
-       NO  ./textures/NO.xpm
+       NO  ./textures/north.xpm
 
-  SO                ./textures/SO.xpm
+  SO                ./textures/south.xpm
 
-         WE      ./textures/WE.xpm
+         WE      ./textures/west.xpm
 
-    EA                    ./textures/EA.xpm
+    EA                    ./textures/east.xpm
 
        S               ./textures/migu/cat.xpm
 

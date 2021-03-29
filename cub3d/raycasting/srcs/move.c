@@ -157,8 +157,8 @@ int         d(t_game *game)
 int         move(t_game *game)
 {
     ((game->move.w) && (w(game)));
-    ((game->move.s) && (s(game)));
     ((game->move.a) && (a(game)));
+    ((game->move.s) && (s(game)));
     ((game->move.d) && (d(game)));
     if (game->move.r_left)
         r_left(game);

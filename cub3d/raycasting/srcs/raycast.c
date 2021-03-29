@@ -108,10 +108,10 @@ void        draw2(t_game *game, int x)
 	while (i < game->loop.draw_end)
     {
         game->loop.tex_y = (int)(game->loop.tex_pos) &
-		(game->texture[game->loop.texnum].height - 1);
+		(game->texture->height - 1);
         game->loop.tex_pos += game->loop.step;
-        game->color = game->texture[game->loop.texnum].data[(int)(game->texture
-		[game->loop.texnum].height * game->loop.tex_y + game->loop.tex_x)];
+        game->color = game->texture[game->loop.texnum].data[(int)
+            (game->texture->height * game->loop.tex_y + game->loop.tex_x)];
 //      if (game->loop.side == 1)
 //          game->color = (color >> 1) & 8355711;
         *(game->img.data + (i * g_config.res.x) + x) = game->color;// !!!!!!!

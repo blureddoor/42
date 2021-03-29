@@ -26,8 +26,8 @@ int			it_is_map(char *l)
 		i++;
 	if (i == ft_strlen(l))
 		return(1);
-//	else
-//		error(RED" - Map is wrong\n"RESET);
+	else
+		error(RED" - Map is wrong\n"RESET);
 	ft_printf("2 - checkpoint it_is_map\n");
 	return (0);
 }
@@ -47,8 +47,7 @@ void		map_calc(char *l, char *aux, int len, int end)
 			g_config.map.buff = aux;
 		}
 		len = ft_strlen(l);
-		if (len > g_config.map.cols)
-				(g_config.map.cols = len);
+		((len > g_config.map.cols) && (g_config.map.cols = len));
 	}
 }
 void		map_fill(char **map)
@@ -113,7 +112,7 @@ int			check_map(char **map, int rows, int cols)
 		return (1);
 	else if (c == '3' || c == '1')
 		return (0);
-	map[rows][cols] = '3';
+	map[rows][cols] = '4';
 	ok = check_map(map, rows, cols - 1);
 	if (ok == 0)
 		check_map(map, rows, cols + 1);

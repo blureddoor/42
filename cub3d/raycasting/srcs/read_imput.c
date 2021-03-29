@@ -82,6 +82,8 @@ int			read_config(char *argv)
 	{
 		ft_printf("1-checkpoint read_config\n");
 		(check_tex(line, p) && (error(RED"Wrong element in .cub\n"RESET)));
+        if (g_config.fch >=2 || g_config.cch >= 2)
+            error(RED""RESET);
 		free(line);
 		line = NULL;
 	}
