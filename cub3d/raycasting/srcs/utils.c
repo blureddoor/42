@@ -6,36 +6,11 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 19:48:46 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/29 19:51:39 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/29 20:57:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raycasting/includes/cub.h"
-/*
-int		space_skip(char *line, int i)
-{
-	while (ft_isspace(line[i]))
-		i++;
-	return (i);
-}
-
-int		check_flags(t_check *check, char c)
-{
-	int i;
-
-	i = 0;
-	if (ft_strchr(check->flag, c))
-		return (1);
-	else
-	{
-		while (check->flag[i] != '\0')
-			i++;
-		check->flag[i++] = c;
-		check->flag[i] = '\0';
-		return (0);
-	}
-}
-*/
 
 char	*pad_right(char pad, int len)
 {
@@ -51,17 +26,6 @@ char	*pad_right(char pad, int len)
 	return (str);
 }
 
-/*
-int		error(const char *str)
-{
-	char	*show_error;
-
-	show_error = ft_strjoin(RED"Error\n"RESET, str);
-	ft_printf(show_error);
-	free(show_error);
-	exit(1);
-}
-*/
 void	free_str(char **str)
 {
 	int i;

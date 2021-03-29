@@ -1,10 +1,12 @@
+/* ************************************************************************** */
+/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/03/23 21:35:45 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/29 21:15:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +24,8 @@
 # include "../raycasting/printf/includes/ft_printf.h"
 # include "../raycasting/printf/libft/libft.h"
 
-# define RED        "\033[22;31m"
-# define RESET      "\033[0m"
-# define SCREEN_WIDTH	640
-# define SCREEN_HEIGHT	480
+# define RED			"\033[22;31m"
+# define RESET			"\033[0m"
 # define MAX_RES_WIDTH	1080
 # define MAX_RES_HEIGHT	720
 # define MIN_RES_WIDTH	320
@@ -59,13 +59,13 @@
 # define RGB_YELLOW		0x00FFFF00
 # define RGB_WHITE		0x00FFFFFF
 
-typedef struct	s_mlx
+typedef struct s_mlx
 {
-	void		*ptr;
-	void		*win;
-}				t_mlx;
+	void			*ptr;
+	void			*win;
+}					t_mlx;
 
-typedef struct		s_map
+typedef struct s_map
 {
 	int				rows;
 	int				cols;
@@ -73,38 +73,38 @@ typedef struct		s_map
 	char			**world_map;
 }					t_map;
 
-typedef struct  s_sprite
+typedef struct s_sprite
 {
-	double		x;
-	double		y;
-	int			texture;
-}				t_sprite;
+	double			x;
+	double			y;
+	int				texture;
+}					t_sprite;
 
-typedef	struct  s_img
+typedef struct s_img
 {
 	void			*img_ptr;
 	int				*data;
-    int				size_l;
+	int				size_l;
 	int				bpp;
 	int				endian;
 	int				height;
 	int				width;
-}				t_img;
+}					t_img;
 
-typedef struct  s_res
+typedef struct s_res
 {
-    int x;
-    int y;
-}               t_res;
+	int				x;
+	int				y;
+}					t_res;
 
-typedef struct	s_color
+typedef struct s_color
 {
-	int			rgb[3];
-	int			rgb_hex;
-	int			rgb_int;
-}				t_color;
+	int				rgb[3];
+	int				rgb_hex;
+	int				rgb_int;
+}					t_color;
 
-typedef struct	s_main_loop
+typedef struct s_main_loop
 {
 	void			*mlx;
 	void			*mlx_win;
@@ -136,18 +136,15 @@ typedef struct	s_main_loop
 	double			old_dir_x2;
 	double			old_plane_x1;
 	double			old_plane_x2;
-	int				buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
 	int				texnum;
 	double			wall_x;
 	int				tex_y;
 	int				tex_x;
 	double			tex_pos;
 	double			step;
-}				t_main_loop;
+}					t_main_loop;
 
-
-
-typedef	struct		s_config
+typedef struct s_config
 {
 	char			*no;
 	char			*so;
@@ -171,9 +168,7 @@ typedef	struct		s_config
 
 t_config			g_config;
 
-
-
-typedef	struct	s_move
+typedef struct s_move
 {
 	double			a;
 	double			s;
@@ -182,30 +177,32 @@ typedef	struct	s_move
 	double			r_left;
 	double			r_right;
 	double			speed;
-}				t_move;
+}					t_move;
 
-typedef struct	s_game
+typedef struct s_game
 {
-	t_mlx		mlx;
-	t_img		img;
-	t_img		*texture;
-	t_main_loop	loop;
-	t_res		res;
-	char		**world_map;
-    int         color;
-	t_move		move;
-}				t_game;
+	t_mlx			mlx;
+	t_img			img;
+	t_img			*texture;
+	t_main_loop		loop;
+	t_res			res;
+	char			**world_map;
+	int				color;
+	t_move			move;
+}					t_game;
 
-int             closer(t_game *game);
-int             press(int key, t_game *game);
-int             release(int key, t_game *game);
-void            rot(t_game *game);
-int             mv(t_game *game);
-int             lat_mv(t_game *game);
-int             move(t_game *game);
-int             init_arg(t_game *game, int argc, char **argv);
-void            draw2(t_game *game, int x);
-int             loop(t_game *game);
+int				closer(t_game *game);
+int				press(int key, t_game *game);
+int				release(int key, t_game *game);
+void			rot(t_game *game);
+int				w(t_game *game);
+int				s(t_game *game);
+int				a(t_game *game);
+int				d(t_game *game);
+int				move(t_game *game);
+int				init_arg(t_game *game, int argc, char **argv);
+void			draw2(t_game *game, int x);
+int				loop(t_game *game);
 void			init_vars(t_game *game);
 int				tex_calc(t_game *game);
 int				tex_gen(t_game *game);
@@ -217,7 +214,6 @@ void			calc_pixel(t_game *game);
 void			draw2(t_game *game, int x);
 int				error(const char *str);
 void			free_str(char **str);
-int				space_skip(char *line, int i);
 char			*s_tex(char *line);
 int				check_len(char **aux, int num);
 void			read_map(int fd);
@@ -240,5 +236,6 @@ t_color			s_color(char *line, char *pos);
 int				rgb_int(int r, int g, int b);
 int				orientation(void);
 void			orientation_input(double dirx, double diry,
-				double plx, double ply);
+					double plx, double ply);
+
 #endif

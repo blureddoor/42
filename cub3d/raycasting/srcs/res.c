@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 19:22:32 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/29 20:31:52 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/29 20:49:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,19 @@ t_res		s_res(char *line)
 {
 	char	**aux;
 	t_res	res;
+	int		i;
 
+	i = 0;
 	aux = ft_split(line, ' ');
-	ft_printf("%d\n", aux[0]);
-	ft_printf("%d\n", aux[1]);
+	ft_printf("aux[0] =%p\n", aux[0]);
+	ft_printf("aux[1] =%p\n", aux[1]);
 	check_len(aux, 3);
-	ft_printf("check_len en s_res para R");
+	while (i < 3)
+	{
+		if (aux[i] == NULL)
+			error(RED"Wrong Resolution-Missing 1 or both arguments for R"RESET);
+		i++;
+	}
 	if (is_digit(aux[1]) && is_digit(aux[2]))
 		(res.x = ft_atoi(aux[1])) && (res.y = ft_atoi(aux[2]));
 	else
