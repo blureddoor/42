@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 20:43:42 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/29 20:16:24 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/29 21:52:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ int			read_config(char *argv)
 	{
 		ft_printf("1-checkpoint read_config\n");
 		(check_tex(line, p) && (error(RED"Wrong element in .cub\n"RESET)));
-        if (g_config.fch >=2 || g_config.cch >= 2)
-            error(RED" ... "RESET);
+        if (g_config.fch >= 2 || g_config.cch >= 2)
+            error(RED" FC is rep "RESET);
 		free(line);
 		line = NULL;
 	}

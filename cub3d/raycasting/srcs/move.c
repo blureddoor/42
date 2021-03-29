@@ -6,16 +6,16 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:15:59 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/22 21:21:49 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/29 21:37:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raycasting/includes/cub.h"
 
-int         press(int key, t_game *game)
+int	press(int key, t_game *game)
 {
-    (((key == W) || (key == KEY_UP)) && (game->move.w = 1));
-    (((key == S) || (key == KEY_DOWN)) && (game->move.s = -1));
+	(((key == W) || (key == KEY_UP)) && (game->move.w = 1));
+	(((key == S) || (key == KEY_DOWN)) && (game->move.s = -1));
     ((key == A) && (game->move.a = 1));
     ((key == D) && (game->move.d = -1));
     ((key == KEY_DCH) && (game->move.r_right = -1));
