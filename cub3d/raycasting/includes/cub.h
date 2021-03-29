@@ -24,8 +24,6 @@
 
 # define RED        "\033[22;31m"
 # define RESET      "\033[0m"
-//# define WIDTHS		32
-//# define HEIGHTS		32
 # define SCREEN_WIDTH	640
 # define SCREEN_HEIGHT	480
 # define MAX_RES_WIDTH	1080
@@ -33,19 +31,9 @@
 # define MIN_RES_WIDTH	320
 # define MIN_RES_HEIGHT	240
 
-//# define S_SPACE		0.1
-//# define TEX_WIDTH		64
-//# define TEX_HEIGHT		64
 # define NUM_FLAGS		8
 
-# define NUM_SPRITES	19
-
-//# define U_DIV			1
-//# define V_DIV			1
-//# define V_MOVE			0.5
-
-# define	M_SPEED		0.1
-//# define 	R_SPEED		0.03
+# define	M_SPEED		0.3
 
 # define KEY_PRESS		2
 # define KEY_RELEASE	3
@@ -53,10 +41,6 @@
 # define KEY_EXIT		17
 
 # define KEY_ESC		53
-//# define KEY_W			13
-//# define KEY_A			0
-//# define KEY_S			1
-//# define KEY_D			2
 # define W				13
 # define A				0
 # define S				1
@@ -74,16 +58,6 @@
 # define RGB_BLACK		0x00000000
 # define RGB_YELLOW		0x00FFFF00
 # define RGB_WHITE		0x00FFFFFF
-
-//# define FALSE			0
-//# define TRUE			1
-
-typedef struct	s_check
-{
-	int			init_m;
-	char		flag[9];
-	t_list		*first;
-}				t_check;
 
 typedef struct	s_mlx
 {
@@ -123,28 +97,6 @@ typedef struct  s_res
     int y;
 }               t_res;
 
-typedef struct	s_floor
-{
-	int		y;
-	float	ray_dir_x0;
-	float	        ray_dir_y0;
-	float	        ray_dir_x1;
-	float	        ray_dir_y1;
-	int		        p;
-	float	        pos_z;
-	float	        row_distance;
-	float	        floor_step_x;
-	float	        floor_step_y;
-	float	        floor_x;
-	float	        floor_y;
-	int		        x;
-	int		        tx;
-	int		        ty;
-	int		        check_board_pattern;
-	int		        floor_texture;
-	int		        ceiling_texture;
-}				t_floor;
-
 typedef struct	s_color
 {
 	int			rgb[3];
@@ -162,10 +114,6 @@ typedef struct	s_main_loop
 	double			plane_y;
 	double			dir_x;
 	double			dir_y;
-	double			time;
-	double			old_time;
-	int				x;
-	int				w;
 	double			camera_x;
 	double			ray_dir_x;
 	double			ray_dir_y;
@@ -179,7 +127,6 @@ typedef struct	s_main_loop
 	int				lineheight;
 	int				draw_start;
 	int				draw_end;
-	int				h;
 	int				side;
 	int				step_x;
 	int				step_y;
@@ -189,37 +136,13 @@ typedef struct	s_main_loop
 	double			old_dir_x2;
 	double			old_plane_x1;
 	double			old_plane_x2;
-	unsigned int	color;
-	int				y;
-	t_sprite		sprite[NUM_SPRITES];
-	double			zbuffer[SCREEN_WIDTH];
-	int				sprite_distance[NUM_SPRITES];
-	double			sprite_order[NUM_SPRITES];
-	unsigned int	texture[11];
-	int				cell_x;
-	int				cell_y;
 	int				buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
 	int				texnum;
 	double			wall_x;
 	int				tex_y;
 	int				tex_x;
-	double			inv_det;
 	double			tex_pos;
-	double			sprite_x;
-	double			sprite_y;
 	double			step;
-	double			transform_x;
-	double			transform_y;
-	int				sprite_screen_x;
-	int				sprite_screen_y;
-	int				stripe;
-	int				draw_start_x;
-	int				draw_end_x;
-	int				sprite_width;
-	int				draw_start_y;
-	int				draw_end_y;
-	int				vmove_screen;
-    int             sprite_height;
 }				t_main_loop;
 
 
@@ -264,12 +187,9 @@ typedef	struct	s_move
 typedef struct	s_game
 {
 	t_mlx		mlx;
-//	void        *mlx;
-//	void		*win_ptr;
 	t_img		img;
 	t_img		*texture;
 	t_main_loop	loop;
-	t_floor		floor;
 	t_res		res;
 	char		**world_map;
     int         color;

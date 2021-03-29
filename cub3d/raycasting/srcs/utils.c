@@ -6,12 +6,12 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 19:48:46 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/26 20:40:14 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/29 19:51:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raycasting/includes/cub.h"
-
+/*
 int		space_skip(char *line, int i)
 {
 	while (ft_isspace(line[i]))
@@ -35,6 +35,7 @@ int		check_flags(t_check *check, char c)
 		return (0);
 	}
 }
+*/
 
 char	*pad_right(char pad, int len)
 {

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:56:58 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/26 21:04:05 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/29 19:25:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int		side(t_game *game)
 	int num;
 	((game->loop.ray_dir_x < 0 && game->loop.side == 0) && (num = 0));
 	((game->loop.ray_dir_x > 0 && game->loop.side == 0) && (num = 1));
-	((game->loop.ray_dir_x < 0 && game->loop.side == 1) && (num = 2));
-	((game->loop.ray_dir_x > 0 && game->loop.side == 1) && (num = 3));
+	((game->loop.ray_dir_y < 0 && game->loop.side == 1) && (num = 2));
+	((game->loop.ray_dir_y > 0 && game->loop.side == 1) && (num = 3));
 	return (num);
 }
 /*

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 20:05:15 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/26 20:45:49 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/29 19:18:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int			check_map(char **map, int rows, int cols)
 		return (1);
 	else if (c == '3' || c == '1')
 		return (0);
-	map[rows][cols] = '4';
+	map[rows][cols] = '3';
 	ok = check_map(map, rows, cols - 1);
 	if (ok == 0)
 		check_map(map, rows, cols + 1);
