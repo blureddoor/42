@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:56:58 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/29 19:25:16 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/30 19:04:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,7 @@ int		side(t_game *game)
 	((game->loop.ray_dir_y > 0 && game->loop.side == 1) && (num = 3));
 	return (num);
 }
-/*
-int		tex_calc(t_game *game)
-{
-	game->loop.texnum = side(game);
-	if (game->loop.side == 0)
-		game->loop.wall_x = game->loop.pos_y + game->loop.perpwalldist *
-			game->loop.ray_dir_y;
-	else
-		game->loop.wall_x = game->loop.pos_x + game->loop.perpwalldist *
-			game->loop.ray_dir_x;
-	game->loop.wall_x -= floor((game->loop.wall_x));
-	game->loop.tex_x = (int)(game->loop.wall_x * (double)(TEX_WIDTH));
-	if (game->loop.side == 0 && game->loop.ray_dir_x > 0)
-		game->loop.tex_x = TEX_WIDTH - game->loop.tex_x - 1;
-	if (game->loop.side == 1 && game->loop.ray_dir_y < 0)
-		game->loop.tex_x = TEX_WIDTH - game->loop.tex_x - 1;
-	game->loop.step = 1.0 * TEX_HEIGHT / game->loop.lineheight;
-	game->loop.tex_pos = (game->loop.draw_start - game->loop.h / 2 +
-			game->loop.lineheight / 2) * game->loop.step;
-	return (0);
-}
-*/
+
 int		tex_calc(t_game *game)
 {
 	game->loop.texnum = side(game);
@@ -67,19 +46,6 @@ int		tex_calc(t_game *game)
 			game->loop.lineheight / 2) * game->loop.step;
 	return (0);
 }
-/*
-int		tex_gen(t_game *game)
-{
-	game->texture.height = TEX_HEIGHT;
-	game->texture.width = TEX_WIDTH;
-	game->texture.img_ptr = mlx_xpm_file_to_image(game->mlx, "../raycasting/textures/east.xpm",
-			&game->texture.width, &game->texture.height);
-	game->texture.data = (int*)mlx_get_data_addr(game->texture.img_ptr,
-			&game->texture.bpp, &game->texture.size_l, &game->texture.endian);
-	return (0);
-}
-*/
-
 
 void		open_tex(t_game *game)
 {
@@ -99,10 +65,10 @@ void		open_tex(t_game *game)
 		(game->texture[3].img_ptr, &game->texture[3].bpp,
 		 &game->texture[3].size_l, &game->texture[3].endian);
 	ft_printf("open_text[3]\n");
-/*	game->texture[4].data = (int*)mlx_get_data_addr
+	game->texture[4].data = (int*)mlx_get_data_addr
 		(game->texture[4].img_ptr, &game->texture[4].bpp,
 		 &game->texture[4].size_l, &game->texture[4].endian);
-	ft_printf("open_text[4]\n");*/
+	ft_printf("open_text[4]\n");
 }
 
 char		*s_tex(char *line)
@@ -143,11 +109,11 @@ t_img		*init_texture(t_game *game)
 					&texture[3].width, &texture[3].height)))
 		error(RED"Can't open WE texture"RESET);
 	ft_printf("init_tex[3]\n");
-/*	if (!(texture[4].img_ptr =
+	if (!(texture[4].img_ptr =
 				mlx_xpm_file_to_image(game->mlx.ptr, g_config.s,
 					&texture[4].width, &texture[4].height)))
-		error(RED"Sprite Can't be opened WE "RESET);
-	ft_printf("init_tex[4]\n");*/
+		error(RED"Sprite Can't be opened"RESET);
+	ft_printf("init_tex[4]\n");
 	return (texture);
 }
 
