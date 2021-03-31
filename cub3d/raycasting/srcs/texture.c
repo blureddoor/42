@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:56:58 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/30 19:04:59 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/31 21:22:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ char		*s_tex(char *line)
 	n_str = ft_split(line, ' ');
 	check_len(n_str, 2);
 	f_name = ft_strdup(n_str[1]);
+	if (n_str[2])
+		error(RED" texture path not valid "RESET);
 	free_str(n_str);
 	return (f_name);
 }
