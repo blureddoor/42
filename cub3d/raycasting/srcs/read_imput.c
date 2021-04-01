@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 20:43:42 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/31 21:17:34 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/01 19:58:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int 		check_tex(char *l, char *p)
 	}
 	g_config.count++;
 	ft_printf("Fin-checkpoint check_tex\n");
-	ft_printf("%d\n", g_config.count);
+	ft_printf("g_config.count = %d\n", g_config.count);
 	return (0);
 }
 

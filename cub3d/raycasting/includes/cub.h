@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/03/29 21:15:03 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/01 20:27:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@
 
 # define NUM_FLAGS		8
 
-# define	M_SPEED		0.3
-
+# define M_SPEED		0.1
+# define VMOVE			128.0
+# define VDIV			1
+# define UDIV			1
 # define KEY_PRESS		2
 # define KEY_RELEASE	3
-
 # define KEY_EXIT		17
 
 # define KEY_ESC		53
@@ -78,7 +79,20 @@ typedef struct s_sprite
 	double			x;
 	double			y;
 	int				texture;
+	int				num;
 }					t_sprite;
+
+typedef	struct		s_vector
+{
+	double			x;
+	double			y;
+}					t_vector;
+
+typedef struct		s_vector_int
+{
+	int				x;
+	int				y;
+}					t_vector_int;
 
 typedef struct s_img
 {
@@ -142,6 +156,11 @@ typedef struct s_main_loop
 	int				tex_x;
 	double			tex_pos;
 	double			step;
+	int				numsprites;
+	int				*spriteorder;
+	double			*spritedistance;
+	t_sprite		*sprite;
+
 }					t_main_loop;
 
 typedef struct s_config
@@ -168,6 +187,19 @@ typedef struct s_config
 
 t_config			g_config;
 
+typedef struct		s_s_cast
+{
+	t_vector		sprite;
+	double			invdet;
+	t_vector		transform;
+	t_vector_int	drawstart;
+	t_vector_int	drawend;
+	int				spritescreenx;
+	int				spriteheight;
+	int				spritewidth;
+	int				mvscreen;
+}					t_s_cast;
+
 typedef struct s_move
 {
 	double			a;
@@ -189,6 +221,7 @@ typedef struct s_game
 	char			**world_map;
 	int				color;
 	t_move			move;
+	unsigned int	*zbuffer;
 }					t_game;
 
 int				closer(t_game *game);
@@ -237,5 +270,12 @@ int				rgb_int(int r, int g, int b);
 int				orientation(void);
 void			orientation_input(double dirx, double diry,
 					double plx, double ply);
-
+void			sort_sprites_loop(t_game *game);
+void			sprite_put(t_game *game, t_s_cast s, int stripe);
+void			sprite_calc(t_game *game, int i, t_s_cast *s);
+void			sort_sprites(t_game *game);
+int				num_sprites(void);
+t_sprite		*set_sprites(int num);
+int				sprite_casting(t_game *game);
+void			init_sprites(t_game *game);
 #endif

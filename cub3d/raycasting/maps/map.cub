@@ -1,11 +1,11 @@
 R  1080 720
 
-NO ./text_sprites/north.xpm
-SO ./text_sprites/south.xpm
-WE ./text_sprites/west.xpm
-EA ./text_sprites/east.xpm
+NO ./textures/north.xpm
+SO ./textures/south.xpm
+WE ./textures/west.xpm
+EA ./textures/east.xpm
 
-S ./text_sprites/migu/cat.xpm
+S ./textures/migu/cat.xpm
 
 F 224,172,105
 C 205,249,255

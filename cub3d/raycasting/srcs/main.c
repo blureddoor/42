@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/29 21:23:48 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/01 19:54:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	loop(t_game *game)
 	int	x;
 
 	x = 0;
+	refresh(game);
 	while (x < g_config.res.x)
 	{
 		camera_calc(game, x);
@@ -52,32 +53,35 @@ int	loop(t_game *game)
 		dda(game);
 		calc_pixel(game);
 		tex_calc(game);
+		game->zbuffer[x] = game->loop.perpwalldist;
 		draw2(game, x);
 		x++;
 	}
+	sprite_casting(game);
 	mlx_put_image_to_window(game->mlx.ptr, game->mlx.win,
 			game->img.img_ptr, 0, 0);
-	refresh(game);
 	move(game);
 	return (1);
 }
 
 void	init_vars(t_game *game)
 {
-	ft_printf("-1-init_vars\n");
+	ft_printf("-inicio-init_vars\n");
 	game->loop.pos_x = g_config.posx + 0.5;
 	game->loop.pos_y = g_config.posy + 0.5;
 	orientation();
-	ft_printf("-2- init_vars\n");
+	ft_printf("-orientation- init_vars\n");
 	game->texture = init_texture(game);
-	ft_printf("-3- init_vars\n");
+	ft_printf("-game-texture->init-texture- init_vars\n");
 	open_tex(game);
-	ft_printf("-4-init_vars\n");
+	ft_printf("-open_text-init_vars\n");
+	init_sprites(game);
+	ft_printf("-sprite-init_vars\n");
 	game->move.a = 0;
 	game->move.s = 0;
 	game->move.d = 0;
 	game->move.w = 0;
-	ft_printf("-5- init_vars\n");
+	ft_printf("-move- init_vars\n");
 	game->move.r_right = 0;
 	game->move.r_left = 0;
 	game->move.speed = 0.05;

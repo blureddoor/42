@@ -1,17 +1,15 @@
 S ./textures/migu/cat.xpm
-	R 900 600
-
-H ./textures/health.xpm
+ R 900 600
 
 
-	NO ./textures/north.xpm
+ NO ./textures/north.xpm
            SO ./textures/south.xpm      
 WE ./textures/west.xpm
 EA 	./textures/east.xpm
 
 
-		F	 220,100,0 		
-   C 			  			225,30,0		
+       F  220,100,1
+  C 225,30,1
   
 		
 
