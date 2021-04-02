@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 20:43:42 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/01 19:58:08 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/02 21:12:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int 		check_tex(char *l, char *p)
 		g_config.res = s_res(l);
 		ft_printf("2-checkpoint check_tex\n");
 	}
-	else if ((p = strnstr(l, "NO", ft_strlen(l))) != NULL && *(p + 2) == ' ')
+	else if ((p = strnstr(l, "NO", ft_strlen(l))) != NULL && (*(p + 2) == ' ' || *(p + 2) == '\t'))
 	{
 		ft_printf("3-checkpoint chec_tex\n");
 		g_config.no = s_tex(l);

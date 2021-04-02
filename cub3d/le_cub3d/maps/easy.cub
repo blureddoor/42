@@ -1,14 +1,14 @@
 R      6000 4000
 
-       NO  text_sprites/north.xpm
+       NO  textures/north.xpm
 
-  SO                text_sprites/south.xpm
+  SO                textures/south.xpm
 
-         WE      text_sprites/west.xpm
+         WE      textures/west.xpm
 
-    EA                    text_sprites/east.xpm
+    EA                    textures/east.xpm
 
-       S               text_sprites/migu/cat.xpm
+       S               textures/migu/cat.xpm
 
 
 

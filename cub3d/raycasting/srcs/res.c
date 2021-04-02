@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 19:22:32 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/01 17:14:44 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/02 21:12:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ t_res		s_res(char *line)
 	ft_printf("aux[0] = %s\n", aux[0]);
 	ft_printf("aux[1] = %s\n", aux[1]);
 	ft_printf("aux[2] = %s\n", aux[2]);
-	ft_printf("aux[3] = %s\n", aux[3]);
+//	ft_printf("aux[3] = %s\n", aux[3]);
 	check_len(aux, 3);
 	while (i < 3)
 	{
 		if (aux[i] == NULL)
-			error(RED"Wrong Resolution-Missing 1 or both arguments for R"RESET);
+			error(RED"Wrong Resolution 1\n"RESET);
 		i++;
 	}
 	if (aux[3])
@@ -55,7 +55,7 @@ t_res		s_res(char *line)
 	if (is_digit(aux[1]) && is_digit(aux[2]))
 		(res.x = ft_atoi(aux[1])) && (res.y = ft_atoi(aux[2]));
 	else
-		error(RED"Wrong resolution \n"RESET);
+		error(RED"Wrong resolution 2 \n"RESET);
 	check_res(&res);
 	free_str(aux);
 	return (res);

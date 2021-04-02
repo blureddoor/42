@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by lvintila          #+#    #+#             */
-/*   Updated: 2021/03/29 21:52:54 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/02 20:08:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,26 @@ char	**copy_matrix(int rows, char **map)
 	}
 	matrix[i] = NULL;
 	return (matrix);
+}
+
+char	space_tab(char *line, int i)
+{
+	while (isspacetab(line[i]))
+		i++;
+	return (line[i]);
+}
+
+int     isspacetab(int c)
+{
+    c = (unsigned char)c;
+    if (c == '\t' || c == ' ')
+        return (1);
+    return (0);
+}
+
+int     space_skip(char *line, int i)
+{
+    while (ft_isspace(line[i]))
+        i++;
+    return(i);
 }

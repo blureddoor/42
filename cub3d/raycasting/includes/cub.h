@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/01 20:27:06 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/02 20:09:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -278,4 +278,7 @@ int				num_sprites(void);
 t_sprite		*set_sprites(int num);
 int				sprite_casting(t_game *game);
 void			init_sprites(t_game *game);
+int				space_skip(char *line, int i);
+char			space_tab(char *line, int i);
+int				isspacetab(int c);
 #endif

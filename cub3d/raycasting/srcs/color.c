@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by lvintila          #+#    #+#             */
-/*   Updated: 2021/03/26 20:58:01 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/02 21:12:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@ t_color     s_color(char *line, char *pos)
 	line = pos;
 	((pos[1] == '\0') && (error(RED"Color is empty \n"RESET)));
 	while (pos[++i])
+	{
+		if (ft_isspace(pos[i]))
+				i++;
 		if (!ft_isdigit(pos[i]) && pos[i] != ',' && pos[i] != ' ')
 			error(RED"Color is not a number"RESET);
+	}
 	i = 0;
 	while (i < 3)
 	{
