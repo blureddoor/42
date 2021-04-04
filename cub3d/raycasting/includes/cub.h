@@ -279,6 +279,7 @@ t_sprite		*set_sprites(int num);
 int				sprite_casting(t_game *game);
 void			init_sprites(t_game *game);
 int				space_skip(char *line, int i);
-char			space_tab(char *line, int i);
+char			space_tab(unsigned int i, char c);
 int				isspacetab(int c);
+int				check_res_color(char *l, char *p);
 #endif

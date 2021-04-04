@@ -14,13 +14,11 @@
 
 int			it_is_map(char *l)
 {
-	ft_printf("0 - checkpoint it_is_map\n");
 	unsigned int i;
 
 	i = 0;
 	if (!*l)
 		return (0);
-	ft_printf("1 - checkpoint it_is_map\n");
 	while (l[i] == 'N' || l[i] == 'S' || l[i] == 'E' || l[i] == 'W' ||
 			l[i] == ' ' || l[i] == '0' || l[i] == '1' || l[i] == '2')
 		i++;
@@ -28,7 +26,6 @@ int			it_is_map(char *l)
 		return(1);
 	else
 		error(RED" - Map is wrong\n"RESET);
-	ft_printf("2 - checkpoint it_is_map\n");
 	return (0);
 }
 
@@ -36,7 +33,6 @@ void		map_calc(char *l, char *aux, int len, int end)
 {	
 	if (it_is_map(l))
 	{
-		ft_printf("-- check point map_calc \n");
 		aux = ft_strjoin(g_config.map.buff, l);
 		free(g_config.map.buff);
 		g_config.map.buff = aux;

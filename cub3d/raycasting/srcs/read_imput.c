@@ -14,51 +14,56 @@
 
 int 		check_tex(char *l, char *p)
 {
-	if ((p = ft_strchr(l, 'R')) != NULL && *(p + 1) == ' ')
+	char *str;
+
+	str = ft_strmapi(l, space_tab);
+	if ((p = ft_strchr(str, 'R')) != NULL && *(p + 1) == ' ')
 	{
-		g_config.res = s_res(l);
 		ft_printf("2-checkpoint check_tex\n");
+		g_config.res = s_res(p);
 	}
-	else if ((p = strnstr(l, "NO", ft_strlen(l))) != NULL && (*(p + 2) == ' ' || *(p + 2) == '\t'))
+	else if ((p = ft_strnstr(str, "NO", ft_strlen(l))) != NULL && *(p + 2) == ' ')
 	{
 		ft_printf("3-checkpoint chec_tex\n");
-		g_config.no = s_tex(l);
+		g_config.no = s_tex(p);
 	}
-	else if ((p = strnstr(l, "SO", ft_strlen(l))) != NULL && *(p + 2) == ' ')
+	else if ((p = ft_strnstr(str, "SO", ft_strlen(l))) != NULL && *(p + 2) == ' ')
 	{
-		g_config.so = s_tex(l);
+		g_config.so = s_tex(p);
 		ft_printf("4-checkpoint check_tex\n");
 	}
-	else if ((p = strnstr(l, "EA", ft_strlen(l))) != NULL && *(p + 2) == ' ')
+	else if ((p = ft_strnstr(str, "EA", ft_strlen(l))) != NULL && *(p + 2) == ' ')
 	{
-		g_config.ea = s_tex(l);
+		g_config.ea = s_tex(p);
 		ft_printf("5-checkpoint check_tex\n");
 	}
-	else if ((p = strnstr(l, "WE", ft_strlen(l))) != NULL && *(p + 2) == ' ')
+	else if ((p = ft_strnstr(str, "WE", ft_strlen(l))) != NULL && *(p + 2) == ' ')
 	{
-		g_config.we = s_tex(l);
+		g_config.we = s_tex(p);
 		ft_printf("6-checkpoint check_tex\n");
 	}
-	else if ((p = ft_strchr(l, 'S')) != NULL && *(p + 1) == ' ')
+	else if ((p = ft_strchr(str, 'S')) != NULL && *(p + 1) == ' ')
 	{
-		g_config.s = s_tex(l);
+		g_config.s = s_tex(str);
 		ft_printf("S-checkpoint check_tex\n");
 	}
-	else if ((p = ft_strchr(l, 'F')) != NULL && *(p + 1) == ' ' && ++g_config.fch)
+	else if ((p = ft_strchr(str, 'C')) != NULL && *(p + 1) == ' ' && ++g_config.fch)
 	{
-		g_config.floor = s_color(l, p);
-		ft_printf("F-checkpoint check_tex\n");
-	}
-	else if ((p = ft_strchr(l, 'C')) != NULL && *(p + 1) == ' ' && ++g_config.cch)
-	{
-		g_config.ceiling = s_color(l, p);
+		g_config.floor = s_color(str, p);
 		ft_printf("C-checkpoint check_tex\n");
+	}
+	else if ((p = ft_strchr(str, 'F')) != NULL && *(p + 1) == ' ' && ++g_config.cch)
+	{
+		g_config.ceiling = s_color(str, p);
+		ft_printf("F-checkpoint check_tex\n");
 	}
 	else if (l[0])
 	{
 		return (1);
 		ft_printf("7-checkpoint check_tex\n");
 	}
+	if (str)
+		free(str);
 	if (!l[0])
 	{
 		return (0);

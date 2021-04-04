@@ -45,11 +45,17 @@ char	**copy_matrix(int rows, char **map)
 	return (matrix);
 }
 
-char	space_tab(char *line, int i)
+char	space_tab(unsigned int i, char c)
 {
-	while (isspacetab(line[i]))
-		i++;
-	return (line[i]);
+	ft_printf("entry s_t\n");
+	i = 0;
+	if (c == '\t')
+		{
+			ft_printf("dentro if - s_t\n");
+			c = ' ';
+			return (c);
+		}
+	return (c);
 }
 
 int     isspacetab(int c)

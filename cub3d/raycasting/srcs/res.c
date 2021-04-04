@@ -39,6 +39,7 @@ t_res		s_res(char *line)
 
 	i = 0;
 	aux = ft_split(line, ' ');
+	ft_printf("line = %s\n", line);
 	ft_printf("aux[0] = %s\n", aux[0]);
 	ft_printf("aux[1] = %s\n", aux[1]);
 	ft_printf("aux[2] = %s\n", aux[2]);
