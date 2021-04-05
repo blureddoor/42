@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 19:22:32 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/02 21:12:20 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/05 20:56:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ t_res		s_res(char *line)
 
 	i = 0;
 	aux = ft_split(line, ' ');
-	ft_printf("line = %s\n", line);
-	ft_printf("aux[0] = %s\n", aux[0]);
-	ft_printf("aux[1] = %s\n", aux[1]);
-	ft_printf("aux[2] = %s\n", aux[2]);
+//	ft_printf("line = %s\n", line);
+//	ft_printf("aux[0] = %s\n", aux[0]);
+//	ft_printf("aux[1] = %s\n", aux[1]);
+//	ft_printf("aux[2] = %s\n", aux[2]);
 //	ft_printf("aux[3] = %s\n", aux[3]);
 	check_len(aux, 3);
 	while (i < 3)

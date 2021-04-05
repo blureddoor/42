@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 20:05:15 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/02 20:57:40 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/05 20:38:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		map_fill(char **map)
 		}
 		i++;
 	}
-	ft_printf("checkpoint map_fill\n");
+//	ft_printf("checkpoint map_fill\n");
 }
 
 void		locate_player_pos(char **map)
@@ -84,7 +84,7 @@ void		locate_player_pos(char **map)
 	{
 		while (j < g_config.map.cols)
 		{
-			ft_printf("checkpoint player locate pos\n");
+//			ft_printf("checkpoint player locate pos\n");
 			if (ft_strchr("EWSN", map[i][j]) && (player_pos += 1))
 				(g_config.posx = i) && (g_config.posy = j);
 			j++;
@@ -104,9 +104,9 @@ int			check_map(char **map, int rows, int cols)
 			cols >= g_config.map.cols)
 		return (1);
 	c = map[rows][cols];
-	if (c == ' ')
-		return (1);
-	else if (c == '3' || c == '1')
+//	if (c == ' ')
+//		return (1);
+	if (c == '3' || c == '1')
 		return (0);
 	map[rows][cols] = '3';
 	ok = check_map(map, rows, cols - 1);
@@ -116,7 +116,7 @@ int			check_map(char **map, int rows, int cols)
 		check_map(map, rows - 1, cols);
 	if (ok == 0)
 		check_map(map, rows + 1, cols);
-	ft_printf("checkpoint check_map\n");
+//	ft_printf("checkpoint check_map\n");
 	return (ok);
 }
 
@@ -128,7 +128,7 @@ char		**map_parse(void)
 	map = ft_split(g_config.map.buff, '\n');
 	map_fill(map);
 	locate_player_pos(map);
-	ft_printf("checkpoint map_parse\n");
+//	ft_printf("checkpoint map_parse\n");
 	aux = copy_matrix(g_config.map.rows, map);
 	if (check_map(aux, g_config.posx, g_config.posy))
 		error(RED" - Map is not closed \n"RESET);
@@ -152,13 +152,13 @@ void		read_map(int fd)
 	len = 0;
 	while ((end = get_next_line(fd, &l)) >= 0)
 	{
-		ft_printf("0 - check point read_map \n");
+//		ft_printf("0 - check point read_map \n");
 		((*l && it_is_map(l)) && (first_line = 1));
 		if (first_line)
 		{
-			ft_printf("1 - check point read_map \n");
+//			ft_printf("1 - check point read_map \n");
 			map_calc(l, aux, len, end);
-			ft_printf("2 - check point read_map \n");
+//			ft_printf("2 - check point read_map \n");
 		}
 		free(l);
 		if (!end)

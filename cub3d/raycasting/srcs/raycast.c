@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 19:21:42 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/26 19:40:08 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/05 21:11:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void     dda(t_game *game)
             game->loop.map_y += game->loop.step_y;
             game->loop.side = 1;
         }
-
         if (g_config.map.world_map[game->loop.map_x][game->loop.map_y] == '1')
             game->loop.hit = 1;
     }
@@ -81,7 +80,6 @@ void     dda(t_game *game)
     else
         game->loop.perpwalldist = (game->loop.map_y - game->loop.pos_y + (1 -
         game->loop.step_y) / 2) / game->loop.ray_dir_y;
-
     game->loop.lineheight = (int)(g_config.res.y / game->loop.perpwalldist);
 }
 

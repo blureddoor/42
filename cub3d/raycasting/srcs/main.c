@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/01 19:54:26 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/05 21:51:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	init_arg(t_game *game, int argc, char **argv)
 			g_config.res.x, g_config.res.y);
 	game->img.data = (int *)mlx_get_data_addr(game->img.img_ptr,
 			&game->img.bpp, &game->img.size_l, &game->img.endian);
-	ft_printf("fin init_arg\n");
+//	ft_printf("fin init_arg\n");
 	return (1);
 }
 
@@ -66,29 +66,29 @@ int	loop(t_game *game)
 
 void	init_vars(t_game *game)
 {
-	ft_printf("-inicio-init_vars\n");
-	game->loop.pos_x = g_config.posx + 0.5;
-	game->loop.pos_y = g_config.posy + 0.5;
+//	ft_printf("-inicio-init_vars\n");
+	game->loop.pos_x = g_config.posx;
+	game->loop.pos_y = g_config.posy;
 	orientation();
-	ft_printf("-orientation- init_vars\n");
+//	ft_printf("-orientation- init_vars\n");
 	game->texture = init_texture(game);
-	ft_printf("-game-texture->init-texture- init_vars\n");
+//	ft_printf("-game-texture->init-texture- init_vars\n");
 	open_tex(game);
-	ft_printf("-open_text-init_vars\n");
+//	ft_printf("-open_text-init_vars\n");
 	init_sprites(game);
-	ft_printf("-sprite-init_vars\n");
+//	ft_printf("-sprite-init_vars\n");
 	game->move.a = 0;
 	game->move.s = 0;
 	game->move.d = 0;
 	game->move.w = 0;
-	ft_printf("-move- init_vars\n");
+//	ft_printf("-move- init_vars\n");
 	game->move.r_right = 0;
 	game->move.r_left = 0;
-	game->move.speed = 0.05;
+	game->move.speed = 0.08;
 	g_config.fch = 0;
 	g_config.cch = 0;
 	g_config.count = 0;
-	ft_printf("fin init_vars\n");
+//	ft_printf("fin init_vars\n");
 }
 
 int	main(int argc, char **argv)
@@ -99,14 +99,14 @@ int	main(int argc, char **argv)
 	init_arg(&game, argc, argv);
 	init_vars(&game);
 	mlx_hook(game.mlx.win, KEY_PRESS, 0, press, &game);
-	ft_printf("check KEY_PRESS\n");
+//	ft_printf("check KEY_PRESS\n");
 	mlx_hook(game.mlx.win, KEY_RELEASE, 0, release, &game);
-	ft_printf("check KEY_RELEASE\n");
+//	ft_printf("check KEY_RELEASE\n");
 	mlx_hook(game.mlx.win, KEY_EXIT, 0, &closer, &game);
-	ft_printf("check KEY_EXIT\n");
+//	ft_printf("check KEY_EXIT\n");
 	mlx_loop_hook(game.mlx.ptr, loop, &game);
-	ft_printf("check main loop hook\n");
+//	ft_printf("check main loop hook\n");
 	mlx_loop(game.mlx.ptr);
-	ft_printf("check main mlx.ptr\n");
+//	ft_printf("check main mlx.ptr\n");
 	return (0);
 }

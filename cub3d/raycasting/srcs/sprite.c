@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 17:32:53 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/01 20:16:55 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/05 21:11:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,13 @@ void	sort_sprites_loop(t_game *game)
 void	init_sprites(t_game *game)
 {
 	game->loop.numsprites = num_sprites();
-	ft_printf("init_sprites / num_prites()\n");
+//	ft_printf("init_sprites / num_prites()\n");
 	game->loop.sprite = set_sprites(game->loop.numsprites);
-	ft_printf("init_sprites / set_sprites()\n");
+//	ft_printf("init_sprites / set_sprites()\n");
 	game->zbuffer = malloc(sizeof(unsigned int) * g_config.res.x);
-	ft_printf("init_sprites / malloc zbuffer\n");
+//	ft_printf("init_sprites / malloc zbuffer\n");
 	game->loop.spriteorder = malloc(sizeof(int) * game->loop.numsprites);
-	ft_printf("init_sprites / malloc spriteorder\n");
+//	ft_printf("init_sprites / malloc spriteorder\n");
 	game->loop.spritedistance = malloc(sizeof(double) * game->loop.numsprites);
-	ft_printf("init_sprites / malloc spritedistance\n");
+//	ft_printf("init_sprites / malloc spritedistance\n");
 }
