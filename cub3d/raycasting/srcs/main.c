@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/05 21:51:32 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/06 20:04:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,18 @@
 
 int	init_arg(t_game *game, int argc, char **argv)
 {
+    g_config.screenshot = 0;
+    if (argc == 3)
+    {
+        if ((ft_strncmp(argv[2], "--save", 7) != 0))
+            error(RED"Third argument is not --save\n"RESET);
+        else
+            g_config.screenshot = 1;
+	}
 	if (argc > 3 || argc <= 1)
 		error(RED"Wrong number of arguments\n"RESET);
-	if ((ft_strlen(argv[1]) < 5 || ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4],
-					".cub", 4)))
+	if ((ft_strlen(argv[1]) < 5 || ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4]
+					,".cub", 4)))
 		error(RED"No .cub file.\n"RESET);
 	else
 		game->mlx.ptr = mlx_init();
@@ -27,10 +35,9 @@ int	init_arg(t_game *game, int argc, char **argv)
 			g_config.res.x, g_config.res.y);
 	game->img.data = (int *)mlx_get_data_addr(game->img.img_ptr,
 			&game->img.bpp, &game->img.size_l, &game->img.endian);
-//	ft_printf("fin init_arg\n");
 	return (1);
 }
-
+/*
 static void	refresh(t_game *game)
 {
 	mlx_destroy_image(game->mlx.ptr, game->img.img_ptr);
@@ -39,13 +46,14 @@ static void	refresh(t_game *game)
 	game->img.data = (int *)mlx_get_data_addr(game->img.img_ptr,
 			&game->img.bpp, &game->img.endian, &game->img.size_l);
 }
+*/
 
 int	loop(t_game *game)
 {
 	int	x;
 
 	x = 0;
-	refresh(game);
+//	refresh(game);
 	while (x < g_config.res.x)
 	{
 		camera_calc(game, x);
@@ -66,29 +74,22 @@ int	loop(t_game *game)
 
 void	init_vars(t_game *game)
 {
-//	ft_printf("-inicio-init_vars\n");
 	game->loop.pos_x = g_config.posx;
 	game->loop.pos_y = g_config.posy;
 	orientation();
-//	ft_printf("-orientation- init_vars\n");
 	game->texture = init_texture(game);
-//	ft_printf("-game-texture->init-texture- init_vars\n");
 	open_tex(game);
-//	ft_printf("-open_text-init_vars\n");
 	init_sprites(game);
-//	ft_printf("-sprite-init_vars\n");
 	game->move.a = 0;
 	game->move.s = 0;
 	game->move.d = 0;
 	game->move.w = 0;
-//	ft_printf("-move- init_vars\n");
 	game->move.r_right = 0;
 	game->move.r_left = 0;
 	game->move.speed = 0.08;
 	g_config.fch = 0;
 	g_config.cch = 0;
 	g_config.count = 0;
-//	ft_printf("fin init_vars\n");
 }
 
 int	main(int argc, char **argv)
@@ -99,14 +100,9 @@ int	main(int argc, char **argv)
 	init_arg(&game, argc, argv);
 	init_vars(&game);
 	mlx_hook(game.mlx.win, KEY_PRESS, 0, press, &game);
-//	ft_printf("check KEY_PRESS\n");
 	mlx_hook(game.mlx.win, KEY_RELEASE, 0, release, &game);
-//	ft_printf("check KEY_RELEASE\n");
 	mlx_hook(game.mlx.win, KEY_EXIT, 0, &closer, &game);
-//	ft_printf("check KEY_EXIT\n");
 	mlx_loop_hook(game.mlx.ptr, loop, &game);
-//	ft_printf("check main loop hook\n");
 	mlx_loop(game.mlx.ptr);
-//	ft_printf("check main mlx.ptr\n");
 	return (0);
 }

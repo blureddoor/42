@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/02 20:09:07 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/06 20:04:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ typedef struct s_config
 	double			diry;
 	double			planex;
 	double			planey;
+	int				screenshot;
 }					t_config;
 
 t_config			g_config;

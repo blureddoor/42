@@ -1,13 +1,13 @@
 R 	1920 		1080 	
 	NO	 	        	./textures/north.xpm 		 
  	SO	  	    	./textures/south.xpm		  		
-	 WE	    	textures/west.xpm		
+	 WE	    	textures/bluestone.xpm		
 EA 		textures/east.xpm 		
-S  textures/migu/cat.xpm
+S  textures/pillar.xpm
 
-C 80,	0, 80
+C 50,	50, 20
 
-F 50,50,100
+F 80,150,80
 
 
           11111111111111111111111111
@@ -18,7 +18,7 @@ F 50,50,100
 10000000000000000000000001
 10000001000020000000001111
 10000011100000000000000001
-10000001020000000000N00001
+10000001200000000000N00001
 10000000000011100000000001
 11111111111111111111111111
 
