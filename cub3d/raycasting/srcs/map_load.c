@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 20:05:15 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/05 20:38:26 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/07 21:46:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int			it_is_map(char *l)
 	i = 0;
 	if (!*l)
 		return (0);
-	while (l[i] == 'N' || l[i] == 'S' || l[i] == 'E' || l[i] == 'W' ||
-			l[i] == ' ' || l[i] == '0' || l[i] == '1' || l[i] == '2')
+	while (l[i] == 'N' || l[i] == 'S' || l[i] == 'E' || l[i] == 'W'
+			|| l[i] == ' ' || l[i] == '0' || l[i] == '1' || l[i] == '2')
 		i++;
 	if (i == ft_strlen(l))
 		return(1);
@@ -104,9 +104,9 @@ int			check_map(char **map, int rows, int cols)
 			cols >= g_config.map.cols)
 		return (1);
 	c = map[rows][cols];
-//	if (c == ' ')
-//		return (1);
-	if (c == '3' || c == '1')
+	if (c == ' ')
+		return (1);
+	else if (c == '3' || c == '1')
 		return (0);
 	map[rows][cols] = '3';
 	ok = check_map(map, rows, cols - 1);
@@ -124,7 +124,11 @@ char		**map_parse(void)
 {
 	char	**map;
 	char	**aux;
+	int		i;
+	int		j;
 
+	i = 0;
+	j = 0;
 	map = ft_split(g_config.map.buff, '\n');
 	map_fill(map);
 	locate_player_pos(map);

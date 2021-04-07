@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 19:21:42 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/05 21:11:42 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/07 20:39:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,6 @@ void        draw2(t_game *game, int x)
         game->loop.tex_pos += game->loop.step;
         game->color = game->texture[game->loop.texnum].data[(int)
             (game->texture->height * game->loop.tex_y + game->loop.tex_x)];
-//      if (game->loop.side == 1)
-//          game->color = (color >> 1) & 8355711;
         *(game->img.data + (i * g_config.res.x) + x) = game->color;// !!!!!!!
         i++;
     }

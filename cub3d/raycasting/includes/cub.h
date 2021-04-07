@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/06 20:04:40 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/07 21:47:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,26 @@ typedef struct s_img
 	int				height;
 	int				width;
 }					t_img;
+
+typedef struct		s_bmp
+{
+	char			type[2];		/* 2 bytes de identificación */
+	int				byte_size;        /* Tamaño del archivo */
+	int				reserved;       /* Reservado */
+	int				offset;      /* Offset hasta los datos de imagen */
+	int				headersize;      /* Tamaño de la cabecera */
+	int				img_width;               /* Ancho */
+	int				img_height;          /* Alto */
+	char			color_planes[2];                  /* Planos de color (Siempre 1) */
+	char			bpp[2];             /* bits por pixel */
+	int				compress;        /* compresión */
+	int				imgsize;     /* tamaño de los datos de imagen */
+	int				bpmx;                /* Resolución X en bits por metro */
+	int				bpmy; 	/* Resolución Y en bits por metro */
+	int				color;
+	int				total_colors;              /* colors used en la paleta */
+	int				imxtcolors;      /* Colores importantes. 0 si son todos */
+}					t_bmp;
 
 typedef struct s_res
 {
@@ -283,4 +303,7 @@ int				space_skip(char *line, int i);
 char			space_tab(unsigned int i, char c);
 int				isspacetab(int c);
 int				check_res_color(char *l, char *p);
+int				s_bmp(t_game *game);
+t_bmp			define_header(void);
+
 #endif

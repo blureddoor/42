@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/05 20:56:02 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/07 20:36:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_color     s_color(char *line, char *pos)
 	while (pos[++i])
 	{
 		
-//		ft_printf("s_color-3\n");
 		if ((!ft_isdigit(pos[i])) && (pos[i] != ',') && (pos[i] != ' '))
 				error(RED"Color is not a number"RESET);
 	}
@@ -38,19 +37,49 @@ t_color     s_color(char *line, char *pos)
 	while (i < 3)
 	{
 		((line == NULL) && (error(RED"Missing colors \n"RESET)));
-//		ft_printf("line =%s\n", line);
 		line++;
-//		ft_printf("line++ =%s\n", line);
 		color.rgb[i] = ft_atoi(line);
-//		ft_printf("color.rgb[i] = %d\n", color.rgb[i]);
 		line = ft_strchr(line, ',');
-//		ft_printf("line(ft_strchr) =%s\n", line);
 		((line != NULL && i == 2) && (error(RED"Too many colors \n"RESET)));
-//		ft_printf("%d\n", color.rgb[i]);
 		i++;
 	}
 	color.rgb_int = rgb_int(color.rgb[0], color.rgb[1], color.rgb[2]);
-//	ft_printf("color.rgb_int = %d\n", color.rgb_int);
-//	ft_printf("pos = %s\n", pos);
 	return (color);
+}
+
+t_bmp	define_header(void)
+{
+	t_bmp	bmp;
+
+	bmp.type[0] = 'B';        /* 1 bytes de identificación */
+	bmp.type[1] = 'M';        /* 1 bytes de identificación */
+	bmp.byte_size = 54 + 4 * (int)g_config.res.x * (int)g_config.res.y; /* Tamaño del archivo */
+	bmp.offset = 54;      /* Offset hasta los datos de imagen */
+	bmp.headersize = 54 - 14;      /* Tamaño de la cabecera */
+	bmp.img_width = (int)g_config.res.x;               /* Ancho */
+	bmp.img_height = -(int)g_config.res.y;          /* Alto */
+	bmp.bpp[0] = 32;             /* bits por pixel */
+	bmp.bpp[1] = 0;             /* bits por pixel */
+	bmp.compress = 0;        /* compresión */
+	bmp.imgsize = 4 * (int)g_config.res.x * (int)g_config.res.y;/* tamaño de los datos de imagen */
+	bmp.color_planes[0] = 1; /* Planes de color */
+	bmp.color_planes[1] = 0; /* Planes de color */
+	bmp.imgsize = 4 * (int)g_config.res.x * (int)g_config.res.y;
+	ft_printf("g_config --->%d, %d\n", g_config.res.x, g_config.res.y);
+	ft_printf("bmp.imgsize --->%d\n", bmp.imgsize);
+	ft_printf("bmp.img_width --->%d\n", bmp.img_width);
+	ft_printf("bmp.img_height --->%d\n", bmp.img_height);
+	return (bmp);
+}
+
+int		s_bmp(t_game *game)
+{
+	t_bmp	img;
+	int		file;
+
+	file = open("cub3D.bmp", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0666);
+	img = define_header();
+	((write(file, &img, 54)) && (write(file, game->img.data, img.imgsize))
+	 && (close(file)));
+	return (1);
 }

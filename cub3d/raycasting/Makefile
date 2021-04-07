@@ -1,3 +1,7 @@
+YELLOW  	= 	$(shell tput -Txterm setaf 3)
+GREEN		=	$(shell tput -Txterm setaf 2)
+RED			=	$(shell tput -Txterm setaf 1)
+
 LIBFT		=	printf/libft
 
 MINILIBX	=	minilibx
@@ -30,11 +34,15 @@ OBJS		=	$(SRCS:%.c=%.o)
 
 NAME		=	cub3D
 
+IMG			=	$(NAME).bmp
+
 CC			=	gcc
 
 CFLAGS		=	-g -Wall -Werror -Wextra -I. -o $(NAME)
 
 MFLAGS		=	-lmlx -framework OpenGL -framework AppKit
+
+SANFLAG		=	-fsanitize=adress
 
 RM			=	rm -rf
 
@@ -51,19 +59,25 @@ $(DIR_O)/%.o:	$(DIR_S)/%.c $(HEADER)/cub.h
 
 libft:
 				make -C $(LIBFT)
-run:
-	./cub3D
+run1:
+				./cub3D ./maps/easy_1.cub
+
+run2:			
+				./cub3D ./maps/map1.cub
+
+runsave:		
+				./cub3D ./maps/map1.cub --save
 
 clean:
 				make -C $(LIBFT) clean
 				$(RM) $(OBJS) $(DIR_O)
-				@echo "${GREEN} Cleaned, Thank you! ${RESET}"
+				@echo "${GREEN}Cleaned, Thank you!${RESET}"
 
 fclean:			clean
 				$(RM) $(NAME) $(IMG)
 				make -C $(LIBFT) fclean
-				@echo "${GREEN} Total fclean!!!! ${RESET}"
+				@echo "${GREEN}Total fclean!!!!${RESET}"
 
 re:				fclean all
-				@echo "${GREEN} Deleted and recompiled for you !!! ${RESET}"
+				@echo "${GREEN}Deleted and recompiled for you !!!${RESET}"
 

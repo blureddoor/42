@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/06 20:04:20 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/07 21:22:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,11 @@ int	loop(t_game *game)
 		x++;
 	}
 	sprite_casting(game);
-	mlx_put_image_to_window(game->mlx.ptr, game->mlx.win,
-			game->img.img_ptr, 0, 0);
+	mlx_put_image_to_window(game->mlx.ptr, game->mlx.win, game->img.img_ptr,
+			0, 0);
+	((g_config.screenshot) && (s_bmp(game)) && (closer(game)));
 	move(game);
-	return (1);
+	return (0);
 }
 
 void	init_vars(t_game *game)
