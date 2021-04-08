@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/07 21:47:46 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/08 21:50:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define NUM_FLAGS		8
 
 # define M_SPEED		0.1
-# define VMOVE			128.0
+# define VMOVE			32.0
 # define VDIV			1
 # define UDIV			1
 # define KEY_PRESS		2
@@ -52,13 +52,6 @@
 # define KEY_SHIFT		257
 # define KEY_IZQ		123
 # define KEY_DCH		124
-
-# define RGB_RED		0x00FF0000
-# define RGB_GREEN		0x00008000
-# define RGB_BLUE		0x000000FF
-# define RGB_BLACK		0x00000000
-# define RGB_YELLOW		0x00FFFF00
-# define RGB_WHITE		0x00FFFFFF
 
 typedef struct s_mlx
 {
