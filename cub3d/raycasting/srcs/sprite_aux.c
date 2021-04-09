@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 18:36:42 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/08 21:50:59 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/09 21:20:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_sprite	*set_sprites(int num)
 		while (j < g_config.map.cols && ++j)
 			((g_config.map.world_map[i][j] == '2')
 			 && (sprites[count].num = g_config.map.world_map[i][j] - '0')
-			 && (sprites[count].x = i + 0.5) && (sprites[count++].y = j + 0.5));
+			 && (sprites[count].x = i) && (sprites[count++].y = j));
 		i++;
 	}
 	return (sprites);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/09 21:04:19 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/09 20:26:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int	loop(t_game *game)
 
 void	init_vars(t_game *game)
 {
-	game->loop.pos_x = g_config.posx;
-	game->loop.pos_y = g_config.posy;
+	game->loop.pos_x = g_config.posx + 0.25;
+	game->loop.pos_y = g_config.posy + 0.25;
 	orientation();
 	game->texture = init_texture(game);
 	open_tex(game);

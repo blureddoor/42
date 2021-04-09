@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 17:32:53 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/08 21:37:02 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/09 21:31:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	sort_sprites(t_game *game)
 
 void	sprite_calc(t_game *game, int i, t_s_cast *s)
 {
-	s->sprite.x = game->loop.sprite[game->loop.spriteorder[i]].x
+	s->sprite.x = game->loop.sprite[game->loop.spriteorder[i]].x + 0.5
 		- game->loop.pos_x;
-	s->sprite.y = game->loop.sprite[game->loop.spriteorder[i]].y
+	s->sprite.y = game->loop.sprite[game->loop.spriteorder[i]].y + 0.5
 		- game->loop.pos_y;
-	s->invdet = 1.0 / (g_config.planex * g_config.diry - g_config.dirx
+	s->invdet = 0.85 / (g_config.planex * g_config.diry - g_config.dirx
 			* g_config.planey);
 	s->transform.x = s->invdet * (g_config.diry * s->sprite.x - g_config.dirx
 		* s->sprite.y);
@@ -77,7 +77,7 @@ void	sprite_put(t_game *game, t_s_cast s, int stripe)
 		{
 			d = (y - s.mvscreen) * 256 - g_config.res.y * 128
 				+ s.spriteheight * 128;
-			tex.y = ((d * 64) / s.spriteheight) / 256;
+			tex.y = ((d * game->texture[4].height) / s.spriteheight) / 256;
 			game->color = game->texture[4].data[(game->texture[4].width
 					* (int)tex.y + (int)tex.x)];
 			if (game->color != game->texture[4].data[0])
