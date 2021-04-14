@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 17:32:53 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/09 21:31:42 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/14 20:09:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	sort_sprites(t_game *game)
 
 void	sprite_calc(t_game *game, int i, t_s_cast *s)
 {
-	s->sprite.x = game->loop.sprite[game->loop.spriteorder[i]].x + 0.5
+	s->sprite.x = game->loop.sprite[game->loop.spriteorder[i]].x + 0.4
 		- game->loop.pos_x;
-	s->sprite.y = game->loop.sprite[game->loop.spriteorder[i]].y + 0.5
+	s->sprite.y = game->loop.sprite[game->loop.spriteorder[i]].y + 0.3
 		- game->loop.pos_y;
-	s->invdet = 0.85 / (g_config.planex * g_config.diry - g_config.dirx
+	s->invdet = 1 / (g_config.planex * g_config.diry - g_config.dirx
 			* g_config.planey);
 	s->transform.x = s->invdet * (g_config.diry * s->sprite.x - g_config.dirx
 		* s->sprite.y);
@@ -114,13 +114,13 @@ void	sort_sprites_loop(t_game *game)
 void	init_sprites(t_game *game)
 {
 	game->loop.numsprites = num_sprites();
-//	ft_printf("init_sprites / num_prites()\n");
+	ft_printf("init_sprites / num_prites()\n");
 	game->loop.sprite = set_sprites(game->loop.numsprites);
-//	ft_printf("init_sprites / set_sprites()\n");
+	ft_printf("init_sprites / set_sprites()\n");
 	game->zbuffer = malloc(sizeof(unsigned int) * g_config.res.x);
-//	ft_printf("init_sprites / malloc zbuffer\n");
+	ft_printf("init_sprites / malloc zbuffer\n");
 	game->loop.spriteorder = malloc(sizeof(int) * game->loop.numsprites);
-//	ft_printf("init_sprites / malloc spriteorder\n");
+	ft_printf("init_sprites / malloc spriteorder\n");
 	game->loop.spritedistance = malloc(sizeof(double) * game->loop.numsprites);
-//	ft_printf("init_sprites / malloc spritedistance\n");
+	ft_printf("init_sprites / malloc spritedistance\n");
 }

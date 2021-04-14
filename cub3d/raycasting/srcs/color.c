@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/07 20:36:04 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/14 19:54:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ t_bmp	define_header(void)
 	bmp.color_planes[0] = 1; /* Planes de color */
 	bmp.color_planes[1] = 0; /* Planes de color */
 	bmp.imgsize = 4 * (int)g_config.res.x * (int)g_config.res.y;
-	ft_printf("g_config --->%d, %d\n", g_config.res.x, g_config.res.y);
-	ft_printf("bmp.imgsize --->%d\n", bmp.imgsize);
-	ft_printf("bmp.img_width --->%d\n", bmp.img_width);
-	ft_printf("bmp.img_height --->%d\n", bmp.img_height);
+//	ft_printf("g_config --->%d, %d\n", g_config.res.x, g_config.res.y);
+//	ft_printf("bmp.imgsize --->%d\n", bmp.imgsize);
+//	ft_printf("bmp.img_width --->%d\n", bmp.img_width);
+//	ft_printf("bmp.img_height --->%d\n", bmp.img_height);
 	return (bmp);
 }
 

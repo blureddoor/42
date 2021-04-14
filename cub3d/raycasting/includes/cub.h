@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/09 21:53:12 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/14 20:11:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define NUM_FLAGS		8
 
 # define M_SPEED		0.1
-# define VMOVE			32.0
+# define VMOVE			96.0
 # define VDIV			1
 # define UDIV			1
 # define KEY_PRESS		2
@@ -235,7 +235,7 @@ typedef struct s_game
 	char			**world_map;
 	int				color;
 	t_move			move;
-	unsigned int	*zbuffer;
+	double			*zbuffer;
 }					t_game;
 
 int				closer(t_game *game);

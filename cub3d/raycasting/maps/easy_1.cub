@@ -3,14 +3,14 @@ R 	1920 		1080
  	SO	  	    	./textures/south.xpm		  		
 	 WE	    	textures/bluestone.xpm		
 EA 		textures/east.xpm 		
-S  textures/pillar.xpm
+S  textures/migu/cat.xpm
 
 C 50,	50, 20
 
 F 80,150,80
 
 
-11111111111111111111111
+11111111111011111111111
 12000000000000000000021
 10000000000000N00200001
 10200000000000000000001

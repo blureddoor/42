@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/09 21:04:19 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/14 20:05:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	init_arg(t_game *game, int argc, char **argv)
         else
             g_config.screenshot = 1;
 	}
+	ft_printf(" checkpoint main init_arg --save\n");
 	if (argc > 3 || argc <= 1)
 		error(RED"Wrong number of arguments\n"RESET);
 	if ((ft_strlen(argv[1]) < 5 || ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4]
@@ -65,10 +66,13 @@ int	loop(t_game *game)
 		draw2(game, x);
 		x++;
 	}
+	ft_printf(" checkpoint loop 1\n");
 	sprite_casting(game);
+	ft_printf(" checkpoint loop 2\n");
 	mlx_put_image_to_window(game->mlx.ptr, game->mlx.win, game->img.img_ptr,
 			0, 0);
 	((g_config.screenshot) && (s_bmp(game)) && (closer(game)));
+	ft_printf(" checkpoint loop 3\n");
 	move(game);
 	return (0);
 }
@@ -100,8 +104,8 @@ int	main(int argc, char **argv)
 	read_config(argv[1]);
 	init_arg(&game, argc, argv);
 	init_vars(&game);
-	mlx_hook(game.mlx.win, KEY_PRESS, 0, press, &game);
-	mlx_hook(game.mlx.win, KEY_RELEASE, 0, release, &game);
+	mlx_hook(game.mlx.win, 2, 1, press, &game);
+	mlx_hook(game.mlx.win, 3, 2, release, &game);
 	mlx_hook(game.mlx.win, KEY_EXIT, 0, &closer, &game);
 	mlx_loop_hook(game.mlx.ptr, loop, &game);
 	mlx_loop(game.mlx.ptr);
