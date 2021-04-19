@@ -6,47 +6,13 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 20:05:15 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/15 20:46:18 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/19 21:16:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raycasting/includes/cub.h"
 
-int			it_is_map(char *l)
-{
-	unsigned int i;
-
-	i = 0;
-	if (!*l)
-		return (0);
-	while (l[i] == 'N' || l[i] == 'S' || l[i] == 'E' || l[i] == 'W'
-			|| l[i] == ' ' || l[i] == '0' || l[i] == '1' || l[i] == '2')
-		i++;
-	if (i == ft_strlen(l))
-		return(1);
-	else
-		error(RED" - Map is wrong\n"RESET);
-	return (0);
-}
-
-void		map_calc(char *l, char *aux, int len, int end)
-{	
-	if (it_is_map(l))
-	{
-		aux = ft_strjoin(g_config.map.buff, l);
-		free(g_config.map.buff);
-		g_config.map.buff = aux;
-		if (end && ++g_config.map.rows)
-		{
-			aux = ft_strjoin(g_config.map.buff, "\n");
-			free(g_config.map.buff);
-			g_config.map.buff = aux;
-		}
-		len = ft_strlen(l);
-		((len > g_config.map.cols) && (g_config.map.cols = len));
-	}
-}
-void		map_fill(char **map)
+void	map_fill(char **map)
 {
 	char	pad;
 	ssize_t	len;
@@ -71,7 +37,7 @@ void		map_fill(char **map)
 	}
 }
 
-void		locate_player_pos(char **map)
+void	locate_player_pos(char **map)
 {
 	int		i;
 	int		j;
@@ -79,13 +45,20 @@ void		locate_player_pos(char **map)
 
 	i = 0;
 	player_pos = 0;
-	while ((!(j = 0)) && i < g_config.map.rows)
+	while (i < g_config.map.rows)
 	{
-		while (j < g_config.map.cols)
+		j = 0;
+		if (!j)
 		{
-			if (ft_strchr("EWSN", map[i][j]) && (player_pos += 1))
-				(g_config.posx = i) && (g_config.posy = j);
-			j++;
+			while (j < g_config.map.cols)
+			{
+				if (ft_strchr("EWSN", map[i][j]))
+				{
+					player_pos++;
+					(g_config.posx = i) && (g_config.posy = j);
+				}
+				j++;
+			}
 		}
 		i++;
 	}
@@ -93,13 +66,13 @@ void		locate_player_pos(char **map)
 		error(RED" - Wrong number of positions\n"RESET);
 }
 
-int			check_map(char **map, int rows, int cols)
+int	check_map(char **map, int rows, int cols)
 {
-	char 	c;
+	char	c;
 	int		ok;
 
-	if (rows < 0 || cols < 0  || rows >= g_config.map.rows ||
-			cols >= g_config.map.cols)
+	if (rows < 0 || cols < 0 || rows >= g_config.map.rows
+		|| cols >= g_config.map.cols)
 		return (1);
 	c = map[rows][cols];
 	if (c == ' ')
@@ -117,7 +90,7 @@ int			check_map(char **map, int rows, int cols)
 	return (ok);
 }
 
-char		**map_parse(void)
+char	**map_parse(void)
 {
 	char	**map;
 	char	**aux;
@@ -136,7 +109,7 @@ char		**map_parse(void)
 	return (map);
 }
 
-void		read_map(int fd)
+void	read_map(int fd)
 {
 	char	*l;
 	char	*aux;
@@ -150,8 +123,10 @@ void		read_map(int fd)
 	g_config.map.buff = ft_strdup("");
 	aux = NULL;
 	len = 0;
-	while ((end = get_next_line(fd, &l)) >= 0)
+	end = 0;
+	while (end >= 0)
 	{
+		end = get_next_line(fd, &l);
 		((*l && it_is_map(l)) && (first_line = 1));
 		if (first_line)
 			map_calc(l, aux, len, end);

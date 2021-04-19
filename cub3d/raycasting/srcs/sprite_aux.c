@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 18:36:42 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/15 21:33:42 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/19 21:43:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 int	num_sprites(void)
 {
 	int	i;
-	int j;
-	int num;
+	int	j;
+	int	num;
 
 	i = 0;
 	num = 0;
-	while ((!(j = 0)) && i < g_config.map.rows)
+	while (i < g_config.map.rows)
 	{
-		while (j < g_config.map.cols && ++j)
-			((g_config.map.world_map[i][j] == '2') && (num++));
+		j = 0;
+		if (!j)
+			while (j < g_config.map.cols && ++j)
+				((g_config.map.world_map[i][j] == '2') && (num++));
 		i++;
 	}
 	return (num);
@@ -39,12 +41,14 @@ t_sprite	*set_sprites(int num)
 	i = 0;
 	count = 0;
 	sprites = malloc(sizeof(t_sprite) * num);
-	while ((!(j = 0)) && i < g_config.map.rows)
+	while (i < g_config.map.rows)
 	{
-		while (j < g_config.map.cols && ++j)
-			((g_config.map.world_map[i][j] == '2')
-			 && (sprites[count].num = g_config.map.world_map[i][j] - '0')
-			 && (sprites[count].x = i) && (sprites[count++].y = j));
+		j = 0;
+		if (!j)
+			while (j < g_config.map.cols && ++j)
+				((g_config.map.world_map[i][j] == '2')
+				 && (sprites[count].num = g_config.map.world_map[i][j] - '0')
+				 && (sprites[count].x = i) && (sprites[count++].y = j));
 		i++;
 	}
 	ft_printf("CKP-sprite_casting\n");

@@ -6,13 +6,13 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 19:22:32 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/07 20:59:43 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/19 21:36:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../raycasting/includes/cub.h"
 
-int		is_digit(char *str)
+int	is_digit(char *str)
 {
 	while (*str)
 	{
@@ -23,7 +23,7 @@ int		is_digit(char *str)
 	return (1);
 }
 
-void		check_res(t_res *res)
+void	check_res(t_res *res)
 {
 	if (res->x > MAX_RES_WIDTH || res->y > MAX_RES_HEIGHT)
 		(res->x = MAX_RES_WIDTH) && (res->y = MAX_RES_HEIGHT);
@@ -31,7 +31,7 @@ void		check_res(t_res *res)
 		(res->x = MIN_RES_WIDTH) && (res->y = MIN_RES_HEIGHT);
 }
 
-t_res		s_res(char *line)
+t_res	s_res(char *line)
 {
 	char	**aux;
 	t_res	res;
@@ -47,7 +47,7 @@ t_res		s_res(char *line)
 		i++;
 	}
 	if (aux[3])
-			error(RED"Wrong Resolution:Too many arguments for R"RESET);
+		error(RED"Wrong Resolution:Too many arguments for R"RESET);
 	if (is_digit(aux[1]) && is_digit(aux[2]))
 		(res.x = ft_atoi(aux[1])) && (res.y = ft_atoi(aux[2]));
 	else
@@ -57,7 +57,7 @@ t_res		s_res(char *line)
 	return (res);
 }
 
-void		orientation_input(double dirx, double diry, double plx, double ply)
+void	orientation_input(double dirx, double diry, double plx, double ply)
 {
 	g_config.dirx = dirx;
 	g_config.diry = diry;
@@ -65,9 +65,9 @@ void		orientation_input(double dirx, double diry, double plx, double ply)
 	g_config.planey = ply;
 }
 
-int			orientation(void)
+int	orientation(void)
 {
-	char    dir;
+	char	dir;
 
 	dir = g_config.map.world_map[g_config.posx][g_config.posy];
 	g_config.map.world_map[g_config.posx][g_config.posy] = '0';
@@ -81,4 +81,3 @@ int			orientation(void)
 		orientation_input(0, -1, -0.66, 0);
 	return (0);
 }
-

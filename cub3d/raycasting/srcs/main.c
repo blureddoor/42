@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/15 21:00:40 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/19 20:50:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	init_arg(t_game *game, int argc, char **argv)
 	}
 	((argc > 3 || argc <= 1) && (error(RED"Wrong number of arguments\n"RESET)));
 	if ((ft_strlen(argv[1]) < 5) || ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4]
-			, ".cub", 4))
+		, ".cub", 4))
 		error(RED"No .cub file.\n"RESET);
 	else
 		game->mlx.ptr = mlx_init();

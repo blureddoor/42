@@ -18,7 +18,7 @@ HEADER		=	includes
 
 SOURCES_C	=	main.c move.c texture.c raycast.c utils.c \
 				utils_aux.c read_imput.c res.c map_load.c color.c \
-				sprite.c sprite_aux.c \
+				sprite.c sprite_aux.c map_utils.c move_aux.c \
 
 SOURCES_P	=	aux.c aux_1.c converts.c ft_printf.c mods.c \
 				print_char.c print_hex.c print_nbr.c print_pointer.c \
