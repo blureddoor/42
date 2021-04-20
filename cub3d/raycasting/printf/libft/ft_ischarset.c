@@ -6,11 +6,11 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 20:28:30 by lvintila          #+#    #+#             */
-/*   Updated: 2020/09/17 17:05:05 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/20 21:14:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_ischarset(int c, const char *charset)
+int	ft_ischarset(int c, const char *charset)
 {
 	while (*charset)
 	{

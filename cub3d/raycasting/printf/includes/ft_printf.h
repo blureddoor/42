@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 19:31:09 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/21 22:16:37 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/20 21:10:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define CCONVERSIONS	"cspdiuxX%"
 # define ALLSYMBOLS		"cspdiuxX%-.*0123456789"
 
-typedef struct	s_struct
+typedef struct s_struct
 {
 	char		*format;
 	int			i;
@@ -41,9 +41,9 @@ typedef struct	s_struct
 
 void			mods(const char *format, t_struct *f, va_list ap);
 int				mods_converts(t_struct *f, int pos, const char *format,
-				va_list ap);
+					va_list ap);
 int				select_format(const char *format, t_struct *list, va_list ap,
-				int pos);
+					int pos);
 void			width_star(const char *format, t_struct *f, va_list ap);
 void			precision_star(const char *format, t_struct *f, va_list ap);
 void			converts(char c, va_list ap, t_struct *f);

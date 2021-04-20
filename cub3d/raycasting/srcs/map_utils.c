@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 21:12:38 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/19 21:16:30 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/20 19:23:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	it_is_map(char *l)
 	if (i == ft_strlen(l))
 		return (1);
 	else
-		error(RED" - Map is wrong\n"RESET);
+		error(RED" - Map is wrong !!!!!\n"RESET);
 	return (0);
 }
 

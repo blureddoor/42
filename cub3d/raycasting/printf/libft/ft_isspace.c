@@ -6,17 +6,17 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 20:20:00 by lvintila          #+#    #+#             */
-/*   Updated: 2021/03/26 20:32:42 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/20 21:15:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isspace(int c)
+int	ft_isspace(int c)
 {
-	c =	(unsigned char)c;
+	c = (unsigned char)c;
 	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
-			|| c == ' ')
+		|| c == ' ')
 		return (1);
 	return (0);
 }
