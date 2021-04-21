@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/16 21:30:41 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/21 21:45:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@
 
 # define RED			"\033[22;31m"
 # define RESET			"\033[0m"
-# define MAX_RES_WIDTH	1080
-# define MAX_RES_HEIGHT	720
-# define MIN_RES_WIDTH	320
-# define MIN_RES_HEIGHT	240
+# define MAX_RES_WIDTH	1920
+# define MAX_RES_HEIGHT	1080
+# define MIN_RES_WIDTH	360
+# define MIN_RES_HEIGHT	180
 
 # define NUM_FLAGS		8
 
 # define M_SPEED		0.1
-# define VMOVE			64.0
+# define VMOVE			128.0
 # define VDIV			1
 # define UDIV			1
 # define KEY_PRESS		2

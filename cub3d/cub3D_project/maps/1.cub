@@ -1,0 +1,16 @@
+R 1980 1200
+NO  textures/north.xpm
+SO  textures/south.xpm
+WE  textures/west.xpm
+EA  textures/east.xpm
+S   textures/migu/cat.xpm
+F 200, 110, 50
+C 255, 20, 120
+
+11111111
+100S0001
+10200111
+10000001
+10000201
+12001021
+11111111

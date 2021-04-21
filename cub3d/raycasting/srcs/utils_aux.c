@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/16 21:18:10 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/21 21:26:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	error(const char *str)
 	char	*show_error;
 
 	show_error = ft_strjoin(RED"Error: \n"RESET, str);
-	ft_printf(show_error);
+	printf(show_error);
 	free(show_error);
 	exit(1);
 }
