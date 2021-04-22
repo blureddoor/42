@@ -6,11 +6,11 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 21:28:57 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/19 21:35:10 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/22 20:26:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../raycasting/includes/cub.h"
+#include "../includes/cub.h"
 
 int	w(t_game *game)
 {

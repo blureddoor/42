@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 19:21:42 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/15 19:34:24 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/22 20:26:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../raycasting/includes/cub.h"
+#include "../includes/cub.h"
 
 void	camera_calc(t_game *game, int x)
 {

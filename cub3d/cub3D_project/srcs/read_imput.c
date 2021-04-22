@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 20:43:42 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/21 20:41:18 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/22 20:27:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../raycasting/includes/cub.h"
+#include "../includes/cub.h"
 
 int	check_flags(char *l, char *p)
 {
@@ -95,13 +95,13 @@ int	read_config(char *argv)
 
 	str = NULL;
 	p = NULL;
-	(((fd = open(argv, O_RDONLY)) <= 0) && (error(RED"- Can't open FD\n"RESET)));
+	(((fd = open(argv, O_RDONLY)) <= 0) && (error("Can't open FD\n")));
 	while (g_config.count < NUM_FLAGS && get_next_line(fd, &line) > 0)
 	{
 		str = ft_strmapi(line, space_tab);
-		(check_tex(str, p) && (error(RED"Wrong element in .cub\n"RESET)));
+		(check_tex(str, p) && (error("Wrong element in .cub\n")));
 		if (g_config.fch >= 2 || g_config.cch >= 2)
-			error(RED" FC is rep "RESET);
+			error(" FC is rep ");
 		free(line);
 		line = NULL;
 	}

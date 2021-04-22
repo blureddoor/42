@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 19:48:46 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/16 21:27:16 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/22 20:28:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../raycasting/includes/cub.h"
+#include "../includes/cub.h"
 
 char	*pad_right(char pad, int len)
 {

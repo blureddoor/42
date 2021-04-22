@@ -6,11 +6,11 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/21 21:46:36 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/22 20:28:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../raycasting/includes/cub.h"
+#include "../includes/cub.h"
 
 int	closer(t_game *game)
 {
@@ -23,7 +23,7 @@ int	error(const char *str)
 {
 	char	*show_error;
 
-	show_error = ft_strjoin(RED"Error: \n"RESET, str);
+	show_error = ft_strjoin("Error\n", str);
 	printf("%s", show_error);
 	free(show_error);
 	exit(1);

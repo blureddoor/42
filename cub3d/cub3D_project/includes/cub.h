@@ -6,23 +6,22 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 22:00:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/21 21:46:26 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/22 20:36:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
 
-# include <../raycasting/minilibx/mlx.h>
+# include <mlx.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <math.h>
 # include <string.h>
 # include <errno.h>
-# include "../raycasting/gnl/get_next_line.h"
-# include "../raycasting/printf/includes/ft_printf.h"
-# include "../raycasting/printf/libft/libft.h"
+# include "../gnl/get_next_line.h"
+# include "libft.h"
 
 # define RED			"\033[22;31m"
 # define RESET			"\033[0m"
@@ -34,7 +33,7 @@
 # define NUM_FLAGS		8
 
 # define M_SPEED		0.1
-# define VMOVE			128.0
+# define VMOVE			156.0
 # define VDIV			1
 # define UDIV			1
 # define KEY_PRESS		2

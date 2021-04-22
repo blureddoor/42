@@ -6,11 +6,11 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 18:36:42 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/21 20:10:42 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/22 20:28:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../raycasting/includes/cub.h"
+#include "../includes/cub.h"
 
 int	num_sprites(void)
 {

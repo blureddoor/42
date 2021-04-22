@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_load.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/24 20:05:15 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/21 20:22:37 by marvin           ###   ########.fr       */
+/*   Created: 2021/03/24 20:05:15 by lvintila          #+#    #+#             */
+/*   Updated: 2021/04/22 20:25:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../raycasting/includes/cub.h"
+#include "../includes/cub.h"
 
 void	map_fill(char **map)
 {
@@ -63,7 +63,7 @@ void	locate_player_pos(char **map)
 		i++;
 	}
 	if (player_pos != 1)
-		error(RED" - Wrong number of positions\n"RESET);
+		error("Wrong number of positions\n");
 }
 
 int	check_map(char **map, int rows, int cols)
@@ -104,7 +104,7 @@ char	**map_parse(void)
 	locate_player_pos(map);
 	aux = copy_matrix(g_config.map.rows, map);
 	if (check_map(aux, g_config.posx, g_config.posy))
-		error(RED" - Map is not closed \n"RESET);
+		error("Map is not closed \n");
 	free_str(aux);
 	return (map);
 }

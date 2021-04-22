@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:56:58 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/20 17:52:28 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/22 20:28:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../raycasting/includes/cub.h"
+#include "../includes/cub.h"
 
 int	side(t_game *game)
 {
@@ -76,7 +76,7 @@ char	*s_tex(char *line)
 	check_len(n_str, 2);
 	f_name = ft_strdup(n_str[1]);
 	if (n_str[2])
-		error(RED" one of texture path it's not valid "RESET);
+		error("One of texture path it's not valid ");
 	free_str(n_str);
 	return (f_name);
 }
@@ -90,22 +90,22 @@ t_img	*init_texture(t_game *game)
 	texture[0].img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, g_config.no,
 			&texture[0].width, &texture[0].height);
 	if (!(texture[0].img_ptr))
-		error(RED"Can't open NO texture"RESET);
+		error("Can't open NO texture");
 	texture[1].img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, g_config.so,
 			&texture[1].width, &texture[1].height);
 	if (!(texture[1].img_ptr))
-		error(RED"Can't open SO texture"RESET);
+		error("Can't open SO texture");
 	texture[2].img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, g_config.ea,
 			&texture[2].width, &texture[2].height);
 	if (!(texture[2].img_ptr))
-		error(RED"Can't open EA texture"RESET);
+		error("Can't open EA texture");
 	texture[3].img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, g_config.we,
 			&texture[3].width, &texture[3].height);
 	if (!(texture[3].img_ptr))
-		error(RED"Can't open WE texture"RESET);
+		error("Can't open WE texture");
 	texture[4].img_ptr = mlx_xpm_file_to_image(game->mlx.ptr, g_config.s,
 			&texture[4].width, &texture[4].height);
 	if (!(texture[4].img_ptr))
-		error(RED"Sprite Can't be opened"RESET);
+		error("Sprite Can't be opened");
 	return (texture);
 }

@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/21 20:10:05 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/22 20:23:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../raycasting/includes/cub.h"
+#include "../includes/cub.h"
 
 int	init_arg(t_game *game, int argc, char **argv)
 {
@@ -18,14 +18,14 @@ int	init_arg(t_game *game, int argc, char **argv)
 	if (argc == 3)
 	{
 		if ((ft_strncmp(argv[2], "--save", 7) != 0))
-			error(RED"Third argument is not --save\n"RESET);
+			error("Third argument is not --save\n");
 		else
 			g_config.screenshot = 1;
 	}
-	((argc > 3 || argc <= 1) && (error(RED"Wrong number of arguments\n"RESET)));
+	((argc > 3 || argc <= 1) && (error("Wrong number of arguments\n")));
 	if ((ft_strlen(argv[1]) < 5) || ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4]
 		, ".cub", 4))
-		error(RED"No .cub file.\n"RESET);
+		error("No .cub file.\n");
 	else
 		game->mlx.ptr = mlx_init();
 	game->mlx.win = mlx_new_window(game->mlx.ptr, g_config.res.x,

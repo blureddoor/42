@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:15:59 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/19 21:30:45 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/22 20:26:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../raycasting/includes/cub.h"
+#include "../includes/cub.h"
 
 int	press(int key, t_game *game)
 {

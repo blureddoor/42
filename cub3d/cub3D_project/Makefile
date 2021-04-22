@@ -10,8 +10,6 @@ DIR_S		=	srcs
 
 DIR_O		=	obj
 
-// DIR_SP		=	printf/srcs
-
 DIR_G		=	gnl
 
 HEADER		=	includes
@@ -19,10 +17,6 @@ HEADER		=	includes
 SOURCES_C	=	main.c move.c texture.c raycast.c utils.c \
 				utils_aux.c read_imput.c res.c map_load.c color.c \
 				sprite.c sprite_aux.c map_utils.c move_aux.c \
-
-SOURCES_P	=	aux.c aux_1.c converts.c ft_printf.c mods.c \
-				print_char.c print_hex.c print_nbr.c print_pointer.c \
-				print_str.c print_u.c \
 
 SOURCES_G	=	get_next_line.c get_next_line_utils.c 
 
@@ -47,12 +41,13 @@ RM			=	rm -rf
 
 all:			$(NAME)
 
+
 $(NAME):		$(OBJS)
 				@echo "${YELLOW}... compiling cub3D ...${RESET}"
 				@make -C $(LIBFT)
 				@ar rc $(NAME) $(OBJS)
 				@ranlib $(NAME)
-				$(CC) $(OBJS) $(CFLAGS) $(MFLAGS) -L $(LIBFT) $(LIBFT)/libft.a -L $(MINILIBX) $(MINILIBX)/libmlx.a
+				$(CC) $(OBJS) $(CFLAGS) $(MFLAGS) -L $(LIBFT) $(LIBFT)/libft.a
 
 $(DIR_O)/%.o:	$(DIR_S)/%.c $(HEADER)/cub.h
 				@mkdir -p obj
@@ -60,14 +55,7 @@ $(DIR_O)/%.o:	$(DIR_S)/%.c $(HEADER)/cub.h
 
 libft:
 				make -C $(LIBFT)
-run1:
-				./cub3D ./maps/easy_1.cub
 
-run2:			
-				./cub3D ./maps/map1.cub
-
-runsave:		
-				./cub3D ./maps/map1.cub --save
 
 clean:
 				make -C $(LIBFT) clean

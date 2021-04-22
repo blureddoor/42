@@ -6,11 +6,11 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:48:11 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/21 20:40:13 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/22 20:24:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../raycasting/includes/cub.h"
+#include "../includes/cub.h"
 
 int	rgb_int(int r, int g, int b)
 {
@@ -29,15 +29,15 @@ t_color	s_color(char *line, char *pos)
 	((pos[1] == '\0') && (error(RED"Color is empty \n"RESET)));
 	while (pos[++i])
 		if ((!ft_isdigit(pos[i])) && (pos[i] != ',') && (pos[i] != ' '))
-			error(RED"Color is not a number"RESET);
+			error("Color is not a number");
 	i = 0;
 	while (i < 3)
 	{
-		((line == NULL) && (error(RED"Missing colors \n"RESET)));
+		((line == NULL) && (error("Missing colors \n")));
 		line++;
 		color.rgb[i] = ft_atoi(line);
 		line = ft_strchr(line, ',');
-		((line != NULL && i == 2) && (error(RED"Wrong colors format \n"RESET)));
+		((line != NULL && i == 2) && (error("Wrong colors format \n")));
 		i++;
 	}
 	color.rgb_int = rgb_int(color.rgb[0], color.rgb[1], color.rgb[2]);

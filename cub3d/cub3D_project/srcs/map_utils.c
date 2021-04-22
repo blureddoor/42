@@ -6,11 +6,11 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 21:12:38 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/20 21:51:07 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/22 20:25:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../raycasting/includes/cub.h"
+#include "../includes/cub.h"
 
 int	it_is_map(char *l)
 {
@@ -25,7 +25,7 @@ int	it_is_map(char *l)
 	if (i == ft_strlen(l))
 		return (1);
 	else
-		error(RED" - Map is wrong !!!!!\n"RESET);
+		error("Map is wrong\n"RESET);
 	return (0);
 }
 

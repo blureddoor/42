@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 19:22:32 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/19 21:36:29 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/22 20:27:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../raycasting/includes/cub.h"
+#include "../includes/cub.h"
 
 int	is_digit(char *str)
 {
@@ -43,15 +43,15 @@ t_res	s_res(char *line)
 	while (i < 3)
 	{
 		if (aux[i] == NULL)
-			error(RED"Wrong Resolution 1\n"RESET);
+			error("Wrong Resolution 1\n");
 		i++;
 	}
 	if (aux[3])
-		error(RED"Wrong Resolution:Too many arguments for R"RESET);
+		error("Wrong Resolution:Too many arguments for R");
 	if (is_digit(aux[1]) && is_digit(aux[2]))
 		(res.x = ft_atoi(aux[1])) && (res.y = ft_atoi(aux[2]));
 	else
-		error(RED"Wrong resolution 2 \n"RESET);
+		error("Wrong resolution 2 \n");
 	check_res(&res);
 	free_str(aux);
 	return (res);

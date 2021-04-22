@@ -6,11 +6,11 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 17:32:53 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/15 21:21:14 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/22 20:27:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../raycasting/includes/cub.h"
+#include "../includes/cub.h"
 
 void	sort_sprites(t_game *game)
 {
