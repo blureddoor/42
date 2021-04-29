@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 20:09:29 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/29 20:52:55 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/29 21:35:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,9 @@ static void		apply_rot(t_stack *stack);
 void			rotate(t_struct *ps, int instr_nb, char write_it);
 static void		apply_rotate_rev(t_stack *stack);
 void			rotate_rev(t_struct *ps, int instr_nb, char write_it);
+void			init_struct(t_struct *ps);
+int				free_and_return(t_struct *ps);
+int				stack_size(t_stack *stack);
+void			ft_swap(int *a, int *b);
 
 #endif
