@@ -6,13 +6,31 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 20:09:29 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/05 19:49:23 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/06 21:44:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 
 # define PUSH_SWAP_H
+
+# include "libft.h"
+# include "structs.h"
+# include <unistd.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+
+#define SA	0
+#define SB	1
+#define SS	2
+#define PA	3
+#define PB	4
+#define RA	5
+#define RB	6
+#define RR	7
+#define RRA	8
+#define RRB	9
+#define RRR	10
 
 typedef struct	s_chunk
 {
@@ -49,5 +67,10 @@ void			init_struct(t_struct *ps);
 int				free_and_return(t_struct *ps);
 int				stack_size(t_stack *stack);
 void			ft_swap(int *a, int *b);
-
+int				get_max(t_stack stack);
+int				get_min(t_stack stack);
+int				get_min_index(t_stack stack);
+int				get_max_index(t_stack stack);
+int				check_order(t_stack stack_a);
+static int		chunk_sort(t_struct *ps, t_chunk *ch, int nb, int instr);
 #endif

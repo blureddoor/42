@@ -6,27 +6,27 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:34:12 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/05 19:52:01 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/06 20:30:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "push_swap.h"
 
-static void	find_instr(t_sstruct *ps)
+static void	find_instr(t_struct *ps)
 {
 	if (stack_size(&ps->stack_a) >= 20)
-		selection_sort(ps);
+		selection_sort_loop(ps);
 	else if (ps->stack_a.size <= 100)
-		chunk_sort(ps, 5);
+		chunk_sort_loop(ps, 5);
 	else if (ps->stack_a.size <= 200)
-		chunk_sort(ps, 7);
+		chunk_sort_loop(ps, 7);
 	else if (ps->stack_a.size <= 300)
-		chunk_sort(ps, 9);
+		chunk_sort_loop(ps, 9);
 	else if (ps->stack_a.size <= 400)
-		chunk_sort(ps, 10);
+		chunk_sort_loop(ps, 10);
 	else
-		chunk_sort(11);
+		chunk_sort_loop(11);
 }
 
 int	main(int argc, char **argv)
@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 	ps.stack_b.size = ps.stack_a.size;
 	ps.stack_b.begin = ps.stack_b.size;
 	if (!check_order(ps.stack_a))
-		find_isnstr(&ps);
+		find_instr(&ps);
 	free_and_return(&ps);
 	return (0);
 }

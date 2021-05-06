@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deal_args.c                                        :+:      :+:    :+:   */
+/*   check_order.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/05 19:52:12 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/06 21:43:48 by marvin           ###   ########.fr       */
+/*   Created: 2021/05/06 20:46:07 by marvin            #+#    #+#             */
+/*   Updated: 2021/05/06 21:43:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	deal_args(int argc, char **argv, t_struct *ps)
+int	check_order(t_stack stack_a)
 {
-	char **agg_split;
+	int	i;
 
-	agg_split = NULL;
-	if (!split_args(&agg_split, argc, argv))
-		return (free_agg_split(&gg_split));
-	if (!check_args(agg_split, ps))
-		return (free_Agg_split(&agg_split));
-	free_agg_split(&agg_split);
+	i = stack_a.begin;
+	while (i < stack_a.size - 1)
+	{
+		if (stack_a.tab[i] < stack.tab[i + 1])
+			i++;
+		else
+			return (0);
+	}
 	return (1);
 }
