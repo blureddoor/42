@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 21:22:30 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/06 21:40:13 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/07 21:06:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	move_to_b(t_struct *ps, int rank, int instr)
 	min_b = get_min(ps->stack_b);
 	if (nb < min_b)
 		apply_instr(ps, RB, 1);
-	if (ps->stack_b.begin < ps->stack_b.size  - 1
-			&& nb < ps->stack_b.tab[ps->stack_b.begin + 1])
+	if (ps->stack_b.begin < ps->stack_b.size - 1
+		&& nb < ps->stack_b.tab[ps->stack_b.begin + 1])
 		apply_instr(ps, SB, 1);
 }
 

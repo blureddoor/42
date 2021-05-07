@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:34:12 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/06 20:30:32 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/07 21:13:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	init_struct(&ps);
-	if (!deal_args(argc, argv,  &ps))
+	if (!deal_args(argc, argv, &ps))
 	{
 		write(2, "Error\n", 6);
 		return (free_and_return(&ps));

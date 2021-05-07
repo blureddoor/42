@@ -6,7 +6,7 @@
 /*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:05:42 by lvintila          #+#    #+#             */
-/*   Updated: 2020/02/24 20:07:51 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/05/07 19:52:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,5 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 void				ft_memdel(char **s);
 void				ft_strdel(char **s);
 int					ft_strtab(const char *s);
+long				ft_atol(char *str, char **end);
 #endif

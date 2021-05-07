@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 20:09:29 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/06 21:44:00 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/07 20:28:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,9 @@ int				get_min_index(t_stack stack);
 int				get_max_index(t_stack stack);
 int				check_order(t_stack stack_a);
 static int		chunk_sort(t_struct *ps, t_chunk *ch, int nb, int instr);
+static int		split_args(char ***agg_split, int argc, char **argv);
+static int		check_args(char **agg_split, t_struct *ps);
+int				check_line(t_struct *ps, char *arg, int *nb);
+int				ft_realloc(t_stack *stack, int nb_to_add);
+void			deal_args(int argc, char **argv, t_struct *ps);
 #endif

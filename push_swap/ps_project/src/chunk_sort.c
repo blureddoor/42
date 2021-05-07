@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:54:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/06 21:21:53 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/07 21:06:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	init_chunk(t_struct *ps, t_chunk *ch, int nb)
 
 void	chunk_sort_loop(t_struct *ps, int nb)
 {
-	t_chunk ch;
+	t_chunk	ch;
 
 	init_chunk(ps, &ch, nb);
 	while (ps->stack_a.begin < ps->stack_a.size)
