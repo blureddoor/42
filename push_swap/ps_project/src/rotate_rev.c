@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 20:22:48 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/29 20:53:05 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/13 21:45:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 static void	apply_rotate_rev(t_stack *stack)
 {
-	int bottom;
+	int	i;
+	int	bottom;
 
-	bottom = stack->tab[stack->size - 1];
-	while (stack->begin < stack->size - 1)
+	i = stack->size - 1;
+	bottom = stack->tab[i];
+	while (stack->begin < i)
 	{
-		stack->tab[stack->size - 1] = stack->tab[stack->size - 2];
-		stack->tab[stack->size - 2] = bottom;
-		(stack->size - 1)--;
+		stack->tab[i] = stack->tab[i - 1];
+		stack->tab[i - 1] = bottom;
+		i--;
 	}
 }
 

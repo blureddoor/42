@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 20:02:54 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/29 20:37:05 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/13 19:40:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	apply_rot(t_stack *stack)
 {
-	int top;
+	int	top;
 
 	top = stack->tab[stack->begin];
 	while (stack->begin < stack->size - 1)
@@ -31,7 +31,7 @@ void	rotate(t_struct *ps, int instr_nb, char write_it)
 		&& (instr_nb == RA || instr_nb == RR))
 		apply_rot(&ps->stack_a);
 	if (ps->stack_b.size - 1 - ps->stack_b.begin > 0
-		&& (instr_nb == RB ||instr_nb == RR))
+		&& (instr_nb == RB || instr_nb == RR))
 		apply_rot(&ps->stack_b);
 	if (write_it)
 	{

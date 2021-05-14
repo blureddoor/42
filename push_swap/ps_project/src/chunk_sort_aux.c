@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 21:22:30 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/07 21:06:41 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/14 21:40:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	get_rank(t_stack stack, t_chunk ch, char up_or_down)
 	else
 	{
 		i = stack.size - 1;
-		while (stack_begin <= i && !(ch.chunk_min >= stack.tab[i]
+		while (stack.begin <= i && !(ch.chunk_min >= stack.tab[i]
 				&& stack.tab[i] <= ch.chunk_max))
 			i--;
 	}
@@ -68,6 +68,6 @@ void	move_back_to_a(t_struct *ps)
 		instr = RRB;
 	max_index = 0;
 	while (ps->stack_b.tab[ps->stack_b.begin] != max && ++max_index)
-		apply_isntr(ps, instr, 1);
-	apply_isntr(ps, PA, 1);
+		apply_instr(ps, instr, 1);
+	apply_instr(ps, PA, 1);
 }

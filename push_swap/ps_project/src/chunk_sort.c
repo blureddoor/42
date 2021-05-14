@@ -6,13 +6,13 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:54:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/07 21:06:03 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/14 21:37:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	chunk_sort(t_struct *ps, t_chunk *ch, int nb, int instr)
+static int	chunk_sort(t_struct *ps, t_chunk *ch, int nb, int instr)
 {
 	int	rank_up;
 	int	rank_down;
@@ -26,7 +26,7 @@ void	chunk_sort(t_struct *ps, t_chunk *ch, int nb, int instr)
 		ch->chunk_nb++;
 		if (ch->chunk_nb == nb && ch->chunk_max < ch->stack_max)
 			ch->chunk_max = ch->stack_max;
-		return (chunk_sort(ps, ch, nb));
+		return (chunk_sort(ps, ch, nb, instr));
 	}
 	rank_down = get_rank(ps->stack_a, *ch, 1);
 	if ((rank_up - ps->stack_a.begin) < (ps->stack_a.size - rank_down))
@@ -46,7 +46,7 @@ static void	init_chunk(t_struct *ps, t_chunk *ch, int nb)
 	ch->stack_min = get_min(ps->stack_a);
 	ch->stack_max = get_max(ps->stack_a);
 	ch->chunk_min = ch->stack_min;
-	ch->chunk_max = (ch->stack_mx - ch->stack_min) / nb;
+	ch->chunk_max = (ch->stack_max - ch->stack_min) / nb;
 	ch->interval = ch->stack_min + ch->interval;
 	ch->chunk_nb = 1;
 }
@@ -54,10 +54,12 @@ static void	init_chunk(t_struct *ps, t_chunk *ch, int nb)
 void	chunk_sort_loop(t_struct *ps, int nb)
 {
 	t_chunk	ch;
+	int		instr;
 
+	instr = 0;
 	init_chunk(ps, &ch, nb);
 	while (ps->stack_a.begin < ps->stack_a.size)
-		chunk_sort(ps, &ch, nb);
+		chunk_sort(ps, &ch, nb, instr);
 	while (!is_stack_empty(&ps->stack_b))
 		move_back_to_a(ps);
 }

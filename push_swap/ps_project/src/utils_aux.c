@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 21:27:00 by marvin            #+#    #+#             */
-/*   Updated: 2021/05/05 19:51:11 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/14 21:31:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_swap(int *a, int *b)
 {
-	int tmp;
+	int	tmp;
 
 	tmp = *a;
 	*a = *b;
@@ -49,4 +49,11 @@ int	free_and_return(t_struct *ps)
 int	stack_size(t_stack *stack)
 {
 	return (stack->size - stack->begin);
+}
+
+int	is_stack_empty(t_stack *stack)
+{
+	if (stack_size(stack) < 1)
+		return (1);
+	return (0);
 }

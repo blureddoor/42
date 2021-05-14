@@ -6,11 +6,10 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:34:12 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/07 21:13:04 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/14 20:35:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "push_swap.h"
 
 static void	find_instr(t_struct *ps)
@@ -26,7 +25,7 @@ static void	find_instr(t_struct *ps)
 	else if (ps->stack_a.size <= 400)
 		chunk_sort_loop(ps, 10);
 	else
-		chunk_sort_loop(11);
+		chunk_sort_loop(ps, 11);
 }
 
 int	main(int argc, char **argv)
@@ -41,7 +40,7 @@ int	main(int argc, char **argv)
 		write(2, "Error\n", 6);
 		return (free_and_return(&ps));
 	}
-	if (!replace_values_by_rank(&ps.stack_a))
+	if (!replace_value_by_rank(&ps.stack_a))
 		return (free_and_return(&ps));
 	ps.stack_b.tab = (int *)malloc(sizeof(int) * ps.stack_a.size);
 	if (!(ps.stack_b.tab))

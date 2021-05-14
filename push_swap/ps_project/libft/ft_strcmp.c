@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_order.c                                      :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42madrdid.com>    +  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 20:46:07 by marvin            #+#    #+#             */
-/*   Updated: 2021/05/13 21:34:46 by marvin           ###   ########.fr       */
+/*   Created: 2021/05/13 21:19:21 by lvintila          #+#    #+#             */
+/*   Updated: 2021/05/13 21:29:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	check_order(t_stack stack_a)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	int	i;
 
-	i = stack_a.begin;
-	while (i < stack_a.size - 1)
-	{
-		if (stack_a.tab[i] < stack_a.tab[i + 1])
-			i++;
-		else
-			return (0);
-	}
-	return (1);
+	i = 0;
+	while ((unsigned char)s1[i] == (unsigned char)s2[i] && s1[i] && s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

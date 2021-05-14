@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 20:23:56 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/07 21:12:25 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/13 21:40:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ int	free_agg_split(char ***agg_split)
 	while ((*agg_split)[i])
 	{
 		free((*agg_split)[i]);
-		(*agg_split)[i] == NULL;
+		(*agg_split)[i] = NULL;
 		i++;
 	}
 	free((*agg_split)[i]);
-	(*agg_split)[i] == NULL;
+	(*agg_split)[i] = NULL;
 	free(*agg_split);
-	*agg_split == NULL;
+	*agg_split = NULL;
 	return (0);
 }

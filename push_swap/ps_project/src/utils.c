@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 20:10:38 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/06 20:44:12 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/13 21:47:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	get_max(t_stack stack)
 {
-	int max;
+	int	max;
 	int	i;
 
 	max = stack.tab[stack.begin];
@@ -30,7 +30,7 @@ int	get_max(t_stack stack)
 
 int	get_min(t_stack stack)
 {
-	int min;
+	int	min;
 	int	i;
 
 	min = stack.tab[stack.begin];
@@ -48,11 +48,11 @@ int	get_max_index(t_stack stack)
 {
 	int	max;
 	int	max_index;
-	int i;
+	int	i;
 
 	max = stack.tab[stack.begin];
 	max_index = stack.begin;
-	i = stack_begin + 1;
+	i = stack.begin + 1;
 	while (i < stack.size)
 	{
 		if (stack.tab[i] > max)
@@ -69,11 +69,11 @@ int	get_min_index(t_stack stack)
 {
 	int	min;
 	int	min_index;
-	int i;
+	int	i;
 
 	min = stack.tab[stack.begin];
 	min_index = stack.begin;
-	i = stack_begin + 1;
+	i = stack.begin + 1;
 	while (i < stack.size)
 	{
 		if (stack.tab[i] < min)
