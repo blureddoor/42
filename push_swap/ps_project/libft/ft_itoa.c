@@ -6,7 +6,7 @@
 /*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 10:20:57 by lvintila          #+#    #+#             */
-/*   Updated: 2020/01/15 18:50:15 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/04/20 21:16:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ char	*ft_itoa(int n)
 {
 	char	*str;
 
-	if (!(str = (char *)malloc(sizeof(char) * 2)))
+	str = (char *)malloc(sizeof(char) * 2);
+	if (!str)
 		return (NULL);
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));

@@ -6,7 +6,7 @@
 /*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 20:18:31 by lvintila          #+#    #+#             */
-/*   Updated: 2020/01/22 17:35:17 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/04/20 21:19:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_list	*ft_lstnew(void *content)
 {
 	t_list	*new;
 
-	if ((new = (t_list *)malloc(sizeof(t_list))) == NULL)
+	new = (t_list *)malloc(sizeof(t_list));
+	if (new == NULL)
 		return (NULL);
 	new->content = (void *)content;
 	new->next = NULL;

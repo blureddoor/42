@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 20:09:29 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/14 21:38:27 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/18 20:16:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define RRB	9
 # define RRR	10
 
-typedef struct	s_chunk
+typedef struct s_chunk
 {
 	int			stack_min;
 	int			stack_max;
@@ -41,14 +41,14 @@ typedef struct	s_chunk
 	int			chunk_nb;
 }				t_chunk;
 
-typedef struct	s_stack
+typedef struct s_stack
 {
 	int			*tab;
 	int			begin;
 	int			size;
 }				t_stack;
 
-typedef	struct	s_struct
+typedef struct s_struct
 {
 	t_stack		stack_a;
 	t_stack		stack_b;

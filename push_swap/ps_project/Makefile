@@ -31,14 +31,14 @@ CHECKER_OBJ_FILES = apply_instr.o check_instr.o check_order.o \
 CHECKER_OBJ = $(addprefix $(OBJ_DIR), $(CHECKER_OBJ_FILES))
 PUSH_SWAP_OBJ_FILES = apply_instr.o check_instr.o check_order.o \
 					  deal_args.o deal_args_aux.o push.o swap.o \
-					  rotate.o rotate_rev.o checker.o utils.o utils_aux.o\
+					  rotate.o rotate_rev.o utils.o utils_aux.o\
 					  replace_value_by_rank.o selection_sort.o \
 					  sort_last_3.o main_p_s.o chunk_sort.o chunk_sort_aux.o \
 
 PUSH_SWAP_OBJ = $(addprefix $(OBJ_DIR), $(PUSH_SWAP_OBJ_FILES))
 
 HDR_DIR	= ./includes/
-HDR_FIES = push_swap.h
+HDR_FILES = push_swap.h
 HDR = $(addprefix $(HDR_DIR), $(HDR_FILES))
 
 all: $(OBJ_DIR) $(CHECKER_NAME) $(PUSH_SWAP_NAME)

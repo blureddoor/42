@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_ischarset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 15:18:34 by lvintila          #+#    #+#             */
-/*   Updated: 2020/10/16 20:55:23 by marvin           ###   ########.fr       */
+/*   Created: 2020/09/02 20:28:30 by lvintila          #+#    #+#             */
+/*   Updated: 2021/04/20 21:14:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_isdigit(int c)
+int	ft_ischarset(int c, const char *charset)
 {
-	if (c >= 48 && c <= 57)
-		return (1);
+	while (*charset)
+	{
+		if (c == *charset)
+			return (1);
+		charset++;
+	}
 	return (0);
 }

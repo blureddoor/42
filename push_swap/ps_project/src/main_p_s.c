@@ -6,11 +6,11 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:34:12 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/14 20:35:01 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/18 21:08:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 static void	find_instr(t_struct *ps)
 {

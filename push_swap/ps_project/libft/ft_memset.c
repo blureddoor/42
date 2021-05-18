@@ -6,7 +6,7 @@
 /*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 19:24:23 by lvintila          #+#    #+#             */
-/*   Updated: 2020/01/20 17:19:46 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/04/20 21:20:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_memset(void *b, int c, size_t len)
 {
 	char	*ptr;
 
-	ptr = (char*)b;
+	ptr = (char *)b;
 	while (len > 0)
 	{
 		*ptr++ = (char)c;
