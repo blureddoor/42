@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:52:12 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/13 21:39:11 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/19 20:16:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	split_args(char ***agg_split, int argc, char **argv)
 	agg = NULL;
 	if (!agg_args(&agg, argc, argv))
 		return (0);
-	*agg_split = ft_split(agg, ' ');
+	*agg_split = ft_split(agg, " ");
 	if (!(*agg_split))
 	{
 		free(agg);

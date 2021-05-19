@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 20:42:56 by marvin            #+#    #+#             */
-/*   Updated: 2021/05/14 21:29:25 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/19 22:18:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,13 @@ static int	check_if_valid_instr(t_struct *ps, char buf[], int *index)
 	return (1);
 }
 
-int	check_instr(t_struct *ps)
+int	valid_read(t_struct *ps)
 {
 	char	buf[5];
-	int		ret;
 	int		index;
 
 	index = 0;
-	ret = read(0, buf + index, 1);
-	while (ret > 0)
+	while (read(0, buf + index, 1) > 0)
 	{
 		if (buf[index] != '\n')
 		{
@@ -75,6 +73,18 @@ int	check_instr(t_struct *ps)
 				return (0);
 		}
 	}
+	return (0);
+}
+
+int	check_instr(t_struct *ps)
+{
+	char	buf[5];
+	int		ret;
+	int		index;
+
+	index = 0;
+	valid_read(ps);
+	ret = read(0, buf + index, 1);
 	if (!ret && index > 0 && !check_if_valid_instr(ps, buf, &index))
 		return (0);
 	if (ret == -1)

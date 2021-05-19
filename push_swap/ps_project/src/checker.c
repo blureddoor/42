@@ -6,11 +6,20 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 21:16:30 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/18 21:08:11 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/19 22:40:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+int	fix_checker(t_struct ps)
+{
+	if (check_order(ps.stack_a) && is_stack_empty(&ps.stack_b))
+		write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
+	return (0);
+}
 
 int	main(int argc, char **argv)
 {
@@ -35,9 +44,6 @@ int	main(int argc, char **argv)
 		write(2, "Error\n", 6);
 		return (free_and_return(&ps));
 	}
-	if (check_order(ps.stack_a) && is_stack_empty(&ps.stack_b))
-		write(1, "OK\n", 3);
-	else
-		write(1, "KO\n", 3);
+	fix_checker(ps);
 	return (free_and_return(&ps));
 }

@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 20:09:29 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/18 20:16:03 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/19 20:26:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 # include "libft.h"
 # include <unistd.h>
+# include <stdio.h>
 # include <sys/types.h>
 # include <sys/uio.h>
 

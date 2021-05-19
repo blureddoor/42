@@ -3,82 +3,108 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: agardina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/21 18:40:00 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/21 18:45:47 by marvin           ###   ########.fr       */
+/*   Created: 2019/04/25 19:14:46 by agardina          #+#    #+#             */
+/*   Updated: 2021/05/19 22:23:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
-static int	ft_nbofwords(char *s, char c)
+static int	is_sep(char *charset, char c)
 {
 	int	i;
-	int	is_word;
 
 	i = 0;
-	is_word = 0;
-	while (*s)
+	while (charset[i])
 	{
-		if (is_word == 0 && *s != c)
-		{
-			is_word = 1;
+		if (c == charset[i])
+			return (1);
+		else
 			i++;
-		}
-		else if (is_word == 1 && *s == c)
-			is_word = 0;
-		s++;
 	}
-	return (i);
+	return (0);
 }
 
-static int	ft_strlenword(char *s, char c)
+static int	get_words_nb(char const *s, char *charset)
 {
-	int	len;
+	int	i;
+	int	count;
 
-	len = 0;
-	while (*s != c && *s != '\0')
-	{
-		len++;
-		s++;
-	}
-	return (len);
-}
-
-static void	*my_free(char **tab, int i)
-{
-	while (i-- > 0)
-	{
-		free(tab[i]);
-	}
-	free(tab);
-	return (NULL);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	int		nb_ofwords;
-	char	**tab;
-	int		i;
-
-	if (!s)
-		return (NULL);
-	nb_ofwords = ft_nbofwords((char *)s, c);
-	tab = (char **)malloc((nb_ofwords + 1) * sizeof(char *));
-	if (!(tab))
-		return (NULL);
 	i = 0;
-	while (nb_ofwords--)
+	count = 0;
+	while (s[i])
 	{
-		while (*s == c && *s != '\0')
-			s++;
-		tab[i] = ft_substr((char *)s, 0, ft_strlenword((char *)s, c));
-		if (!tab[i])
-			return (my_free(tab, i));
-		s = s + ft_strlenword((char *)s, c);
+		if (!is_sep(charset, s[i]) && ((i > 0 && is_sep(charset, s[i - 1]))
+				|| i == 0))
+			count++;
 		i++;
 	}
-	tab[i] = NULL;
+	return (count);
+}
+
+static void	get_words_info(char const *s, char *charset, t_word *tab)
+{
+	int	i;
+	int	index;
+
+	i = 0;
+	index = -1;
+	while (s[i])
+	{
+		if (!is_sep(charset, s[i]) && ((i > 0 && is_sep(charset, s[i - 1]))
+				|| i == 0))
+		{
+			index++;
+			(tab + index)->len = 1;
+			(tab + index)->start = i;
+		}
+		if (i > 0 && !is_sep(charset, s[i]) && !is_sep(charset, s[i - 1]))
+			((tab + index)->len)++;
+		i++;
+	}
+}
+
+static void	fill_tab(char const *str, char *substr, t_word word_info)
+{
+	int	i;
+
+	i = 0;
+	while (i < word_info.len)
+	{
+		substr[i] = str[word_info.start + i];
+		i++;
+	}
+	substr[i] = '\0';
+}
+
+char	**ft_split(char const *s, char *charset)
+{
+	char	**tab;
+	int		words_nb;
+	t_word	*info;
+	int		i;
+
+	if (!s || !charset || !charset[0])
+		return (NULL);
+	words_nb = get_words_nb(s, charset);
+	tab = (char **)malloc(sizeof(char *) * (size_t)(words_nb + 1));
+	info = (t_word *)malloc(sizeof(t_word) * (size_t)words_nb);
+	if (tab == NULL || info == NULL)
+		return (NULL);
+	get_words_info(s, charset, info);
+	i = 0;
+	while (i < words_nb)
+	{
+		tab[i] = (char *)malloc(sizeof(char) * (size_t)(info[i].len + 1));
+		if (tab[i] == NULL)
+			return (NULL);
+		fill_tab(s, tab[i], info[i]);
+		i++;
+	}
+	tab[i] = 0;
+	free(info);
 	return (tab);
 }

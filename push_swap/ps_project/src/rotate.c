@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 20:02:54 by marvin            #+#    #+#             */
-/*   Updated: 2021/05/13 19:40:48 by marvin           ###   ########.fr       */
+/*   Updated: 2021/05/19 21:43:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 static void	apply_rot(t_stack *stack)
 {
 	int	top;
+	int	i;
 
-	top = stack->tab[stack->begin];
-	while (stack->begin < stack->size - 1)
+	i = stack->begin;
+	top = stack->tab[i];
+	while (i < stack->size - 1)
 	{
-		stack->tab[stack->begin] = stack->tab[stack->begin + 1];
-		stack->tab[stack->begin + 1] = top;
-		stack->begin++;
+		stack->tab[i] = stack->tab[i + 1];
+		stack->tab[i + 1] = top;
+		i++;
 	}
 }
 
