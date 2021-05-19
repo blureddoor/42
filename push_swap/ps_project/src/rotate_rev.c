@@ -38,10 +38,10 @@ void	rotate_rev(t_struct *ps, int instr_nb, char write_it)
 	if (write_it)
 	{
 		if (instr_nb == RRA)
-			write(1, "rra\n", 3);
+			write(1, "rra\n", 4);
 		else if (instr_nb == RRB)
-			write(1, "rrb\n", 3);
+			write(1, "rrb\n", 4);
 		else if (instr_nb == RRR)
-			write(1, "rrr\n", 3);
+			write(1, "rrr\n", 4);
 	}
 }

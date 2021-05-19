@@ -28,7 +28,7 @@ void	push(t_struct *ps, int instr_nb, char write_it)
 	{
 		apply_push(&ps->stack_a, &ps->stack_b);
 		if (write_it)
-			write(1, "p\n", 3);
+			write(1, "pa\n", 3);
 	}
 	else
 	{

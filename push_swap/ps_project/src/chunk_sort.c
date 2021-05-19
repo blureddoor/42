@@ -12,11 +12,12 @@
 
 #include "push_swap.h"
 
-static int	chunk_sort(t_struct *ps, t_chunk *ch, int nb, int instr)
+static int	chunk_sort(t_struct *ps, t_chunk *ch, int nb)
 {
 	int	rank_up;
 	int	rank_down;
 	int	rank_to_move;
+    int instr;
 
 	rank_up = get_rank(ps->stack_a, *ch, 0);
 	if (rank_up < 0)
@@ -26,7 +27,7 @@ static int	chunk_sort(t_struct *ps, t_chunk *ch, int nb, int instr)
 		ch->chunk_nb++;
 		if (ch->chunk_nb == nb && ch->chunk_max < ch->stack_max)
 			ch->chunk_max = ch->stack_max;
-		return (chunk_sort(ps, ch, nb, instr));
+		return (chunk_sort(ps, ch, nb));
 	}
 	rank_down = get_rank(ps->stack_a, *ch, 1);
 	if ((rank_up - ps->stack_a.begin) < (ps->stack_a.size - rank_down))
@@ -46,20 +47,18 @@ static void	init_chunk(t_struct *ps, t_chunk *ch, int nb)
 	ch->stack_min = get_min(ps->stack_a);
 	ch->stack_max = get_max(ps->stack_a);
 	ch->chunk_min = ch->stack_min;
-	ch->chunk_max = (ch->stack_max - ch->stack_min) / nb;
-	ch->interval = ch->stack_min + ch->interval;
+	ch->chunk_max = ch->stack_min + ch->interval;
+	ch->interval = (ch->stack_max - ch->stack_min) / nb;
 	ch->chunk_nb = 1;
 }
 
 void	chunk_sort_loop(t_struct *ps, int nb)
 {
 	t_chunk	ch;
-	int		instr;
 
-	instr = 0;
 	init_chunk(ps, &ch, nb);
 	while (ps->stack_a.begin < ps->stack_a.size)
-		chunk_sort(ps, &ch, nb, instr);
+		chunk_sort(ps, &ch, nb);
 	while (!is_stack_empty(&ps->stack_b))
 		move_back_to_a(ps);
 }

@@ -65,7 +65,7 @@ int	free_agg_split(char ***agg_split)
 {
 	int	i;
 
-	if (!agg_split)
+	if (!*agg_split)
 		return (0);
 	i = 0;
 	while ((*agg_split)[i])
