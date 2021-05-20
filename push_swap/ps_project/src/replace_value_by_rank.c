@@ -12,15 +12,13 @@
 
 #include "push_swap.h"
 
-int	replace_value_by_rank(t_stack *stack)
+int fix_replace(t_stack *stack)
 {
-	t_stack	rank;
-	int		i;
-	int		j;
-	int		res;
+    t_stack rank;
+    int i;
+    int j;
+    int res;
 
-	rank.begin = 0;
-	rank.size = stack_size(stack);
 	rank.tab = (int *)malloc(sizeof(int) * rank.size);
 	if (!rank.tab)
 		return (0);
@@ -39,5 +37,15 @@ int	replace_value_by_rank(t_stack *stack)
 		stack->tab[i] = rank.tab[i];
 	free(rank.tab);
 	rank.tab = NULL;
+    return (0);
+}
+
+int	replace_value_by_rank(t_stack *stack)
+{
+	t_stack	rank;
+
+	rank.begin = 0;
+	rank.size = stack_size(stack);
+    fix_replace(stack);
 	return (1);
 }
