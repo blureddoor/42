@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 21:22:30 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/19 21:10:54 by marvin           ###   ########.fr       */
+/*   Updated: 2021/06/10 21:38:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,20 @@ int	get_rank(t_stack stack, t_chunk ch, char up_or_down)
 		i = stack.begin;
 		while (i < stack.size && !(ch.chunk_min <= stack.tab[i]
 				&& stack.tab[i] <= ch.chunk_max))
+		{
 			i++;
+    		printf("i++ if_get_rank = %d\n", i);
+		}
 	}
 	else
 	{
 		i = stack.size - 1;
 		while (stack.begin <= i && !(ch.chunk_min >= stack.tab[i]
 				&& stack.tab[i] <= ch.chunk_max))
+		{	
 			i--;
+    		printf("i-- else_get_rank = %d\n", i);
+		}
 	}
 	if (i == stack.size || i == stack.begin - 1)
 		return (-1);

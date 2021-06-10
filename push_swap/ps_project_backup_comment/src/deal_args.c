@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:52:12 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/19 20:16:15 by marvin           ###   ########.fr       */
+/*   Updated: 2021/06/10 21:38:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	split_args(char ***agg_split, int argc, char **argv)
 	}
 	free(agg);
 	agg = NULL;
-	printf("Final_split_args\n");
+//	printf("Final_split_args\n");
 	return (1);
 }
 
@@ -37,7 +37,7 @@ static int	check_args(char **agg_split, t_struct *ps)
 	int	i;
 	int	nb_to_add;
 
-	printf("Begin_check_args\n");
+//	printf("Begin_check_args\n");
 	nb_to_add = 0;
 	i = 0;
 	while (agg_split[i])
@@ -48,17 +48,17 @@ static int	check_args(char **agg_split, t_struct *ps)
 			ps->stack_a.tab = NULL;
 			return (0);
 		}
-		printf("check_args_first_while\n");
+//		printf("check_args_first_while\n");
 		if (!ft_realloc(&ps->stack_a, nb_to_add))
 		{
 			free(ps->stack_a.tab);
 			ps->stack_a.tab = NULL;
 			return (0);
 		}
-		printf("check_args_sec_while\n");
+//		printf("check_args_sec_while\n");
 		i++;
 	}
-	printf("Final_check_args\n");
+//	printf("Final_check_args\n");
 	return (1);
 }
 
@@ -76,7 +76,7 @@ int	check_line(t_struct *ps, char *arg, int *nb)
 		else
 			return (0);
 	}
-	printf("check_line_after_first_while\n");
+//	printf("check_line_after_first_while\n");
 	end = NULL;
 	*nb = ft_atol(arg, &end);
 	if (!end)
@@ -89,7 +89,7 @@ int	check_line(t_struct *ps, char *arg, int *nb)
 		else
 			return (0);
 	}
-	printf("check_line_after_second_while\n");
+//	printf("check_line_after_second_while\n");
 	return (1);
 }
 
@@ -112,20 +112,20 @@ int	i;
 		free(stack->tab);
 	stack->tab = tmp;
 	stack->size++;
-	printf("ft_realloc_final\n");
+//	printf("ft_realloc_final\n");
 	return (1);
 }
 
 int	deal_args(int argc, char **argv, t_struct *ps)
 {
-	printf("Begin_deal_args\n");
+//	printf("Begin_deal_args\n");
 	char	**agg_split;
 
 	agg_split = NULL;
-	printf("deal_args_before_if_split_args\n");
+//	printf("deal_args_before_if_split_args\n");
 	if (!split_args(&agg_split, argc, argv))
 		return (free_agg_split(&agg_split));
-	printf("deal_args_before_if_check_args\n");
+//	printf("deal_args_before_if_check_args\n");
 	if (!check_args(agg_split, ps))
 		return (free_agg_split(&agg_split));
 	free_agg_split(&agg_split);
