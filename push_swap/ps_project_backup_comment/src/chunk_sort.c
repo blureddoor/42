@@ -66,13 +66,25 @@ static void	init_chunk(t_struct *ps, t_chunk *ch, int nb)
 void	chunk_sort_loop(t_struct *ps, int nb)
 {
 	t_chunk	ch;
+    int i;
+
+    i = 0;
 	printf("CHUNK_SORT\n");
 	init_chunk(ps, &ch, nb);
 	printf("CHUNK_SORT_1\n");
 	while (ps->stack_a.begin < ps->stack_a.size)
-		chunk_sort(ps, &ch, nb);
+    {
+        chunk_sort(ps, &ch, nb);
+        i++;
+        printf("i_ps_stack_a.begin<ps->stack_a.size = %d\n", i);
+    }
 	printf("CHUNK_SORT_2\n");
+    i = 0;
 	while (!is_stack_empty(&ps->stack_b))
-		move_back_to_a(ps);
+    {
+        move_back_to_a(ps);
+        i++;
+        printf("i_is_stack_empty = %d\n", i);
+    }
 	printf("CHUNK_SORT_3\n");
 }

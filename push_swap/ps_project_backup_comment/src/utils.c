@@ -17,6 +17,7 @@ int	get_max(t_stack stack)
 	int	max;
 	int	i;
 
+    printf("get_max_0\n");
 	max = stack.tab[stack.begin];
 	i = stack.begin + 1;
 	while (i < stack.size)
@@ -25,6 +26,7 @@ int	get_max(t_stack stack)
 			max = stack.tab[i];
 		i++;
 	}
+    printf("get_max_1\n");
 	return (max);
 }
 
@@ -33,6 +35,7 @@ int	get_min(t_stack stack)
 	int	min;
 	int	i;
 
+    printf("get_min_1\n");
 	min = stack.tab[stack.begin];
 	i = stack.begin + 1;
 	while (i < stack.size)
@@ -41,6 +44,7 @@ int	get_min(t_stack stack)
 			min = stack.tab[i];
 		i++;
 	}
+    printf("get_min_1\n");
 	return (min);
 }
 
@@ -50,6 +54,7 @@ int	get_max_index(t_stack stack)
 	int	max_index;
 	int	i;
 
+    printf("get_max_index_0\n");
 	max = stack.tab[stack.begin];
 	max_index = stack.begin;
 	i = stack.begin + 1;
@@ -62,6 +67,7 @@ int	get_max_index(t_stack stack)
 		}
 		i++;
 	}
+    printf("get_max_index_1\n");
 	return (max_index);
 }
 
@@ -71,6 +77,7 @@ int	get_min_index(t_stack stack)
 	int	min_index;
 	int	i;
 
+    printf("get_min_index_0\n");
 	min = stack.tab[stack.begin];
 	min_index = stack.begin;
 	i = stack.begin + 1;
@@ -82,6 +89,7 @@ int	get_min_index(t_stack stack)
 			min_index = i;
 		}
 		i++;
-	}
+    }	
+    printf("get_min_index_1\n");
 	return (min_index);
 }

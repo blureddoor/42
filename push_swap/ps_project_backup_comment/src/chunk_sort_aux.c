@@ -16,6 +16,7 @@ int	get_rank(t_stack stack, t_chunk ch, char up_or_down)
 {
 	int	i;
 
+    printf("_get_rank_0\n");
 	if (!up_or_down)
 	{
 		i = stack.begin;
@@ -32,6 +33,7 @@ int	get_rank(t_stack stack, t_chunk ch, char up_or_down)
 	}
 	if (i == stack.size || i == stack.begin - 1)
 		return (-1);
+    printf("_get_rank_1\n");
 	return (i);
 }
 
@@ -40,6 +42,7 @@ void	move_to_b(t_struct *ps, int rank, int instr)
 	int	nb;
 	int	min_b;
 
+    printf("_B_move___to_B_0\n");
 	nb = ps->stack_a.tab[rank];
 	while (ps->stack_a.tab[ps->stack_a.begin] != nb)
 		apply_instr(ps, instr, 1);
@@ -50,6 +53,7 @@ void	move_to_b(t_struct *ps, int rank, int instr)
 	if (ps->stack_b.begin < ps->stack_b.size - 1
 		&& nb < ps->stack_b.tab[ps->stack_b.begin + 1])
 		apply_instr(ps, SB, 1);
+    printf("_B_move___to_B_1\n");
 }
 
 void	move_back_to_a(t_struct *ps)
@@ -59,6 +63,7 @@ void	move_back_to_a(t_struct *ps)
 	int	max_index;
 	int	instr;
 
+    printf("move_back_to_A_0\n");
 	max = get_max(ps->stack_b);
 	max_index = get_max_index(ps->stack_b);
 	middle = (ps->stack_b.size - ps->stack_b.begin) / 2 + ps->stack_b.begin;
@@ -70,4 +75,5 @@ void	move_back_to_a(t_struct *ps)
 	while (ps->stack_b.tab[ps->stack_b.begin] != max && ++max_index)
 		apply_instr(ps, instr, 1);
 	apply_instr(ps, PA, 1);
+    printf("move_back_to_A_1\n");
 }

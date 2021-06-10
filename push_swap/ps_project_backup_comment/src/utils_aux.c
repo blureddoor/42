@@ -23,6 +23,7 @@ void	ft_swap(int *a, int *b)
 
 void	init_struct(t_struct *ps)
 {
+    printf("_init_struct\n");
 	ps->stack_a.tab = NULL;
 	ps->stack_a.begin = 0;
 	ps->stack_a.size = 0;
@@ -33,6 +34,7 @@ void	init_struct(t_struct *ps)
 
 int	free_and_return(t_struct *ps)
 {
+    printf("free_and_return_0\n");
 	if (ps->stack_a.tab)
 	{
 		free(ps->stack_a.tab);
@@ -53,6 +55,7 @@ int	stack_size(t_stack *stack)
 
 int	is_stack_empty(t_stack *stack)
 {
+    printf("_inside_is_stack_empty_0\n");
 	if (stack_size(stack) < 1)
 		return (1);
 	return (0);
