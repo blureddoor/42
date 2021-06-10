@@ -64,8 +64,8 @@ int	main(int argc, char **argv)
 		write(2, "Error\n", 6);
 		return (free_and_return(&ps));
 	}
-	if (!replace_value_by_rank(&ps.stack_a))
-		return (free_and_return(&ps));
+//	if (!replace_value_by_rank(&ps.stack_a))
+//		return (free_and_return(&ps));
 	printf("main_p_s_after_if_replace_value_by_rank\n");
 	ps.stack_b.tab = (int *)malloc(sizeof(int) * ps.stack_a.size);
 	printf("main_p_s_after_malloc_ps_stack_b_size\n");
