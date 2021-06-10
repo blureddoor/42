@@ -25,6 +25,7 @@ int	get_max(t_stack stack)
 		if (stack.tab[i] > max)
 			max = stack.tab[i];
 		i++;
+        printf("i_get_max =%d\n", i);
 	}
     printf("get_max_1\n");
 	return (max);
@@ -43,6 +44,7 @@ int	get_min(t_stack stack)
 		if (stack.tab[i] < min)
 			min = stack.tab[i];
 		i++;
+        printf("i_get_min =%d\n", i);
 	}
     printf("get_min_1\n");
 	return (min);
@@ -66,6 +68,7 @@ int	get_max_index(t_stack stack)
 			max_index = i;
 		}
 		i++;
+        printf("i_get_max_index =%d\n", i);
 	}
     printf("get_max_index_1\n");
 	return (max_index);
@@ -89,6 +92,7 @@ int	get_min_index(t_stack stack)
 			min_index = i;
 		}
 		i++;
+        printf("i_get_min_index =%d\n", i);
     }	
     printf("get_min_index_1\n");
 	return (min_index);
