@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 20:10:38 by lvintila          #+#    #+#             */
-/*   Updated: 2021/06/10 21:38:39 by marvin           ###   ########.fr       */
+/*   Updated: 2021/06/15 21:49:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ int	get_max(t_stack stack)
     printf("Intro: get_max\n");
 	max = stack.tab[stack.begin];
 	i = stack.begin + 1;
-    printf("i_inicio_get_max =%d\n", i);
+    printf("i_inicio_get_max = %d, max_inicial = %d\n", i, max);
 	while (i < stack.size)
 	{
 		if (stack.tab[i] > max)
 			max = stack.tab[i];
 		i++;
 	}
-    printf("i_exit_get_max =%d\n", i);
+    printf("i_exit_get_max =%d, max = %d\n", i, max);
     printf("Exit:get_max\n");
 	return (max);
 }
@@ -40,14 +40,14 @@ int	get_min(t_stack stack)
     printf("Intro: get_min\n");
 	min = stack.tab[stack.begin];
 	i = stack.begin + 1;
+    printf("i_get_min = %d, min_get_min = %d\n", i, min);
 	while (i < stack.size)
 	{
 		if (stack.tab[i] < min)
 			min = stack.tab[i];
 		i++;
 	}
-    printf("i_get_min =%d\n", i);
-    printf("Exit: get_min\n");
+//    printf("Exit: get_min\n");
 	return (min);
 }
 
@@ -94,7 +94,7 @@ int	get_min_index(t_stack stack)
 		}
 		i++;
     }	
-    printf("i_get_min_index =%d\n", i);
+    printf("min_index = %d, min = %d\n", min_index, min);
     printf("Exit: get_min_index\n");
 	return (min_index);
 }

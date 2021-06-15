@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:34:12 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/19 21:24:13 by marvin           ###   ########.fr       */
+/*   Updated: 2021/06/14 20:44:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static void	find_instr(t_struct *ps)
 {
 	if (stack_size(&ps->stack_a) <= 20)
 		selection_sort_loop(ps);
-	else if (ps->stack_a.size <= 100)
+	else if (ps->stack_a.size < 100)
 		chunk_sort_loop(ps, 5);
 	else if (ps->stack_a.size <= 200)
-		chunk_sort_loop(ps, 7);
+		chunk_sort_loop(ps, 8);
 	else if (ps->stack_a.size <= 300)
 		chunk_sort_loop(ps, 9);
 	else if (ps->stack_a.size <= 400)
@@ -40,8 +40,8 @@ int	main(int argc, char **argv)
 		write(2, "Error\n", 6);
 		return (free_and_return(&ps));
 	}
-	if (!replace_value_by_rank(&ps.stack_a))
-		return (free_and_return(&ps));
+//	if (!replace_value_by_rank(&ps.stack_a))
+//		return (free_and_return(&ps));
 	ps.stack_b.tab = (int *)malloc(sizeof(int) * ps.stack_a.size);
 	if (!(ps.stack_b.tab))
 		return (free_and_return(&ps));

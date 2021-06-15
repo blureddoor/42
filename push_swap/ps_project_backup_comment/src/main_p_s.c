@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:34:12 by lvintila          #+#    #+#             */
-/*   Updated: 2021/06/10 21:29:42 by marvin           ###   ########.fr       */
+/*   Updated: 2021/06/14 20:44:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	find_instr(t_struct *ps)
 		}
 	else if (ps->stack_a.size <= 200)
 		{
-			chunk_sort_loop(ps, 7);
+			chunk_sort_loop(ps, 8);
 //			printf("find_instr_200\n");
 		}
 	else if (ps->stack_a.size <= 300)

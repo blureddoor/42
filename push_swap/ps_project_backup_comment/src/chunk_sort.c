@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:54:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/06/10 21:38:26 by marvin           ###   ########.fr       */
+/*   Updated: 2021/06/15 19:58:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	fix_chunk_sort(t_struct *ps, t_chunk *ch)
 		instr = RA;
 	else
 		instr = RRA;
+	printf("rank_to_move = %d, instr = %d\n", rank_to_move, instr);
 	move_to_b(ps, rank_to_move, instr);
 	printf("_fix_chunk_sort\n");
 }
