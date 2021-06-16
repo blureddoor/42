@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 20:01:44 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/19 22:51:38 by marvin           ###   ########.fr       */
+/*   Updated: 2021/06/16 20:43:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,13 @@ int fix_replace(t_stack *stack)
 				res++;
 		rank.tab[i] = res;
 	}
+	printf("res = %d\n", res);
+	printf("rank.tab[i] = %d, i = %d, stack->tab[i] = %d\n", rank.tab[i], i, stack->tab[i]);
+	printf("j = %d, stack->tab[j] = %d\n", j, stack->tab[j]);
 	i = -1;
-	printf("Before_secnd_while_fix_replace\n");
 	while (++i < rank.size)
 		stack->tab[i] = rank.tab[i];
+	printf("rank.tab[i] = %d, i = %d, stack->tab[i] = %d\n", rank.tab[i], i, stack->tab[i]);
 	free(rank.tab);
 	rank.tab = NULL;
 	printf("Final_fix_replacer\n");
@@ -51,6 +54,7 @@ int	replace_value_by_rank(t_stack *stack)
 	printf("Begin_r_v_b_r\n");
 	rank.begin = 0;
 	rank.size = stack_size(stack);
+	printf("rank.begin = %d, rank.size = %d\n", rank.begin, rank.size);
     fix_replace(stack);
 	printf("Final_r_v_b_r\n");
 	return (1);

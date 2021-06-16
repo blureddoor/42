@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:34:12 by lvintila          #+#    #+#             */
-/*   Updated: 2021/06/14 20:44:22 by marvin           ###   ########.fr       */
+/*   Updated: 2021/06/16 21:18:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,14 @@ int	main(int argc, char **argv)
 	printf("main_p_s_2\n");
 	if (!deal_args(argc, argv, &ps))
 	{
-//		printf("main_p_s_dentro_if_deal_args\n");
 		write(2, "Error\n", 6);
 		return (free_and_return(&ps));
 	}
-//	if (!replace_value_by_rank(&ps.stack_a))
-//		return (free_and_return(&ps));
-	printf("main_p_s_after_if_replace_value_by_rank\n");
 	ps.stack_b.tab = (int *)malloc(sizeof(int) * ps.stack_a.size);
-//	printf("main_p_s_after_malloc_ps_stack_b_size\n");
+	printf("main_p_s_2_y_medio\n");
 	if (!(ps.stack_b.tab))
 		return (free_and_return(&ps));
 	ft_bzero(ps.stack_b.tab, ps.stack_a.size * sizeof(int));
-//	printf("main_p_s_after_bzero\n");
 	ps.stack_b.size = ps.stack_a.size;
 	printf("main_p_s_3\n");
 	ps.stack_b.begin = ps.stack_b.size;

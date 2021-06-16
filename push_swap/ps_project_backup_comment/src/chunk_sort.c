@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:54:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/06/15 19:58:55 by marvin           ###   ########.fr       */
+/*   Updated: 2021/06/16 20:54:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	fix_chunk_sort(t_struct *ps, t_chunk *ch)
 		instr = RA;
 	else
 		instr = RRA;
-	printf("rank_to_move = %d, instr = %d\n", rank_to_move, instr);
+//	printf("rank_to_move = %d, instr = %d\n", rank_to_move, instr);
 	move_to_b(ps, rank_to_move, instr);
-	printf("_fix_chunk_sort\n");
+//	printf("_fix_chunk_sort\n");
 }
 
 static int	chunk_sort(t_struct *ps, t_chunk *ch, int nb)
@@ -49,7 +49,7 @@ static int	chunk_sort(t_struct *ps, t_chunk *ch, int nb)
 		return (chunk_sort(ps, ch, nb));
 	}
 	fix_chunk_sort(ps, ch);
-	printf("_chunk_sort\n");
+//	printf("_chunk_sort\n");
 	return (0);
 }
 
@@ -61,7 +61,7 @@ static void	init_chunk(t_struct *ps, t_chunk *ch, int nb)
 	ch->interval = (ch->stack_max - ch->stack_min) / nb;
 	ch->chunk_max = ch->stack_min + ch->interval;
 	ch->chunk_nb = 1;
-	printf("_init_chunk\n");
+//	printf("_init_chunk\n");
 }
 
 void	chunk_sort_loop(t_struct *ps, int nb)

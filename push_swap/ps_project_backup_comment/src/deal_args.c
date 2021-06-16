@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:52:12 by lvintila          #+#    #+#             */
-/*   Updated: 2021/06/10 21:38:46 by marvin           ###   ########.fr       */
+/*   Updated: 2021/06/16 22:13:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ static int	split_args(char ***agg_split, int argc, char **argv)
 {
 	char	*agg;
 
+	printf("Inicio_split_args\n");
 	agg = NULL;
 	if (!agg_args(&agg, argc, argv))
 		return (0);
 	*agg_split = ft_split(agg, " ");
+	printf("**agg_split = %s\n", **agg_split);
 	if (!(*agg_split))
 	{
 		free(agg);
@@ -28,7 +30,8 @@ static int	split_args(char ***agg_split, int argc, char **argv)
 	}
 	free(agg);
 	agg = NULL;
-//	printf("Final_split_args\n");
+	printf("***agg_split = %c\n", ***agg_split);
+	printf("Final_split_args\n");
 	return (1);
 }
 
@@ -37,28 +40,29 @@ static int	check_args(char **agg_split, t_struct *ps)
 	int	i;
 	int	nb_to_add;
 
-//	printf("Begin_check_args\n");
+	printf("Begin_check_args\n");
 	nb_to_add = 0;
 	i = 0;
 	while (agg_split[i])
 	{
+		printf("agg_split[i] = %s\n", agg_split[i]);
 		if (!check_line(ps, agg_split[i], &nb_to_add))
 		{
 			free(ps->stack_a.tab);
 			ps->stack_a.tab = NULL;
 			return (0);
 		}
-//		printf("check_args_first_while\n");
+		printf("check_args_first_while\n");
 		if (!ft_realloc(&ps->stack_a, nb_to_add))
 		{
 			free(ps->stack_a.tab);
 			ps->stack_a.tab = NULL;
 			return (0);
 		}
-//		printf("check_args_sec_while\n");
+		printf("check_args_sec_while\n");
 		i++;
 	}
-//	printf("Final_check_args\n");
+	printf("Final_check_args\n");
 	return (1);
 }
 
@@ -76,9 +80,10 @@ int	check_line(t_struct *ps, char *arg, int *nb)
 		else
 			return (0);
 	}
-//	printf("check_line_after_first_while\n");
 	end = NULL;
+	printf("arg = %s\n", arg);
 	*nb = ft_atol(arg, &end);
+	printf("*nb = %d\n", *nb);
 	if (!end)
 		return (0);
 	i = 0;
@@ -89,7 +94,7 @@ int	check_line(t_struct *ps, char *arg, int *nb)
 		else
 			return (0);
 	}
-//	printf("check_line_after_second_while\n");
+	printf("check_line_after_second_while, i = %d\n", i);
 	return (1);
 }
 
@@ -112,13 +117,13 @@ int	i;
 		free(stack->tab);
 	stack->tab = tmp;
 	stack->size++;
-//	printf("ft_realloc_final\n");
+	printf("ft_realloc_final\n");
 	return (1);
 }
 
 int	deal_args(int argc, char **argv, t_struct *ps)
 {
-//	printf("Begin_deal_args\n");
+	printf("Begin_deal_args\n");
 	char	**agg_split;
 
 	agg_split = NULL;
