@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 21:16:30 by lvintila          #+#    #+#             */
-/*   Updated: 2021/05/19 22:40:48 by marvin           ###   ########.fr       */
+/*   Updated: 2021/06/17 20:34:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,5 @@ int	main(int argc, char **argv)
 	}
 	fix_checker(ps);
 	return (free_and_return(&ps));
+	system("leaks checker");
 }

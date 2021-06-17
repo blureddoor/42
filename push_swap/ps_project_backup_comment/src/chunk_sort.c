@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:54:58 by lvintila          #+#    #+#             */
-/*   Updated: 2021/06/16 20:54:46 by marvin           ###   ########.fr       */
+/*   Updated: 2021/06/17 21:25:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	fix_chunk_sort(t_struct *ps, t_chunk *ch)
 		instr = RA;
 	else
 		instr = RRA;
-//	printf("rank_to_move = %d, instr = %d\n", rank_to_move, instr);
+	printf("_fix_chunk_sort: rank_to_move = %d, rank_up = %d, rarnk_dw = %d, instr = %d\n", rank_to_move, rank_up, rank_down, instr);
 	move_to_b(ps, rank_to_move, instr);
 //	printf("_fix_chunk_sort\n");
 }
@@ -49,7 +49,7 @@ static int	chunk_sort(t_struct *ps, t_chunk *ch, int nb)
 		return (chunk_sort(ps, ch, nb));
 	}
 	fix_chunk_sort(ps, ch);
-//	printf("_chunk_sort\n");
+	printf("_chunk_sort: rank_up = %d, ch->chunk_max = %d, ch->interval = %d\n", rank_up, ch->chunk_max, ch->interval);
 	return (0);
 }
 
@@ -75,9 +75,9 @@ void	chunk_sort_loop(t_struct *ps, int nb)
 	printf("CHUNK_SORT_1\n");
 	while (ps->stack_a.begin < ps->stack_a.size)
     {
+        printf("======================================>>> i_ps_stack_a.begin<ps->stack_a.size = %d\n", i);
         chunk_sort(ps, &ch, nb);
         i++;
-        printf("i_ps_stack_a.begin<ps->stack_a.size = %d\n", i);
     }
 	printf("CHUNK_SORT_2\n");
     i = 0;

@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:34:12 by lvintila          #+#    #+#             */
-/*   Updated: 2021/06/16 22:16:12 by marvin           ###   ########.fr       */
+/*   Updated: 2021/06/17 21:25:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,14 @@ int	main(int argc, char **argv)
 		return (free_and_return(&ps));
 	}
 	ps.stack_b.tab = (int *)malloc(sizeof(int) * ps.stack_a.size);
-	printf("main_p_s_2_y_medio\n");
 	if (!(ps.stack_b.tab))
 		return (free_and_return(&ps));
 	ft_bzero(ps.stack_b.tab, ps.stack_a.size * sizeof(int));
 	ps.stack_b.size = ps.stack_a.size;
+	printf("ps.stack_b.size = %d\n", ps.stack_b.size);
 	printf("main_p_s_3\n");
 	ps.stack_b.begin = ps.stack_b.size;
+	printf("ps.stack_b.begin = %d\n", ps.stack_b.begin);
 	printf("main_p_s_4\n");
 	if (!check_order(ps.stack_a))
 		find_instr(&ps);

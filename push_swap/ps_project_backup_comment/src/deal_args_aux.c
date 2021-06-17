@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 20:23:56 by lvintila          #+#    #+#             */
-/*   Updated: 2021/06/16 22:16:21 by marvin           ###   ########.fr       */
+/*   Updated: 2021/06/17 20:23:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	add_to_agg(char **agg, char *argv)
 		return (0);
 	tmp = *agg;
 	*agg = ft_strjoin(*agg, argv);
-	printf("*agg = %s", *agg);
+	printf("*agg(add_to_agg) = %s", *agg);
 	free(tmp);
 	if (!*agg)
 		return (0);
