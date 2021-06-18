@@ -1,4 +1,4 @@
-#makefile fractol
+makefile fractol
 YELLOW		=	$(shell tput -Txterm setaf 3)
 GREEN		=	$(shell tput -Txterm setaf 2)
 REDI		=	$(shell tput -Txterm setaf 1)
