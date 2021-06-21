@@ -34,8 +34,10 @@ all:		${NAME}
 clean:
 			${RM} ${OBJS}
 fclean:		clean
-			${RM} ${OBJS_BONUS}
+			${RM} ${OBJS_BONUS} ${NAME}
 
-re:			fclean bonus
+re:			
+			@${MAKE} fclean
+			@${MAKE} all
 
 .PHONY:		bonus all clean fclean re
