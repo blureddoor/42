@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 19:34:12 by lvintila          #+#    #+#             */
-/*   Updated: 2021/06/14 20:44:37 by marvin           ###   ########.fr       */
+/*   Updated: 2021/06/21 17:14:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ int	main(int argc, char **argv)
 		write(2, "Error\n", 6);
 		return (free_and_return(&ps));
 	}
-//	if (!replace_value_by_rank(&ps.stack_a))
-//		return (free_and_return(&ps));
 	ps.stack_b.tab = (int *)malloc(sizeof(int) * ps.stack_a.size);
 	if (!(ps.stack_b.tab))
 		return (free_and_return(&ps));

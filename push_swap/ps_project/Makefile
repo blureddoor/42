@@ -19,7 +19,7 @@ OBJ_DIR = ./obj/
 SRC_FILES = apply_instr.c deal_args.c deal_args_aux.c \
 			check_instr.c check_order.c chunk_sort.c chunk_sort_aux.c \
 			push.c swap.c rotate.c rotate_rev.c checker.c \
-			main_p_s.c replace_value_by_rank.c selection_sort.c \
+			main_p_s.c selection_sort.c \
 			sort_last_3.c utils.c utils_aux.c \
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
@@ -32,7 +32,7 @@ CHECKER_OBJ = $(addprefix $(OBJ_DIR), $(CHECKER_OBJ_FILES))
 PUSH_SWAP_OBJ_FILES = apply_instr.o check_instr.o check_order.o \
 					  deal_args.o deal_args_aux.o push.o swap.o \
 					  rotate.o rotate_rev.o utils.o utils_aux.o\
-					  replace_value_by_rank.o selection_sort.o \
+					  selection_sort.o \
 					  sort_last_3.o main_p_s.o chunk_sort.o chunk_sort_aux.o \
 
 PUSH_SWAP_OBJ = $(addprefix $(OBJ_DIR), $(PUSH_SWAP_OBJ_FILES))
