@@ -1,26 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/04 10:05:37 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/05 21:40:58 by marvin           ###   ########.fr       */
+/*   Created: 2021/07/05 20:39:40 by lvintila          #+#    #+#             */
+/*   Updated: 2021/07/05 21:05:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fractal.h"
 
-void	ft_putstr(char const *s)
-{
-	size_t	len;
 
-	if (s == NULL)
-		return ;
-	len = ft_strlen(s);
-	if (len > 0)
-	{
-		write(1, s, len);
-	}
-}

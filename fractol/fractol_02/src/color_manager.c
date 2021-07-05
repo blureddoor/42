@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:15:51 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/04 19:11:57 by marvin           ###   ########.fr       */
+/*   Updated: 2021/07/05 21:07:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	more_colors(t_env *e, int depth)
 {
 	if (e->choose_color == 2)
 	{
-		e->red = (SQR(depth) * 30) % 255;
-		e->blue = (SQR(depth) * 80) % 255;
+		e->red = ((depth * depth) * 30) % 255;
+		e->blue = ((depth * depth) * 80) % 255;
 		e->green = (depth * 40) % 255;
 	}
 	else if (e->choose_color == 3)

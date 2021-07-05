@@ -6,14 +6,13 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 18:10:19 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/05 19:03:24 by marvin           ###   ########.fr       */
+/*   Updated: 2021/07/05 21:36:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fractol.h"
 
-t_map	add_params(long double a, long double b,
-	long double c, long double d)
+t_map	add_params(long double a, long double b, long double c, long double d)
 {
 	t_map	p;
 

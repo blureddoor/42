@@ -6,7 +6,7 @@
 /*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:05:42 by lvintila          #+#    #+#             */
-/*   Updated: 2021/04/20 21:12:50 by marvin           ###   ########.fr       */
+/*   Updated: 2021/07/05 21:40:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,5 @@ int					ft_isspace(int c);
 void				ft_putstr(char const *s);
 int					ft_strcmp(const char *s1, const char *s2);
 void				ft_memdel(void **ap);
-
-
 
 #endif

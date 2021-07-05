@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:15:51 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/05 18:45:13 by marvin           ###   ########.fr       */
+/*   Updated: 2021/07/05 20:58:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	exit_x(void)
 {
 	exit(1);
-	return ;
+	return (0);
 }
 
 static int	arguments_handler(char *str)
@@ -94,4 +94,5 @@ int	main(int argc, char *argv[])
 	else
 		param_list();
 	return (0);
+	system("leaks fractol");
 }

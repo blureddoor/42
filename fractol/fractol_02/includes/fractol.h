@@ -6,7 +6,7 @@
 /*   By: kprytkov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:39 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/04 18:26:40 by marvin           ###   ########.fr       */
+/*   Updated: 2021/07/05 21:07:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "../libft/libft.h"
 # define WIDTH 		800
 # define HEIGHT		600
-# define MOTION_MASK (1L<<6)
+# define MOTION_MASK 1L
 # define MOTION_NOTIFY	6
 # define KEY_MOUSE_CLIC_L 1
 # define KEY_MOUSE_CLIC_R 2
@@ -27,23 +27,22 @@
 # define KEY_MOUSE_DOWN 4
 # define KEY_MOUSE_LEFT 7
 # define KEY_MOUSE_RIGHT 6
-# define SQR(x) (x * x)
 # define MANDELBROT 	"mandelbrot_set"
 # define JULIA 		"julia_set"
 # define BURNING_SHIP "burning_ship"
 # define SIERPINSKI_CARPET "sierpinski_carpet"
 # define DOUADY_RABBIT "douady_rabbit"
 
-typedef	struct			s_map
+typedef struct s_map
 {
-	long double			min_in;
-	long double			max_in;
-	long double			min_out;
-	long double			max_out;
+	long double	min_in;
+	long double	max_in;
+	long double	min_out;
+	long double	max_out;
 
-}						t_map;
+}				t_map;
 
-typedef struct			s_env
+typedef struct s_env
 {
 	int					(*function)(struct s_env *e, int x, int y);
 	void				*mlx_ptr;
@@ -92,6 +91,6 @@ void					choose_color(t_env *e, int color);
 int						mouse_zoom(int keycode, int x, int y, t_env *e);
 int						mouse_for_julia(int x, int y, t_env *e);
 t_map					add_params(long double a, long double b,
-	long double c, long double d);
+							long double c, long double d);
 
 #endif
