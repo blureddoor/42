@@ -6,19 +6,19 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:21:50 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/04 19:22:54 by marvin           ###   ########.fr       */
+/*   Updated: 2021/07/05 18:43:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fractol.h"
 
-int		mandelbrot_math(t_env *e, int x, int y)
+int	mandelbrot_math(t_env *e, int x, int y)
 {
-	long double mx;
-	long double my;
-	long double c_im;
-	long double c_re;
-	long double x_temp;
+	long double	mx;
+	long double	my;
+	long double	c_im;
+	long double	c_re;
+	long double	x_temp;
 
 	e->iteration = 0;
 	mx = 0.0;
@@ -37,11 +37,11 @@ int		mandelbrot_math(t_env *e, int x, int y)
 	return (e->iteration);
 }
 
-int		julia_math(t_env *e, int x, int y)
+int	julia_math(t_env *e, int x, int y)
 {
-	long double mx;
-	long double my;
-	long double x_temp;
+	long double	mx;
+	long double	my;
+	long double	x_temp;
 
 	e->iteration = 0;
 	mx = ft_map(x, add_params(0, WIDTH, e->min_x, e->max_x));
@@ -58,13 +58,13 @@ int		julia_math(t_env *e, int x, int y)
 	return (e->iteration);
 }
 
-int		burning_ship_math(t_env *e, int x, int y)
+int	burning_ship_math(t_env *e, int x, int y)
 {
-	long double mx;
-	long double my;
-	long double c_im;
-	long double c_re;
-	long double x_temp;
+	long double	mx;
+	long double	my;
+	long double	c_im;
+	long double	c_re;
+	long double	x_temp;
 
 	e->iteration = 0;
 	mx = 0.0;
@@ -83,9 +83,9 @@ int		burning_ship_math(t_env *e, int x, int y)
 	return (e->iteration);
 }
 
-int		sierpinski_carpet(t_env *e, int x, int y)
+int	sierpinski_carpet(t_env *e, int x, int y)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	x *= e->zoom;
@@ -101,11 +101,11 @@ int		sierpinski_carpet(t_env *e, int x, int y)
 	return (20);
 }
 
-int		douady_rabbit(t_env *e, int x, int y)
+int	douady_rabbit(t_env *e, int x, int y)
 {
-	long double mx;
-	long double my;
-	long double x_temp;
+	long double	mx;
+	long double	my;
+	long double	x_temp;
 
 	e->iteration = 0;
 	mx = ft_map((long double)x, add_params(0, WIDTH, e->min_x, e->max_x));

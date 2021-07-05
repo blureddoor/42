@@ -6,13 +6,13 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 16:19:41 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/03 17:21:31 by marvin           ###   ########.fr       */
+/*   Updated: 2021/07/05 18:46:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fractol.h"
 
-static void		guess_color(int keycode, t_env *e)
+static void	guess_color(int keycode, t_env *e)
 {
 	if (keycode == 18)
 	{
@@ -36,7 +36,7 @@ static void		guess_color(int keycode, t_env *e)
 	}
 }
 
-static int		key_move(int keycode, t_env *e)
+static int	key_move(int keycode, t_env *e)
 {
 	if (keycode == 125)
 	{
@@ -65,7 +65,7 @@ static int		key_move(int keycode, t_env *e)
 	return (-1);
 }
 
-int				key_draw(int keycode, t_env *e)
+int	key_draw(int keycode, t_env *e)
 {
 	if (keycode == 53)
 		exit(1);

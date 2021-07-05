@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:50:59 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/04 19:20:45 by marvin           ###   ########.fr       */
+/*   Updated: 2021/07/05 18:41:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	init(t_env *e)
 
 void	foreach_pixel(t_env *e)
 {
-	int x;
-	int y;
-	int color;
+	int	x;
+	int	y;
+	int	color;
 
 	y = 0;
 	while (y < HEIGHT)

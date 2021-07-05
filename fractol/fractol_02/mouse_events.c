@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:19:22 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/04 19:31:10 by marvin           ###   ########.fr       */
+/*   Updated: 2021/07/05 19:04:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int	mouse_zoom_in(int x, int y, t_env *e)
 	long double	move_y;
 
 	move_x = (long double)x * (long double)((e->max_x - e->min_x)
-		/ (long double)WIDTH) + (long double)e->min_x;
+			/ (long double)WIDTH) + (long double)e->min_x;
 	move_y = (long double)y * (long double)((e->max_y - e->min_y)
-		/ (long double)HEIGHT) + (long double)e->min_y;
+			/ (long double)HEIGHT) + (long double)e->min_y;
 	zoom_factor = 0.9f;
 	e->zoom *= zoom_factor;
 	e->max_x = e->max_x * zoom_factor + move_x * (1 - zoom_factor);
@@ -41,9 +41,9 @@ static int	mouse_zoom_out(int x, int y, t_env *e)
 	if (e->zoom <= 2)
 	{
 		move_x = (long double)x * (long double)((e->max_x - e->min_x)
-			/ (long double)WIDTH) + e->min_x;
+				/ (long double)WIDTH) + e->min_x;
 		move_y = (long double)y * ((long double)(e->max_y - e->min_y)
-			/ (long double)HEIGHT) + e->min_y;
+				/ (long double)HEIGHT) + e->min_y;
 		zoom_factor = 1.1f;
 		e->zoom *= zoom_factor;
 		e->max_x = e->max_x * zoom_factor + move_x * (1 - zoom_factor);
@@ -55,7 +55,7 @@ static int	mouse_zoom_out(int x, int y, t_env *e)
 	return (0);
 }
 
-int			mouse_zoom(int keycode, int x, int y, t_env *e)
+int	mouse_zoom(int keycode, int x, int y, t_env *e)
 {
 	if (keycode == 5 || keycode == 1)
 		mouse_zoom_in(x, y, e);
@@ -64,10 +64,10 @@ int			mouse_zoom(int keycode, int x, int y, t_env *e)
 	return (0);
 }
 
-int			mouse_for_julia(int x, int y, t_env *e)
+int	mouse_for_julia(int x, int y, t_env *e)
 {
-	long double new_x;
-	long double new_y;
+	long double	new_x;
+	long double	new_y;
 
 	if (e->julia_mode_on == 1)
 	{
