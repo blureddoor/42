@@ -14,7 +14,7 @@
 # define FRACTOL_H
 # include <unistd.h>
 # include <stdlib.h>
-# include <mlx.h>
+# include "../minilibx/mlx.h"
 # include <math.h>
 # include "../libft/libft.h"
 # define WIDTH 		800
