@@ -6,7 +6,7 @@
 /*   By: mvillaes <mvillaes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 17:13:35 by mvillaes          #+#    #+#             */
-/*   Updated: 2020/09/03 16:20:04 by mvillaes         ###   ########.fr       */
+/*   Updated: 2021/07/14 21:15:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	param_init(t_param *param)
 
 int		imputkey(int key, t_param *param)
 {
-	static int a = 0;
+//	static int a = 0;
 
 	if (key == KEY_ESC)
 		exit(0);

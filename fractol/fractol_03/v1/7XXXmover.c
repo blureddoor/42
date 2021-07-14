@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   7mover.c                                           :+:      :+:    :+:   */
+/*   7XXXmover.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvillaes <mvillaes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 17:13:35 by mvillaes          #+#    #+#             */
-/*   Updated: 2020/09/08 16:41:12 by mvillaes         ###   ########.fr       */
+/*   Updated: 2021/07/07 20:46:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	param_init(t_param *param)
 
 int		imputkey(int key, t_param *param)
 {
-	static int a = 0;
+//	static int a = 0;
 
 	if (key == KEY_ESC)
 		exit(0);
@@ -108,6 +108,7 @@ int		main(void)
 	int			img_width;
 	int			img_height;
 
+	mlx = NULL;
 	mlx->mlx_ptr = mlx_init();
 	mlx->mlx_win = mlx_new_window(mlx->mlx_ptr, ANCHO_VENTANA, ALTO_VENTANA, "mu");
 	fondo = mlx_xpm_file_to_image(mlx->mlx_ptr, "./texturas/cow.xpm", &img_width, &img_height);

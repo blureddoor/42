@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   createandclose.c                                   :+:      :+:    :+:   */
+/*   2createandclose.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvillaes <mvillaes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 17:13:35 by mvillaes          #+#    #+#             */
-/*   Updated: 2020/09/02 18:53:47 by mvillaes         ###   ########.fr       */
+/*   Updated: 2021/07/14 21:07:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ typedef struct s_param
 	char	str[3];
 }t_param;
 
-int		imputkey(int key, t_param *param)
+int		imputkey(int key)
 {
-	static int a = 0;
+//	static int a = 0;
 
 	if (key == KEY_ESC)
 		exit(0);

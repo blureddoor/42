@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   creaclose_img.c                                    :+:      :+:    :+:   */
+/*   3XXXcreaclose_img.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvillaes <mvillaes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 17:34:43 by mvillaes          #+#    #+#             */
-/*   Updated: 2020/08/28 18:52:04 by mvillaes         ###   ########.fr       */
+/*   Updated: 2021/07/14 21:10:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ typedef struct s_param
 	char	str[3];
 }t_param;
 
-int		imputkey(int keycode, t_param *param)
+int		imputkey(int keycode)
 {
-	static int a = 0;
+//	static int a = 0;
 
 	if (keycode == KEY_ESC)
 		exit(0);
