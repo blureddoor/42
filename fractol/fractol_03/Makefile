@@ -6,7 +6,7 @@ FLAG	=	-Wall -Werror -Wextra -O3
 
 MFLAG	=	-lmlx -framework OpenGL -framework Appkit
 
-SRC		=	 mandelbrot.c \
+SRC		=	 main.c \
 
 INC		=	./inc
 
