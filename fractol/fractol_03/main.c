@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:03:13 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/15 22:12:11 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/07/16 19:47:27 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,34 +113,38 @@ int	read_arg(char *str)
 
 void	param(void)
 {
-	ft_putstr("List of available params:");
-	ft_putstr("1. Julia\n");
-	ft_putstr("2. Mandelbrot\n");
+	ft_putstr("List of available params:\n");
+	ft_putstr("1. julia_set\n");
+	ft_putstr("2. mandelbrot_set\n");
 }
 
 void	tips(t_fract *fr)
 {
 	if (fr->choose_fractal == 1 || fr->choose_fractal == 2)
 	{
-		ft_putstr("==== // FRACT'OL \\ LEGEND ====");
-		ft_putstr("· MOOVE: ... ");
-		ft_putstr("· ZOOM: ... ");
-		ft_putstr("· CHANGE COLOR ...");
-		ft_putstr("· CHANGE DEPTH ...");
-		ft_putstr("· RESET ... ");
+		ft_putstr("\n");
+		ft_putstr("==== // FRACT'OL LEGEND \\\\ ====\n");
+		ft_putstr("· MOOVE: ... \n");
+		ft_putstr("· ZOOM: ... \n");
+		ft_putstr("· CHANGE COLOR ...\n");
+		ft_putstr("· CHANGE DEPTH ...\n");
+		ft_putstr("· RESET ... \n");
 	}	
 }
 
 void	init(t_fract *fr)
 {
 	fr->func = julia_math;
+	fr->set_color = 0;
 	fr->min_x = -1.5f;
 	fr->max_x = 1.0f;
 	fr->min_y = -1.0f;
 	fr->max_y = 1.0f;
 	fr->infinity = 100;
 	fr->zoom = 1.0f;
-	fr->set_color = 0;
+	if (fr->choose_fractal == 1)
+		fr->func = julia_math;
+/*	else if (fr->choose_fractal == 2)*/
 }
 
 int press(int key, t_fract *fr)
@@ -202,14 +206,18 @@ void	loop(t_fract *fr)
 		while (x < ANCHO)
 		{
 			color = fr->func(fr, x, y); // ejemplo puntero a funcion: fr->func(fr, x, y);
+			printf("color is: %d\n", color);
 			set_color(fr, color);
+			printf("loop_1\n");
 			my_mlx_pixel_put(fr, x, y, color);
+			printf("loop_2\n");
 	/*		camera_calc(mnd_set, x);
 			initial_dist(mnd_set);
 			dda(mnd_set);
 			calc_pixel(mnd_set);
 			draw2(mnd_set, x);*/
 			x++;
+			printf("loop_3\n");
 		}
 		y++;
 	}

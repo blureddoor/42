@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:21:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/15 21:55:29 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/07/16 19:31:04 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int				julia_math(t_fract *fr, int x, int y);
 int				ft_mouse_zoom(int key, int x, int y, t_fract *fr);
 /* static int	mouse_zoom_out(int x, int y, t_fract *fr);
 static int		mouse_zoom_in(int x, int y, t_fract *fr); */
+void			loop(t_fract *fr);
 
 
 #endif
