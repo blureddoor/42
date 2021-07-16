@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "fractol.h": "c",
+        "algorithm": "c",
+        "random": "c"
+    }
+}

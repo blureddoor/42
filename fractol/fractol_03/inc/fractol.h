@@ -15,7 +15,7 @@
 
 # include <stdio.h>
 # include <unistd.h>
-# include <mlx.h>
+# include "../minilibx/mlx.h"
 # include "../libft/libft.h"
 # include <string.h>
 # include <stdlib.h>
@@ -91,5 +91,10 @@ int				julia_mouse(int x, int y, t_fract *fr);
 int				ft_mouse_zoom(int key, int x, int y, t_fract *fr);
 void			set_color(t_fract *fr, int depth);
 void			my_mlx_pixel_put(t_fract *fr, int x, int y, int color);
+int				julia_math(t_fract *fr, int x, int y);
+int				ft_mouse_zoom(int key, int x, int y, t_fract *fr);
+/* static int	mouse_zoom_out(int x, int y, t_fract *fr);
+static int		mouse_zoom_in(int x, int y, t_fract *fr); */
+
 
 #endif

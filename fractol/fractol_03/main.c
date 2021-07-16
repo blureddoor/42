@@ -133,12 +133,12 @@ void	tips(t_fract *fr)
 
 void	init(t_fract *fr)
 {
-	fr->func = julia_math
+	fr->func = julia_math;
 	fr->min_x = -1.5f;
 	fr->max_x = 1.0f;
 	fr->min_y = -1.0f;
 	fr->max_y = 1.0f;
-	fr->infinity = 100
+	fr->infinity = 100;
 	fr->zoom = 1.0f;
 	fr->set_color = 0;
 }
@@ -176,12 +176,17 @@ int	init_mlx(t_fract *fr)
 		&fr->endian);
     return (1);
 }
+
+
 /*
 void	pixel(t_fract *fr)
 {
 	;
 }
 */
+
+
+
 
 void	loop(t_fract *fr)
 {
@@ -230,7 +235,7 @@ int main(int argc, char *argv[])
 			mlx_hook(fr->win, 2, 5, press, fr);
 			mlx_hook(fr->win, 17, 1L, release, NULL);
 			mlx_mouse_hook(fr->win, ft_mouse_zoom, fr);
-			mlx_hook(fr->win, MOTION_NOTIFY, MOTION_MASK, julia_mouse, fr);
+		/*	mlx_hook(fr->win, MOTION_NOTIFY, MOTION_MASK, julia_mouse, fr);   */
 			mlx_loop(fr->mlx);
 		}
 	else

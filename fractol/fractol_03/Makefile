@@ -6,7 +6,7 @@ FLAG	=	-Wall -Werror -Wextra -O3
 
 MFLAG	=	-lmlx -framework OpenGL -framework Appkit
 
-SRC		=	 main.c \
+SRC		=	 main.c utils.c fractals_math.c \
 
 INC		=	./inc
 
