@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:03:13 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/16 19:47:27 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/07/16 20:07:07 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,18 +206,14 @@ void	loop(t_fract *fr)
 		while (x < ANCHO)
 		{
 			color = fr->func(fr, x, y); // ejemplo puntero a funcion: fr->func(fr, x, y);
-			printf("color is: %d\n", color);
 			set_color(fr, color);
-			printf("loop_1\n");
 			my_mlx_pixel_put(fr, x, y, color);
-			printf("loop_2\n");
 	/*		camera_calc(mnd_set, x);
 			initial_dist(mnd_set);
 			dda(mnd_set);
 			calc_pixel(mnd_set);
 			draw2(mnd_set, x);*/
 			x++;
-			printf("loop_3\n");
 		}
 		y++;
 	}

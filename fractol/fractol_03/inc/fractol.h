@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:21:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/16 19:31:04 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/07/16 20:25:51 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <math.h>
 
 # define MAXCOUNT 30
-# define ANCHO 640
-# define ALTO 640
+# define ANCHO 1920
+# define ALTO 1080
 
 # define RED            "\033[22;31m"
 # define RESET          "\033[0m"
@@ -96,6 +96,7 @@ int				ft_mouse_zoom(int key, int x, int y, t_fract *fr);
 /* static int	mouse_zoom_out(int x, int y, t_fract *fr);
 static int		mouse_zoom_in(int x, int y, t_fract *fr); */
 void			loop(t_fract *fr);
+t_set			add_param(long double a, long double b, long double c, long double d);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 20:59:57 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/16 19:52:21 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/07/16 20:05:36 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,19 +94,20 @@ void    set_color(t_fract *fr, int depth)
 		fr->blue = (depth * 2) % 70;
 		fr->green = (depth * 3) % 4;
 	}
-	else if (fr->set_color == 2)
+	else 
 	{
-		fr->red = (depth * 12) % 255;
-		fr->blue = (depth * 48) % 255;
-		fr->green = (depth * 24) % 255;
-	}
-	else
-	{
-		if (fr->set_color == 3)
+		if (fr->set_color == 2)
 		{
-			fr->red = (depth * 6) % 255;
-			fr->blue = (depth * 6) % 255;
-			fr->green = (depth * 6) % 255;
+			fr->red = ((depth * depth) * 30) % 255;
+			fr->blue = ((depth * depth) * 80) % 255;
+			fr->green = (depth * 40) % 255;
+		}
+		else if (fr->set_color == 3)
+		{
+			fr->red = (depth * 5) % 255;
+			fr->blue = (depth * 5) % 255;
+			fr->green = (depth * 5) % 255;
+		}
 	}
 }
 
