@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 22:14:46 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/16 20:32:39 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/07/19 22:21:32 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,28 @@ int    julia_math(t_fract *fr, int x, int y)
     }
     return (fr->iter);
 }
-/*
-void    mandelbrot_math(t_fract *fr)
+
+int	mandelbrot_math(t_fract *fr, int x, int y)
 {
-    printf(" * ");
-}*/
+	long double	mx;
+	long double	my;
+	long double	c_im;
+	long double	c_re;
+	long double	x_temp;
+
+	fr->iter = 0;
+	mx = 0.0;
+	my = 0.0; 
+	c_re = ft_map(x, add_param(0, ANCHO, fr->min_x, fr->max_x));
+	c_im = ft_map(y, add_param(0, ALTO, fr->min_y, fr->max_y));
+	while (fr->iter < fr->infinity)
+	{
+		x_temp = (mx * mx - my * my) + c_re;
+		my = 2.0f * mx * my + c_im;
+		mx = x_temp;
+		if ((mx * mx + my * my) > 4.0f)
+			break ;
+		fr->iter++;
+	}
+	return (fr->iter);
+}

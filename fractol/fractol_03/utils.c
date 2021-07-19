@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 20:59:57 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/16 20:05:36 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/07/19 21:45:40 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,12 @@ void	my_mlx_pixel_put(t_fract *fr, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = fr->data + (y * fr->size_l + x * (fr->bpp / 8));
+	dst = fr->image + (y * fr->size_l + x * (fr->bpp / 8));
 	*(unsigned int*)dst = color;
+	if ((x >= 0 || x <= ANCHO) && (y >= 0 || y <= ALTO))
+	{
+		fr->image[(x * 4) + (y * ANCHO * 4) + 2] = fr->red;
+		fr->image[(x * 4) + (y * ANCHO * 4) + 1] = fr->green;
+		fr->image[(x * 4) + (y * ANCHO * 4)] = fr->blue;
+	}
 }

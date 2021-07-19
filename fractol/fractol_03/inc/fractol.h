@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:21:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/16 20:25:51 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/07/19 22:13:29 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 
 typedef struct	s_set
 {
-	long double min_in;
+	long double	min_in;
 	long double max_in;
 	long double min_out;
 	long double max_out;
@@ -68,6 +68,7 @@ typedef struct	s_fract
 	void		*win;
 	void		*data;
 	void		*img;
+	char		*image;
 	int			bpp;
 	int			endian;
 	int			size_l;
@@ -92,6 +93,7 @@ int				ft_mouse_zoom(int key, int x, int y, t_fract *fr);
 void			set_color(t_fract *fr, int depth);
 void			my_mlx_pixel_put(t_fract *fr, int x, int y, int color);
 int				julia_math(t_fract *fr, int x, int y);
+int				mandelbrot_math(t_fract *fr, int x, int y);
 int				ft_mouse_zoom(int key, int x, int y, t_fract *fr);
 /* static int	mouse_zoom_out(int x, int y, t_fract *fr);
 static int		mouse_zoom_in(int x, int y, t_fract *fr); */

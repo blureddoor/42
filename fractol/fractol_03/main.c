@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:03:13 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/16 20:07:07 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/07/19 22:20:11 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,12 @@ int main(void)
 }
 *//////////////////////////////////////////////////////////////////
 
-int closer(t_fract *fr)
+int closer(void)
 {
-    mlx_destroy_window(fr->mlx, fr->win);
+/*    mlx_destroy_window(fr->mlx, fr->win);*/
     system("leaks fractol");
-    exit(0);
+    exit(1);
+	return (0);
 }
 
 int	read_arg(char *str)
@@ -124,6 +125,7 @@ void	tips(t_fract *fr)
 	{
 		ft_putstr("\n");
 		ft_putstr("==== // FRACT'OL LEGEND \\\\ ====\n");
+		ft_putstr("\n");
 		ft_putstr("· MOOVE: ... \n");
 		ft_putstr("· ZOOM: ... \n");
 		ft_putstr("· CHANGE COLOR ...\n");
@@ -141,56 +143,27 @@ void	init(t_fract *fr)
 	fr->min_y = -1.0f;
 	fr->max_y = 1.0f;
 	fr->infinity = 100;
-	fr->zoom = 1.0f;
+	fr->zoom = 0.1f;
 	if (fr->choose_fractal == 1)
+	{
 		fr->func = julia_math;
-/*	else if (fr->choose_fractal == 2)*/
-}
-
-int press(int key, t_fract *fr)
-{
-/*	(((key == W) || (key == KEY_UP)) && (game->move.w = 1));
-    (((key == S) || (key == KEY_DOWN)) && (game->move.s = -1));
-    ((key == A) && (game->move.a = 1));
-    ((key == D) && (game->move.d = -1));
-    ((key == KEY_DCH) && (game->move.r_right = -1));
-    ((key == KEY_IZQ) && (game->move.r_left = 1));*/
-    ((key == KEY_ESC) && (closer(fr)));
-    return (0);
-}
-
-int release(int key, t_fract *fr)
-{
-/*	(((key == W) || (key == KEY_UP)) && (game->move.w = 0));
-    (((key == S) || (key == KEY_DOWN)) && (game->move.s = 0));
-    ((key == A) && (game->move.a = 0));
-    ((key == D) && (game->move.d = 0));
-    ((key == KEY_DCH) && (game->move.r_right = 0));
-    ((key == KEY_IZQ) && (game->move.r_left = 0)); */
-    ((key == KEY_ESC) && (closer(fr)));
-    return (0);
+		fr->c_im = -0.70176f;
+		fr->c_re = -0.3842f;
+ 	}
+	else if (fr->choose_fractal == 2)
+		fr->func = mandelbrot_math; 
 }
 
 int	init_mlx(t_fract *fr)
 {
 	fr->mlx = mlx_init();
-    fr->win = mlx_new_window(fr->mlx, ANCHO, ALTO, "=== // -MANDELBROT- \\\\ ===");
+    fr->win = mlx_new_window(fr->mlx, ANCHO, ALTO, "=== // -42fract'ol- \\\\ ===");
     fr->img= mlx_new_image(fr->mlx, ANCHO, ALTO);
-    fr->data = (int *)mlx_get_data_addr(fr->img, &fr->bpp, &fr->size_l,
+    fr->image = (char *)mlx_get_data_addr(fr->img, &fr->bpp, &fr->size_l,
 		&fr->endian);
     return (1);
 }
-
-
-/*
-void	pixel(t_fract *fr)
-{
-	;
-}
-*/
-
-
-
+/*funcion que dibuja*/
 
 void	loop(t_fract *fr)
 {
@@ -212,12 +185,115 @@ void	loop(t_fract *fr)
 			initial_dist(mnd_set);
 			dda(mnd_set);
 			calc_pixel(mnd_set);
-			draw2(mnd_set, x);*/
+			draw2(mnd_set, x);
+	*/
 			x++;
 		}
 		y++;
 	}
 	mlx_put_image_to_window(fr->mlx, fr->win, fr->img, 0, 0);
+}
+
+void	choose_color(int key, t_fract *fr)
+{
+	if (key == 18)
+	{
+		fr->set_color = 0;
+		loop(fr);
+	}
+	if (key == 19)
+	{
+		fr->set_color = 1;
+		loop(fr);
+	}
+	if (key == 20)
+	{
+		fr->set_color = 2;
+		loop(fr);
+	}
+	if (key == 21)
+	{
+		fr->set_color = 3;
+		loop(fr);
+	}
+}
+/*
+int press(int key, t_fract *fr)
+{
+	(((key == W) || (key == KEY_UP)) && (game->move.w = 1));
+    (((key == S) || (key == KEY_DOWN)) && (game->move.s = -1));
+    ((key == A) && (game->move.a = 1));
+    ((key == D) && (game->move.d = -1));
+    ((key == KEY_DCH) && (game->move.r_right = -1));
+    ((key == KEY_IZQ) && (game->move.r_left = 1));
+    ((key == KEY_ESC) && (closer(fr)));
+    return (0);
+}*/
+
+int press(int key, t_fract *fr)
+{
+/*	(((key == W) || (key == KEY_UP)) && (game->move.w = 0));
+    (((key == S) || (key == KEY_DOWN)) && (game->move.s = 0));
+    ((key == A) && (game->move.a = 0));
+    ((key == D) && (game->move.d = 0));*/
+    if (key == KEY_DCH)
+	{
+		fr->min_x -= 0.5 * fr->zoom;
+		fr->max_x -= 0.5 * fr->zoom;
+		loop(fr);
+	}
+    if (key == KEY_IZQ)
+	{
+		fr->min_x += 0.5 * fr->zoom;
+		fr->max_x += 0.5 * fr->zoom;
+		loop(fr);
+	}
+	if (key == KEY_UP)
+	{
+		fr->min_y += 1.0 * fr->zoom;
+		fr->max_y += 1.0 * fr->zoom;
+		loop(fr);
+	}
+	if (key == KEY_DOWN)
+	{
+		fr->min_y -= 1.0 * fr->zoom;
+		fr->max_y -= 1.0 * fr->zoom;
+		loop(fr);		
+	}
+	if (key == KEY_ESC)
+	{
+		system("leaks fractol");
+		exit (1);
+	}
+		
+/*	((key == KEY_ESC) && (closer(fr)));*/
+    return (-1);
+}
+
+int	key_draw(int key, t_fract *fr)
+{
+	if (key == 53)
+	/*	system("leaks fractol");
+		exit (1);*/
+		closer();
+	press(key, fr);
+	if (key == 13)
+	{
+		fr->infinity += 40;
+		loop(fr);
+	}
+	if (key == 14)
+	{
+		fr->infinity -= 40;
+		loop(fr);
+	}
+	if (key == 49)
+	{
+		init(fr);
+		loop(fr);
+	}
+	choose_color(key, fr);
+	return (-1);
 }
 
 int main(int argc, char *argv[])
@@ -236,8 +312,8 @@ int main(int argc, char *argv[])
 			init(fr); // inicializa los argumentos
 			loop(fr); //funcion para dibujar fractal
 		/*	init_vars(&mnd_set);*/
-			mlx_hook(fr->win, 2, 5, press, fr);
-			mlx_hook(fr->win, 17, 1L, release, NULL);
+			mlx_hook(fr->win, 2, 5, key_draw, fr);
+			mlx_hook(fr->win, 17, 1, closer, NULL);
 			mlx_mouse_hook(fr->win, ft_mouse_zoom, fr);
 		/*	mlx_hook(fr->win, MOTION_NOTIFY, MOTION_MASK, julia_mouse, fr);   */
 			mlx_loop(fr->mlx);
