@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kprytkov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 12:04:39 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/05 21:46:25 by marvin           ###   ########.fr       */
+/*   Updated: 2021/07/20 20:22:01 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "../minilibx/mlx.h"
 # include <math.h>
 # include "../libft/libft.h"
-# define WIDTH 		800
-# define HEIGHT		600
+# define WIDTH 		1920
+# define HEIGHT		1080
 # define MOTION_MASK 1L
 # define MOTION_NOTIFY	6
 # define KEY_MOUSE_CLIC_L 1

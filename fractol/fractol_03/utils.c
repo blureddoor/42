@@ -6,19 +6,13 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 20:59:57 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/19 21:45:40 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/07/20 21:37:28 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/fractol.h"
-/*
-int julia_mouse(int x, int y, t_fract *fr)
-{
-    return (0);
-}
-*/
 
-static int	mouse_zoom_in(int x, int y, t_fract *fr)
+int	mouse_zoom_in(int x, int y, t_fract *fr)
 {
 	long double	zoom_factor;
 	long double	move_x;
@@ -28,7 +22,7 @@ static int	mouse_zoom_in(int x, int y, t_fract *fr)
 			/ (long double)ANCHO) + (long double)fr->min_x;
 	move_y = (long double)y * (long double)((fr->max_y - fr->min_y)
 			/ (long double)ALTO) + (long double)fr->min_y;
-	zoom_factor = 0.9f;
+	zoom_factor = 0.7f;
 	fr->zoom *= zoom_factor;
 	fr->max_x = fr->max_x * zoom_factor + move_x * (1 - zoom_factor);
 	fr->min_x = fr->min_x * zoom_factor + move_x * (1 - zoom_factor);
@@ -38,7 +32,7 @@ static int	mouse_zoom_in(int x, int y, t_fract *fr)
 	return (0);
 }
 
-static int	mouse_zoom_out(int x, int y, t_fract *fr)
+int	mouse_zoom_out(int x, int y, t_fract *fr)
 {
 	long double	zoom_factor;
 	long double	move_x;
@@ -47,10 +41,10 @@ static int	mouse_zoom_out(int x, int y, t_fract *fr)
 	if (fr->zoom <= 2)
 	{
 		move_x = (long double)x * (long double)((fr->max_x - fr->min_x)
-				/ (long double)ANCHO) + fr->min_x;
+				/ (long double)ANCHO) + (long double)fr->min_x;
 		move_y = (long double)y * ((long double)(fr->max_y - fr->min_y)
-				/ (long double)ALTO) + fr->min_y;
-		zoom_factor = 1.1f;
+				/ (long double)ALTO) + (long double)fr->min_y;
+		zoom_factor = 1.4f;
 		fr->zoom *= zoom_factor;
 		fr->max_x = fr->max_x * zoom_factor + move_x * (1 - zoom_factor);
 		fr->min_x = fr->min_x * zoom_factor + move_x * (1 - zoom_factor);
@@ -90,9 +84,9 @@ void    set_color(t_fract *fr, int depth)
     }
 	else if (fr->set_color == 1)
 	{
-		fr->red = (depth * 7) % 255;
-		fr->blue = (depth * 2) % 70;
-		fr->green = (depth * 3) % 4;
+		fr->red = (depth * 3) % 255;
+		fr->blue = (depth * 7) % 70;
+		fr->green = (depth * 4) % 4;
 	}
 	else 
 	{

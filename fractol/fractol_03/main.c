@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:03:13 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/19 22:20:11 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/07/20 21:42:46 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ int	read_arg(char *str)
 
 void	param(void)
 {
-	ft_putstr("List of available params:\n");
+	ft_putstr("\n");
+	ft_putstr("Please choose one of available params:\n");
 	ft_putstr("1. julia_set\n");
 	ft_putstr("2. mandelbrot_set\n");
 }
@@ -126,14 +127,14 @@ void	tips(t_fract *fr)
 		ft_putstr("\n");
 		ft_putstr("==== // FRACT'OL LEGEND \\\\ ====\n");
 		ft_putstr("\n");
-		ft_putstr("· MOOVE: ... \n");
-		ft_putstr("· ZOOM: ... \n");
-		ft_putstr("· CHANGE COLOR ...\n");
-		ft_putstr("· CHANGE DEPTH ...\n");
-		ft_putstr("· RESET ... \n");
+		ft_putstr("· MOOVE: keys: UP || DOWN || LEFT || RIGHT\n");
+		ft_putstr("· ZOOM: mouse wheel or mouse click\n");
+		ft_putstr("· CHANGE COLOR: key 1 || key 2 || key 3 || key 4\n");
+		ft_putstr("· CHANGE DEPTH: press key W or E\n");
+		ft_putstr("· RESET: press SPACE key\n");
 	}	
 }
-
+/*inicia todos los params*/
 void	init(t_fract *fr)
 {
 	fr->func = julia_math;
@@ -153,11 +154,12 @@ void	init(t_fract *fr)
 	else if (fr->choose_fractal == 2)
 		fr->func = mandelbrot_math; 
 }
+/* funcion que inicia la ventana mlx */
 
 int	init_mlx(t_fract *fr)
 {
 	fr->mlx = mlx_init();
-    fr->win = mlx_new_window(fr->mlx, ANCHO, ALTO, "=== // -42fract'ol- \\\\ ===");
+    fr->win = mlx_new_window(fr->mlx, ANCHO, ALTO, "=// - 42fract'ol - \\\\=");
     fr->img= mlx_new_image(fr->mlx, ANCHO, ALTO);
     fr->image = (char *)mlx_get_data_addr(fr->img, &fr->bpp, &fr->size_l,
 		&fr->endian);
@@ -217,18 +219,6 @@ void	choose_color(int key, t_fract *fr)
 		loop(fr);
 	}
 }
-/*
-int press(int key, t_fract *fr)
-{
-	(((key == W) || (key == KEY_UP)) && (game->move.w = 1));
-    (((key == S) || (key == KEY_DOWN)) && (game->move.s = -1));
-    ((key == A) && (game->move.a = 1));
-    ((key == D) && (game->move.d = -1));
-    ((key == KEY_DCH) && (game->move.r_right = -1));
-    ((key == KEY_IZQ) && (game->move.r_left = 1));
-    ((key == KEY_ESC) && (closer(fr)));
-    return (0);
-}*/
 
 int press(int key, t_fract *fr)
 {
@@ -265,7 +255,6 @@ int press(int key, t_fract *fr)
 		system("leaks fractol");
 		exit (1);
 	}
-		
 /*	((key == KEY_ESC) && (closer(fr)));*/
     return (-1);
 }
@@ -277,14 +266,16 @@ int	key_draw(int key, t_fract *fr)
 		exit (1);*/
 		closer();
 	press(key, fr);
+	if (key == 256)
+		fr->mouse_move_mode = (fr->mouse_move_mode + 1) % 2;
 	if (key == 13)
 	{
-		fr->infinity += 40;
+		fr->infinity += 25;
 		loop(fr);
 	}
 	if (key == 14)
 	{
-		fr->infinity -= 40;
+		fr->infinity -= 25;
 		loop(fr);
 	}
 	if (key == 49)
@@ -296,7 +287,7 @@ int	key_draw(int key, t_fract *fr)
 	return (-1);
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
     t_fract  *fr;
 
@@ -310,12 +301,11 @@ int main(int argc, char *argv[])
 			fr->choose_fractal = read_arg(argv[1]); //funcion para elegir el fractal
 			tips(fr); // user instruction
 			init(fr); // inicializa los argumentos
-			loop(fr); //funcion para dibujar fractal
-		/*	init_vars(&mnd_set);*/
+			loop(fr); //funcion para dibujar
 			mlx_hook(fr->win, 2, 5, key_draw, fr);
 			mlx_hook(fr->win, 17, 1, closer, NULL);
 			mlx_mouse_hook(fr->win, ft_mouse_zoom, fr);
-		/*	mlx_hook(fr->win, MOTION_NOTIFY, MOTION_MASK, julia_mouse, fr);   */
+			mlx_hook(fr->win, MOTION_NOTIFY, MOTION_MASK, mouse_move, fr);
 			mlx_loop(fr->mlx);
 		}
 	else
