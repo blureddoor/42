@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:21:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/21 19:57:02 by marvin           ###   ########.fr       */
+/*   Updated: 2021/07/21 21:32:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,20 @@ int				julia_mouse(int x, int y, t_fract *fr);
 int				ft_mouse_zoom(int key, int x, int y, t_fract *fr);
 int				mouse_move(int x, int y, t_fract *fr);
 void			set_color(t_fract *fr, int depth);
+void			set_other_colors(t_fract *fr, int depth);
+int				closer(void);
 void			my_mlx_pixel_put(t_fract *fr, int x, int y, int color);
+int				init_mlx(t_fract *fr);
+void			init(t_fract *fr);
 int				julia_math(t_fract *fr, int x, int y);
 int				mandelbrot_math(t_fract *fr, int x, int y);
 int				ft_mouse_zoom(int key, int x, int y, t_fract *fr);
-/* static int	mouse_zoom_out(int x, int y, t_fract *fr);
-static int		mouse_zoom_in(int x, int y, t_fract *fr); */
 void			loop(t_fract *fr);
 t_set			add_param(long double a, long double b, long double c,
 					long double d);
+int				press(int key, t_fract *fr);
+int				key_draw(int key, t_fract *fr);
+void			choose_color(int key, t_fract *fr);
 long double		ft_map(long double x, t_set p);
 
 #endif
