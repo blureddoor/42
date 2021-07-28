@@ -26,8 +26,9 @@
 
 # define RED            "\033[22;31m"
 # define RESET          "\033[0m"
-# define JULIA			"julia_set"
-# define MANDELBROT		"mandelbrot_set" 
+# define JULIA			"julia"
+# define MANDELBROT		"mandelbrot"
+# define SHIP			"burning_ship"
 
 # define MOTION_MASK	1
 # define MOTION_NOTIFY	6
@@ -36,10 +37,6 @@
 # define KEY_EXIT       17
 
 # define KEY_ESC        53
-# define W              13
-# define A              0
-# define S              1
-# define D              2
 
 # define KEY_UP         126
 # define KEY_DOWN       125
@@ -60,9 +57,8 @@ typedef struct s_fract
 	int			(*func)(struct s_fract *fr, int x, int y);
 	void		*mlx;
 	void		*win;
-	void		*data;
 	void		*img;
-	char		*image;
+	char		*data;
 	int			bpp;
 	int			endian;
 	int			size_l;
@@ -83,7 +79,6 @@ typedef struct s_fract
 	int			mouse_move_mode;
 }				t_fract;
 
-int				julia_mouse(int x, int y, t_fract *fr);
 int				ft_mouse_zoom(int key, int x, int y, t_fract *fr);
 int				mouse_move(int x, int y, t_fract *fr);
 void			set_color(t_fract *fr, int depth);
@@ -94,6 +89,7 @@ int				init_mlx(t_fract *fr);
 void			init(t_fract *fr);
 int				julia_math(t_fract *fr, int x, int y);
 int				mandelbrot_math(t_fract *fr, int x, int y);
+int				burning_ship_math(t_fract *fr, int x, int y);
 int				ft_mouse_zoom(int key, int x, int y, t_fract *fr);
 void			loop(t_fract *fr);
 t_set			add_param(long double a, long double b, long double c,

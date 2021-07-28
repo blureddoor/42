@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/fractol.h"
+#include "../inc/fractol.h"
 
 int	press2(int key, t_fract *fr)
 {
@@ -52,32 +52,6 @@ int	press(int key, t_fract *fr)
 	return (-1);
 }
 
-int	key_draw(int key, t_fract *fr)
-{
-	if (key == 53)
-		closer();
-	press(key, fr);
-	if (key == 256)
-		fr->mouse_move_mode = (fr->mouse_move_mode + 1) % 2;
-	if (key == 13)
-	{
-		fr->infinity += 25;
-		loop(fr);
-	}
-	if (key == 14)
-	{
-		fr->infinity -= 25;
-		loop(fr);
-	}
-	if (key == 49)
-	{
-		init(fr);
-		loop(fr);
-	}
-	choose_color(key, fr);
-	return (-1);
-}
-
 void	choose_color(int key, t_fract *fr)
 {
 	if (key == 18)
@@ -100,4 +74,30 @@ void	choose_color(int key, t_fract *fr)
 		fr->set_color = 3;
 		loop(fr);
 	}
+}
+
+int	key_draw(int key, t_fract *fr)
+{
+	if (key == KEY_ESC)
+		closer();
+	press(key, fr);
+	if (key == 256)
+		fr->mouse_move_mode = (fr->mouse_move_mode + 1) % 2;
+	if (key == 13)
+	{
+		fr->infinity += 25;
+		loop(fr);
+	}
+	if (key == 14)
+	{
+		fr->infinity -= 25;
+		loop(fr);
+	}
+	if (key == 49)
+	{
+		init(fr);
+		loop(fr);
+	}
+	choose_color(key, fr);
+	return (-1);
 }

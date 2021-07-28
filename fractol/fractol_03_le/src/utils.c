@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/fractol.h"
+#include "../inc/fractol.h"
 
 int	mouse_zoom_in(int x, int y, t_fract *fr)
 {
@@ -64,6 +64,7 @@ int	ft_mouse_zoom(int key, int x, int y, t_fract *fr)
 	return (0);
 }
 
+
 int	mouse_move(int x, int y, t_fract *fr)
 {
 	long double	new_x;
@@ -88,12 +89,12 @@ void	my_mlx_pixel_put(t_fract *fr, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = fr->image + (y * fr->size_l + x * (fr->bpp / 8));
+	dst = fr->data + (y * fr->size_l + x * (fr->bpp / 8));
 	*(unsigned int *)dst = color;
 	if ((x >= 0 || x <= ANCHO) && (y >= 0 || y <= ALTO))
 	{
-		fr->image[(x * 4) + (y * ANCHO * 4) + 2] = fr->red;
-		fr->image[(x * 4) + (y * ANCHO * 4) + 1] = fr->green;
-		fr->image[(x * 4) + (y * ANCHO * 4)] = fr->blue;
+		fr->data[(x * 4) + (y * ANCHO * 4) + 2] = fr->red;
+		fr->data[(x * 4) + (y * ANCHO * 4) + 1] = fr->green;
+		fr->data[(x * 4) + (y * ANCHO * 4)] = fr->blue;
 	}
 }

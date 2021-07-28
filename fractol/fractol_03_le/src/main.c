@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/fractol.h"
+#include "../inc/fractol.h"
 
 int	read_arg(char *str)
 {
@@ -18,21 +18,26 @@ int	read_arg(char *str)
 		return (1);
 	else if (ft_strcmp(str, MANDELBROT) == 0)
 		return (2);
+	else if (ft_strcmp(str, SHIP) == 0)
+		return (3);
 	else
 		return (0);
 }
 
 void	param(void)
 {
-	ft_putstr("\n");
-	ft_putstr("Please choose one of available params:\n");
-	ft_putstr("1. julia_set\n");
-	ft_putstr("2. mandelbrot_set\n");
+		ft_putstr("\n");
+		ft_putstr("Please choose one of available params:\n");
+		ft_putstr("1. julia\n");
+		ft_putstr("2. mandelbrot\n");
+		ft_putstr("3. burning_ship\n");
+		closer();
 }
 
 void	tips(t_fract *fr)
 {
-	if (fr->choose_fractal == 1 || fr->choose_fractal == 2)
+	if (fr->choose_fractal == 1 || fr->choose_fractal == 2
+		|| fr->choose_fractal == 3)
 	{
 		ft_putstr("\n");
 		ft_putstr("==== // FRACT'OL LEGEND \\\\ ====\n");
@@ -74,7 +79,7 @@ int	main(int argc, char **argv)
 {
 	t_fract	*fr;
 
-	if (argc == 2 && (read_arg(argv[1]) != 0))
+	if (argc >= 2 && (read_arg(argv[1]) != 0))
 	{
 		fr = malloc(sizeof(t_fract));
 		if (!(fr))
@@ -86,7 +91,7 @@ int	main(int argc, char **argv)
 		init(fr);
 		loop(fr);
 		mlx_hook(fr->win, 2, 5, key_draw, fr);
-		mlx_hook(fr->win, 17, 1, closer, NULL);
+		mlx_hook(fr->win, KEY_EXIT, MOTION_MASK, closer, NULL);
 		mlx_mouse_hook(fr->win, ft_mouse_zoom, fr);
 		mlx_hook(fr->win, MOTION_NOTIFY, MOTION_MASK, mouse_move, fr);
 		mlx_loop(fr->mlx);

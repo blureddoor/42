@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/fractol.h"
+#include "../inc/fractol.h"
 
 int	closer(void)
 {
-	exit (1);
 	system("leaks fractol");
+	exit (1);
 	return (0);
 }
 
@@ -66,7 +66,7 @@ int	init_mlx(t_fract *fr)
 	fr->mlx = mlx_init();
 	fr->win = mlx_new_window(fr->mlx, ANCHO, ALTO, "=// - 42fract'ol - \\\\=");
 	fr->img = mlx_new_image(fr->mlx, ANCHO, ALTO);
-	fr->image = (char *)mlx_get_data_addr(fr->img, &fr->bpp, &fr->size_l,
+	fr->data = (char *)mlx_get_data_addr(fr->img, &fr->bpp, &fr->size_l,
 			&fr->endian);
 	return (1);
 }

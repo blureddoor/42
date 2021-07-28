@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/fractol.h"
+#include "../inc/fractol.h"
 
 t_set	add_param(long double a, long double b, long double c, long double d)
 {
@@ -71,6 +71,31 @@ int	mandelbrot_math(t_fract *fr, int x, int y)
 		x_temp = (mx * mx - my * my) + c_re;
 		my = 2.0f * mx * my + c_im;
 		mx = x_temp;
+		if ((mx * mx + my * my) > 4.0f)
+			break ;
+		fr->iter++;
+	}
+	return (fr->iter);
+}
+
+int	burning_ship_math(t_fract *fr, int x, int y)
+{
+	long double	mx;
+	long double	my;
+	long double	c_im;
+	long double	c_re;
+	long double	x_temp;
+
+	fr->iter = 0;
+	mx = 0.0;
+	my = 0.0;
+	c_re = ft_map(x, add_param(0, ANCHO, fr->min_x, fr->max_x));
+	c_im = ft_map(y, add_param(0, ALTO, fr->min_y, fr->max_y));
+	while (fr->iter < fr->infinity)
+	{
+		x_temp = (mx * mx - my * my) + c_re;
+		my = fabsl(2.0 * mx * my + c_im);
+		mx = fabsl(x_temp);
 		if ((mx * mx + my * my) > 4.0f)
 			break ;
 		fr->iter++;

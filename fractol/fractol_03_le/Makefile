@@ -10,46 +10,79 @@
 #                                                                              #
 # **************************************************************************** #
 
-YELLOW	=	$(shell tput -Txterm setaf 3)
-GREEN	= 	$(shell tput -Txterm setaf 2)
-RED		= 	$(shell tput -Txterm setaf 1)
+YELLOW		=	$(shell tput -Txterm setaf 3)
+GREEN		= 	$(shell tput -Txterm setaf 2)
+RED			= 	$(shell tput -Txterm setaf 1)
 
-NAME	=	fractol
+LIBFT		=	libft	
 
-CC		=	gcc
+NAME		=	fractol
 
-FLAG	=	-Wall -Werror -Wextra -O3
+CC			=	gcc
 
-MFLAG	=	-lmlx -framework OpenGL -framework Appkit
+FLAG		=	-g -Wall -Werror -Wextra -I. -o $(NAME)
 
-SANFLAG	=	-fsanitize=address
+MFLAG		=	-lmlx -framework OpenGL -framework Appkit
 
-SRC		=	 main.c utils.c fractals_math.c utils_aux.c keys.c\
+SANFLAG		=	-fsanitize=address
 
-INC		=	./inc
+DIR_S		=	src
 
-SRO		=	$(SRC:.c=.o)
+DIR_O		=	obj
 
-all: 		$(NAME)
+DIR_O_BONUS	=	obj
 
-$(NAME):	$(SRO)
-			@echo "${YELLOW}compiling 42 fract'ol${RESET}"
-			make -C ./libft/
-			$(CC) $(FLAG) -I$(INC) $(SRC) $(MFLAG) ./libft/libft.a -o $(NAME)
+DIR_B		=	src_bonus
 
-%.o:		%.c ./includes/fractol.h
-			$(CC) $(FLAG) -c -o $@ $<
+INC			=	inc
+
+SOURCES_C	=	main.c keys.c fractals_math.c utils.c utils_aux.c \
+
+SOURCES_B	=	main_bonus.c keys_bonus.c fractal_math_bonus.c \
+					utils_bonus.c utils_aux_bonus.c \
+
+SRCS		=	$(addprefix $(DIR_S)/, $(SOURCES_C))
+
+SRCS_BONUS	=	$(addprefix $(DIR_B)/, $(SOURCES_B))
+
+OBJS		=	$(SRCS:%.c=%.o)
+
+OBJS_BONUS	=	$(SRC_BONUS:%.c=%.o)
+
+all: 			$(NAME)
+
+bonus:			$(BONUS)
+
+$(NAME):		$(OBJS)
+				@echo "${YELLOW}compiling fract'ol${RESET}"
+				make -C $(LIBFT)
+				ar rc $(NAME) $(OBJS)
+				ranlib $(NAME)
+				$(CC) $(OBJS) $(FLAG) $(MFLAG) -L $(LIBFT) ./libft/libft.a
+
+$(DIR_O)/%.o:	$(DIR_S)/%.c $(INC)/fractol.h
+				@mkdir -p obj
+
+$(BONUS):		$(OBJS_BONUS)
+				@echo "${YELLOW}compiling with bonus ... ${RESET}"
+				@make -C $(LIBFT)
+				@ar rc $(BONUS) $(OBJS_BONUS)
+				@ranib $(BONUS)
+				$(CC) $(BONUS) $(FLAG) $(MFLAG) -L $(LIBFT) $(LIBFT)/libft.a
+
+$(DIR_O)/%.o:	$(DIR_B)/%.c $(INC)/fractol.h
+				@mkdir -p obj
 
 
 clean:
-			make -C libft/ clean
-			rm -f $(SRO)
+			make -C $(LIBFT) clean
+			@rm -rf $(OBJS) $(DIR_O) $(DIR_O_BONUS)
 			@echo "${GREEN}Cleaned${RESET}"
 
 fclean:		clean
-			make -C libft/ fclean
-			rm -rf $(NAME)
+			@make -C libft/ fclean
+			@rm -rf $(NAME) $(BONUS)
 			@echo "${GREEN}fcleaned ... ${RESET}"
 
 re:			fclean all
-			@echo "${GREEN}deleted and recompiled${RESET}"
+	@echo "${GREEN}deleted and recompiled${RESET}"
