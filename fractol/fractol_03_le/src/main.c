@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:03:13 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/21 21:41:59 by marvin           ###   ########.fr       */
+/*   Updated: 2021/08/03 22:08:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,30 @@ void	param(void)
 		ft_putstr("Please choose one of available params:\n");
 		ft_putstr("1. julia\n");
 		ft_putstr("2. mandelbrot\n");
-		ft_putstr("3. burning_ship\n");
+		ft_putstr("3. ship (if you check bonus)\n");
+		ft_putstr("\n\n");
 		closer();
 }
 
 void	tips(t_fract *fr)
 {
-	if (fr->choose_fractal == 1 || fr->choose_fractal == 2
-		|| fr->choose_fractal == 3)
+	if (fr->choose_fractal == 1 || fr->choose_fractal == 2)
 	{
-		ft_putstr("\n");
+//		ft_putstr("\n");
 		ft_putstr("==== // FRACT'OL LEGEND \\\\ ====\n");
-		ft_putstr("\n");
+//		ft_putstr("\n");
+//		if (fr->choose_fractal == 1)
+//			ft_putstr("· MOUSE_MOVE_MODE_ON: LEFT CTRL\n");
+//		ft_putstr("· MOOVE: keys: UP || DOWN || LEFT || RIGHT\n");
+		ft_putstr("· ZOOM: mouse wheel or mouse click\n");
+//		ft_putstr("· CHANGE COLOR: key 1 || key 2 || key 3 || key 4\n");
+//		ft_putstr("· CHANGE DEPTH: press key W or E\n");
+//		ft_putstr("· RESET: press SPACE key\n");
+	}
+	else if (fr->choose_fractal == 1 || fr->choose_fractal == 2
+			|| fr->choose_fractal == 3)
+	{
+		ft_putstr("==== // FRACT'OL LEGEND \\\\ ====\n");
 		if (fr->choose_fractal == 1)
 			ft_putstr("· MOUSE_MOVE_MODE_ON: LEFT CTRL\n");
 		ft_putstr("· MOOVE: keys: UP || DOWN || LEFT || RIGHT\n");
@@ -49,7 +61,7 @@ void	tips(t_fract *fr)
 		ft_putstr("· CHANGE COLOR: key 1 || key 2 || key 3 || key 4\n");
 		ft_putstr("· CHANGE DEPTH: press key W or E\n");
 		ft_putstr("· RESET: press SPACE key\n");
-	}	
+	}
 }
 
 void	loop(t_fract *fr)
@@ -93,7 +105,8 @@ int	main(int argc, char **argv)
 		mlx_hook(fr->win, 2, 5, key_draw, fr);
 		mlx_hook(fr->win, KEY_EXIT, MOTION_MASK, closer, NULL);
 		mlx_mouse_hook(fr->win, ft_mouse_zoom, fr);
-		mlx_hook(fr->win, MOTION_NOTIFY, MOTION_MASK, mouse_move, fr);
+		if (argc >= 3 && (ft_strcmp(argv[2], MOUSE_MOVE) == 0))
+			mlx_hook(fr->win, MOTION_NOTIFY, MOTION_MASK, mouse_move, fr);
 		mlx_loop(fr->mlx);
 	}
 	else

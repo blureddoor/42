@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:21:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/21 21:32:41 by marvin           ###   ########.fr       */
+/*   Updated: 2021/08/03 22:08:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 # define RESET          "\033[0m"
 # define JULIA			"julia"
 # define MANDELBROT		"mandelbrot"
-# define SHIP			"burning_ship"
+# define SHIP			"ship"
+# define MOUSE_MOVE		"mm"
 
 # define MOTION_MASK	1
 # define MOTION_NOTIFY	6
@@ -77,6 +78,7 @@ typedef struct s_fract
 	long double	zoom;
 	long double	infinity;
 	int			mouse_move_mode;
+	int			bonus;
 }				t_fract;
 
 int				ft_mouse_zoom(int key, int x, int y, t_fract *fr);
@@ -98,5 +100,6 @@ int				press(int key, t_fract *fr);
 int				key_draw(int key, t_fract *fr);
 void			choose_color(int key, t_fract *fr);
 long double		ft_map(long double x, t_set p);
+int				bonus(t_fract *fr);
 
 #endif

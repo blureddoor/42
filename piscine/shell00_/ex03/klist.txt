@@ -1,0 +1,5 @@
+Credentials cache: API:4901
+        Principal: lvintila@42MADRID.COM
+
+  Issued                Expires               Principal
+Nov 11 14:30:01 2019  Nov 12 00:29:49 2019  krbtgt/42MADRID.COM@42MADRID.COM

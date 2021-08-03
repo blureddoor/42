@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:03:13 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/21 21:41:59 by marvin           ###   ########.fr       */
+/*   Updated: 2021/08/03 20:40:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	param(void)
 		ft_putstr("Please choose one of available params:\n");
 		ft_putstr("1. julia\n");
 		ft_putstr("2. mandelbrot\n");
-		ft_putstr("3. burning_ship\n");
+		ft_putstr("3. ship\n");
 		closer();
 }
 
