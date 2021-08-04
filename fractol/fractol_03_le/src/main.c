@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:03:13 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/03 22:08:23 by marvin           ###   ########.fr       */
+/*   Updated: 2021/08/04 22:53:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 int	read_arg(char *str)
 {
+	char **argv = NULL;
+	int argc = 0;
 	if (ft_strcmp(str, JULIA) == 0)
 		return (1);
 	else if (ft_strcmp(str, MANDELBROT) == 0)
 		return (2);
-	else if (ft_strcmp(str, SHIP) == 0)
+	else if ((ft_strcmp(str, JULIA) == 0) && argv[2] == MM)
 		return (3);
 	else
 		return (0);
@@ -26,41 +28,21 @@ int	read_arg(char *str)
 
 void	param(void)
 {
-		ft_putstr("\n");
-		ft_putstr("Please choose one of available params:\n");
-		ft_putstr("1. julia\n");
-		ft_putstr("2. mandelbrot\n");
-		ft_putstr("3. ship (if you check bonus)\n");
-		ft_putstr("\n\n");
-		closer();
+	ft_putstr("\n");
+	ft_putstr("Please choose one of available params:\n");
+	ft_putstr("1. julia\n");
+	ft_putstr("2. mandelbrot\n");
+	ft_putstr("\n\n");
+	closer();
 }
 
 void	tips(t_fract *fr)
 {
 	if (fr->choose_fractal == 1 || fr->choose_fractal == 2)
 	{
-//		ft_putstr("\n");
 		ft_putstr("==== // FRACT'OL LEGEND \\\\ ====\n");
-//		ft_putstr("\n");
-//		if (fr->choose_fractal == 1)
-//			ft_putstr("· MOUSE_MOVE_MODE_ON: LEFT CTRL\n");
-//		ft_putstr("· MOOVE: keys: UP || DOWN || LEFT || RIGHT\n");
 		ft_putstr("· ZOOM: mouse wheel or mouse click\n");
-//		ft_putstr("· CHANGE COLOR: key 1 || key 2 || key 3 || key 4\n");
-//		ft_putstr("· CHANGE DEPTH: press key W or E\n");
-//		ft_putstr("· RESET: press SPACE key\n");
-	}
-	else if (fr->choose_fractal == 1 || fr->choose_fractal == 2
-			|| fr->choose_fractal == 3)
-	{
-		ft_putstr("==== // FRACT'OL LEGEND \\\\ ====\n");
-		if (fr->choose_fractal == 1)
-			ft_putstr("· MOUSE_MOVE_MODE_ON: LEFT CTRL\n");
-		ft_putstr("· MOOVE: keys: UP || DOWN || LEFT || RIGHT\n");
-		ft_putstr("· ZOOM: mouse wheel or mouse click\n");
-		ft_putstr("· CHANGE COLOR: key 1 || key 2 || key 3 || key 4\n");
-		ft_putstr("· CHANGE DEPTH: press key W or E\n");
-		ft_putstr("· RESET: press SPACE key\n");
+		ft_putstr("· Press ESC  to close\n");
 	}
 }
 
@@ -105,8 +87,6 @@ int	main(int argc, char **argv)
 		mlx_hook(fr->win, 2, 5, key_draw, fr);
 		mlx_hook(fr->win, KEY_EXIT, MOTION_MASK, closer, NULL);
 		mlx_mouse_hook(fr->win, ft_mouse_zoom, fr);
-		if (argc >= 3 && (ft_strcmp(argv[2], MOUSE_MOVE) == 0))
-			mlx_hook(fr->win, MOTION_NOTIFY, MOTION_MASK, mouse_move, fr);
 		mlx_loop(fr->mlx);
 	}
 	else

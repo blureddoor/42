@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 20:59:57 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/03 22:08:31 by marvin           ###   ########.fr       */
+/*   Updated: 2021/08/04 22:09:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	mouse_zoom_out(int x, int y, t_fract *fr)
 	long double	move_x;
 	long double	move_y;
 
-	if (fr->zoom <= 2)
+	if (fr->zoom <= 30)
 	{
 		move_x = (long double)x * (long double)((fr->max_x - fr->min_x)
 				/ (long double)ANCHO) + (long double)fr->min_x;
@@ -57,31 +57,10 @@ int	mouse_zoom_out(int x, int y, t_fract *fr)
 
 int	ft_mouse_zoom(int key, int x, int y, t_fract *fr)
 {
-	if (key == 5 || key == 1)
+	if (key == 5)
 		mouse_zoom_in(x, y, fr);
-	else if (key == 4 || key == 2)
+	else if (key == 4)
 		mouse_zoom_out(x, y, fr);
-	return (0);
-}
-
-
-int	mouse_move(int x, int y, t_fract *fr)
-{
-	long double	new_x;
-	long double	new_y;
-	long double	c_im;
-	long double	c_re;
-
-	if (fr->mouse_move_mode == 1)
-	{
-		new_x = ft_map(x, add_param(0, ANCHO, -1.5, 1));
-		new_y = ft_map(y, add_param(0, ALTO, -1.5, 1));
-		fr->c_re = new_x;
-		fr->c_im = new_y;
-		c_im = new_x;
-		c_re = new_y;
-		loop(fr);
-	}
 	return (0);
 }
 

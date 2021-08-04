@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:03:13 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/03 20:40:52 by marvin           ###   ########.fr       */
+/*   Updated: 2021/08/04 21:53:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	read_arg(char *str)
 
 void	param(void)
 {
-		ft_putstr("\n");
-		ft_putstr("Please choose one of available params:\n");
-		ft_putstr("1. julia\n");
-		ft_putstr("2. mandelbrot\n");
-		ft_putstr("3. ship\n");
-		closer();
+	ft_putstr("\n");
+	ft_putstr("Please choose one of available params:\n");
+	ft_putstr("1. julia\n");
+	ft_putstr("2. mandelbrot\n");
+	ft_putstr("3. ship\n");
+	closer();
 }
 
 void	tips(t_fract *fr)
@@ -49,6 +49,7 @@ void	tips(t_fract *fr)
 		ft_putstr("· CHANGE COLOR: key 1 || key 2 || key 3 || key 4\n");
 		ft_putstr("· CHANGE DEPTH: press key W or E\n");
 		ft_putstr("· RESET: press SPACE key\n");
+		ft_putstr("· press ESC for close fractal window\n");
 	}	
 }
 

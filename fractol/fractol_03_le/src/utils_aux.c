@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 20:58:15 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/03 22:08:29 by marvin           ###   ########.fr       */
+/*   Updated: 2021/08/04 22:49:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,6 @@ void	set_color(t_fract *fr, int depth)
 			fr->blue = (depth * 7) % 255;
 			fr->green = (depth * 4) % 255;
 		}
-	}
-	else if (fr->set_color == 1)
-	{
-		fr->red = (depth * 3) % 255;
-		fr->blue = (depth * 7) % 70;
-		fr->green = (depth * 4) % 4;
-	}
-	set_other_colors(fr, depth);
-}
-
-void	set_other_colors(t_fract *fr, int depth)
-{
-	if (fr->set_color == 2)
-	{
-		fr->red = ((depth * depth) * 30) % 255;
-		fr->blue = ((depth * depth) * 80) % 255;
-		fr->green = (depth * 40) % 255;
-	}
-	else if (fr->set_color == 3)
-	{
-		fr->red = (depth * 5) % 255;
-		fr->blue = (depth * 5) % 255;
-		fr->green = (depth * 5) % 255;
 	}
 }
 
@@ -89,4 +66,10 @@ void	init(t_fract *fr)
 	}
 	else if (fr->choose_fractal == 2)
 		fr->func = mandelbrot_math;
+	else if (fr->choose_fractal == 3)
+	{
+		fr->func = julia_math_2;
+		fr->c_re = 0.1942f;
+		fr->c_im = -0.60176f;
+	}
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_aux.c                                        :+:      :+:    :+:   */
+/*   utils_aux_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 20:58:15 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/21 21:22:28 by marvin           ###   ########.fr       */
+/*   Updated: 2021/08/04 21:02:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,6 @@ void	init(t_fract *fr)
 	}
 	else if (fr->choose_fractal == 2)
 		fr->func = mandelbrot_math;
+	else if (fr->choose_fractal == 3)
+		fr->func = burning_ship_math;
 }
