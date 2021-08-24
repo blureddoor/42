@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:03:13 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/04 21:53:50 by marvin           ###   ########.fr       */
+/*   Updated: 2021/08/24 21:56:50 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	param(void)
 {
 	ft_putstr("\n");
 	ft_putstr("Please choose one of available params:\n");
-	ft_putstr("1. julia\n");
-	ft_putstr("2. mandelbrot\n");
-	ft_putstr("3. ship\n");
+	ft_putstr("julia\n");
+	ft_putstr("mandelbrot\n");
+	ft_putstr("ship\n");
 	closer();
 }
 

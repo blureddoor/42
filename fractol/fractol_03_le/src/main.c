@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:03:13 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/04 22:53:25 by marvin           ###   ########.fr       */
+/*   Updated: 2021/08/24 21:34:03 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 int	read_arg(char *str)
 {
-	char **argv = NULL;
-	int argc = 0;
 	if (ft_strcmp(str, JULIA) == 0)
 		return (1);
 	else if (ft_strcmp(str, MANDELBROT) == 0)
 		return (2);
-	else if ((ft_strcmp(str, JULIA) == 0) && argv[2] == MM)
-		return (3);
+//	else if ((ft_strcmp(str, JULIA) == 0))
+//		return (3);
 	else
 		return (0);
 }
@@ -30,8 +28,9 @@ void	param(void)
 {
 	ft_putstr("\n");
 	ft_putstr("Please choose one of available params:\n");
-	ft_putstr("1. julia\n");
-	ft_putstr("2. mandelbrot\n");
+	ft_putstr("\n\n");
+	ft_putstr("julia\n");
+	ft_putstr("mandelbrot\n");
 	ft_putstr("\n\n");
 	closer();
 }
@@ -41,8 +40,9 @@ void	tips(t_fract *fr)
 	if (fr->choose_fractal == 1 || fr->choose_fractal == 2)
 	{
 		ft_putstr("==== // FRACT'OL LEGEND \\\\ ====\n");
-		ft_putstr("· ZOOM: mouse wheel or mouse click\n");
-		ft_putstr("· Press ESC  to close\n");
+		ft_putstr("· ZOOM: mouse wheel for zoom in o zoom out\n");
+		ft_putstr("· Press ESC to close\n");
+		ft_putstr("\n");
 	}
 }
 
@@ -82,7 +82,7 @@ int	main(int argc, char **argv)
 			return (0);
 		fr->choose_fractal = read_arg(argv[1]);
 		tips(fr);
-		init(fr);
+		init(fr, argv);
 		loop(fr);
 		mlx_hook(fr->win, 2, 5, key_draw, fr);
 		mlx_hook(fr->win, KEY_EXIT, MOTION_MASK, closer, NULL);

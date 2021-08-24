@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+         #
+#    By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/21 21:33:46 by lvintila          #+#    #+#              #
-#    Updated: 2021/08/04 22:00:14 by marvin           ###   ########.fr        #
+#    Updated: 2021/08/24 21:56:57 by lvintila         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ $(BONUS):		$(OBJS_BONUS)
 
 
 $(DIR_O)/%.o:	$(DIR_S)/%.c $(INC)/fractol.h
-				@mkdir -p obj
+	@mkdir -p obj
 				
 bonus:			$(BONUS)
 
@@ -80,12 +80,12 @@ bonus:			$(BONUS)
 clean:
 			make -C $(LIBFT) clean
 			rm -f $(OBJS) $(OBJS_BONUS) $(DIR_O) $(DIR_O_BONUS)
-			@echo "${GREEN}Cleaned${RESET}"
+	@echo "${GREEN}Cleaned${RESET}"
 
 fclean:		clean
 			make -C libft/ fclean
 			rm -f $(NAME) $(BONUS)
-			@echo "${GREEN}fcleaned ... ${RESET}"
+	@echo "${GREEN}fcleaned ... ${RESET}"
 
 re:			fclean all
 	@echo "${GREEN}deleted and recompiled${RESET}"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:05:42 by lvintila          #+#    #+#             */
-/*   Updated: 2021/07/05 21:40:30 by marvin           ###   ########.fr       */
+/*   Updated: 2021/08/24 21:52:10 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int					ft_isspace(int c);
 void				ft_putstr(char const *s);
 int					ft_strcmp(const char *s1, const char *s2);
 void				ft_memdel(void **ap);
+long double			ft_atol(const char *s);
 
 #endif
