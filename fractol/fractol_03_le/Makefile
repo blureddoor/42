@@ -6,7 +6,7 @@
 #    By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/21 21:33:46 by lvintila          #+#    #+#              #
-#    Updated: 2021/08/24 21:56:57 by lvintila         ###   ########.fr        #
+#    Updated: 2021/08/25 20:48:31 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,13 +69,8 @@ $(BONUS):		$(OBJS_BONUS)
 
 
 $(DIR_O)/%.o:	$(DIR_S)/%.c $(INC)/fractol.h
-	@mkdir -p obj
 				
 bonus:			$(BONUS)
-
-#$(DIR_O_BONUS)/%.o:	$(DIR_S_BONUS)/%.c $(INC)/fractol.h
-#				mkdir -p obj_bonus
-
 
 clean:
 			make -C $(LIBFT) clean

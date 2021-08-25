@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   keys_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 20:43:46 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/04 20:46:21 by marvin           ###   ########.fr       */
+/*   Updated: 2021/08/25 21:45:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
+
+int	closer(void)
+{
+	exit (1);
+	return (0);
+}
 
 int	press2(int key, t_fract *fr)
 {
@@ -23,7 +29,6 @@ int	press2(int key, t_fract *fr)
 	if (key == KEY_ESC)
 	{
 		exit (1);
-		system("leaks fractol");
 	}
 	return (-1);
 }
@@ -78,6 +83,9 @@ void	choose_color(int key, t_fract *fr)
 
 int	key_draw(int key, t_fract *fr)
 {
+	int		argc;
+	char	**argv;
+
 	if (key == KEY_ESC)
 		closer();
 	press(key, fr);
@@ -95,7 +103,7 @@ int	key_draw(int key, t_fract *fr)
 	}
 	if (key == 49)
 	{
-		init(fr);
+		init_bonus(fr, argc, argv);
 		loop(fr);
 	}
 	choose_color(key, fr);

@@ -6,18 +6,11 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 20:58:15 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/04 21:02:15 by marvin           ###   ########.fr       */
+/*   Updated: 2021/08/25 21:58:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
-
-int	closer(void)
-{
-	system("leaks fractol");
-	exit (1);
-	return (0);
-}
 
 void	set_color(t_fract *fr, int depth)
 {
@@ -71,7 +64,7 @@ int	init_mlx(t_fract *fr)
 	return (1);
 }
 
-void	init(t_fract *fr)
+void	init_bonus(t_fract *fr, int argc, char **argv)
 {
 	fr->func = julia_math;
 	fr->set_color = 0;
@@ -84,11 +77,22 @@ void	init(t_fract *fr)
 	if (fr->choose_fractal == 1)
 	{
 		fr->func = julia_math;
-		fr->c_re = -0.3842f;
-		fr->c_im = -0.70176f;
+		if ((argc <= 4) && (argv[2] != 0) && (argv[3] != 0))
+			julia_args(fr, argc, argv);
+		else
+		{
+			fr->c_re = -0.3842f;
+			fr->c_im = -0.70176f;
+		}
 	}
 	else if (fr->choose_fractal == 2)
 		fr->func = mandelbrot_math;
 	else if (fr->choose_fractal == 3)
 		fr->func = burning_ship_math;
+}
+
+void	julia_args(t_fract *fr, int argc, char **argv)
+{
+	fr->c_re = strtold(argv[2], 0);
+	fr->c_im = strtold(argv[3], 0);
 }

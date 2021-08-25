@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:21:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/24 21:52:40 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/08/25 21:53:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # define JULIA			"julia"
 # define MANDELBROT		"mandelbrot"
 # define SHIP			"ship"
-# define MM				"mm"
 
 # define MOTION_MASK	1
 # define MOTION_NOTIFY	6
@@ -99,6 +98,7 @@ int				press(int key, t_fract *fr);
 int				key_draw(int key, t_fract *fr);
 void			choose_color(int key, t_fract *fr);
 long double		ft_map(long double x, t_set p);
-int				init_bonus(t_fract *fr);
-int				julia_math_2(t_fract *fr, int x, int y);
+void			init_bonus(t_fract *fr, int argc, char **argv);
+void			julia_args(t_fract *fr, int argc, char **argv);
+
 #endif

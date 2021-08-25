@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:03:13 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/24 21:56:50 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/08/25 21:31:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	main(int argc, char **argv)
 			return (0);
 		fr->choose_fractal = read_arg(argv[1]);
 		tips(fr);
-		init(fr);
+		init_bonus(fr, argc, argv);
 		loop(fr);
 		mlx_hook(fr->win, 2, 5, key_draw, fr);
 		mlx_hook(fr->win, KEY_EXIT, MOTION_MASK, closer, NULL);

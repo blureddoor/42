@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 20:58:15 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/24 21:56:00 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/08/25 21:20:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	closer(void)
 {
-	system("leaks fractol");
 	exit (1);
 	return (0);
 }
@@ -61,22 +60,17 @@ void	init(t_fract *fr, int argc, char **argv)
 	if (fr->choose_fractal == 1)
 	{
 		fr->func = julia_math;
-		if (argv[2] && argv[2] != 0)
-			fr->c_re = ft_atol(argv[2]);
+		if ((argc <= 4) && (argv[2] != 0) && (argv[3] != 0))
+		{
+			fr->c_re = strtold(argv[2], 0);
+			fr->c_im = strtold(argv[3], 0);
+		}
 		else
+		{	
 			fr->c_re = -0.3842f;
-		if (argv[3] && argv[3] != 0)
-			fr->c_im = ft_atol(argv[3]);
-		else
 			fr->c_im = -0.70176f;
+		}
 	}
 	else if (fr->choose_fractal == 2)
 		fr->func = mandelbrot_math;
-	else if (fr->choose_fractal == 3)
-	{
-		fr->func = julia_math_2;
-		fr->c_re = 0.0;
-		fr->c_im = -0.60176f;
-		ft_putstr("julia_2\n\n");
-	}
 }
