@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 22:14:46 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/31 20:12:24 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/08/31 22:33:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,14 @@ long double	ft_map(long double x, t_set p)
 	return (ret);
 }
 
-
-
 int	julia_math(t_fract *fr, int x, int y)
 {
 	long double	mx;
 	long double	my;
 	long double	x_temp;
 	long double	y_temp;
-	
+
 	fr->iter = 0;
-	
 	mx = ft_map(x, add_param(0, ANCHO, fr->min_x, fr->max_x));
 	my = ft_map(y, add_param(0, ALTO, fr->min_y, fr->max_y));
 	while (fr->iter < fr->infinity)
