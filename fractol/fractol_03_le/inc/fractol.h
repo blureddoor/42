@@ -21,8 +21,8 @@
 # include <stdlib.h>
 # include <math.h>
 
-# define ANCHO 1400
-# define ALTO 1000
+# define ANCHO 800
+# define ALTO 600
 
 # define RED            "\033[22;31m"
 # define RESET          "\033[0m"

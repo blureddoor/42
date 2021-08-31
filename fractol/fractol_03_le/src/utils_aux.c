@@ -51,11 +51,11 @@ void	init(t_fract *fr, int argc, char **argv)
 {
 	fr->func = julia_math;
 	fr->set_color = 0;
-	fr->min_x = -1.5f;
+	fr->min_x = -1.0f;
 	fr->max_x = 1.0f;
 	fr->min_y = -1.0f;
 	fr->max_y = 1.0f;
-	fr->infinity = 100;
+	fr->infinity = 300;
 	fr->zoom = 0.1f;
 	if (fr->choose_fractal == 1)
 	{
@@ -67,8 +67,8 @@ void	init(t_fract *fr, int argc, char **argv)
 		}
 		else
 		{	
-			fr->c_re = -0.3842f;
-			fr->c_im = -0.70176f;
+			fr->c_re = 0.285f;
+			fr->c_im = -0.01f;
 		}
 	}
 	else if (fr->choose_fractal == 2)

@@ -68,11 +68,11 @@ void	init_bonus(t_fract *fr, int argc, char **argv)
 {
 	fr->func = julia_math;
 	fr->set_color = 0;
-	fr->min_x = -1.5f;
+	fr->min_x = -1.0f;
 	fr->max_x = 1.0f;
 	fr->min_y = -1.0f;
 	fr->max_y = 1.0f;
-	fr->infinity = 100;
+	fr->infinity = 300;
 	fr->zoom = 0.1f;
 	if (fr->choose_fractal == 1)
 	{

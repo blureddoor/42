@@ -27,8 +27,8 @@ void	param(void)
 	ft_putstr("\n");
 	ft_putstr("Please choose one of available params:\n");
 	ft_putstr("\n\n");
-	ft_putstr("julia\n");
-	ft_putstr("mandelbrot\n");
+	ft_putstr("· julia\n");
+	ft_putstr("· mandelbrot\n");
 	ft_putstr("\n\n");
 	closer();
 }
