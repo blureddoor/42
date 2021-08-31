@@ -6,23 +6,20 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:21:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/25 21:53:35 by marvin           ###   ########.fr       */
+/*   Updated: 2021/08/31 22:23:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include <stdio.h>
 # include <unistd.h>
 # include "../minilibx/mlx.h"
 # include "../libft/libft.h"
-# include <string.h>
-# include <stdlib.h>
 # include <math.h>
 
-# define ANCHO 800
-# define ALTO 600
+# define ANCHO 1400
+# define ALTO 1000
 
 # define RED            "\033[22;31m"
 # define RESET          "\033[0m"

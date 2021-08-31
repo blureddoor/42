@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 20:59:57 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/25 21:43:53 by marvin           ###   ########.fr       */
+/*   Updated: 2021/08/31 20:18:50 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	mouse_zoom_out(int x, int y, t_fract *fr)
 	long double	move_x;
 	long double	move_y;
 
-	if (fr->zoom <= 30)
+	if (fr->zoom <= 40)
 	{
 		move_x = (long double)x * (long double)((fr->max_x - fr->min_x)
 				/ (long double)ANCHO) + (long double)fr->min_x;

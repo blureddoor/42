@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 20:58:15 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/25 21:20:16 by marvin           ###   ########.fr       */
+/*   Updated: 2021/08/31 21:51:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	init(t_fract *fr, int argc, char **argv)
 		}
 		else
 		{	
-			fr->c_re = 0.285f;
-			fr->c_im = -0.01f;
+			fr->c_re = -0.4f;
+			fr->c_im = 0.6f;
 		}
 	}
 	else if (fr->choose_fractal == 2)
