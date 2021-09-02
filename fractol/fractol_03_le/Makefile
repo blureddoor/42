@@ -6,7 +6,7 @@
 #    By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/21 21:33:46 by lvintila          #+#    #+#              #
-#    Updated: 2021/08/25 20:48:31 by marvin           ###   ########.fr        #
+#    Updated: 2021/09/02 19:47:48 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ DIR_O_BONUS	=	obj_bonus
 
 INC			=	inc
 
-SOURCES_C	=	main.c keys.c fractals_math.c utils.c utils_aux.c \
+SOURCES_C	=	main.c keys.c fractals_math.c utils.c utils_aux.c julia_aux.c \
 
 SOURCES_B	=	main.c keys_bonus.c fractals_math_bonus.c utils_bonus.c \
 				utils_aux_bonus.c  \

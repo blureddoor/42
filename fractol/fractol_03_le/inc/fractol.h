@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:21:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/31 22:28:51 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/02 22:41:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../minilibx/mlx.h"
 # include "../libft/libft.h"
 # include <math.h>
+# include <stdio.h>
 
 # define ANCHO 1400
 # define ALTO 1000
@@ -75,6 +76,7 @@ typedef struct s_fract
 	long double	infinity;
 	int			mouse_move_mode;
 	int			bonus;
+	long long	sign;
 }				t_fract;
 
 int				ft_mouse_zoom(int key, int x, int y, t_fract *fr);
@@ -97,5 +99,6 @@ void			choose_color(int key, t_fract *fr);
 long double		ft_map(long double x, t_set p);
 void			init_bonus(t_fract *fr, int argc, char **argv);
 void			julia_args(t_fract *fr, int argc, char **argv);
+long double 	read_str(char *str);
 
 #endif
