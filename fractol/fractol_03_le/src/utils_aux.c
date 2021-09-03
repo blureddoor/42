@@ -61,10 +61,11 @@ void	init(t_fract *fr, int argc, char **argv)
 	if (fr->choose_fractal == 1)
 	{
 		fr->func = julia_math;
-		if ((argc <= 4) && (argv[2] != 0) && (argv[3] != 0))
+		if ((argc <= 4) && (argv[2] != 0) && (argv[3] != 0) 
+			&& str_is_float(argv[2]) == 0 && str_is_float(argv[3]) == 0)
 		{
-			fr->c_re = (long double)read_str(argv[2]);
-			fr->c_im = (long double)read_str(argv[3]);
+			fr->c_re = read_str(argv[2]);
+			fr->c_im = read_str(argv[3]);
 		}
 		else
 		{	

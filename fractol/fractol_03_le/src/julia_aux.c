@@ -12,21 +12,25 @@
 
 #include "../inc/fractol.h"
 
-/*
-int	all_digits_str(char *str)
+int	str_is_float(char *str)
 {
 	int i;
+	int res;
 
 	i = 0;
-	while(str[i] != '\0')
+	while (str[i] != '\0')
 	{
-		if (ft_isdigit(str[i]) != 0)
+		if (str[i] == '.' || str[i] == '-' || str[i] == '+')
+			i++;
+		else if (ft_isdigit(str[i]) != 0)
+			i++;
+		else
 			return (1);
-		i++;
 	}
+	printf(" ok <====> ok \n");
 	return (0);
 }
-*/
+
 long double	read_str(char *str)
 {
 	int			n;

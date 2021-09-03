@@ -100,5 +100,6 @@ long double		ft_map(long double x, t_set p);
 void			init_bonus(t_fract *fr, int argc, char **argv);
 void			julia_args(t_fract *fr, int argc, char **argv);
 long double 	read_str(char *str);
+int				str_is_float(char *str);
 
 #endif
