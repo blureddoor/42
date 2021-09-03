@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 18:22:16 by lvintila          #+#    #+#             */
-/*   Updated: 2021/09/02 22:41:48 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/03 21:45:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,46 @@
 int	str_is_float(char *str)
 {
 	int i;
-	int res;
+	int	j;
 
 	i = 0;
+	j = 0;
+	if (str[0] == '.')
+		return (1);
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	if (str[i] == '.')
+		return (1);
 	while (str[i] != '\0')
 	{
-		if (str[i] == '.' || str[i] == '-' || str[i] == '+')
-			i++;
-		else if (ft_isdigit(str[i]) != 0)
-			i++;
+		if (ft_isdigit(str[i]) != 0 || str[i] == '.')
+			{
+				if (str[i] == '.')
+				j++;
+				i++;
+			}
 		else
 			return (1);
 	}
-	printf(" ok <====> ok \n");
+	if (j > 1)
+		return (1);
 	return (0);
+}
+
+void	is_not_ld(char *str)
+{
+	int			a;
+	long double	ld;
+
+	a = ft_atoi(str);
+	ld = (long double)a;
+}
+
+void	read_str_aux()
+{
+	a = ft_atoi(tab[0]);
+	b = ft_atoi(tab[1]);
+	n = ft_strlen(tab[1]);
 }
 
 long double	read_str(char *str)
@@ -61,9 +87,7 @@ long double	read_str(char *str)
 		free(tab);
 	}
 	else
-	{
-		a = ft_atoi(str);
-		ld = (long double)a;
-	}
+		is_not_ld(str);
 	return (ld);
 }
+
