@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:21:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/09/03 20:38:21 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/06 21:29:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void			set_other_colors(t_fract *fr, int depth);
 int				closer(void);
 void			my_mlx_pixel_put(t_fract *fr, int x, int y, int color);
 int				init_mlx(t_fract *fr);
-void			init(t_fract *fr, int argc, char **argv);
+void			init(t_fract *fr);
+void			init_func(t_fract *fr, int argc, char **argv);
 int				julia_math(t_fract *fr, int x, int y);
 int				mandelbrot_math(t_fract *fr, int x, int y);
 int				burning_ship_math(t_fract *fr, int x, int y);
@@ -99,7 +100,7 @@ void			choose_color(int key, t_fract *fr);
 long double		ft_map(long double x, t_set p);
 void			init_bonus(t_fract *fr, int argc, char **argv);
 void			julia_args(t_fract *fr, int argc, char **argv);
-long double 	read_str(char *str);
+long double		read_str(char *str);
 int				str_is_float(char *str);
 
 #endif

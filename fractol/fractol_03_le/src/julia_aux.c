@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 18:22:16 by lvintila          #+#    #+#             */
-/*   Updated: 2021/09/03 21:45:51 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/06 21:34:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	str_is_float(char *str)
 {
-	int i;
+	int	i;
 	int	j;
 
 	i = 0;
@@ -28,33 +28,17 @@ int	str_is_float(char *str)
 	while (str[i] != '\0')
 	{
 		if (ft_isdigit(str[i]) != 0 || str[i] == '.')
-			{
-				if (str[i] == '.')
+		{
+			if (str[i] == '.')
 				j++;
-				i++;
-			}
+			i++;
+		}
 		else
 			return (1);
 	}
 	if (j > 1)
 		return (1);
 	return (0);
-}
-
-void	is_not_ld(char *str)
-{
-	int			a;
-	long double	ld;
-
-	a = ft_atoi(str);
-	ld = (long double)a;
-}
-
-void	read_str_aux()
-{
-	a = ft_atoi(tab[0]);
-	b = ft_atoi(tab[1]);
-	n = ft_strlen(tab[1]);
 }
 
 long double	read_str(char *str)
@@ -65,29 +49,23 @@ long double	read_str(char *str)
 	long double	ld;
 	char		**tab;
 
-	if (ft_strchr(str, '.') != 0)
+	tab = ft_split(str, '.');
+	if (tab[0][0] == '-')
 	{
-		tab = ft_split(str, '.');
-		if (tab[0][0] == '-')
-		{
-			a = ft_atoi(&tab[0][1]);
-			b = ft_atoi(tab[1]);
-			n = ft_strlen(tab[1]);
-			ld = (-1) * ((long double)a + ((long double)b / (pow(10, n))));
-		}
-		else
-		{
-			a = ft_atoi(tab[0]);
-			b = ft_atoi(tab[1]);
-			n = ft_strlen(tab[1]);
-			ld = (long double)a + ((long double)b / (pow(10, n)));
-		}
-		free(tab[0]);
-		free(tab[1]);
-		free(tab);
+		a = ft_atoi(&tab[0][1]);
+		b = ft_atoi(tab[1]);
+		n = ft_strlen(tab[1]);
+		ld = (-1) * ((long double)a + ((long double)b / (pow(10, n))));
 	}
 	else
-		is_not_ld(str);
+	{
+		a = ft_atoi(tab[0]);
+		b = ft_atoi(tab[1]);
+		n = ft_strlen(tab[1]);
+		ld = (long double)a + ((long double)b / (pow(10, n)));
+	}
+	free(tab[0]);
+	free(tab[1]);
+	free(tab);
 	return (ld);
 }
-

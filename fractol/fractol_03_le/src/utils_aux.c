@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 20:58:15 by lvintila          #+#    #+#             */
-/*   Updated: 2021/09/03 20:38:27 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/06 21:33:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	closer(void)
 {
-	system("leaks fractol");
 	exit (1);
 	return (0);
 }
@@ -48,7 +47,7 @@ int	init_mlx(t_fract *fr)
 	return (1);
 }
 
-void	init(t_fract *fr, int argc, char **argv)
+void	init(t_fract *fr)
 {
 	fr->func = julia_math;
 	fr->set_color = 0;
@@ -58,11 +57,16 @@ void	init(t_fract *fr, int argc, char **argv)
 	fr->max_y = 1.0f;
 	fr->infinity = 300;
 	fr->zoom = 0.1f;
+}
+
+void	init_func(t_fract *fr, int argc, char **argv)
+{
 	if (fr->choose_fractal == 1)
 	{
 		fr->func = julia_math;
-		if ((argc <= 4) && (argv[2] != 0) && (argv[3] != 0) 
-			&& str_is_float(argv[2]) == 0 && str_is_float(argv[3]) == 0)
+		if ((argc <= 4) && (argv[2] != 0) && (argv[3] != 0)
+			&& str_is_float(argv[2]) == 0 && str_is_float(argv[3]) == 0
+			&& ft_strchr(argv[2], '.') != 0 && ft_strchr(argv[3], '.') != 0)
 		{
 			fr->c_re = read_str(argv[2]);
 			fr->c_im = read_str(argv[3]);
