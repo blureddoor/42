@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 20:59:57 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/31 20:18:50 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/09/07 21:04:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int	mouse_move(int x, int y, t_fract *fr)
 
 	if (fr->mouse_move_mode == 1)
 	{
-		new_x = ft_map(x, add_param(0, ANCHO, -1.5, 1));
-		new_y = ft_map(y, add_param(0, ALTO, -1.5, 1));
+		new_x = ft_map(x, add_param(0, ANCHO, -1, 1));
+		new_y = ft_map(y, add_param(0, ALTO, -1, 1));
 		fr->c_re = new_x;
 		fr->c_im = new_y;
 		c_im = new_x;

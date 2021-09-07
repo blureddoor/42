@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 20:58:15 by lvintila          #+#    #+#             */
-/*   Updated: 2021/09/06 21:33:55 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/07 21:03:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	init(t_fract *fr)
 	fr->max_x = 1.0f;
 	fr->min_y = -1.0f;
 	fr->max_y = 1.0f;
-	fr->infinity = 300;
+	fr->infinity = 180;
 	fr->zoom = 0.1f;
 }
 

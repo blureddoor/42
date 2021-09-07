@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 20:58:15 by lvintila          #+#    #+#             */
-/*   Updated: 2021/09/06 21:33:53 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/07 20:51:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	init_bonus(t_fract *fr, int argc, char **argv)
 	fr->max_x = 1.0f;
 	fr->min_y = -1.0f;
 	fr->max_y = 1.0f;
-	fr->infinity = 300;
+	fr->infinity = 180;
 	fr->zoom = 0.1f;
 	if (fr->choose_fractal == 1)
 	{
@@ -81,7 +81,7 @@ void	init_bonus(t_fract *fr, int argc, char **argv)
 			julia_args(fr, argc, argv);
 		else
 		{
-			fr->c_re = -0.40f;
+			fr->c_re = -0.4f;
 			fr->c_im = 0.6f;
 		}
 	}

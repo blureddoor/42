@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 20:43:46 by lvintila          #+#    #+#             */
-/*   Updated: 2021/08/25 21:45:06 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/07 20:52:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	key_draw(int key, t_fract *fr)
 		closer();
 	press(key, fr);
 	if (key == 256)
-		fr->mouse_move_mode = (fr->mouse_move_mode + 1) % 2;
+		fr->mouse_move_mode = 1;
 	if (key == 13)
 	{
 		fr->infinity += 25;

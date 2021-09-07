@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 20:59:57 by lvintila          #+#    #+#             */
-/*   Updated: 2021/09/06 21:41:05 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/07 21:00:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	mouse_zoom_out(int x, int y, t_fract *fr)
 
 int	ft_mouse_zoom(int key, int x, int y, t_fract *fr)
 {
-	if (key == 5)
+	if (key == 5 || key == 1)
 		mouse_zoom_in(x, y, fr);
-	else if (key == 4)
+	else if (key == 4 || key == 2)
 		mouse_zoom_out(x, y, fr);
 	return (0);
 }
