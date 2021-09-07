@@ -41,7 +41,7 @@ INC			=	inc
 SOURCES_C	=	main.c keys.c fractals_math.c utils.c utils_aux.c julia_aux.c \
 
 SOURCES_B	=	main.c keys_bonus.c fractals_math_bonus.c utils_bonus.c \
-				utils_aux_bonus.c  \
+				julia_aux_bonus.c utils_aux_bonus.c  \
 
 SRCS		=	$(addprefix $(DIR_S)/, $(SOURCES_C))
 

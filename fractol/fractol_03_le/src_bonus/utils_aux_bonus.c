@@ -81,8 +81,8 @@ void	init_bonus(t_fract *fr, int argc, char **argv)
 			julia_args(fr, argc, argv);
 		else
 		{
-			fr->c_re = -0.3842f;
-			fr->c_im = -0.70176f;
+			fr->c_re = -0.40f;
+			fr->c_im = 0.6f;
 		}
 	}
 	else if (fr->choose_fractal == 2)
@@ -93,6 +93,10 @@ void	init_bonus(t_fract *fr, int argc, char **argv)
 
 void	julia_args(t_fract *fr, int argc, char **argv)
 {
-	fr->c_re = strtold(argv[2], 0);
-	fr->c_im = strtold(argv[3], 0);
+	if (str_is_float(argv[2]) == 0 && str_is_float(argv[3]) == 0
+		&& ft_strchr(argv[2], '.') != 0 && ft_strchr(argv[3], '.') != 0)
+	{
+		fr->c_re = read_str(argv[2]);
+		fr->c_im = read_str(argv[3]);
+	}
 }
