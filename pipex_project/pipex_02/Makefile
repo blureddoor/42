@@ -6,13 +6,15 @@
 #    By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/08 20:35:15 by lvintila          #+#    #+#              #
-#    Updated: 2021/09/08 20:58:37 by marvin           ###   ########.fr        #
+#    Updated: 2021/09/09 22:40:34 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 YELLOW		=	$(shell tput -Txterm setaf 3)
 GREEN		=	$(shell tput -Txterm setaf 3)
 RED			=	$(shell tput -Txterm setaf 3)
+
+LIBFT		=	libft
 
 NAME		= 	pipex
 
