@@ -18,7 +18,7 @@ NAME		= 	pipex
 
 CC			=	gcc
 
-FLAG		=	-g -Wall -Werror -Wextra $(NAME)
+FLAG		=	-g -Wall -Werror -Wextra -I. -o $(NAME)
 
 SANFLAG		=	-fsanitize=adress
 
@@ -38,19 +38,22 @@ all:			$(NAME)
 
 $(NAME):		$(OBJS)
 				@echo "${YELLOW}... compiling pipex... ${RESET}"
+				@make -C $(LIBFT)
 				@ar rc $(NAME) $(OBJS)
 				@ranlib $(NAME)
-				$(CC) $(OBJS) $(FLAG)
+				$(CC) $(OBJS) $(FLAG) -L $(LIBFT) ./libft/libft.a
 
 $(DIR_O)/%.o:	$(DIR_S)/%.c $(INC)/pipex.h
 
 clean:
+				make -C $(LIBFT) clean
 				rm -f $(OBJS) $(DIR_O)
 				@echo "${GREEN} Cleaned ${RESET}"
 
 fclean:			clean
+				make -C libft/ fclean
 				rm -f $(NAME)
-				@echo "${} fcleaned ... Done!${RESET}"
+				@echo "${GREEN} fcleaned ... Done!${RESET}"
 
 re:				fclean all
 				@echo "${GREEN} ... deleted and recompiled ... Done!${RESET}"
