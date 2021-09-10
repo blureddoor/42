@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 20:51:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/09/10 22:14:06 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/10 23:06:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@
 # define STDOUT 1
 
 char	*find_path(char *cmd, char **envp);
-void	pipex(char *cmd1, char *cmd2, char **envp, char **argv);
+void	pipex(int f1, int f2, char *cmd1, char *cmd2, char **envp);
 
 #endif

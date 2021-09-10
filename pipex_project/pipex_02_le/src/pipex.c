@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 20:54:21 by lvintila          #+#    #+#             */
-/*   Updated: 2021/09/10 23:02:45 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/10 23:04:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,16 @@ char	*find_path(char *cmd, char **envp)
 	return (cmd);
 }
 
-void	child1(int fd[2], int f1, char *cmd1, char **envp)
+void	child1(int f1, char *cmd1, char **envp)
 {
 	int	end[2];
 	char **cmd;
 	char *str;
 
 	dup2(f1, STDIN);
-	dup2(fd[1], STDOUT);
-	close(fd[0]);
+	dup2(end[1], STDOUT);
+	close(end[1]);
+	close(end[0]);
 	close(f1);
 	cmd = ft_split(cmd1, ' ');
 	str = find_path(cmd[0], envp);
@@ -59,7 +60,7 @@ void	child1(int fd[2], int f1, char *cmd1, char **envp)
 	exit(EXIT_FAILURE);
 }
 
-void	parent1(int fd[2], int f2, char *cmd2, char **envp)
+void	parent1(int f2, char *cmd2, char **envp)
 {
 	int		end[2];
 	int		status;
@@ -69,8 +70,9 @@ void	parent1(int fd[2], int f2, char *cmd2, char **envp)
 	status = 0;
 	waitpid(-1, &status, 0);
 	dup2(f2, STDOUT);
-	dup2(fd[0], STDIN);
-	close(fd[1]);
+	dup2(end[0], STDIN);
+	close(end[1]);
+	close(end[0]);
 	close(f2);
 	cmd = ft_split(cmd2, ' ');
 	str = find_path(cmd[0], envp);
@@ -79,32 +81,20 @@ void	parent1(int fd[2], int f2, char *cmd2, char **envp)
 	exit(EXIT_FAILURE);
 }
 
-void	pipex(char *cmd1, char *cmd2, char **envp, char **argv)
+void	pipex(int f1, int f2, char *cmd1, char *cmd2, char **envp)
 {
 	int		status;
 	pid_t	parent;
-	int		fd[2];
-	int f1;
-	int	f2;
+	int		end[2];
 
-	pipe(fd);
+	pipe(end);
 	parent = fork();
-	f1 = open(argv[1], O_RDONLY);
-	f2 = open(argv[4], O_CREAT | O_RDWR | O_TRUNC | 0644);
-	if (fd[0] < 0 || fd[1] < 0)
-		write(2, "Error\n", 6);
 	if (parent < 0)
-		write(2, "Error\n", 6);
+		write(2, "Error", 5);
 	if (!parent)
-	{
-		close(fd[0]);
-		child1(fd, f1, cmd1, envp);
-	}
+		child1(f1, cmd1, envp);
 	else
-	{
-		close(fd[1]);
-		parent1(fd, f2, cmd2, envp);
-	}
+		parent1(f2, cmd2, envp);
 }
 
 
@@ -113,6 +103,10 @@ int	main(int argc, char **argv, char **envp)
 	int f1;
 	int	f2;
 
-	pipex(argv[2], argv[3], envp, argv);
+	f1 = open(argv[1], O_RDONLY);
+	f2 = open(argv[4], O_CREAT | O_RDWR | O_TRUNC | 0644);
+	if (f1 < 0 || f2 < 0)
+		return (-1);
+	pipex(f1, f2, argv[3], argv[4], envp);
 	return (0);
 }

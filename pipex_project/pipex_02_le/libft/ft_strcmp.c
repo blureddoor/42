@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/08 20:51:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/09/10 22:14:06 by marvin           ###   ########.fr       */
+/*   Created: 2021/07/03 11:32:24 by lvintila          #+#    #+#             */
+/*   Updated: 2021/09/01 18:33:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-
-# define STDIN 0
-# define STDOUT 1
-
-char	*find_path(char *cmd, char **envp);
-void	pipex(char *cmd1, char *cmd2, char **envp, char **argv);
-
-#endif
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	while (*s1 != '\0' && *s2 != '\0' && (*s1 - *s2) == 0)
+	{
+		s1++;
+		s2++;
+	}
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+}

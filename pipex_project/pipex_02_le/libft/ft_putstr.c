@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/08 20:51:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/09/10 22:14:06 by marvin           ###   ########.fr       */
+/*   Created: 2021/07/04 10:05:37 by lvintila          #+#    #+#             */
+/*   Updated: 2021/07/05 21:48:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/wait.h>
+void	ft_putstr(char const *s)
+{
+	size_t	len;
 
-# define STDIN 0
-# define STDOUT 1
-
-char	*find_path(char *cmd, char **envp);
-void	pipex(char *cmd1, char *cmd2, char **envp, char **argv);
-
-#endif
+	if (s == NULL)
+		return ;
+	len = ft_strlen(s);
+	if (len > 0)
+	{
+		write(1, s, len);
+	}
+}
