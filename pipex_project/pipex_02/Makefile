@@ -18,6 +18,8 @@ LIBFT		=	libft
 
 NAME		= 	pipex
 
+NAME_FILE_2	=	outfile
+
 CC			=	gcc
 
 FLAG		=	-g -Wall -Werror -Wextra -I. -o $(NAME)
@@ -54,7 +56,7 @@ clean:
 
 fclean:			clean
 				make -C libft/ fclean
-				rm -f $(NAME)
+				rm -f $(NAME) $(NAME_FILE_2)
 				@echo "${GREEN} fcleaned ... Done!${RESET}"
 
 re:				fclean all
