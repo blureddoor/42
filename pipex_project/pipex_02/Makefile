@@ -6,7 +6,7 @@
 #    By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/08 20:35:15 by lvintila          #+#    #+#              #
-#    Updated: 2021/09/09 22:40:34 by marvin           ###   ########.fr        #
+#    Updated: 2021/09/20 20:29:30 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ DIR_O		=	obj
 
 INC			=	inc
 
-SOURCES		=	pipex.c \
+SOURCES		=	pipex.c utils.c \
 
 SRCS		= 	$(addprefix $(DIR_S)/, $(SOURCES))
 
