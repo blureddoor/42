@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 20:22:27 by lvintila          #+#    #+#             */
-/*   Updated: 2021/09/20 22:13:00 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/21 21:56:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	pipex_usage(const int num)
 	else if (num == 4)
 		error = "Error: el archivo inicial no existe\n";
 	else if (num == 5)
-		error = "Error: segundo comando no valido o no existe \n";
+		error = "Error: uno de los comandos no es valido o no existe \n";
 	ft_putstr_fd(error, 2);
 	exit(1);
 	return (1);

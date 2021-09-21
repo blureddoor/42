@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 20:54:21 by lvintila          #+#    #+#             */
-/*   Updated: 2021/09/20 22:12:58 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/21 21:56:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*find_path(char *cmd, char **envp)
 	if (access(cmd, F_OK) == 0)
 		return (cmd);
 	i = 0;
-	while (envp[++i])
+	while (envp[i++])
 	{
 		if (!ft_strncmp(envp[i], "PATH=", 5))
 		{
@@ -30,7 +30,7 @@ char	*find_path(char *cmd, char **envp)
 		}
 	}
 	i = 0;
-	while (tab[++i])
+	while (tab[i++])
 	{
 		str = ft_strjoin(ft_strjoin(tab[i], "/"), cmd);
 		if (access(str, F_OK) == 0)
@@ -106,6 +106,8 @@ void	pipex(char *cmd1, char *cmd2, char **envp, char **argv)
 	int		f1;
 	int		f2;
 
+	if (!cmd1 || !cmd2)
+		pipex_usage(5);
 	pipe(fd);
 	parent = fork();
 	f1 = open(argv[1], O_RDONLY);
@@ -122,11 +124,12 @@ void	pipex(char *cmd1, char *cmd2, char **envp, char **argv)
 
 int	main(int argc, char **argv, char **envp)
 {
+	char *str;
 	if (argc == 5)
 	{
 		if (access(argv[1], F_OK) != 0)
-		   pipex_usage(4);
-		else if (argv[3] != "")
+			pipex_usage(4);
+		else if (argv[2] == '\0' || argv[3] == '\0')
 			pipex_usage(5);
 		else
 			pipex(argv[2], argv[3], envp, argv);
