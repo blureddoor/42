@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 20:22:27 by lvintila          #+#    #+#             */
-/*   Updated: 2021/09/21 21:56:36 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/22 18:45:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	pipex_usage(const int num)
 	if (num == 0)
 		error = strerror(num);
 	else if (num == 1)
-		error = "Error: too less arguments\n";
+		error = "Wrong number of arguments\n";
 	else if (num == 2)
 		error = "Error: can't find binary of the given command\n";
 	else if (num == 3)

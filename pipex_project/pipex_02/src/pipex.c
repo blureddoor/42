@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 20:54:21 by lvintila          #+#    #+#             */
-/*   Updated: 2021/09/21 21:56:41 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/22 20:49:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ char	*find_path(char *cmd, char **envp)
 		if (access(str, F_OK) == 0)
 			return (str);
 	}
+	if (access(str, F_OK) != 0)
+	{	
+		write(2, "pipex: ", 7);
+		write(2, "El comando: ", 12);
+		write(2, cmd, ft_strlen(cmd));
+		write(2, ": no existe\n", 12);
+		closer();
+	}
 	free(str);
 	free(tab);
 	return (cmd);
@@ -47,22 +55,17 @@ void	child1(int fd[2], int f1, char *cmd1, char **envp)
 	char	**cmd;
 	char	*str;
 
-	i = 0;
 	close(fd[0]);
 	dup2(f1, STDIN);
 	dup2(fd[1], STDOUT);
 	close(f1);
 	cmd = ft_split(cmd1, ' ');
 	str = find_path(cmd[0], envp);
-	while (str[i] != '\0' && ft_isspace(str[i]) != 0 && str != NULL)
+/*	if (access(str, F_OK != 0))
 	{
-		if (access(&str[i], F_OK != 0))
-		{
-			write(2, "Error: 1st argument is not a valid command\n", 43);
-			closer();
-		}
-		i++;
-	}
+		write(2, "Error: 1st argument is not a valid command\n", 43);
+		closer();
+	}*/
 	if (execve(str, cmd, envp) == 0)
 		write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
@@ -75,7 +78,6 @@ void	parent1(int fd[2], int f2, char *cmd2, char **envp)
 	char	**cmd;
 	char	*str;
 
-	i = 0;
 	close(fd[1]);
 	status = 0;
 	waitpid(-1, &status, 0);
@@ -84,15 +86,11 @@ void	parent1(int fd[2], int f2, char *cmd2, char **envp)
 	close(f2);
 	cmd = ft_split(cmd2, ' ');
 	str = find_path(cmd[0], envp);
-	while (str[i] != '\0' && ft_isspace(str[i]) != 0 && str != NULL)
+/*	if (access(str, F_OK != 0))
 	{
-		if (access(&str[i], F_OK != 0))
-		{
-			write(2, "Error: 2nd argument is not a valid command\n", 43);
-			closer();
-		}
-		i++;
-	}
+		write(2, "Error: 2nd argument is not a valid command\n", 43);
+		closer();
+	} */
 	if (execve(str, cmd, envp) == 0)
 		write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
@@ -106,8 +104,6 @@ void	pipex(char *cmd1, char *cmd2, char **envp, char **argv)
 	int		f1;
 	int		f2;
 
-	if (!cmd1 || !cmd2)
-		pipex_usage(5);
 	pipe(fd);
 	parent = fork();
 	f1 = open(argv[1], O_RDONLY);
@@ -129,12 +125,12 @@ int	main(int argc, char **argv, char **envp)
 	{
 		if (access(argv[1], F_OK) != 0)
 			pipex_usage(4);
-		else if (argv[2] == '\0' || argv[3] == '\0')
-			pipex_usage(5);
-		else
+/*		else if (argv[2] == '\0' || argv[3] == '\0')
+			pipex_usage(5);*/
+		else 
 			pipex(argv[2], argv[3], envp, argv);
 	}
-	else if (argc < 5)
+	else
 	{
 		pipex_usage(1);
 //		write(2, "Wrong number of arguments\n", 26);

@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 20:51:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/09/21 21:56:34 by marvin           ###   ########.fr       */
+/*   Updated: 2021/09/22 18:34:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include <stdio.h>
 # include <fcntl.h>
 # include <sys/wait.h>
 
