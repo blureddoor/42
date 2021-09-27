@@ -19,8 +19,7 @@ char	*find_path(char *cmd, char **envp)
 	char	**tab;
 
 /*	if (access(cmd, F_OK) == 0)
-		return (cmd);*/
-	check_cmd(cmd);
+		return (cmd); */
 	i = 0;
 	while (envp[i++])
 	{
@@ -30,6 +29,9 @@ char	*find_path(char *cmd, char **envp)
 			break ;
 		}
 	}
+	check_cmd(cmd, envp);
+/*	if (!envp)
+		return (cmd); */
 	i = 0;
 	while (tab[i++])
 	{
@@ -63,8 +65,7 @@ void	child1(int fd[2], int f1, char *cmd1, char **envp)
 	close(f1);
 	cmd = ft_split(cmd1, ' ');
 	str = find_path(cmd[0], envp);
-	if (execve(str, cmd, envp))
-		exit(1);
+	execve(str, cmd, envp);
 	free(str);
 	free(cmd);
 }
@@ -75,7 +76,6 @@ void	parent1(int fd[2], int f2, char *cmd2, char **envp)
 	int		status;
 	char	**cmd;
 	char	*str;
-    char    **cmd_strdup;
 
 	close(fd[1]);
 	status = 0;
@@ -84,11 +84,9 @@ void	parent1(int fd[2], int f2, char *cmd2, char **envp)
 	dup2(fd[0], STDIN);
 	close(f2);
 	cmd = ft_split(cmd2, ' ');
-	if (access(cmd[0], F_OK) == 0)
-        str = find_path(cmd[0], envp);
 	str = find_path(cmd[0], envp);
     execve(str, cmd, envp);
-    free(str);
+	free(str);
     free(cmd);
 	exit(1);
 }
@@ -105,41 +103,29 @@ void	pipex(char *cmd1, char *cmd2, char **envp, char **argv)
 	parent = fork();
     f1 = open(argv[1], O_RDONLY);
 	f2 = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (fd[0] < 0 || fd[1] < 0)
-		write(2, "Error\n", 6);
+	if (f1 < 0 || f2 < 0)
+		return (perror("Error"));
 	if (parent < 0)
-		write(2, "Error\n", 6);
+		return(perror("Error"));
 	if (!parent)
 		child1(fd, f1, cmd1, envp);
-	else if (cmd2 != 0)
+	else
         parent1(fd, f2, cmd2, envp);
 }
 
 int	main(int argc, char **argv, char **env)
 {
-	char *str;
-
     if (argc == 5)
 	{
 		if (access(argv[1], F_OK) != 0)
-        {
-			write(2, "pipex: Error: ", 14);
-            write(2, "No such file or directory\n", 26);
-            exit(127);
-        }
-		if (ft_strlen(argv[2]) == 0 || ft_strlen(argv[3]) == 0)
-		{
-			write(2, "pipex: ", 7);
-			write(2, "Error: permission denied:\n", 26);
-			exit(127);
-		}
+			pipex_usage(4);
+		else if (ft_strlen(argv[2]) == 0 || ft_strlen(argv[3]) == 0
+				|| str_is_all_spaces(argv[3]))
+			pipex_usage(5);
 		else 
 			pipex(argv[2], argv[3], env, argv);
 	}
 	else
-	{
-		write(2, "Wrong number of arguments\n", 26);
-		return(1);
-	}
+		pipex_usage(1);
 	return (0);
 }

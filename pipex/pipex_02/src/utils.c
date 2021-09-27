@@ -25,34 +25,49 @@ int	pipex_usage(const int num)
 	if (num == 0)
 		error = strerror(num);
 	else if (num == 1)
-		error = "Wrong number of arguments\n";
+		error = "pipex: Wrong number of arguments\n";
 	else if (num == 2)
 		error = "Error: can't find binary of the given command\n";
 	else if (num == 3)
-		error = "ft_strjoin fails";
+		error = "Error: ft_strjoin fails";
 	else if (num == 4)
-		error = "Error: el archivo inicial no existe\n";
+		error = "pipex: Error: No such file or directory\n";
 	else if (num == 5)
 		error = "pipex: Command not found\n";
 	ft_putstr_fd(error, 2);
 	exit(1);
-	return (1);
+	return (127);
 }
 
 void	check_str(char *str, char *cmd)
 {
 	if (access(str, F_OK) != 0)
 	{	
-		write(2, "pipex: ", 7);
-		write(2, "command not found: ", 19);
 		write(2, cmd, ft_strlen(cmd));
-		write(2, "\n", 1);
-		exit(127);
+		write(2, ": ", 2);
+		pipex_usage(5);
 	}
 }
-char	*check_cmd(char *cmd)
+char	*check_cmd(char *cmd, char **envp)
 {
-	if (access(cmd, F_OK) == 0)
+	if (!envp)
 		return (cmd);
 	return (cmd);
+}
+
+int	str_is_all_spaces(char *str)
+{
+	int i;
+
+	i = 0;
+	while(str[i] != '\0')
+	{
+		if (ft_isspace(str[i]) == 1)
+			i++;
+		else
+			break ;
+	}
+	if (i == (ft_strlen(str)))
+		return (i);
+	return (0);
 }

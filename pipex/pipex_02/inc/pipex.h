@@ -29,6 +29,7 @@ void	pipex(char *cmd1, char *cmd2, char **envp, char **argv);
 int		closer(void);
 int		pipex_usage(const int num);
 void    check_str(char *str, char *cmd);
-char	*check_cmd(char *cmd);
+char	*check_cmd(char *cmd, char **envp);
+int     str_is_all_spaces(char *str);
 
 #endif
