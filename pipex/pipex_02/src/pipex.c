@@ -68,6 +68,7 @@ void	child1(int fd[2], int f1, char *cmd1, char **envp)
 	execve(str, cmd, envp);
 	free(str);
 	free(cmd);
+	exit(1);
 }
 
 void	parent1(int fd[2], int f2, char *cmd2, char **envp)
