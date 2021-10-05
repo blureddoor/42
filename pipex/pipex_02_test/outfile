@@ -1,1 +1,16 @@
-iMac-de-Max.local
+total 152
+-rw-r--r--   1 lvintila  2019   1074 Oct  5 20:15 LICENSE
+-rw-r--r--   1 lvintila  2019   1990 Oct  5 20:15 Makefile
+-rw-r--r--   1 lvintila  2019   2080 Oct  5 20:15 README.md
+drwxr-xr-x   7 lvintila  2019    238 Oct  5 20:15 assets
+-rwxr-xr-x   1 lvintila  2019    156 Oct  5 20:15 config.vars
+drwxr-xr-x   4 lvintila  2019    136 Oct  5 22:46 inc
+-rw-r--r--   1 lvintila  2019     55 Oct  5 22:50 infile
+drwxr-xr-x   3 lvintila  2019    102 Oct  5 20:15 man
+-rw-r--r--   1 lvintila  2019      0 Oct  5 22:51 outfile
+drwxr-xr-x  95 lvintila  2019   3230 Oct  5 20:15 outs
+-rwxr-xr-x   1 lvintila  2019  13884 Oct  5 22:49 pipex
+drwxr-xr-x   2 lvintila  2019     68 Oct  5 20:15 pipex-tester
+-rwxr-xr-x   1 lvintila  2019  39911 Oct  5 20:15 run.sh
+drwxr-xr-x   5 lvintila  2019    170 Oct  5 20:15 scripts
+drwxr-xr-x  34 lvintila  2019   1156 Oct  5 22:49 src

@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/20 20:22:27 by lvintila          #+#    #+#             */
-/*   Updated: 2021/10/05 23:03:02 by marvin           ###   ########.fr       */
+/*   Created: 2020/01/09 16:33:29 by lvintila          #+#    #+#             */
+/*   Updated: 2021/09/27 19:40:39 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex.h"
 
-void	check_str(char *str, char *cmd)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	if (access(str, F_OK) != 0)
-	{	
-		write(2, "pipex: ", 7);
-		write(2, "command not found: ", 19);
-		write(2, cmd, ft_strlen(cmd));
-		write(2, "\n", 1);
-		exit(1);
-	}
-}
-
-void	free_arr(char **arr)
-{
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
+	while (s1[i] && s2[i] && (unsigned char)s1[i] == (unsigned char)s2[i]
+		&& i < n)
+		i++;
+	if (i == n)
+		return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
