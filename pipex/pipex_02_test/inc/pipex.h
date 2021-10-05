@@ -25,11 +25,8 @@
 # define STDOUT 1
 
 char	*find_path(char *cmd, char **envp);
-void	pipex(char *cmd1, char *cmd2, char **envp, char **argv);
-int		closer(void);
-int		pipex_usage(const int num);
+void	pipex(char **argv, char **envp);
 void    check_str(char *str, char *cmd);
-char	*check_cmd(char *cmd, char **envp);
 int     str_is_all_spaces(char *str);
 int     ft_isspace(int c);
 void	ft_putstr_fd(char *s, int fd);
@@ -39,5 +36,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *str);
 int     ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+void	free_arr(char **arr);
 
 #endif

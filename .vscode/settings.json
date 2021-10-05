@@ -2,6 +2,7 @@
     "files.associations": {
         "fractol.h": "c",
         "algorithm": "c",
-        "random": "c"
+        "random": "c",
+        "ostream": "c"
     }
 }

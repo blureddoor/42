@@ -12,12 +12,7 @@
 
 #include "../inc/pipex.h"
 
-int	closer(void)
-{
-	exit (1);
-	return (0);
-}
-
+/*
 int	pipex_usage(const int num)
 {
 	char *error;
@@ -35,25 +30,20 @@ int	pipex_usage(const int num)
 	else if (num == 5)
 		error = "pipex: command not found\n";
 	ft_putstr_fd(error, 2);
-	exit(1);
-	return (127);
+	return (0);
 }
+*/
 
 void	check_str(char *str, char *cmd)
 {
 	if (access(str, F_OK) != 0)
 	{	
+		write(2, "pipex: ", 7);
+		write(2, "command not found: ", 19);
 		write(2, cmd, ft_strlen(cmd));
-		write(2, ": ", 2);
-		write(2, "pipex: Error: command not found\n", 32);
+		write(2, "\n", 1);
 		exit(127);
 	}
-}
-char	*check_cmd(char *cmd, char **envp)
-{
-	if (!envp)
-		return (cmd);
-	return (cmd);
 }
 
 int	str_is_all_spaces(char *str)
@@ -71,4 +61,14 @@ int	str_is_all_spaces(char *str)
 	if (i == (ft_strlen(str)))
 		return (i);
 	return (0);
+}
+
+void	free_arr(char **arr)
+{
+	int i;
+
+	i = 0;
+	while(arr[i])
+		free(arr[i++]);
+	free(arr);
 }

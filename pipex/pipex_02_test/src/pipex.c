@@ -18,88 +18,82 @@ char	*find_path(char *cmd, char **envp)
 	char	*str;
 	char	**tab;
 
-/*	check_cmd(cmd, envp);*/
 	if (access(cmd, F_OK) == 0)
-	{
 		return (cmd);
-		exit(0);
-	}
-	i = 0;
-	while (envp[i++])
+	i = -1;
+	while (envp[++i])
 	{
 		if (!ft_strncmp(envp[i], "PATH=", 5))
 		{
 			tab = ft_split(ft_strchr(envp[i], '/'), ':');
 			break ;
-		}
+		};
 	}
-	if (!envp)
-		return (cmd);
-	i = 0;
-	while (tab[i++])
+	i = -1;
+	while (tab[++i])
 	{
 		str = ft_strjoin(ft_strjoin(tab[i], "/"), cmd);
 		if (access(str, F_OK) == 0)
 			return (str);
 	}
 	check_str(str, cmd);
-/*	if (access(str, F_OK) != 0)
-	{	
-		write(2, "pipex: ", 7);
-		write(2, "command not found: ", 19);
-		write(2, cmd, ft_strlen(cmd));
-		write(2, "\n", 1);
-		exit(127);
-	}*/
-	free(str);
-	free(tab);
-	exit (0);
 	return (cmd);
 }
 
-void	child1(int fd[2], int f1, char *cmd1, char **envp)
+void	child1(int fd[2], int f1, char **argv, char **envp)
 {
 	int		i;
 	char	**cmd;
 	char	*str;
 
 	close(fd[0]);
+	if (f1 == -1 )
+	{
+		ft_putstr_fd("pipex: no such file or directory: ", 2);
+		write(2, argv[2], ft_strlen(argv[2]));
+		exit(0);
+	}
 	dup2(f1, STDIN);
-	dup2(fd[1], STDOUT);
 	close(f1);
-	cmd = ft_split(cmd1, ' ');
+	dup2(fd[1], STDOUT);
+	close(fd[1]);
+	cmd = ft_split(argv[2], ' ');
 	str = find_path(cmd[0], envp);
-	if (execve(str, cmd, envp) != 0)
-		pipex_usage(3);
-	perror("Error");
-	free(str);
-	free(cmd);
-	exit(1);
+	if (execve(str, cmd, envp) == -1)
+	{
+		ft_putstr_fd("pipex: command not found: ", 2);
+		write(2, cmd[0], ft_strlen(cmd[0]));
+		free_arr(cmd);
+		free(str);
+		exit(1);
+	}
 }
 
-void	parent1(int fd[2], int f2, char *cmd2, char **envp)
+void	parent1(int fd[2], int f2, char **argv, char **envp)
 {
 	int		i;
-	int		status;
 	char	**cmd;
 	char	*str;
 
 	close(fd[1]);
-	status = 0;
-	waitpid(-1, &status, 0);
 	dup2(f2, STDOUT);
-	dup2(fd[0], STDIN);
 	close(f2);
-	cmd = ft_split(cmd2, ' ');
+	dup2(fd[0], STDIN);
+	close(fd[0]);
+	cmd = ft_split(argv[3], ' ');
 	str = find_path(cmd[0], envp);
-    if (execve(str, cmd, envp) != 0)
-		pipex_usage(3);
-	free(str);
-    free(cmd);
-	exit(1);
+	if (execve(str, cmd, envp) == -1)
+	{
+		ft_putstr_fd("pipex: command not found: ", 2);
+		write(2, cmd[0], ft_strlen(cmd[0]));
+		write(2, "\n", 1);
+		free_arr(cmd);
+		free(str);
+		exit(1);
+	}
 }
 
-void	pipex(char *cmd1, char *cmd2, char **envp, char **argv)
+void	pipex(char **argv, char **envp)
 {
 	int		status;
 	pid_t	parent;
@@ -111,31 +105,38 @@ void	pipex(char *cmd1, char *cmd2, char **envp, char **argv)
 	parent = fork();
     f1 = open(argv[1], O_RDONLY);
 	f2 = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (f1 < 0)
-		pipex_usage(0);
 	if (f2 < 0)
-		pipex_usage(0);
+	{
+		write(2, "pipex: no such file or directory:\n", 34);
+		exit(1);
+	}
 	if (parent < 0)
 		return(perror("Error"));
 	if (!parent)
-		child1(fd, f1, cmd1, envp);
+		child1(fd, f1, argv, envp);
 	else
-        parent1(fd, f2, cmd2, envp);
+        parent1(fd, f2, argv, envp);
+	waitpid(parent, NULL, 0);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
     if (argc == 5)
 	{
-		if (access(argv[1], F_OK) != 0)
-			pipex_usage(4);
-		else if (ft_strlen(argv[2]) == 0 || ft_strlen(argv[3]) == 0
-				|| str_is_all_spaces(argv[2]) || str_is_all_spaces(argv[3]))
-			pipex_usage(5);
+		if (str_is_all_spaces(argv[2]) != 0 || str_is_all_spaces(argv[3]) != 0
+				|| ft_strlen(argv[2]) == 0 || ft_strlen(argv[3]) == 0)
+		{
+			write(2, "pipex: command not found\n", 25);
+			exit(0);
+		}
 		else 
-			pipex(argv[2], argv[3], envp, argv);
+			pipex(argv, envp);
 	}
 	else
-		pipex_usage(1);
+	{
+		write(2, "wrong number of arguments: ", 27);
+		write(2, "pipex usage:   ./pipex infile comand1 command2 outfile\n", 55);
+		exit(1);
+	}
 	return (0);
 }
