@@ -19,9 +19,25 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <semaphore.h>
+# include <errno.h>
+
+# define fork_right R
+# define fork_left L
+# define N 5
+
+int fuel = 0;
+pthread_mutex_t mutex_fuel;
+pthread_cond_t  cond_fuel;
+
+typedef struct philo
+{
+    char        state[3];
+    int         s[];        
+}               t_philo;
+
 
 void    print_status();
-void    *philosopher(void *arg);
-void *print_message_function( void *ptr );
+void    *philosopher(t_philo philo);
+void    *print_message_function( void *ptr );
 
 #endif
