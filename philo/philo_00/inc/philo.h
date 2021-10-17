@@ -25,17 +25,17 @@
 # define fork_left L
 # define N 5
 
-/*
-int fuel = 0;
-pthread_mutex_t mutex_fuel;
-pthread_cond_t  cond_fuel;
-*/
 
 typedef struct philo
 {
     char        state[3];
     int         mutex;
-    int         s[6];   
+    int         s[6];
+    int         num_of_philo;
+    int         time_to_die;
+    int         time_to_sleep;
+    int         time_to_eat;
+    int         num_of_times_to_eat;
 }               t_philo;
 
 
