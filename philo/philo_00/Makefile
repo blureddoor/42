@@ -14,7 +14,7 @@ DIR_O		=	obj
 
 INC			= 	inc
 
-SOURCES		=	fuel.c \
+SOURCES		=	philo.c utils.c utils_aux.c\
 
 SRCS		=	$(addprefix $(DIR_S)/, $(SOURCES))
 
