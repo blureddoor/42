@@ -6,13 +6,11 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 20:51:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/10/12 22:40:07 by marvin           ###   ########.fr       */
+/*   Updated: 2021/10/18 20:25:26 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-
-
 
 void    init(t_philo philo)
 {
@@ -21,7 +19,7 @@ void    init(t_philo philo)
 
 void    take_forks(t_philo philo, int i)
 {
-    lock(philo.mutex);
+/*  lock(philo.mutex); */
     philo.state[i] = 'H'; // Hungry
     printf("philo state %d is: %c\n", i, philo.state[i]);
     test(philo, i);
@@ -54,6 +52,7 @@ void    test(t_philo philo, int i)
 void    *philosopher(t_philo philo)
 {
     int i;
+    p_thread;
 
     i = 0;
     while(1)

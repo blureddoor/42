@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 20:51:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/10/12 12:40:07 by marvin           ###   ########.fr       */
+/*   Updated: 2021/10/19 18:43:20 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct philo
     int         time_to_die;
     int         time_to_sleep;
     int         time_to_eat;
-    int         num_of_times_to_eat;
+    int         nb_eat;
 }               t_philo;
 
 
