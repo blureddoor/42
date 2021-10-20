@@ -12,14 +12,15 @@
 
 #include "../inc/philo.h"
 
-void    eat()
+int ft_puterror(char *str)
 {
-    sleep(1);
-    printf("it's eating\n");
-}
+    int     i;
+    char    *s;
 
-void    think()
-{
-    sleep(1);
-    printf("it's thinking\n");
+    s = str;
+    i = 0;
+    while (*s++)
+        i++;
+    write(2, str, i);
+    return (ERROR);
 }

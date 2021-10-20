@@ -12,64 +12,44 @@
 
 #include "../inc/philo.h"
 
-void    init(t_philo philo)
+void    *all_must_eat(void *argv)
 {
-    philo.mutex = 0;
-}
+    t_param *param;
 
-void    take_forks(t_philo philo, int i)
-{
-/*  lock(philo.mutex); */
-    philo.state[i] = 'H'; // Hungry
-    printf("philo state %d is: %c\n", i, philo.state[i]);
-    test(philo, i);
-    unlock(philo.mutex);
-    down(philo.s[i], i);
-    printf("taking forks\n");
-}
-
-void    put_down_forks(t_philo philo, int i)
-{
-    lock(philo.mutex);
-    philo.state[i] = 'T'; // Thinking
-    printf("philo state %d is: %c\n", i, philo.state[i]);
-    test(philo, 1);
-    test(philo, (i + 1) % 5);
-    unlock(philo.mutex);
-    printf("puting down forks\n");
-}
-
-void    test(t_philo philo, int i)
-{
-    if (philo.state[i] == 'H' && philo.state[i] != 'E' && philo.state[(i + 1) % 5] != 'E' )
+    param = argv;
+    while (!param->end)
     {
-        philo.state[i] = 'E';
-        printf("philo state %d is: %c\n", i, philo.state[i]);
-        up(philo.s[i]);
+        pthread_mutex_lock(&param->end_mutex);
+        if (param->nb_eat_end_philo == param->nb_philos)
+            param->end = 1;
+        pthread_mutex_unlock(&param->end_mutex);
     }
+    return (NULL);
 }
 
-void    *philosopher(t_philo philo)
+void    *philos_alive(void *argv)
 {
-    int i;
-    p_thread;
-
-    i = 0;
-    while(1)
+    unsigned long long  ms;
+    struct timeval      time;
+    t_philo             *philo;
+    
+    philo = argv;
+    while(!philo->param->end)
     {
-        think(); // for some time
-        take_forks(philo, i);
-        eat();
-        put_down_forks(philo, i);
-        i++;
+        pthread_mutex_lock(&philo->check_mutex);
+        pthread_mutex_lock(&philo->param->end_mutex);
+        gettimeofday(&time, NULL);
+        ms = get_my_time(time) - get_my_time(philo->last_time_eat);
+        gettimeofday(&time, NULL);
+        if (ms >= philo->param->time_to_die && philo->param->end == 0)
+        {
+            printf("%lld\t%d\t %s\n",
+                get_my_time(time) - get_my_time(philo->param->timestamp),
+                philo->n + 1, "died");
+            philo->param->end = 1;
+        }
+        pthread_mutex_unlock(&philo->param->end_mutex);
+        pthread_mutex_unlock(&philo->check_mutex);
     }
-}
-
-int main(int argc, char **argv)
-{
-    t_philo ph;
-
-    init(ph);
-    philosopher(ph);
-    return (0);
+    return (NULL);
 }

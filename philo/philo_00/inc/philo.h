@@ -18,35 +18,53 @@
 # include <string.h>
 # include <stdio.h>
 # include <pthread.h>
-# include <semaphore.h>
-# include <errno.h>
+# include <sys/time.h>
 
-# define fork_right R
-# define fork_left L
-# define N 5
+# define ERROR      1
+# define SUCCESS    0
 
 
-typedef struct philo
+typedef struct s_philo
 {
-    char        state[3];
-    int         mutex;
-    int         s[6];
-    int         num_of_philo;
-    int         time_to_die;
-    int         time_to_sleep;
-    int         time_to_eat;
-    int         nb_eat;
-}               t_philo;
+    t_param         *param;
+    struct timeval  last_time_eat;    
+    int             n;
+    int             nb_eat;
+    pthread_mutex_t *left;
+    pthread_mutex_t *right;
+    pthread_mutex_t check_mutex;
+    pthread_t       thread;
+}                   t_philo;
 
+typedef struct      s_param
+{
+    t_philo         *philo;
+    struct timeval  timestamp;    
+    int             nb_philos;
+    int             time_to_die;
+    int             time_to_eat;
+    int             time_to_sleep;
+    int             nb_meals;
+    int             end;
+    int             nb_eat_end_philo;
+    pthread_mutex_t end_mutex;
+    pthread_mutex_t *forks;
 
-void    print_status();
-int     lock(int flag);
-int     unlock(int flag); 
-void    *philosopher(t_philo philo);
-void    *print_message_function( void *ptr );
+}                   t_param;
+
+int                     ft_atoi(const char *nptr);
+int                     ft_malloc(void *dst, size_t size);
+static int              init_philos(t_param *param);
+int                     init(t_param *param, int argc, char **argv);
+static int              check_args(t_param *param, int argc);
+static void             join_threads(t_param *param);
+int                     ft_puterror(char *str);
+void                    print_msg(t_philo *philo, char *str);
+unsigned long long      get_my_time(struct timeval time);
+void                    *all_must_eat(void *argv);
+void                    *philos_alive(void *argv);
+
 void    eat();
 void    think();
-void    up();
-void    down();
-void    test(t_philo philo, int i);
+
 #endif

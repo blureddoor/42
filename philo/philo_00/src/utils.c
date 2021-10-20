@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-
+/*
 int lock(int flag)
 {
     return (0);
@@ -27,20 +27,31 @@ void    up(t_philo philo)
 
 void    down(t_philo philo)
 {}
+*/
 
-int	ft_atoi(const char *nptr)
+
+int	ft_atoi(const char *ptr)
 {
-	int	result;
-	int	flag;
+	int	res;
+	int	neg;
 
-	result = 0;
-	flag = 1;
-	if (*nptr == '-')
-		flag *= -1;
-	while ('0' <= *nptr && *nptr <= '9')
+	res = 0;
+	neg= 1;
+	if (*ptr == '-')
+		neg *= -1;
+	while ('0' <= *ptr && *ptr <= '9')
 	{
-		result *= 10;
-		result += *nptr++ - '0';
+		res *= 10;
+		res += *ptr++ - '0';
 	}
-	return (result * flag);
+	return (res * neg);
+}
+
+int	ft_malloc(void *str, size_t size)
+{
+	*(void **)str = malloc(size);
+	if (*(void **)str == NULL)
+		return (ERROR);
+	memset(*(void **)str, 0, size);
+	return (SUCCESS);
 }
