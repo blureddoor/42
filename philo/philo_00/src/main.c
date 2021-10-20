@@ -40,13 +40,13 @@ static void create_threads(t_param *param)
     {
         param->philo[i].last_time_eat = param->timestamp;
         pthread_create(&param->philo[i].thread, NULL, philo, &param->philo[i]);
-        pthread_create(&thread, NULL, run_philos, &param->philo[i]);
+        pthread_create(&thread, NULL, philos_alive, &param->philo[i]);
         ptread_detach(thread);
         ++i;
     }
     if (param->nb_meals != 0)
     {
-        pthread_create(&thread, NULL, run_philos_nb_meals, param);
+        pthread_create(&thread, NULL, all_must_eat, param);
         pthread_detach(thread);
     }
 }
