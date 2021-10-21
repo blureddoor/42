@@ -35,7 +35,7 @@ static void eating(t_philo *philo)
     if (philo->nb_eat == philo->param->nb_meals)
         philo->param->nb_eat_end_philo += 1;
     pthread_mutex_unlock(&philo->param->end_mutex);
-    usleep(&philo->param->time * 1000);
+    usleep(philo->param->time_to_eat * 1000);
     pthread_mutex_unlock(philo->right);
     pthread_mutex_unlock(philo->left);
     pthread_mutex_unlock(&philo->check_mutex);

@@ -14,8 +14,8 @@ DIR_O		=	obj
 
 INC			= 	inc
 
-SOURCES		=	philo.c utils.c init.c utils_aux.c \
-				threads.c philo.c main.c \
+SOURCES		=	philo.c utils.c \
+				init.c run_philo.c main.c \
 
 SRCS		=	$(addprefix $(DIR_S)/, $(SOURCES))
 

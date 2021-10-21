@@ -11,24 +11,19 @@
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-/*
-int lock(int flag)
+
+int ft_puterror(char *str)
 {
-    return (0);
+    int     i;
+    char    *s;
+
+    s = str;
+    i = 0;
+    while (*s++)
+        i++;
+	write(2, str, i);
+	return (ERROR);
 }
-
-int unlock(int flag)
-{
-    return (1);
-}
-
-void    up(t_philo philo)
-{}
-
-void    down(t_philo philo)
-{}
-*/
-
 
 int	ft_atoi(const char *ptr)
 {
@@ -54,4 +49,17 @@ int	ft_malloc(void *str, size_t size)
 		return (ERROR);
 	memset(*(void **)str, 0, size);
 	return (SUCCESS);
+}
+
+void    print_msg(t_philo *philo, char *str)
+{
+    unsigned long long  ms;
+    struct timeval time;
+
+    pthread_mutex_lock(&philo->param->end_mutex);
+    gettimeofday(&time, NULL);
+    ms = get_my_time(time) - get_my_time(philo->param->timestamp);
+    if (!philo->param->end)
+        printf("%lld\t%d\t %s\n", ms, philo->n + 1, str);
+    pthread_mutex_unlock(&philo->param->end_mutex);
 }

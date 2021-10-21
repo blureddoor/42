@@ -26,7 +26,7 @@
 
 typedef struct s_philo
 {
-    t_param         *param;
+    struct s_param  *param;
     struct timeval  last_time_eat;    
     int             n;
     int             nb_eat;
@@ -34,7 +34,7 @@ typedef struct s_philo
     pthread_mutex_t *right;
     pthread_mutex_t check_mutex;
     pthread_t       thread;
-}                   t_philo;
+    }                   t_philo;
 
 typedef struct      s_param
 {
@@ -63,8 +63,8 @@ void                    print_msg(t_philo *philo, char *str);
 unsigned long long      get_my_time(struct timeval time);
 void                    *all_must_eat(void *argv);
 void                    *philos_alive(void *argv);
-
-void    eat();
-void    think();
+void                    *philo(void *argv);
+void                    parse_args(t_param *param, int argc, char **argv);
+static int              check_args(t_param *param, int argc);
 
 #endif

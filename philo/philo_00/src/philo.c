@@ -12,6 +12,15 @@
 
 #include "../inc/philo.h"
 
+unsigned long long     get_my_time(struct timeval time)
+{
+    unsigned long long  ms;
+
+    ms = time.tv_sec * 1000;
+    ms += time.tv_usec / 1000;
+    return (ms);
+}
+
 void    *all_must_eat(void *argv)
 {
     t_param *param;

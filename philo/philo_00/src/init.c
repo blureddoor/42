@@ -12,6 +12,7 @@
 
 #include "../inc/philo.h"
 
+
 void    parse_args(t_param *param, int argc, char **argv)
 {
     param->nb_philos = ft_atoi(argv[1]);
@@ -36,7 +37,6 @@ static int  check_args(t_param *param, int argc)
         return (ft_puterror("ERROR: wrong time_to_sleep\n"));
     return (SUCCESS);
 }
-
 static int  init_philos(t_param *param)
 {
     int i;
