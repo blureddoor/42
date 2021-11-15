@@ -23,33 +23,39 @@ static void	pickup_fork(t_philo *philo)
 static void	eating(t_philo *philo)
 {
 	unsigned long long	ms;
-
+	
+	
 	pthread_mutex_lock(&philo->check_mutex);
 	gettimeofday(&philo->last_time_eat, NULL);
 	ms = get_my_time(philo->last_time_eat)
 		- get_my_time(philo->param->timestamp);
+	gettimeofday(&philo->last_time_eat, NULL);
 	pthread_mutex_lock(&philo->param->end_mutex);
+	//gettimeofday(&philo->last_time_eat, NULL);
 	if (!philo->param->end)
 		printf("%lld\t%d\t %s\n", ms, philo->n + 1, "is_eating");
 	philo->nb_eat += 1;
 	if (philo->nb_eat == philo->param->nb_meals)
 		philo->param->nb_eat_end_philo += 1;
 	pthread_mutex_unlock(&philo->param->end_mutex);
-	usleep(philo->param->time_to_eat * 1000);
+	phsleep(philo, philo->param->time_to_eat * 1000 - 235);
+	//usleep(philo->param->time_to_eat * 1000);
 	pthread_mutex_unlock(philo->right);
 	pthread_mutex_unlock(philo->left);
 	pthread_mutex_unlock(&philo->check_mutex);
+
 }
 
 static void	sleeping(t_philo *philo)
 {
 	print_msg(philo, "is sleeping");
-	usleep(philo->param->time_to_sleep * 1000);
+	phsleep(philo, philo->param->time_to_sleep * 1000 - 235);
 }
 
 static void	thinking(t_philo *philo)
 {
 	print_msg(philo, "is thinking");
+	//phsleep(philo, 200);
 }
 
 void	*philo(void *argv)
@@ -58,7 +64,9 @@ void	*philo(void *argv)
 
 	philo = argv;
 	if (philo->n % 2 == 0)
-		usleep(philo->param->time_to_eat * 1000);
+	{
+		phsleep(philo, philo->param->time_to_eat * 1000 - 235);
+	}
 	while (!philo->param->end)
 	{
 		pickup_fork(philo);

@@ -61,5 +61,6 @@ void				*philos_alive(void *argv);
 void				*philo(void *argv);
 void				parse_args(t_param *param, int argc, char **argv);
 static int			check_args(t_param *param, int argc);
+void				phsleep(t_philo *philo, unsigned long long ms);
 
 #endif
