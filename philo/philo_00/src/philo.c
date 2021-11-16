@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 20:51:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/11/04 20:02:38 by marvin           ###   ########.fr       */
+/*   Updated: 2021/11/16 19:26:05 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ void	*philos_alive(void *argv)
 	t_philo				*philo;
 
 	philo = argv;
+	//usleep(philo->param->nb_philos);
 	while (!philo->param->end)
 	{
+		usleep(philo->param->nb_philos * 4);
 		pthread_mutex_lock(&philo->check_mutex);
 		pthread_mutex_lock(&philo->param->end_mutex);
 		gettimeofday(&time, NULL);
 		ms = get_my_time(time) - get_my_time(philo->last_time_eat);
-		gettimeofday(&time, NULL);
 		if (ms >= philo->param->time_to_die && philo->param->end == 0)
 		{
 			printf("%lld\t%d\t %s\n",
