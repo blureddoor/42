@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:37:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/11/16 19:26:56 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/11/17 15:31:05 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	phsleep(t_philo *philo, unsigned long long ms)
 	{
 		gettimeofday(&time, NULL);
 		fin = get_my_time(time);
-		// if ((fin - start) < ms / 1000)
 		usleep(philo->param->nb_philos * 4);
 	}
 }
@@ -73,14 +72,12 @@ void	print_msg(t_philo *philo, char *str)
 {
 	unsigned long long	ms;
 	struct timeval		time;
-
+	
+	usleep(philo->param->nb_philos);
 	pthread_mutex_lock(&philo->param->end_mutex);
 	gettimeofday(&time, NULL);
 	ms = get_my_time(time) - get_my_time(philo->param->timestamp);
-	//gettimeofday(&time, NULL);
 	if (!philo->param->end)
 		printf("%lld\t%d\t %s\n", ms, philo->n + 1, str);
-	//gettimeofday(&time, NULL);
 	pthread_mutex_unlock(&philo->param->end_mutex);
-	//gettimeofday(&time, NULL);
 }

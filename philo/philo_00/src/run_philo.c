@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 20:11:35 by lvintila          #+#    #+#             */
-/*   Updated: 2021/11/16 19:13:15 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/11/17 15:30:58 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ static void	eating(t_philo *philo)
 	gettimeofday(&philo->last_time_eat, NULL);
 	ms = get_my_time(philo->last_time_eat)
 		- get_my_time(philo->param->timestamp);
-	//gettimeofday(&philo->last_time_eat, NULL);
 	pthread_mutex_lock(&philo->param->end_mutex);
-	//gettimeofday(&philo->last_time_eat, NULL);
 	if (!philo->param->end)
 		printf("%lld\t%d\t %s\n", ms, philo->n + 1, "is_eating");
 	philo->nb_eat += 1;
@@ -39,7 +37,6 @@ static void	eating(t_philo *philo)
 		philo->param->nb_eat_end_philo += 1;
 	pthread_mutex_unlock(&philo->param->end_mutex);
 	phsleep(philo, philo->param->time_to_eat * 1000);
-	//usleep(philo->param->time_to_eat * 1000);
 	pthread_mutex_unlock(philo->right);
 	pthread_mutex_unlock(philo->left);
 	pthread_mutex_unlock(&philo->check_mutex);
@@ -55,7 +52,6 @@ static void	sleeping(t_philo *philo)
 static void	thinking(t_philo *philo)
 {
 	print_msg(philo, "is thinking");
-	//phsleep(philo, 200);
 }
 
 void	*philo(void *argv)
@@ -63,7 +59,7 @@ void	*philo(void *argv)
 	t_philo	*philo;
 
 	philo = argv;
-	if (philo->n % 2 == 0)
+	if (philo->n % 2 == 1)
 	{
 		phsleep(philo, philo->param->time_to_eat * 1000);
 	}

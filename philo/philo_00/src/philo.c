@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/11 20:51:17 by lvintila          #+#    #+#             */
-/*   Updated: 2021/11/16 19:26:05 by lvintila         ###   ########.fr       */
+/*   Created: 2021/10/17 20:51:17 by lvintila          #+#    #+#             */
+/*   Updated: 2021/11/17 16:24:52 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	*philos_alive(void *argv)
 	t_philo				*philo;
 
 	philo = argv;
-	//usleep(philo->param->nb_philos);
+	usleep(philo->param->nb_philos * 4);
 	while (!philo->param->end)
 	{
 		usleep(philo->param->nb_philos * 4);
@@ -53,13 +53,14 @@ void	*philos_alive(void *argv)
 		ms = get_my_time(time) - get_my_time(philo->last_time_eat);
 		if (ms >= philo->param->time_to_die && philo->param->end == 0)
 		{
-			printf("%lld\t%d\t %s\n",
-				get_my_time(time) - get_my_time(philo->param->timestamp),
-				philo->n + 1, "died");
+			printf("%lld\t%d\t %s\n", get_my_time(time) 
+				- get_my_time(philo->param->timestamp), philo->n + 1, "died");
 			philo->param->end = 1;
 		}
 		pthread_mutex_unlock(&philo->param->end_mutex);
 		pthread_mutex_unlock(&philo->check_mutex);
 	}
+	if (philo->param->nb_philos == 1)
+		pthread_mutex_unlock(philo->right);
 	return (NULL);
 }

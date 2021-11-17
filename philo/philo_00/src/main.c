@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 20:11:35 by lvintila          #+#    #+#             */
-/*   Updated: 2021/11/16 19:22:34 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:24:01 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,10 @@ static void	join_threads(t_param *param)
 	int i;
 
 	i = 0;
-	while (i < param->nb_philos)
+	while(i < param->nb_philos)
 	{
 		pthread_join(param->philo[i].thread, NULL);
 		pthread_detach(param->philo[i].thread);
-		//pthread_mutex_destroy(&param->philo[i++].check_mutex);
-		i++;
-	}
-	//free(param->philo);
-	i = 0;
-	while(i < param->nb_philos)
-	{
-		// pthread_join(param->philo[i].thread, NULL);
-		// pthread_detach(param->philo[i].thread);
 		pthread_mutex_destroy(&param->forks[i]);
 		pthread_mutex_destroy(&param->philo[i].check_mutex);
 		pthread_mutex_destroy(&param->end_mutex);
