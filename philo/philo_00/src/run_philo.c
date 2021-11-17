@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 20:11:35 by lvintila          #+#    #+#             */
-/*   Updated: 2021/11/17 18:36:22 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/11/17 19:22:14 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	eating(t_philo *philo)
 		printf("%lld\t%d\t %s\n", ms, philo->n + 1, "is_eating");
 	philo->nb_eat += 1;
 	if (philo->nb_eat == philo->param->nb_meals)
-		philo->param->nb_eat_end_philo += 1;
+		philo->param->nb_eat_end_philo++;
 	pthread_mutex_unlock(&philo->param->end_mutex);
 	phsleep(philo, philo->param->time_to_eat * 1000);
 	pthread_mutex_unlock(philo->right);
