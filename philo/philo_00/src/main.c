@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 20:11:35 by lvintila          #+#    #+#             */
-/*   Updated: 2021/11/17 16:24:01 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/11/17 19:02:58 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	join_threads(t_param *param)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(i < param->nb_philos)
+	while (i < param->nb_philos)
 	{
 		pthread_join(param->philo[i].thread, NULL);
 		pthread_detach(param->philo[i].thread);
@@ -27,7 +27,7 @@ static void	join_threads(t_param *param)
 		i++;
 	}
 	free(param->philo);
-	free(param->forks);  
+	free(param->forks);
 }
 
 static void	create_threads(t_param *param)
@@ -43,7 +43,7 @@ static void	create_threads(t_param *param)
 		pthread_create(&param->philo[i].thread, NULL, philo, &param->philo[i]);
 		pthread_create(&thread, NULL, philos_alive, &param->philo[i]);
 		pthread_detach(thread);
-		++i;	
+		++i;
 	}
 	if (param->nb_meals != 0)
 	{

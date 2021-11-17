@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 20:11:35 by lvintila          #+#    #+#             */
-/*   Updated: 2021/11/17 15:30:58 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/11/17 18:36:22 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ static void	pickup_fork(t_philo *philo)
 static void	eating(t_philo *philo)
 {
 	unsigned long long	ms;
-	
-	
+
 	pthread_mutex_lock(&philo->check_mutex);
 	gettimeofday(&philo->last_time_eat, NULL);
 	ms = get_my_time(philo->last_time_eat)
@@ -40,7 +39,6 @@ static void	eating(t_philo *philo)
 	pthread_mutex_unlock(philo->right);
 	pthread_mutex_unlock(philo->left);
 	pthread_mutex_unlock(&philo->check_mutex);
-
 }
 
 static void	sleeping(t_philo *philo)
