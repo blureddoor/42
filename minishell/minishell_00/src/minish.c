@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 20:48:11 by lvintila          #+#    #+#             */
-/*   Updated: 2021/12/11 15:03:31 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/12/11 10:46:14 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int get_cmd()
 	// nota LE: hacer que line read que se 
 	// esta devolviendo/leyendo con "Url_gets()" se almacene en buff.
 	// entrar
-	return (0);
+	return 0;
 }
 
 char **parse(char *buff)
@@ -36,7 +36,7 @@ char **parse(char *buff)
 	// y se declaran estáticos
 
 	ptr = buff;
-	free(buff);
+	//free(buff);
 	argc = 0;
 	while(*ptr != '\0')
 	{
@@ -105,14 +105,14 @@ void    redirect(char *buff)
 
 	if(redirect_flag == 1)
 	{
-		fd = open(redirect_file, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+		fd = open(redirect_file, O_WRONLY|O_CREAT|O_TRUNC, 0664);
 		dup2(fd, 1);
 		// Redirigir la salida estándar al archivo
 		// Si solo aparece uno>, significa que es una redirección de sobrescritura, abrir en modo de sobrescritura O_TRUNC
 	}
 	else if(redirect_flag == 2)
 	{
-		fd = open(redirect_file, O_WRONLY | O_CREAT | O_APPEND, 0664);
+		fd = open(redirect_file, O_WRONLY | O_CREAT|O_APPEND, 0664);
 		dup2(fd, 1);
 		// > aparece dos veces, lo que indica que es una redirección adicional,
 		// se abre en el modo de anexar O_APPEND
@@ -121,27 +121,24 @@ void    redirect(char *buff)
 
 int execute(char *buff, char **envp)
 {
-	char	**my_argv;
+	char	**argv;
 	char	*str;
 	char	**cmd;
-	pid_t	pid;
 
 
-	//argv = NULL;
-	pid = fork();
+	argv = NULL;
+	int pid = fork();
 	// Crea un proceso hijo, reemplaza el programa en el proceso hijo
 	if(pid == 0)
 	{	
 		redirect(buff);
-		printf("buff in execute: %s\n", buff);
 		// Redirigir
-		my_argv = parse(buff);
-		printf("my_argv[0] = %s, my_argv[1] = %s, my_argv[2] = %s \n", my_argv[0], my_argv[1], my_argv[2]);
-		// Analizar el comandos
+		argv = parse(buff);
+		// Analizar el comando
 		
-		if(my_argv[0] != NULL)
+		if(argv[0] != NULL)
 		{
-			cmd = ft_split(my_argv[0], ' ');
+			cmd = ft_split(argv[0], ' ');
 			str = find_path(cmd[0], envp);
 			if (execve(str, cmd, envp) == -1)
 			{
@@ -179,7 +176,6 @@ int main(int argc, char **argv, char **envp)
 		 */
 		if(!get_cmd())
 			execute(buff, envp);
-		printf("buff in main is: %s\n", buff);
 	}
 	free(buff);
     return (0);

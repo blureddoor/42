@@ -1,0 +1,10 @@
+ls -la > archivo
+my_argv[0] = ls, my_argv[1] = -la, my_argv[2] = > 
+Makefile
+archivo
+gnl
+inc
+infile
+libft
+minishell
+src

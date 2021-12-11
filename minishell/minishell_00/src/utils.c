@@ -6,11 +6,39 @@
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 19:51:12 by lvintila          #+#    #+#             */
-/*   Updated: 2021/12/08 11:24:50 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/12/11 14:58:39 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+char    *find_path(char *cmd, char **envp)
+{
+    int     i;
+    char    *str;
+    char    **tab;
+    if (access(cmd, F_OK) == 0)
+        return (cmd);
+    i = -1;
+    while (envp[++i])
+    {
+        if (!ft_strncmp(envp[i], "PATH=", 5))
+        {
+            tab = ft_split(ft_strchr(envp[i], '/'), ':');
+            break ;
+        }
+    }
+    i = -1;
+    while (tab[++i])
+    {
+        str = ft_strjoin(ft_strjoin(tab[i], "/"), cmd);
+
+        if (access(str, F_OK) == 0)
+            return (str);
+    }
+    check_str(str, cmd);
+    return (cmd);
+}
 
 void	check_str(char *str, char *cmd)
 {
@@ -73,5 +101,6 @@ char    *rl_gets()
      */
     if (line_read && *line_read)
         add_history (line_read);
+    printf ("line_read es: %s\n", line_read);
     return (line_read);
 }
