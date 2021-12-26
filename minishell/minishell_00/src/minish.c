@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   minish.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 20:48:11 by lvintila          #+#    #+#             */
-/*   Updated: 2021/12/11 10:46:14 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/12/20 21:56:36 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int get_cmd()
 	// y devuelve un puntero al texto leido;
 	// fgets(buff, MAX_CMD - 1, stdin); 
 	// nota LE: hacer que line read que se 
-	// esta devolviendo/leyendo con "Url_gets()" se almacene en buff.
+	// esta devolviendo/leyendo con "rl_gets()" se almacene en buff.
 	// entrar
 	return 0;
 }
