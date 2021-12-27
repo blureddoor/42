@@ -6,19 +6,22 @@
 /*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 17:58:38 by lvintila          #+#    #+#             */
-/*   Updated: 2021/12/27 20:22:31 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/12/27 21:59:30 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/myshell.h"
 
 /**
+ * get_cmd - reads command line;
  * myshell_loop - reads the command line a through readline from rl_gets() 
  * and determine the mode either interactive or non-interactive from the 
  * command line.
+ * loops infinitely and wait for input from user
  * @av: Pointer to arrays of string
  * @execution_counter: command execution counter.
  * @env: Enviroment variable.
+ * @line: extern char variable to store the input.
  * Return: status value.
  **/
 
@@ -40,6 +43,7 @@ int myshell_loop(char *av[], int execution_counter, char **env)
 	char	*token;
 
 	interactive = 1;
+	process_status = 0;
 	if (isatty(STDIN_FILENO) == 0)
 		interactive = 0;
 	while (1)
