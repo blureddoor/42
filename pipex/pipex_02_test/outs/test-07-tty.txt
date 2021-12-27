@@ -1,1 +1,0 @@
-use pipex: ./pipex infile command1 command2 outfile
