@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 17:58:30 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/09 22:47:23 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/09 23:40:26 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,19 @@ int new_process(char *av[], int exec_counter, char **env)
 	char	*msg_err;
 
 	status = 0;
+	printf("-> entry new_process\n");
 	if (access(av[1], F_OK) == 0)
+	{
 		file = av[1];
+		printf("-1- av[1] in new_process is: %s\n", av[1]);
+		printf("-1- file in access is: %s\n", file);
+	}
 	else
+	{
 		(file = find_path(av[1] ,env));
+		printf("--- av[1] in new_process is: %s\n", av[1]);
+		printf("--- file in find_path is: %s\n", file);
+	}
 	if (file)
 	{
 		child_pid = fork();
@@ -43,10 +52,11 @@ int new_process(char *av[], int exec_counter, char **env)
 				check_str(file, av[1]);
 			//	msg_err = av[1];
 			//	perror(msg_err);
-		//		free(file);
-		//		exit(1);
+			//	free(file);
+			exit(1);
 			}
 		}
+		printf("--- --- ---\n");
 		waitpid(child_pid, &status, 0);
 	}
 	else

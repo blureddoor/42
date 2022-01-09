@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   myshell_loop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 17:58:38 by lvintila          #+#    #+#             */
-/*   Updated: 2021/12/27 21:59:30 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/09 23:11:28 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@
  * Return: status value.
  **/
 
-int	get_cmd()
+int	get_cmd(t_param *param)
 {
 	int i;
-	line = rl_gets();
+	param->line = rl_gets();
 	return (0);
 }
 
-int myshell_loop(char *av[], int execution_counter, char **env)
+int myshell_loop(t_param *param, char *av[], int execution_counter, char **env)
 {
 	int		interactive;
 	int		process_status;
@@ -40,7 +40,7 @@ int myshell_loop(char *av[], int execution_counter, char **env)
 	int		read; 
 	size_t	len;
 	char	*args[32]; 
-	char	*token;
+//	char	*token;
 
 	interactive = 1;
 	process_status = 0;
@@ -50,48 +50,45 @@ int myshell_loop(char *av[], int execution_counter, char **env)
 	{
 		if (interactive == 1)
 			write(STDIN_FILENO, "($) ", 4);
-		read = get_cmd();
+		read = get_cmd(param);
 		//read = getline(&line, &len, stdin);
 		if (read == EOF)
 		{
-			free(line);
+			free(param->line);
 			write(STDIN_FILENO, "\n", 1);
 			return (process_status);
 		}
-		else if (ft_strncmp(line, "exit\n", 4) == 0)
+		else if (ft_strncmp(param->line, "exit\n", 4) == 0)
 		{
-			free(line);
-			return (process_status);
+			free(param->line);
+			printf(" ------ ------ -----\n");
+			exit (1);
 		}
 		else
 		{
-			if (ft_strncmp(line, "env\n", 3) == 0)
+			if (ft_strncmp(param->line, "env\n", 3) == 0)
 				print_env(env);
 			else if (read == 0)
 			{
-				token = ft_strtok(line, " \t\r\n\v\f");
+				param->token = ft_strtok(param->line, " \t\r\n\v\f");
 				args[0] = av[0];
 				i = 1;
-				while (i < 32 && token != NULL)
+				while (i < 32 && param->token != NULL)
 				{
-					args[i] = token;
-					token = ft_strtok(NULL, " \t\r\n\v\f");
+					args[i] = param->token;
+					param->token = ft_strtok(NULL, " \t\r\n\v\f");
 					i++;
 				}
 				args[i] = NULL;
 				if (args[1])
-					if ((process_status = new_process(args,
-								execution_counter, env)) != 0)
-					{
-						if (ft_strncmp(line, "exit\n", 4) == 0)
-						{
-							free(line);
-							return (0);
-						}
-					}
+					process_status = new_process(args, execution_counter, env);
 			}
+			printf(" ### ### ###\n");
+			free(param->line);
 			execution_counter++;
 		}
+		free(param->token);
+		printf(" ++++ ++++ ++++\n");
 	}
-	return (process_status);
+	return (0);
 }

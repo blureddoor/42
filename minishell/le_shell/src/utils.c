@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 20:22:27 by lvintila          #+#    #+#             */
-/*   Updated: 2021/12/27 22:12:55 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/09 23:04:08 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	check_str(char *str, char *cmd)
 		write(2, "command nnot found: ", 20);
 		write(2, cmd, ft_strlen(cmd));
 		write(2, "\n", 1);
-		//free(str);
-	//	free(cmd);
-		exit(1);
+		free(str);
+		free(cmd);
+		exit(0);
 	}
 }
 

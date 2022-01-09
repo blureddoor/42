@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   myshell.c                                          :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/12 18:55:41 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/09 23:08:30 by lvintila         ###   ########.fr       */
+/*   Created: 2020/01/11 10:20:04 by lvintila          #+#    #+#             */
+/*   Updated: 2021/12/29 21:14:27 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/myshell.h"
+#include "libft.h"
 
-int main(int ac, char *av[], char **env)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	t_param	*param;
-	int execution_coun = 1;
-	int status = 0;
-	(void)ac;
+	size_t	start;
+	size_t	len;
 
-	if (ac > 1)
-	{
-		write(2, "Error: wrong number of arguments\n", 33);
-		write(2, "Usage: ./minishell\n", 19);
-		return (0);
-	}
-
-	status = myshell_loop(param, av, execution_coun, env);
-	return (0);
+	if (s1 == NULL || set == NULL)
+		return (NULL);
+	start = 0;
+	while (s1[start] && ft_strchr(set, s1[start]) != NULL)
+		start++;
+	len = ft_strlen(&s1[start]);
+	if (len != '\0')
+		while (s1[start + len - 1]
+			&& ft_strchr(set, s1[start + len - 1]) != NULL)
+			len--;
+	return (ft_substr(s1, start, len));
 }

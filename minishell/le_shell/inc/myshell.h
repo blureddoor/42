@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   myshell.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 18:01:48 by lvintila          #+#    #+#             */
-/*   Updated: 2021/12/27 20:23:49 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/09 22:52:15 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,17 @@
 # define STDIN 0
 # define STDOUT 1
 
-char *line;
+//char *line;
+
+typedef struct s_param
+{
+    char    *line;
+    char    *token;
+}               t_param;
+
 
 /* Shell functions*/
-int myshell_loop(char *av[], int execution_counter, char **env);
+int myshell_loop(t_param *param, char *av[], int execution_counter, char **env);
 int new_process(char *av[], int execution_counter, char **env);
 
 /* diffrent utility functions */
@@ -42,7 +49,7 @@ char    *rl_gets();
 
 char    space_tab(unsigned int i, char c);
 char    **parse(char *buff);
-int     get_cmd();
+int     get_cmd(t_param *param);
 void    redirect(char *buff);
 int     execute(char *buff, char **envp);
 char    *rl_gets();
