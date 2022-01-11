@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 20:22:27 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/10 19:52:38 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/11 22:05:07 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ char	*rl_gets()
 	 */
     if (line_read && *line_read)
 		add_history (line_read);
-	printf("rl_gets\n");
     return (line_read);
 }
 
@@ -112,80 +111,87 @@ int	found_char(char *str, char c)
 }
 
 //int	redirection(t_param *param, char *av[], char **args, char **env)
-/* int		redirection(t_param *param, char **env) */
-/* {
+ int		redirection(t_command **commands, char **env)
+ {
 	int		i;
-	int		exec_counter = 0; */
+	int		exec_counter = 0;
+	t_param *param;
 //	int		fd;
 //	char	*aux;
-
-	/* param->dir = 0;
+	printf("==>> Entry redirection\n");
+//	param->dir = 0;
 	i = 0;
- 	printf("param->aux inicial en redirection is %s\n", param->aux);
+	param = malloc(sizeof(t_param));
+/*  	printf("param->aux inicial en redirection is %s\n", param->aux);
 	while (param->aux[i])
 	{
  		printf("param->aux in loop redirection is %s\n", param->aux);
 		if (param->aux[i] == '<')
 		{
-			param->indir++; */
+			param->indir++;
 		//	param->indir_cmd = args[i + 1];
 		//	param->indir_cmd = (aux + 1); 
 		//	printf("found <, param->indir_cmd es: %s\n", param->indir_cmd);
-/* 		}
+ 		}
 		if (param->aux[i] == '>')
 		{
-			param->dir++; */
+			param->dir++; 
 		//	param->dir_cmd = args[i + 1];
 		//	printf("found >, param->dir_cmd es: %s\n", param->dir_cmd);
-		/* } */
+		}
 		//printf("args[%d]: %s\n", i, args[i]);
-	/* 	i++;
-	}
- 	printf("param->aux after loop is %s\n", param->aux);
-	printf("REDIRECTION: param->dir is: %d\n", param->dir);
-	if (param->dir == 1)
+	 	i++;
+	} */
+/*  	printf("param->aux after loop is %s\n", param->aux);
+	printf("REDIRECTION: param->dir is: %d\n", param->dir); */
+	while (commands[i] != NULL)
 	{
-		printf("1\n");
-		param->fd = open(param->dir_cmd, O_WRONLY | O_CREAT | O_TRUNC, 0664);
-		printf("2\n");
-		if (!param->fd)
-			exit (-1);
-		printf("3\n");
-		dup2(param->fd, 1);
-		printf("4\n"); */
-		//if ((execve(param->aux, (&args[1]), env)) == -1)
-		//	check_str(param->aux, args[1]);
- 	/* 	new_process(&param->cmds[0], exec_counter, env); */
-/*		if (access(param->cmds[0], F_OK) == 0)
+		if (commands[i]->fileout != NULL)
 		{
-			file = param->cmds[0];
-		}
-		else
-			(file = find_path(param->cmds[0] ,env));
-		if (file)
-		{
-			child_pid = fork();
-			if (child_pid == 0)
+			printf("1\n");
+			param->fd = open(commands[i]->fileout, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+			printf("2\n");
+			if (!param->fd)
+				exit (-1);
+			printf("3\n");
+			dup2(param->fd, 1);
+			printf("4\n");
+			//if ((execve(param->aux, (&args[1]), env)) == -1)
+			//	check_str(param->aux, args[1]);
+			new_process(commands, exec_counter, env); 
+	/*		if (access(param->cmds[0], F_OK) == 0)
 			{
-				if ((execve(file, (&param->cmds[0]), env)) == -1)
-				{
-					check_str(file, param->cmds[0]);
-				}
+				file = param->cmds[0];
 			}
-			waitpid(child_pid, &status, 0);
+			else
+				(file = find_path(param->cmds[0] ,env));
+			if (file)
+			{
+				child_pid = fork();
+				if (child_pid == 0)
+				{
+					if ((execve(file, (&param->cmds[0]), env)) == -1)
+					{
+						check_str(file, param->cmds[0]);
+					}
+				}
+				waitpid(child_pid, &status, 0);
+			}
+			else
+			{
+				perror("Error");
+				return (127);
+			} */
+			printf("commands[%d]->fileout in redirection is: %s\n", i, commands[i]->fileout);
+		//	printf("args[1] in redirection is: %s\n", args[1]);
+		//	printf("param->aux in redirection is: %s\n", param->aux);
+			dup2(0, 1);
+			close(param->fd);
+			printf("==>> in loop redirection\n");
 		}
-		else
-		{
-			perror("Error");
-			return (127);
-		} *//* 
-		printf("param->dir_cmd in redirection is: %s\n", param->dir_cmd); */
-	//	printf("args[1] in redirection is: %s\n", args[1]);
-/* 		printf("param->aux in redirection is: %s\n", param->aux);
-		dup2(0, 1);
-		close(param->fd); */
-/* 	}
-	else if (param->dir == 2)
+		i++;
+ 	}
+/* 	else if (param->dir == 2)
 	{
 		param->fd = open(param->dir_cmd, O_WRONLY | O_CREAT | O_APPEND, 0664);
 		if (!param->fd)
@@ -194,10 +200,12 @@ int	found_char(char *str, char c)
  		new_process(param->cmds, exec_counter, env);
 		dup2(0, 1);
 		close(param->fd);
-	}
-	return(1);
+	}*/
+	return(0); 
 }
 
+
+/* 
 int	exec_cmds(t_param *param, char **cmds, int exec_count, char **env)
 {
 	if (cmds[1])
@@ -205,6 +213,8 @@ int	exec_cmds(t_param *param, char **cmds, int exec_count, char **env)
 	return (0);
 }
  */
+
+
 void    redirect(char *buff)
 {
 	int		redirect_flag;

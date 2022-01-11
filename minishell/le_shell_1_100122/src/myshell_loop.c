@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   myshell_loop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmontese <pmontese@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 17:58:38 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/10 20:19:36 by pmontese         ###   ########.fr       */
+/*   Updated: 2022/01/11 21:54:19 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,34 +34,35 @@ int	get_cmd(t_param *param)
 	return (1);
 }
 
-int	check_redir(t_param *param, char **env)
+/* int	check_redir(t_command **commands, char **env)
 {
 //	char	**av;
 //	char	**args;
 
-	if (found_char(param->aux, '>') == 0)
+// 	if (found_char(param->aux, '>') == 0)
 	{
 		printf("------------\n");
-		param->dir_cmd = ft_strtrim((ft_strchr(param->aux, '>') + 1), " ");
-		//re_direction_and_pipe(param->cmds, env);i
-	/* 	i = 0;
+		param->dir_cmd = ft_strtrim((ft_strchr(param->aux, '>') + 1), " "); */
+/* 		re_direction_and_pipe(param->cmds, env);i
+	 	i = 0;
 		while (param->aux[i] != '>')
 		{
 			str[i] = param->aux[i];
 			i++;
 		}
 		str[i] = '\0';
-		param->comandos = ft_split(str, ' '); */
-		//redirection(param, env);
-		//close(param->fd);
-		//dup2(1, 1);
-		//exit (-1);
+		param->comandos = ft_split(str, ' ');
+		redirection(param, env);
 		close(param->fd);
+		dup2(1, 1);
+		exit (-1); */
+/* 		close(param->fd);
 		return (1);
 	}
 	else
 		return (0);
-}
+} */
+
 int myshell_loop(t_param *param, char *av[], int exec_count, char **env)
 {
 	int		interactive;
@@ -122,13 +123,13 @@ int myshell_loop(t_param *param, char *av[], int exec_count, char **env)
 			{
 				free(param->line);
 				write(STDIN_FILENO, "\n", 1);
-				return (process_status);
+				return (0);
 			}
 			else if (ft_strncmp(param->line, "exit\n", 4) == 0)
 			{
 				free(param->line);
-				exit(1);
-				//return (process_status);
+				//exit(1);
+				return (process_status);
 			}
 			else
 			{
@@ -152,6 +153,8 @@ int myshell_loop(t_param *param, char *av[], int exec_count, char **env)
 					}
 					cmd_lst = parser(tokens);
 					printf("\nParse result:\n");
+					if (redirection(cmd_lst, env) != 0)
+						printf("salida del if check_redir\n");
 					int i = 0;
 					while (cmd_lst[i] != NULL)
 					{
