@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   myshell_loop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 17:58:38 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/11 21:54:19 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/12 19:06:06 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,14 +155,17 @@ int myshell_loop(t_param *param, char *av[], int exec_count, char **env)
 					printf("\nParse result:\n");
 					if (redirection(cmd_lst, env) != 0)
 						printf("salida del if check_redir\n");
-					int i = 0;
-					while (cmd_lst[i] != NULL)
+					else
 					{
-						printf("Command %d:\n", i);
-						print_cmd(cmd_lst[i]);
-						printf("\n");
-						new_process(cmd_lst, exec_count, env);
-						i++;
+						int i = 0;
+						while (cmd_lst[i] != NULL)
+						{
+							printf("Command %d:\n", i);
+							print_cmd(cmd_lst[i]);
+							printf("\n");
+							new_process(cmd_lst, exec_count, env);
+							i++;
+						}
 					}
 /* 					printf("myshell_loop: param->dir_cmd is: %s\n", param->dir_cmd);
 					printf("myshell_loop: param->line is: %s\n", param->line);
