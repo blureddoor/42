@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 17:58:30 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/12 18:52:16 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/13 19:52:07 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int new_process(t_command **commands, int exec_counter, char **env)
 	char	*msg_err;
 
 	status = 0;
-	printf("=== === ===\n");
+	//printf("=== === ===\n");
 	if (access(*commands[0]->argv, F_OK) == 0)
 	{
 		file = *commands[0]->argv;
@@ -49,21 +49,22 @@ int new_process(t_command **commands, int exec_counter, char **env)
 		{
 			if ((execve(file, commands[0]->argv, env)) == -1)
 			{
-			//	check_str(file, *commands[0]->argv);
-				msg_err = *commands[0]->argv;
+				check_str(file, *commands[0]->argv);
+			/* 	msg_err = *commands[0]->argv;
 				perror(msg_err);
 				free(file);
+				free_arr(commands[0]->argv); */
 			//	exit(1);
 			}
 		}
-/* 		printf("--- --- ---\n"); */
 		waitpid(child_pid, &status, 0);
 	}
 	else
 	{
-		perror("Error");
+		perror("Error_new_process:");
 		return (127);
 	}
+ 	//printf("--- --- ---\n");
 	return (0);
 }
 

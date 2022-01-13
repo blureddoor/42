@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 17:58:38 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/12 19:06:06 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/13 19:51:53 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,12 @@ int	get_cmd(t_param *param)
 	param->line = rl_gets();
 	if (param->line != NULL)
 		return (0);
-	printf("get_cmd: param->line is: %s\n", param->line);
-	return (1);
+	// printf("get_cmd: param->line is: %s\n", param->line);
+	else
+	{
+		perror("Error get_cmd: ");
+		return (-1);
+	}
 }
 
 /* int	check_redir(t_command **commands, char **env)
@@ -152,21 +156,30 @@ int myshell_loop(t_param *param, char *av[], int exec_count, char **env)
 						i++;
 					}
 					cmd_lst = parser(tokens);
-					printf("\nParse result:\n");
+/* 					printf("\nParse result:\n");
 					if (redirection(cmd_lst, env) != 0)
 						printf("salida del if check_redir\n");
 					else
+					{ */
+					int i = 0;
+					while (cmd_lst[i] != NULL)
 					{
-						int i = 0;
-						while (cmd_lst[i] != NULL)
-						{
-							printf("Command %d:\n", i);
-							print_cmd(cmd_lst[i]);
-							printf("\n");
-							new_process(cmd_lst, exec_count, env);
-							i++;
-						}
+						printf("Command %d:\n", i);
+						redirection(cmd_lst, env);
+						print_cmd(cmd_lst[i]);
+						printf("\n");
+						new_process(cmd_lst, exec_count, env);
+						i++;
 					}
+					if (cmd_lst[0]->fileout)
+					{
+						close(1);
+						dup(1);
+						dup(0);
+					}
+					dup2(1, 0);
+					
+				/* 	} */
 /* 					printf("myshell_loop: param->dir_cmd is: %s\n", param->dir_cmd);
 					printf("myshell_loop: param->line is: %s\n", param->line);
 					printf("myshell_loop: param->cmds[1] is: %s\n", param->cmds[1]); */
@@ -202,6 +215,7 @@ int myshell_loop(t_param *param, char *av[], int exec_count, char **env)
 			}
 		exec_count++;
 	}
+//	close(param->fd);
 	free(param->line);
 	return (0);
 }

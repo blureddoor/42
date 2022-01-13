@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 20:22:27 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/12 19:33:42 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/13 20:03:57 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_str(char *str, char *cmd)
 		write(2, "\n", 1);
 	//	free(str);
 	//	free(cmd);
-	//	exit(1);
+		exit(1);
 	}
 }
 
@@ -124,28 +124,37 @@ int	found_char(char *str, char c)
 		{
 			param->fd = open(commands[i]->fileout, O_CREAT | O_RDWR | O_TRUNC, 0664);
 			if (!param->fd)
-				exit (-1);
- 			dup2(param->fd, 1);
+				perror("Error:");
 				//printf("4\n");
-			new_process(commands, exec_counter, env);
+ 			dup2(param->fd, 1);
 		//	dup2(1, 1);
-			close(1);
+		//	new_process(commands, exec_counter, env);
+/* 			close(1);
 		//	dup2(0, 1);
 			dup(1);
 			dup(0);
-			dup(param->fd);
+			dup(param->fd); */
 		//	close(param->fd);
 		}
-		else if (commands[i]->fileout != NULL && commands[i]->append != 0)
+		else if (commands[i]->append != 0)
 		{
-			param->fd = open(commands[i]->fileout, O_CREAT | O_RDWR | O_APPEND | O_TRUNC, 0664);
+			param->fd = open(commands[i]->fileout, O_CREAT | O_WRONLY | O_APPEND, 0664);
 			if (!param->fd)
-				exit (-1);
+				perror("Error:");
 			dup2(param->fd, 1);
-			printf("4\n");
+/* 			printf("4\n");
 			new_process(commands, exec_counter, env);
 			dup2(0, 1);
-			close(param->fd);
+			close(param->fd); */
+		}
+		else if (commands[i]->filein != NULL)
+		{
+			param->fd = open(commands[i]->filein, O_RDONLY);
+			if (!param->fd)
+				perror("Error:");
+			close(0);
+			dup2(param->fd, 0);
+			//close(param->fd);
 		}
 		i++;
  	}
