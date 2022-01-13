@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 20:22:27 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/13 20:03:57 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/13 20:36:43 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,10 @@ int	found_char(char *str, char c)
 			close(0);
 			dup2(param->fd, 0);
 			//close(param->fd);
+		}
+		else if (commands[i]->hdocword != NULL)
+		{
+			dup2(1, 1);
 		}
 		i++;
  	}
