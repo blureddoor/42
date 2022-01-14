@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 18:01:48 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/12 17:27:45 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/14 20:00:01 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,18 @@ ANSI Color codes
 typedef struct  s_param
 {
 //  char    **comandos;
+	int		a_fds[2][2];
     char    *token;
     char    *line;
     int     exec_count;
     int     dir;
     char    *dir_cmd;
+	char	**full_cmd;
 //  char    *dir_cmd2;
 //  char    *indir_cmd;
 //  char    *indir_cmd2;
     int     indir;
-//  int     status;
+	int     status;
     int     process_status;
 //  int     dir_flag;
     char    *aux;
@@ -143,5 +145,20 @@ int         re_direction_and_pipe(char **args, char **env);
 char        **split_line(char *line);
 char        **split_pipes(char *input);
 char        *trim_ws(char *str);
+
+/* implementation of the exit shell command */
+int			ft_myshell_exit(t_list *cmd, int *is_exit);
+
+/* Opens two sets of pipes and checks if they are opened correctly */
+void		*my_here_fd(t_param *param, int fd[2], int auxfd[2]);
+
+/* to handle SIGINT signals for main process */
+void		handle_sigint(int sig);
+
+/* to handle SIGINT signals for child process */
+void		handle_sigint_child(int sig);
+
+/* to handle SIGQUIT signals for child process */
+void		handle_sigquit(int sig);
 
 #endif

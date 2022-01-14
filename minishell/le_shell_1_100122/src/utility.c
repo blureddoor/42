@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utility.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 17:57:54 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/09 12:56:57 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/14 19:00:26 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,33 @@ char **split_pipes(char *input)
 		i++;
 	}
 	return (str);
+}
+
+int	ft_myshell_exit(t_list *cmd, int *is_exit)
+{
+	t_param	*node;
+	long	status[2];
+
+	node = cmd->content;
+	*is_exit = !cmd->next;
+	if (*is_exit)
+		ft_putstr_fd("exit\n", 2);
+	if (!node->full_cmd || !node->full_cmd[1])
+		return (0);
+	status[1] = ft_atoi2(node->full_cmd[1], &status[0]);
+	if (status[1] == -1)
+	{
+		ft_putstr_fd("myshell: exit: ", 2);
+		ft_putstr_fd(node->full_cmd[1], 2);
+		ft_putstr_fd(": numeric argument required\n", 2);
+		return (255);
+	}
+	else if (node->full_cmd[2])
+	{
+		*is_exit = 0;
+		ft_putstr_fd("myshell: exit: too many arguments\n", 2);
+		return (1);
+	}
+	status[0] %= 256 + 256 * (status[0] < 0);
+	return (status[0]);
 }

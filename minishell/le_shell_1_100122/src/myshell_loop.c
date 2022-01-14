@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 17:58:38 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/13 19:51:53 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/14 20:05:19 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,8 +186,8 @@ int myshell_loop(t_param *param, char *av[], int exec_count, char **env)
 /*  				if (found_char(param->line, '>') != 0)
 					//redirection(param, av, args, env);
 					redirect(param->line); */
-				//redirection(param, av, args, env);
-			//	#########################
+					//redirection(param, av, args, env);
+					//	#########################
 /* 					if (param->cmds[1])
 					{
 						process_status = new_process(param->cmds, exec_count, env);

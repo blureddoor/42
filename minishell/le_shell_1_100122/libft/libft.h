@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:05:42 by lvintila          #+#    #+#             */
-/*   Updated: 2021/12/26 20:49:40 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/14 19:56:46 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ char				*ft_strcat(char *dest, char *src);
 static int			ft_getline(char **str, char **line, char *s);
 char				*ft_strndup(const char *src, size_t len);
 char				*ft_strncpy(char *dst, const char *src, size_t len);
+int					ft_atoi2(const char *nptr, long *nbr);
 
 #endif

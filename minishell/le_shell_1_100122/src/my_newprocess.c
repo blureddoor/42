@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 17:58:30 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/13 19:52:07 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/14 20:04:35 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int new_process(t_command **commands, int exec_counter, char **env)
 	pid_t	child_pid;
 	char	*msg_err;
 
-	status = 0;
+	st./miatus = 0;
 	//printf("=== === ===\n");
 	if (access(*commands[0]->argv, F_OK) == 0)
 	{
