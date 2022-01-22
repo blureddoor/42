@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 18:01:48 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/22 21:35:52 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/22 21:50:15 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,23 +72,8 @@ typedef struct  s_param
 	int		tmp_out;
 	int		fd_in;
 	int 	fd_out;
-//  char    **comandos;
-    char    *token;
-    char    *line;
-    int     exec_count;
-    int     dir;
-    char    *dir_cmd;
-//  char    *dir_cmd2;
-//  char    *indir_cmd;
-//  char    *indir_cmd2;
-    int     indir;
-//  int     status;
-    int     process_status;
-//  int     dir_flag;
-    char    *aux;
-//    char    *cmds[32]; // char *args[32];
-    int     fd;
-	int		cmds; //num of simple comands
+	char	*line;
+	int		cmds; // num of commands
 }               t_param;
 
 typedef struct s_command
@@ -112,14 +97,14 @@ typedef struct s_token
 }			t_token;
 
 /* Lexer */
-t_token *tokenizer(char *input);
-int	expander(char **text, int pos);
-int is_op(char c);
-// char *line;
-char	*ft_strreplace(char *str, char *insert, int pos, int len);
+t_token 	*tokenizer(char *input);
+int			expander(char **text, int pos);
+char		*ft_strreplace(char *str, char *insert, int pos, int len);
+
+/* Heredoc */
+char 		*read_heredoc(char **str, int *pos);
 
 /* parser */
-
 t_command	**parser(t_token *tokens);
 void		print_cmd(t_command *cmd);
 
@@ -136,22 +121,11 @@ char        *rl_gets();
 char        space_tab(unsigned int i, char c);
 char        **parse(char *buff);
 int         get_cmd(t_param *param);
-void        redirect(char *buff);
-int         execute(char *buff, char **envp);
 char        *rl_gets();
 char        *find_path(char *cmd, char **envp);
 void        check_str(char *str, char *cmd);
 void        free_arr(char **arr);
-int     	redirection(t_command **commands, char **env);
-void        redirect(char *buff);
-int     	exec_cmds(t_param *param, char **cmds, int exec_count, char **env);
 int         found_char(char *str, char c);
-int         check_redir(t_command *commands, char **env);
-int         found_op(char *str, char *op);
-int         re_direction_and_pipe(char **args, char **env);
-char        **split_line(char *line);
-char        **split_pipes(char *input);
-char        *trim_ws(char *str);
 void 		cmd_execute(t_command **cmd, t_param *param, char **env);
 int			builtins(t_command *cmd, char **env);
 

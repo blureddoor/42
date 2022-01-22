@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 17:58:38 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/22 20:28:06 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/22 21:17:57 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,26 +70,14 @@ int myshell_loop(t_param *param, char *av[], int exec_count, char **env)
 		{
 			tokens = tokenizer(param->line);
 			commands = parser(tokens);
-		// executer(env, tokens, commands);
+		//	executer(env, tokens, commands);
 			i = 0;
 			while (commands[i] != NULL)
-//				printf("commands[%d] is: %s\n", i, commands[i]->argv[0]);
-//				printf("commands[%d] is: %s\n", i, commands[i]->argv[1]);
-				i++;		
+				i++;
 			param->cmds = i++;
+			free(param->line);
 			if (!builtins(commands[0], env))
 				cmd_execute(commands, param, env);
-//			printf ("Salida ----->\n");
-/* 			i = 0;
-			while (commands[i] != NULL)
-			{
-				if (!builtins(commands[i], env))
-					cmd_execute(commands[i], param, env);
-				printf ("Salida ----->\n");
-				free_arr(commands[i]->argv);
-				i++;
-			} */
-//			free(param->line);
 			// free tokens
 			// free commands
 		}
