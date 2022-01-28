@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 20:22:27 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/22 21:48:09 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/23 21:14:37 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,50 @@ void	free_arr(char **arr)
 		free(arr[i++]);
 	free(arr);
 }
+
+void	ft_free_arr(char ***arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr && arr[0] && arr[0][i])
+	{
+		free(arr[0][i]);
+		i++;
+	}
+	if (arr)
+	{
+		free(arr[0]);
+		*arr = NULL;
+	}
+}
+
+char	**ft_dup_arr(char **arr)
+{
+	char	**out;
+	int		n_rows;
+	int		i;
+
+	i = 0;
+	n_rows = ft_matrixlen(arr);
+	out = malloc(sizeof(char *) * (n_rows + 1));
+	if (!out)
+		return (NULL);
+	while (arr[i])
+	{
+		out[i] = ft_strdup(arr[i]);
+		if (!out[i])
+		{
+			ft_free_arr(&out);
+			return (NULL);
+		}
+		i++;
+	}
+	out[i] = NULL;
+	return (out);
+}
+
+
 
 void	print_env(char **env)
 {

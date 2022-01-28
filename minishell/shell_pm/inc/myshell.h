@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 18:01:48 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/22 21:35:52 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/27 22:38:57 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <errno.h>
+# include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../gnl/get_next_line.h"
@@ -68,6 +69,7 @@ ANSI Color codes
 
 typedef struct  s_param
 {
+	char	**envp;
 	int		tmp_in;
 	int		tmp_out;
 	int		fd_in;
@@ -133,6 +135,15 @@ void		executer(char **env, t_token *tokens, t_command **cmd_lst);
 void        print_env(char **env);
 char        *rl_gets();
 
+static		t_param	init_vars(t_param param, char *str, char **argv, char **envp);
+char		**ft_dup_arr(char **arr);
+char		**ft_extend_arr(char **in, char *new_str);
+int			ft_strchr_i(const char *s, int c);
+int			ft_arr_len(char **arr);
+void		ft_free_arr(char ***arr);
+char		**ft_arr_replace_in(char ***big, char **small, int n);
+int			ft_put_arr_fd(char **arr, int fd);
+
 char        space_tab(unsigned int i, char c);
 char        **parse(char *buff);
 int         get_cmd(t_param *param);
@@ -153,6 +164,12 @@ char        **split_line(char *line);
 char        **split_pipes(char *input);
 char        *trim_ws(char *str);
 void 		cmd_execute(t_command **cmd, t_param *param, char **env);
-int			builtins(t_command *cmd, char **env);
+int			builtins(t_command *cmd, t_param *param, char **env);
 
+int			my_cd(t_command *cmd, t_param *param);
+int			my_export(t_command *cmd, t_param *param);
+int			my_unset(t_command *cmd, t_param *param);
+
+char		*my_getenv(char *var, char **envp, int n);
+char		**my_setenv(char *var, char *value, char **envp, int n);
 #endif

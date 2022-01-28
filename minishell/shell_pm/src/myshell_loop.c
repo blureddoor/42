@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 17:58:38 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/22 20:28:06 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/22 20:24:56 lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int myshell_loop(t_param *param, char *av[], int exec_count, char **env)
 //				printf("commands[%d] is: %s\n", i, commands[i]->argv[1]);
 				i++;		
 			param->cmds = i++;
-			if (!builtins(commands[0], env))
+			if (!builtins(commands[0], param, env))
 				cmd_execute(commands, param, env);
 //			printf ("Salida ----->\n");
 /* 			i = 0;

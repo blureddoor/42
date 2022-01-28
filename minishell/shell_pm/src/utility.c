@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 17:57:54 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/22 20:57:29 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/24 22:51:23 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,27 @@ void cmd_execute(t_command **cmd, t_param *param, char **env)
 	param->tmp_in = dup(0);
 	param->tmp_out = dup(1);
 	/* set the initial input */
+//	if (ft_strcmp(cmd[0]->name, "cd") == 0) 
+//	{
+		//execve(cmd[0]->name, cmd[i]->argv, env);
+/* 	if (access(cmd[i]->argv[0], F_OK) == 0)
+	{
+		file = cmd[i]->argv[0];
+		printf("CHECK--1->>>\n");
+	}
+	else
+	{
+		file = find_path(cmd[i]->argv[0], env);
+		printf("CHECK--2->>>\n");
+	}
+	if (execve(file, cmd[i]->argv, env) == -1)
+	{
+		perror("Error: execve first for builtin\n");
+		printf("CHECK--3->>>\n");
+		//check_str(file, cmd[i]->argv[0]);
+	} */
+//	}
+
 	if (cmd[0]->filein)
 	{
 		param->fd_in = open(cmd[0]->filein, O_RDONLY);
@@ -145,7 +166,9 @@ void cmd_execute(t_command **cmd, t_param *param, char **env)
 		dup2(param->fd_out, 1);
 		close(param->fd_out);
  		child_pid = fork();
-		if (child_pid == 0)
+		if (child_pid < 0)
+			perror("Error: fork");
+		else if (child_pid == 0)
 		{
  			if (access(cmd[i]->argv[0], F_OK) == 0)
 				file = cmd[i]->argv[0];
@@ -156,6 +179,27 @@ void cmd_execute(t_command **cmd, t_param *param, char **env)
 		}
 		i++;
 	} /* while */
+
+/* 
+	pipe(fd);
+	parent = fork();
+	if (parent < 0)
+		return (perror("Error"));
+	 else if (parent == 0)
+		parent1(fd, f2, argv, envp);
+	else
+	{
+		parent = fork();
+		if (parent < 0)
+			return (perror("Error"));
+		if (parent == 0)
+			child1(fd, f1, argv, envp);
+	}
+	close(fd[0]);
+	close(fd[1]);
+	waitpid(parent, NULL, 0);
+ */
+
 	/* restore in  / out defaults */
 
  	dup2(param->tmp_in, 0);

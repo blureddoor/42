@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 18:01:48 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/22 21:50:15 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/01/25 20:48:28 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,11 @@ void        free_arr(char **arr);
 int         found_char(char *str, char c);
 void 		cmd_execute(t_command **cmd, t_param *param, char **env);
 int			builtins(t_command *cmd, char **env);
+char		**ft_dup_arr(char **arr);
+void		ft_free_arr(char ***arr);
+
+void		my_cd(t_command *cmd);
+void		my_unset(t_command *cmd);
+void		my_export(t_command *cmd);
 
 #endif
