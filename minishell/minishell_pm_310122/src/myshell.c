@@ -1,0 +1,164 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   myshell.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/12 18:55:41 by lvintila          #+#    #+#             */
+/*   Updated: 2022/02/01 20:50:30 by lvintila         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../inc/myshell.h"
+
+
+ static t_param	init_vars(t_param param, char *str, char **argv, char **envp)
+{
+	char	*num;
+
+	str = getcwd(NULL, 0);
+	param.o_env = my_setenv("PWD", str, param.o_env, 3);
+	free(str);
+	str = mygetenv("SHLVL", &param);
+	if (!str || ft_atoi(str) <= 0)
+		num = ft_strdup("1");
+	else
+		num = ft_itoa(ft_atoi(str) + 1);
+	free(str);
+	param.o_env = my_setenv("SHLVL", num, param.o_env, 5);
+	free(num);
+	str = mygetenv("PATH", &param);
+	if (!str)
+		param.o_env = mini_setenv("PATH", \
+		"/usr/local/sbin:/usr/local/bin:/usr/bin:/bin", param.o_env, 4);
+	free(str);
+	str = mygetenv("_", &param);
+	if (!str)
+		param.o_env = my_setenv("_", argv[0], param.o_env, 1);
+	free(str);
+	return (param);
+}
+
+static t_param	init_params(char **argv, char **env)
+{
+	int			i;
+	t_keyval	*keyval;
+	char 		*str;
+	t_param		param;
+
+	str = NULL;
+//	param->line				= NULL;
+	param.tmp_in			= 0;
+	param.tmp_out			= 0;
+	param.fd_in				= 0;
+	param.fd_out			= 0;
+	param.cmds				= 0;
+	param.envc				= 0;
+	// pasa el env a keyval pairs
+	i = 0;
+	while (env[i] != NULL)
+	{
+		keyval = get_keyval(env[i]);
+		set_env_var(keyval, &param);
+		i++;
+	}
+	param.o_env			= env;
+	param = init_vars(param, str, argv, env);
+	return (param);
+}
+
+int	isdir(const char *path) {
+	struct stat statbuf;
+	if (stat(path, &statbuf) != 0)
+		return 0;
+	return S_ISDIR(statbuf.st_mode);
+}
+
+char	*read_script(char *script)
+{
+	int		fd;
+	char	*tmp;
+	char	*total;
+	char	*line;
+
+	if ((fd = open(script, O_RDONLY)) < 0)
+	{
+		perror("error: ");
+		exit (fd);	// TODO comprobar que error devuelve bash en este caso
+	}
+	ft_putstr("-----------");
+	if (get_next_line(fd, &line))
+	{	
+		tmp = ft_strdup("");
+		total = ft_strjoin(tmp, line);
+		free(tmp);
+		free(line);
+	}
+	while (get_next_line(fd, &line))
+	{
+		tmp = total;
+		total = ft_strjoin(total, "\n");
+		free(tmp);
+		tmp = total;
+		total = ft_strjoin(tmp, line);
+		free(tmp);
+		free(line);
+	}
+	return total;
+}
+
+void	myshell_nointerac(char *script, t_param *param)
+{
+	int		fd;
+	char	*doc;
+	t_token		*tokens;
+	t_command	**commands;
+
+	if (isdir(script))
+	{
+		printf("%s: is a directory \n", script);
+		errno = 126;
+		exit(126);
+	}
+
+	// TODO comprobar permisos
+	doc = read_script(script);
+	printf("file content:\n%s\n", doc);
+
+	tokens = tokenizer(doc, param);
+	commands = parser(tokens);
+	// executer(env, tokens, commands);
+	cmd_execute(commands, param);
+	free(doc);
+	// free tokens
+	// free commands
+	exit(0);
+}
+
+int main(int ac, char *av[], char **env)
+{
+	t_param param;
+	int execution_coun = 1;
+	int status = 0;
+
+	//param = malloc(sizeof(t_param));
+	param = init_params(av, env);
+	//init_params(param, env);
+	if (ac > 2)
+	{
+		write(2, "Error: wrong number of arguments\n", 33);
+		write(2, "Usage: './minishell' or './minishell file'\n", 43);
+		free(&param);
+		return (1);
+	}
+	else if (ac == 2)
+	{
+		printf("Non interactive mode\n");
+		myshell_nointerac(av[1], &param);
+	}
+	printf("Entering interactive mode\n");
+	status = myshell_loop(&param, av, execution_coun);
+	free(&param);
+	return (status);
+}
