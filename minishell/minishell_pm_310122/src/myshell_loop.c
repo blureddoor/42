@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   myshell_loop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 17:58:38 by lvintila          #+#    #+#             */
-/*   Updated: 2022/02/01 20:32:35 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/02/02 22:42:51 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	clean_tokens(t_token *tkns)
 	}
 }
 
-int myshell_loop(t_param *param, char *av[], int exec_count)
+int myshell_loop(t_param *param, char *av[], int exec_count, char **env)
 {
 	int		interactive;
 	int		process_status;
@@ -93,7 +93,7 @@ int myshell_loop(t_param *param, char *av[], int exec_count)
 			return (0);
 		}
 		// si la linea tiene contenido
-		if (read)
+		if (read == 0)
 		{
 			tokens = tokenizer(param->line, param);
 			commands = parser(tokens);
@@ -102,14 +102,14 @@ int myshell_loop(t_param *param, char *av[], int exec_count)
 				i++;
 			param->cmds = i++;
 			free(param->line);
-			cmd_execute(commands, param);
+			cmd_execute(commands, param, env);
 
 			clean_tokens(tokens);
 			free(tokens);
 			free(commands);
 		}
-		else
-			ft_putstr("\n");
+/* 		else
+			ft_putstr("\n"); */
 		exec_count++;
 	}
 //	close(param->fd);

@@ -109,25 +109,28 @@ void	bi_unset(t_command *cmd, t_param *param)
 }
 
 
-int my_cd(t_command *cmd, t_param *param, t_keyval *var)
+int my_cd(t_command *cmd, t_param *param)
 {
-    char    **str[2];
-    char    *aux;
-    DIR     *dir;
+    char		**str[2];
+    char		*aux;
+    DIR			*dir;
+	t_keyval	**kv_env;
+	int 		i;
 
+	kv_env = param->env;
 	param->process_status = 0;
     dir = NULL;
     str[0] = cmd->argv;
-    //str[1] = NULL;
+    str[1] = NULL;
     aux = mygetenv("HOME", param);
     if (!aux)
         aux = ft_strdup("");
-  //  free(aux);
-    str[1] = ft_extend_arr(NULL, aux);
     free(aux);
+    //str[1] = ft_extend_arr(NULL, aux);
     aux = getcwd(NULL, 0);
 	str[1] = ft_extend_arr(str[1], aux);
-	free(aux);
+    free(aux);
+	//free(aux);
     if (str[0][1])
         dir = opendir(str[0][1]);
 	if (!str[0][1] && str[1][0] && !str[1][0][0])
@@ -148,13 +151,13 @@ int my_cd(t_command *cmd, t_param *param, t_keyval *var)
     if (str[0][1] && dir)
         closedir(dir);
     printf("CHECK === >>>\n");
-   // ft_put_arr_fd(param->o_env, 1);
+   	ft_put_arr_fd(param->o_env, 1);
 	if (!param->process_status)
-    	param->o_env = try_set_existing_var("OLDPWD", param);
+		param->o_env = setenv_aux(kv_env, "OLDPWD", str[0][1], param);
     aux = getcwd(NULL, 0);
     str[1] = ft_extend_arr(str[1], aux);
     free(aux);
-    param->o_env = try_set_existing_var("PWD", param);
+    param->o_env = setenv_aux(kv_env, "PWD", str[0][1], param);
     ft_free_arr(&str[1]);
     return (param->process_status);
 }

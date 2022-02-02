@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:38:17 by pmontese          #+#    #+#             */
-/*   Updated: 2022/02/01 21:44:10 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/02/02 23:51:40 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		try_set_existing_var(t_keyval *var, t_param *param)
 	i = 0;
 	while (i < param->envc)
 	{
+		//printf("var->key is: %s\n", var->key);
 		if (!ft_strcmp(var->key, param->env[i]->key))
 		{
 			free(var->key); // usamos el key que ya existe
@@ -56,17 +57,25 @@ int		try_set_existing_var(t_keyval *var, t_param *param)
 // LE:
 // actualiza la variable existente en el env y actualiza env, devuelve el env actualizado
 // con el nuevo valor de la variable
-char	*my_setenv_aux(char *key, char *value, t_keyval *var, t_param *param)
+char	**setenv_aux(t_keyval **kv_env, char *var, char *new_val, t_param *param)
 {
-	int	i;
+	int		i;
+	char	**env;
 
 	i = 0;
-	while (i < param->envc)
+		printf("kv_env->key is %s\n", kv_env[0]->key);
+	while(kv_env[++i] != NULL)
 	{
-		if (ft_strcmp(var->key, key) == 0)
-			return (var->val);
-		i++;
+		if (!ft_strcmp(kv_env[i]->key, var))
+		{
+			kv_env[i]->val = new_val;
+		printf("=======================\n");
+			try_set_existing_var(kv_env[i], param);
+			break ;
+		}
 	}
+	env = make_envp(param);
+	return (env);
 }
 
 /* Damos por hecho que key y value están en el heap*/
@@ -78,6 +87,7 @@ void	set_env_var(t_keyval *var, t_param *param)
 	if (!try_set_existing_var(var, param)) // si no existe la variable
 	{
 		// actualiza env
+		printf("param->envc es: %d\n", param->envc);
 		new_env = (t_keyval**)(malloc(sizeof(t_keyval*) * (param->envc + 1)));
 		i = 0;
 		while (i < param->envc)
@@ -125,6 +135,7 @@ char	*mygetenv(char *name, t_param *param)
 	int i;
 
 	i = 0;
+		printf("AAAAAAAAA\n");
 	while (i < param->envc)
 	{
 		if (ft_strcmp(name, param->env[i]->key) == 0)
@@ -146,7 +157,7 @@ t_keyval	*get_keyval(char *str)
 		len++;
 	pair->key = ft_substr(str, 0, len);
 	pair->val = ft_strdup(&str[len + 1]);
-	return pair;
+	return (pair);
 }
 
 char	**my_setenv(char *var, char *value, char **envp, int n)

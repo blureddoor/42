@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 20:22:27 by lvintila          #+#    #+#             */
-/*   Updated: 2022/01/31 21:46:28 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/02/02 22:45:51 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	check_str(char *str, char *cmd)
 	}
 }
 
-char	*find_path(char *cmd, t_param *param)
+char	*find_path(char *cmd, char **envp)
 {
 	int		i;
 	char	*str;
@@ -35,15 +35,15 @@ char	*find_path(char *cmd, t_param *param)
 	if (access(cmd, F_OK) == 0)
 		return (cmd);
 	i = -1;
-	// while (envp[++i])
-	// {
-	// 	if (!ft_strncmp(envp[i], "PATH=", 5))
-	// 	{
-	// 		tab = ft_split(ft_strchr(envp[i], '/'), ':');
-	// 		break ;
-	// 	}
-	// }
-	tab = ft_split(mygetenv("PATH", param), ':');
+	while (envp[++i])
+	{
+		if (!ft_strncmp(envp[i], "PATH=", 5))
+	 	{
+	 		tab = ft_split(ft_strchr(envp[i], '/'), ':');
+	 		break ;
+	 	}
+	}
+	/* tab = ft_split(mygetenv("PATH", param), ':'); */
 	i = -1;
 	while (tab[++i])
 	{

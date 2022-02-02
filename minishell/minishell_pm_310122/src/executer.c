@@ -1,6 +1,6 @@
 #include "../inc/myshell.h"
 
-int	try_builtins(t_command *cmd, t_param *param, t_keyval *var)
+int	try_builtins(t_command *cmd, t_param *param)
 {
 	int	ret;
 
@@ -14,13 +14,13 @@ int	try_builtins(t_command *cmd, t_param *param, t_keyval *var)
 	else if (!ft_strcmp(cmd->name, "unset"))
 		bi_unset(cmd, param);
 	else if (!ft_strcmp(cmd->name, "cd"))
-		my_cd(cmd, param, var);
+		my_cd(cmd, param);
 	else
 		ret = 0;
 	return (ret);
 }
 
-void cmd_execute(t_command **cmd, t_param *param, t_keyval *var)
+void cmd_execute(t_command **cmd, t_param *param, char **env)
 {
 	pid_t	child_pid;
 	int		i;
@@ -50,7 +50,7 @@ void cmd_execute(t_command **cmd, t_param *param, t_keyval *var)
 	{
 		/* paso aquí los built ins porque cualquier comando puede ser
 		built in, no solo el primero */
-		if (try_builtins(cmd[i], param, var))
+		if (try_builtins(cmd[i], param))
 		{
 			i++;
 			continue;
@@ -84,12 +84,14 @@ void cmd_execute(t_command **cmd, t_param *param, t_keyval *var)
 		close(param->fd_out);
  		child_pid = fork();
 		if (child_pid == 0)
+			perror("Error:fork ");
+		if (child_pid == 0)
 		{
  			if (access(cmd[i]->argv[0], F_OK) == 0)
 				file = cmd[i]->argv[0];
 			else
-				file = find_path(cmd[i]->argv[0], param);
-			if (execve(file, cmd[i]->argv, param->o_env) == -1)
+				file = find_path(cmd[i]->argv[0], env);
+			if (execve(file, cmd[i]->argv, env) == -1)
 				check_str(file, cmd[i]->argv[0]);
 		}
 		i++;
