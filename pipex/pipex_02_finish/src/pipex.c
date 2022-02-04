@@ -6,11 +6,11 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 20:54:21 by lvintila          #+#    #+#             */
-/*   Updated: 2021/12/27 17:33:23 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/02/04 21:02:52 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/hsh.h"
+#include "../inc/pipex.h"
 
 char	*find_path(char *cmd, char **envp)
 {
@@ -114,7 +114,7 @@ void	pipex(int f1, int f2, char **argv, char **envp)
 	waitpid(parent, NULL, 0);
 }
 
-int	m_pipex(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	int	f1;
 	int	f2;

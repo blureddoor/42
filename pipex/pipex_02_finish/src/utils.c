@@ -6,11 +6,11 @@
 /*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 20:22:27 by lvintila          #+#    #+#             */
-/*   Updated: 2021/12/27 17:12:21 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/02/04 21:02:32 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/hsh.h"
+#include "../inc/pipex.h"
 
 void	check_str(char *str, char *cmd)
 {
