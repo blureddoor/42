@@ -1,0 +1,85 @@
+YELLOW		=	$(shell tput -Txterm setaf 3)
+GREEN		=	$(shell tput -Txterm setaf 2)
+BLUE		=	$(shell tput -Txterm setaf 4)
+RESET		=	$(shell tput -Txterm sgr0)
+
+DIR_LIBFT	=	libft
+
+NAME		= 	minishell
+
+CC			=	gcc
+
+#RL_FLAG		=	-L/Users/$(USER)/.brew/opt/readline/lib \
+				-I/Users/$(USER)/.brew/opt/readline/include
+
+#RL_FLAG		=	-L /usr/local/Cellar/readline/8.1.2/lib \
+				-I /usr/local/Cellar/readline/8.1.2/include 
+
+#RL_FLAG		=	-L/opt/homebrew/Cellar/readline/8.1.2/lib \
+				-I/opt/homebrew/Cellar/readline/8.1.2/include
+				
+RL_FLAG		=	-L/Users/lvintila/.brew/Cellar/readline/8.0.4/lib \
+				-I/Users/lvintila/.brew/Cellar/readline/8.0.4/include
+
+SAN_FLAG	=	-fsanitize=address -fdiagnostics-color=always -static-libsan
+DEBUG_FLAG	=	-g# -O0
+
+FLAG		=	$(RL_FLAG) $(SAN_FLAG) $(DEBUG_FLAG) -Wall -Werror -Wextra -I. -L/usr/include -lreadline -o $(NAME)
+
+DIR_S		=	src
+DIR_O		=	obj
+DIR_G		=	gnl
+INC			=	inc
+
+SOURCES_C	=	myshell.c \
+				myshell_loop.c \
+				utils.c \
+				parser.c \
+				utils_aux.c \
+				expander.c \
+				lexer.c \
+				executer.c \
+				heredoc.c \
+				builtins.c \
+				environment.c \
+				signals.c \
+				export.c \
+				utils2.c \
+				cleanup.c \
+				tokenizer_rules.c \
+				debug.c \
+				error.c
+
+SOURCES_G	=	get_next_line.c get_next_line_utils.c \
+
+SRCS		= 	$(addprefix $(DIR_S)/, $(SOURCES_C)) \
+				$(addprefix $(DIR_G)/, $(SOURCES_G)) \
+
+OBJS		=	$(SRCS:%.c=%.o)
+
+all:			$(NAME)
+
+$(NAME):		$(OBJS) inc/myshell.h
+				@echo "${YELLOW}... compiling libft... ${RESET}"
+				@make -C $(DIR_LIBFT)
+				@echo "${YELLOW}... compiling minishell... ${RESET}"
+				$(CC) $(OBJS) $(FLAG) -L $(DIR_LIBFT) $(DIR_LIBFT)/libft.a
+				@echo "${GREEN}DONE ${RESET}"
+
+$(DIR_O)/%.o:	$(DIR_S)/%.c $(INC)/minishell.h
+
+run:			$(NAME)
+				./minishell
+
+clean:
+				make -C $(DIR_LIBFT) clean
+				rm -f $(OBJS) $(DIR_O)
+				@echo "${GREEN} Cleaned ${RESET}"
+
+fclean:			clean
+				make -C $(DIR_LIBFT) fclean
+				rm -f $(NAME)
+				@echo "${GREEN} fcleaned ... Done!${RESET}"
+
+re:				fclean all
+				@echo "${GREEN} ... deleted and recompiled ... Done!${RESET}"

@@ -1,0 +1,22 @@
+{
+	"workbench.colorCustomizations": {
+		"[Ayu Dark Bordered]": {
+			"editor.background": "#000000",
+			"sideBar.background": "#000000",
+			"editor.selectionHighlightBackground": "#410000",
+			"editor.selectionHighlightBorder": "#ffc400",
+			"sideBar.foreground": "#fcfcfcc4"
+		},
+		"activityBar.background": "#4B1948",
+		"titleBar.activeBackground": "#6A2364",
+		"titleBar.activeForeground": "#FDF8FD"
+	},
+	"files.associations": {
+		"cmath": "c",
+		"*.tcc": "c",
+		"unistd.h": "c",
+		"libft.h": "c",
+		"myshell.h": "c",
+		"dirent.h": "c"
+	}
+}
