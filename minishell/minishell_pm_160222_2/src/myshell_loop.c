@@ -68,7 +68,7 @@ int myshell_loop(t_param *param, char *av[])
 		interactive = 0; 
 	*/
 
-	param->process_status = 0;
+	//g_status = 9;
 	while (1)
 	{
 		read = get_cmd(param);
@@ -84,14 +84,15 @@ int myshell_loop(t_param *param, char *av[])
 			param->tkn_lst = tokenizer(param->line, param);
 			param->cmd_lst = parser(param->tkn_lst, param);
 			expand_tokens(param->tkn_lst, param);
-			cmd_execute(param->cmd_lst, param);
+			g_status = cmd_execute(param->cmd_lst, param);
 			free_tokens(param->tkn_lst);
 			param->tkn_lst = NULL;
 			free_commands(param->cmd_lst);
 			param->cmd_lst = NULL;
+			printf("g_status myshell_loop = %d\n", g_status);
 		}
 		free(param->line);
 	}
 //	close(param->fd);
-	return (param->process_status);
+	return (g_status);
 }

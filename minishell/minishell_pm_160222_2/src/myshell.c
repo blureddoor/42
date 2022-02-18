@@ -118,7 +118,7 @@ int main(int ac, char *av[], char **env)
 	reg_parent_signals();
 	printf("\n%s\n", "M I N I S H E L L\t\t\tby pmontese & lvintila\n");
 	update_prompt(param);
-	status = myshell_loop(param, av);
+	g_status = myshell_loop(param, av);
 	cleanup(param);
 	return (g_status);
 }

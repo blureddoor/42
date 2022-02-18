@@ -9,24 +9,29 @@ int	try_bis(t_command *cmd, t_param *param, int ischild)
 {
 	int	ret;
 
-	ret = 1;
-	if (!ft_strcmp(cmd->name, "exit"))
+	g_status = 1;
+	if (!ft_strcmp(cmd->name, "exit\0"))
 		bi_exit(cmd, param, ischild);
-	else if (!ft_strcmp(cmd->name, "env"))
+	else if (!ft_strcmp(cmd->name, "env\0"))
 		bi_env(param, ischild);
-	else if (!ft_strcmp(cmd->name, "export"))
+	else if (!ft_strcmp(cmd->name, "export\0"))
 		bi_export(cmd, param, ischild);
-	else if (!ft_strcmp(cmd->name, "unset"))
+	else if (!ft_strcmp(cmd->name, "unset\0"))
 		bi_unset(cmd, param, ischild);
-	else if (!ft_strcmp(cmd->name, "cd"))
+	else if (!ft_strcmp(cmd->name, "cd\0"))
+	{
 		bi_cd(cmd, param);
-	else if (!ft_strcmp(cmd->name, "pwd"))
+		g_status = 1;
+	}
+	else if (!ft_strcmp(cmd->name, "pwd\0"))
 		bi_pwd(ischild);
-	else if (!ft_strcmp(cmd->name, "echo"))
+	else if (!ft_strcmp(cmd->name, "echo\0"))
 		bi_echo(cmd, ischild);
 	else
-		ret = 0;
-	return (ret);
+	{
+		g_status = 0;
+	}
+	return (g_status);
 }
 
 int	open_redirections(t_command *cmd, t_param *param, t_list *fileout_lst)
@@ -47,14 +52,16 @@ int	open_redirections(t_command *cmd, t_param *param, t_list *fileout_lst)
 	{
 		if (ft_wordcount(cmd->filein, ' ') > 1)
 		{
+			g_status = 1;
 			printf("%s: Ambiguous redirect\n", SHLNAME);
-			return (1);
+			return (g_status);
 		}
 		param->fd_in = open(cmd->filein, O_RDONLY);
 		if (param->fd_in < 0)
 		{
-			perror("Error(file_in): ");
-			return (1);
+			g_status = 1;
+			perror("minishell: ");
+			return (g_status);
 		}
 	}
 	if (fileout_lst != NULL)
@@ -108,7 +115,7 @@ void	update_command_args(t_command *c, t_param *param)
 		c->lastfileout = c->lastfileouttkn->cnt;
 }
 
-void	cmd_execute(t_list *cmd_list, t_param *param)
+int	cmd_execute(t_list *cmd_list, t_param *param)
 {
 	pid_t	pid;
 	int		i;
@@ -152,8 +159,9 @@ void	cmd_execute(t_list *cmd_list, t_param *param)
 		pid = fork();
 		if (pid < 0)
 		{
+			g_status = 1;
 			my_perror(param, FORK_ERR, NULL, 1);
-			return ;
+			return (g_status);
 		}
 		if (pid == 0)
 		{
@@ -175,22 +183,20 @@ void	cmd_execute(t_list *cmd_list, t_param *param)
 			if (!try_bis(cmd, param, 1))
 			{
 				file = find_path(cmd->argv[0], envp);
-		
-			g_status = 0;
 				if (execve(file, cmd->argv, envp) == -1)
 					{
 						g_status = 127;
-						ft_putstr_fd(ft_itoa(g_status), 2);
-						write(2, "\n", 1);
-						printf("execve %d\n", errno);
-						printf("strerror es %s\n", strerror(errno));
-					//	check_str(file, cmd->name, param);
-						exit(127);
+					//	ft_putstr_fd(ft_itoa(g_status), 2);
+					//	write(2, "\n", 1);
+					//	printf("execve %d\n", errno);
+						printf("g_status execve es %d\n", g_status);
+						check_str(file, cmd->name, param);
+					//	exit(127);
 					}
 			}
 			cleanup(param);
 			exit(0);
-		g_status = status;
+		//	g_status = status;
 		}
 		try_bis(cmd, param, 0);
 		reg_parent_signals();
@@ -201,7 +207,7 @@ void	cmd_execute(t_list *cmd_list, t_param *param)
 		close(fds[WRITE_END]);
 		close(fds[READ_END]);
 		waitpid(pid, &status, 0);
-		printf("status %d\n", status);
+		g_status = status;
 		i++;
 		if (DEBUG)
 		{
@@ -217,4 +223,7 @@ void	cmd_execute(t_list *cmd_list, t_param *param)
 	dup2(param->default_out, STDOUT_FILENO);
 	close(param->default_in);
 	close(param->default_out);
+	printf("g_status cmd_execute = %d\n", g_status);
+	return (g_status);
 }
+

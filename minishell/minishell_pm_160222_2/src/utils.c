@@ -12,6 +12,8 @@
 
 #include "../inc/myshell.h"
 
+int g_status;
+
 void	check_str(char *str, char *cmd, t_param *param)
 {
 	if (access(str, F_OK) != 0)
@@ -23,6 +25,7 @@ void	check_str(char *str, char *cmd, t_param *param)
 		//TODO limpiar memoria
 		cleanup(param);
 	//	printf("g_status is %d", g_status);
+	//	g_status = 127;
 		exit (g_status);
 	}
 }
@@ -35,9 +38,8 @@ char	*find_path(char *cmd, char **envp)
 	char	**tab;
 
  	//TODO cambiar la función para que no utilize envp, si no directamente param->env
-	if (ft_strchr(cmd, '/') && access(cmd, F_OK) == 0){
+	if (ft_strchr(cmd, '/') && access(cmd, F_OK) == 0)
 		return (cmd);
-	}
 		
 	i = -1;
 	while (envp[++i])
@@ -62,7 +64,7 @@ char	*find_path(char *cmd, char **envp)
 		free(str);
 	}
 	free_arr(tab);
-	printf("access %d\n", errno);
+	//printf("access %d\n", errno);
 	return (NULL);
 }
 

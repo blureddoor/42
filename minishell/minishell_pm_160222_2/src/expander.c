@@ -1,5 +1,5 @@
 #include "../inc/myshell.h"
-
+int	g_status;
 #define DEBUG 0
 
 /* returns the first expansion possible 
@@ -30,9 +30,13 @@ char	*expand2(char *str, int *read, t_param *param)
 	}
 	if (DEBUG)
 		printf("var name = %s\n", var_name);
-	ret = mygetenv(var_name, param);
+	if (access(mygetenv(var_name, param), F_OK) == -1) 
+		ret = mygetenv(var_name, param);
 	if (ret == NULL)
+	{
 		ret = ft_strdup("");
+		write(1, "\n", 1);
+	}
 	else
 		ret = ft_strdup(mygetenv(var_name, param));
 	free(var_name);
@@ -57,7 +61,6 @@ char	*the_expanse(char *str, t_param *param)
 		{
 			h = 0;
 			res = expand2(&str[i + 1], &h, param);
-	printf("errno expand es %d\n", errno);
 			if (DEBUG)
 				printf("res %s\n", res);
 			i += h + 1;
@@ -103,5 +106,6 @@ void	expand_tokens(t_list *tkn_lst, t_param *param)
 				printf("New tkn->cnt after expansion: '%s'\n", ((t_token*)(tmp->content))->cnt);
 		}
 		tmp = tmp->next;
+		
 	}
 }

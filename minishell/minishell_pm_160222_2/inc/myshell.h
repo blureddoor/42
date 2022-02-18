@@ -90,25 +90,6 @@ typedef struct	s_keyval
 	char	*val;
 }				t_keyval;
 
-typedef struct  s_param
-{
-	int			default_in;
-	int			default_out;
-	int			fd_in;
-	int 		fd_out;
-	char		*line;
-	int			cmdc; // num of commands 
-	t_keyval	**env;
-	int			envc; // num of env variables
-	int			envvalc; // num of env varirables with value, usado para generar el envp
-	int			process_status;
-	char		*prompt;
-	t_list		*tkn_lst;
-	t_list		*cmd_lst;
-
-}               t_param;
-
-
 typedef struct s_token
 {
 	char*	cnt;
@@ -144,6 +125,23 @@ typedef struct s_command
 	int		piped;
 }			t_command;
 
+typedef struct  s_param
+{
+	int			default_in;
+	int			default_out;
+	int			fd_in;
+	int 		fd_out;
+	char		*line;
+	int			cmdc; // num of commands 
+	t_keyval	**env;
+	int			envc; // num of env variables
+	int			envvalc; // num of env varirables with value, usado para generar el envp
+	int			process_status;
+	char		*prompt;
+	t_list		*tkn_lst;
+	t_list		*cmd_lst;
+	t_command	*cmd;
+}               t_param;
 # define RET 1
 # define SKIP 2
 
@@ -189,7 +187,7 @@ t_list		*parser(t_list *tknlst, t_param *param);
 void		print_cmd(t_command *cmd);
 
 /* Executer */
-void	cmd_execute(t_list *cmd_list, t_param *param);
+int	cmd_execute(t_list *cmd_list, t_param *param);
 
 /* Shell functions*/
 int         myshell_loop(t_param *param, char **av);

@@ -65,6 +65,6 @@ void	cleanup(t_param *param)
 	if (param->cmd_lst)
 		free_commands(param->cmd_lst);
 	free(param->prompt);
-	free(param->line);
+//	free(param->line); // daba segfault al hacer Ctrl + D (double free)
 	free(param);
 }

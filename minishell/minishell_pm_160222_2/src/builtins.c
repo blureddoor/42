@@ -135,6 +135,7 @@ void	bi_cd(t_command *cmd, t_param *param)
 		tmp = mygetenv("HOME", param);
 		if (!tmp)
 		{
+			g_status = 1;
 			perror("Error: Home not set");
 			return;
 		}
@@ -145,14 +146,17 @@ void	bi_cd(t_command *cmd, t_param *param)
 	if (access(tmp, F_OK) == -1)
 	{
 		//my_perror(param, NODIR, cmd->argv[1], 1);
+		g_status = 1;
 		free(pwd);
 		perror("Error: not found");
 		printf("errno es: %d\n", errno);
+		g_status = errno;
 		return;
 	}
 	dir = opendir(tmp);
 	if (!dir)
-	{
+	{		
+		g_status = 1;
 		free(pwd);
 		perror("Error: not a directory");
 		return;
@@ -221,6 +225,7 @@ int	bi_echo(t_command *cmd, int ischild)
 			if (cmd->argv[i + 1])
 				ft_putchar_fd(' ', 1);
 		}
+	//	ft_putchar_fd('\n', 1);
 	}
 	if (new_l)
 		ft_putchar_fd('\n', 1);
