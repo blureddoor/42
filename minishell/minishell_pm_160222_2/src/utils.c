@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 20:22:27 by lvintila          #+#    #+#             */
-/*   Updated: 2022/02/19 13:26:21 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/02/19 18:39:52 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	check_str(char *str, char *cmd, t_param *param)
 	{
 		my_perror(param, NOCMD, str, 127);
 		if (*cmd != 36)
-			write(2, cmd, ft_strlen(cmd));
-		write(2, "\n", 1);
+			write(1, cmd, ft_strlen(cmd));
+		write(1, "\n", 1);
 		//TODO limpiar memoria
 		cleanup(param);
 		exit (g_status);
@@ -38,6 +38,8 @@ char	*find_path(char *cmd, char **envp)
  	//TODO cambiar la función para que no utilize envp, si no directamente param->env
 	if (ft_strchr(cmd, '/') && access(cmd, F_OK) == 0)
 		return (cmd);
+	else
+		return ("");
 		
 	i = -1;
 	while (envp[++i])
