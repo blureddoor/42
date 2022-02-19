@@ -119,15 +119,19 @@ void	bi_unset(t_command *cmd, t_param *param, int ischild)
 	}
 }
 
-void	bi_cd(t_command *cmd, t_param *param)
+/* 
+int	bi_cd(t_command *cmd, t_param *param, int ischild)
 {
 	char		*pwd;
 	char		*tmp;
 	DIR			*dir;
 	t_keyval	*kv;
 
+	if (!ischild)
+		return (0);
+	
 	if (param->cmdc > 1)
-		return;
+		return (1);
 	pwd = getcwd(NULL, 0);
 	if (cmd->argc == 1) // if cd sin argumentos
 	{
@@ -136,8 +140,8 @@ void	bi_cd(t_command *cmd, t_param *param)
 		if (!tmp)
 		{
 			g_status = 1;
-			perror("Error: Home not set");
-			return;
+			perror("minishell: Home not set");
+			return (g_status);
 		}
 	}
 	else
@@ -148,18 +152,18 @@ void	bi_cd(t_command *cmd, t_param *param)
 		//my_perror(param, NODIR, cmd->argv[1], 1);
 		g_status = 1;
 		free(pwd);
-		perror("Error: not found");
-		printf("errno es: %d\n", errno);
-		g_status = errno;
-		return;
+		perror("minishell: cd");
+		printf("g_status cd es: %d\n", g_status);
+	//	g_status = errno;
+		return (g_status);
 	}
 	dir = opendir(tmp);
 	if (!dir)
 	{		
 		g_status = 1;
 		free(pwd);
-		perror("Error: not a directory");
-		return;
+		perror("minishell: cd notdir");
+		return (g_status);
 	}
 	// chdir a home
 	chdir(tmp);
@@ -170,7 +174,67 @@ void	bi_cd(t_command *cmd, t_param *param)
 	if (dir)
 		closedir(dir);
 	free(pwd);
+	return (g_status);
+} */
+
+void    bi_cd(t_command *cmd, t_param *param, int ischild)
+{
+    char        *pwd;
+    char        *tmp;
+    DIR         *dir;
+    t_keyval    *kv;
+
+    if (ischild)
+        return;
+    if (param->cmdc > 1)
+        return;
+    pwd = getcwd(NULL, 0);
+    if (cmd->argc == 1) // if cd sin argumentos
+    {
+        // comprobar variable home q exista
+        tmp = mygetenv("HOME", param);
+        if (!tmp)
+        {
+            perror("minishell: Home not set");
+			g_status = 1;
+            return;
+        }
+    }
+    else
+        tmp = cmd->argv[1];
+    // comprobar q existe y q es un directorio
+    if (access(tmp, F_OK) == -1)
+    {
+        free(pwd);
+		my_perror(param, NODIR, cmd->argv[1], 1);
+   /*      perror("cd");
+		ft_putstr_fd(cmd->argv[1], 2); */
+		g_status = 1;
+        return;
+    }
+    dir = opendir(tmp);
+    if (!dir)
+    {
+        free(pwd);
+		
+        perror("Error: not a directory");
+		g_status = 1;
+        return;
+    }
+    // actualizar env oldpwd = env pwd
+    my_setenv("OLDPWD", pwd, param);
+    // chdir a home
+    chdir(tmp);
+    free(pwd);
+    pwd = getcwd(NULL, 0);
+    // actualizar env pwd = arg1
+    my_setenv("PWD", pwd, param);
+    if (dir)
+        closedir(dir);
+    free(pwd);
+    update_prompt(param);
 }
+
 
 int	bi_pwd(int ischild)
 {
@@ -187,9 +251,6 @@ int	bi_pwd(int ischild)
 
 static int	is_n_option(char *argv)
 {
-	// ft_putstr("is_n: ");
-	// ft_putstr(argv);
-	// ft_putstr("\n");
 	if (!argv)
 		return (1);
 	if (argv && *argv == '-')
@@ -225,7 +286,6 @@ int	bi_echo(t_command *cmd, int ischild)
 			if (cmd->argv[i + 1])
 				ft_putchar_fd(' ', 1);
 		}
-	//	ft_putchar_fd('\n', 1);
 	}
 	if (new_l)
 		ft_putchar_fd('\n', 1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   myshell.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 18:55:41 by lvintila          #+#    #+#             */
-/*   Updated: 2022/02/17 20:01:46 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/02/18 23:36:47 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	init_param(t_param *param, char **env)
 	t_keyval	*keyval;
 	char 		*str;
 
- 	param->line				= NULL;
+	g_status = 0;
+	param->line				= NULL;
 	param->default_in		= 0;
 	param->default_out		= 0;
 	param->fd_in			= 0;

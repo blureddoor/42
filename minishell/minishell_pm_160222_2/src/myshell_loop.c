@@ -6,7 +6,7 @@
 /*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 17:58:38 by lvintila          #+#    #+#             */
-/*   Updated: 2022/02/16 22:07:21 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/02/18 23:28:30 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int myshell_loop(t_param *param, char *av[])
 			param->tkn_lst = NULL;
 			free_commands(param->cmd_lst);
 			param->cmd_lst = NULL;
-			printf("g_status myshell_loop = %d\n", g_status);
+			//printf("g_status myshell_loop = %d\n", g_status);
 		}
 		free(param->line);
 	}

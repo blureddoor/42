@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   myshell.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 18:01:48 by lvintila          #+#    #+#             */
-/*   Updated: 2022/02/17 21:23:31 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/02/19 11:17:25 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ void		bi_exit(t_command *cmd, t_param *param, int ischild);
 void		bi_env(t_param *param, int ischild);
 void		bi_export(t_command *cmd, t_param *param, int ischild);
 void		bi_unset(t_command *cmd, t_param *param, int ischild);
-void		bi_cd(t_command *cmd, t_param *param);
+void		bi_cd(t_command *cmd, t_param *param, int ischild);
 int			bi_echo(t_command *cmd, int ischild);
 int			bi_pwd(int ischild);
 
@@ -253,5 +253,8 @@ void	print_tkn(t_token *tkn);
 void	print_cmd(t_command *cmd);
 
 void	*my_perror(t_param *param, int err_type, char *str, int errnum);
+void	update_prompt(t_param *param);
+int	check_str_permissions(char **str);
+/* void		wait_for(t_param *param); */
 
 #endif

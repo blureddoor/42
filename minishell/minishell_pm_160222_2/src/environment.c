@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmontese <pmontes@student.42madrid.com>    +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:38:17 by pmontese          #+#    #+#             */
-/*   Updated: 2022/02/12 23:18:05 by pmontese         ###   ########.fr       */
+/*   Updated: 2022/02/18 23:55:20 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	set_env_var(t_keyval *var, t_param *param)
 	}
 }
 
-// esta función presupone que la variable existe
+/* // esta función presupone que la variable existe
 void	unset_env_var(char *name, t_param *param)
 {
 	t_keyval	**new_env;
@@ -115,6 +115,36 @@ void	unset_env_var(char *name, t_param *param)
 		free(param->env);
 	param->env = new_env;
 	param->envc--;
+} */
+
+void    unset_env_var(char *name, t_param *param)
+{
+    t_keyval    **new_env;
+    int         i;
+    int         j;
+    new_env = (t_keyval**)(malloc(sizeof(t_keyval) * (param->envc - 1)));
+    i = 0;
+    j = 0;
+    while (i < param->envc)
+    {
+        if (ft_strcmp(name, param->env[i]->key) == 0)
+        {
+            free(param->env[i]->key);
+            if (param->env[i]->val)
+                param->envvalc--;
+            free(param->env[i]->val);
+            free(param->env[i]);
+            i++;
+            continue;
+        }
+        new_env[j] = param->env[i];
+        i++;
+        j++;
+    }
+    if (param->env != NULL)
+        free(param->env);
+    param->env = new_env;
+    param->envc--;
 }
 
 char		*mygetenv(char *name, t_param *param)

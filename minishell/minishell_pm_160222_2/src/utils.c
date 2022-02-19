@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <lvintila@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 20:22:27 by lvintila          #+#    #+#             */
-/*   Updated: 2022/02/17 20:48:26 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/02/19 13:26:21 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,14 @@ int g_status;
 
 void	check_str(char *str, char *cmd, t_param *param)
 {
-	if (access(str, F_OK) != 0)
+	if (access(str, F_OK) != 0 || access(str, X_OK) != 0)
 	{
-		my_perror(param, NOCMD, NULL, 127);
-//		write(2, "command not found: ", 20);
-		write(2, cmd, ft_strlen(cmd));
+		my_perror(param, NOCMD, str, 127);
+		if (*cmd != 36)
+			write(2, cmd, ft_strlen(cmd));
 		write(2, "\n", 1);
 		//TODO limpiar memoria
 		cleanup(param);
-	//	printf("g_status is %d", g_status);
-	//	g_status = 127;
 		exit (g_status);
 	}
 }
@@ -64,7 +62,6 @@ char	*find_path(char *cmd, char **envp)
 		free(str);
 	}
 	free_arr(tab);
-	//printf("access %d\n", errno);
 	return (NULL);
 }
 
@@ -141,4 +138,52 @@ int	found_char(char *str, char c)
 		}
 	}
 	return (1);
+}
+
+/* void    update_prompt(t_param *param)
+{  
+    char        *logname;
+    char        *pwd;
+    char        *tmp;
+    if (mygetenv("LOGNAME", param))
+    {
+        logname = ft_strdup(mygetenv("LOGNAME", param));
+        tmp = logname;
+        logname = ft_strjoin(logname, ":");
+        free(tmp);
+    }
+    else
+        logname = ft_strdup("");
+    if (mygetenv("PWD", param))
+        pwd = ft_strdup(mygetenv("PWD", param));
+    else
+        pwd = ft_strdup("");
+    tmp = ft_strjoin(logname, pwd);
+    free(pwd);
+    free(param->prompt);
+    param->prompt = ft_strjoin(tmp, "$ ");
+    free(tmp);
+    free(logname);
+} */
+
+/* void	wait_for(t_param *param)
+{
+	int	status;
+	pid_t	pid;
+
+
+} */
+
+int	check_str_permissions(char **str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] && str[i] != NULL)
+	{
+		if (access (str[i], X_OK) != 0)
+			return (1);
+		i++;
+	}
+	return (0);
 }

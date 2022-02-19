@@ -9,29 +9,24 @@ int	try_bis(t_command *cmd, t_param *param, int ischild)
 {
 	int	ret;
 
-	g_status = 1;
-	if (!ft_strcmp(cmd->name, "exit\0"))
+	ret = 1;
+	if (!ft_strcmp(cmd->name, "exit"))
 		bi_exit(cmd, param, ischild);
-	else if (!ft_strcmp(cmd->name, "env\0"))
+	else if (!ft_strcmp(cmd->name, "env"))
 		bi_env(param, ischild);
-	else if (!ft_strcmp(cmd->name, "export\0"))
+	else if (!ft_strcmp(cmd->name, "export"))
 		bi_export(cmd, param, ischild);
-	else if (!ft_strcmp(cmd->name, "unset\0"))
+	else if (!ft_strcmp(cmd->name, "unset"))
 		bi_unset(cmd, param, ischild);
-	else if (!ft_strcmp(cmd->name, "cd\0"))
-	{
-		bi_cd(cmd, param);
-		g_status = 1;
-	}
-	else if (!ft_strcmp(cmd->name, "pwd\0"))
+	else if (!ft_strcmp(cmd->name, "cd"))
+		bi_cd(cmd, param, ischild);
+	else if (!ft_strcmp(cmd->name, "pwd"))
 		bi_pwd(ischild);
-	else if (!ft_strcmp(cmd->name, "echo\0"))
+	else if (!ft_strcmp(cmd->name, "echo"))
 		bi_echo(cmd, ischild);
 	else
-	{
-		g_status = 0;
-	}
-	return (g_status);
+		ret = 0;
+	return (ret);
 }
 
 int	open_redirections(t_command *cmd, t_param *param, t_list *fileout_lst)
@@ -60,7 +55,8 @@ int	open_redirections(t_command *cmd, t_param *param, t_list *fileout_lst)
 		if (param->fd_in < 0)
 		{
 			g_status = 1;
-			perror("minishell: ");
+			perror("minishell");
+		//	my_perror(param, NOPERM, cmd->filein, 1);
 			return (g_status);
 		}
 	}
@@ -71,13 +67,33 @@ int	open_redirections(t_command *cmd, t_param *param, t_list *fileout_lst)
 			fo = (t_fileout*)fileout_lst->content;
 			if (ft_wordcount(fo->file, ' ') > 1)
 			{
+			//	g_status = 1;
+			//	perror("minishell:");
 				printf("%s: Ambiguous redirect\n", SHLNAME);
 				return (1);
 			}
 			if (fo->append)
-				param->fd_out = open(fo->file, O_CREAT | O_WRONLY | O_APPEND, 0664);
+			{
+				if (access(fo->file, F_OK) == 0 && access(fo->file, W_OK) == -1)
+				{
+					g_status = 1;
+					my_perror(param, NOPERM, fo->file, 1);
+					return (g_status);
+				}
+				else
+					param->fd_out = open(fo->file, O_CREAT | O_WRONLY | O_APPEND, 0664);
+			}
 			else
-				param->fd_out = open(fo->file, O_CREAT | O_WRONLY | O_TRUNC, 0664);
+			{
+				if (access(fo->file, F_OK) == 0 && access(fo->file, R_OK) != 0)
+				{
+					g_status = 1;
+					my_perror(param, NOPERM, fo->file, 1);
+					return (g_status);
+				}
+				else
+					param->fd_out = open(fo->file, O_CREAT | O_WRONLY | O_TRUNC, 0664);
+			}
 			fileout_lst = fileout_lst->next;
 		}
 	}
@@ -127,7 +143,7 @@ int	cmd_execute(t_list *cmd_list, t_param *param)
 
 	if (DEBUG)
 		printf("\nLIST EXECUTER----\n");
-	status = 0;
+	g_status = 0;
 	/* set the initial input */
 	i = 0;
 	param->default_in = dup(STDIN_FILENO);
@@ -182,32 +198,41 @@ int	cmd_execute(t_list *cmd_list, t_param *param)
 			envp = make_envp(param);
 			if (!try_bis(cmd, param, 1))
 			{
-				file = find_path(cmd->argv[0], envp);
-				if (execve(file, cmd->argv, envp) == -1)
+ 				file = find_path(cmd->argv[0], envp);
+/* 				if (!check_str_permissions(cmd->argv))
+					perror ("error_perm"); */
+/*				else
+				{ */
+					if (execve(file, cmd->argv, envp) == -1)
 					{
-						g_status = 127;
-					//	ft_putstr_fd(ft_itoa(g_status), 2);
-					//	write(2, "\n", 1);
-					//	printf("execve %d\n", errno);
-						printf("g_status execve es %d\n", g_status);
 						check_str(file, cmd->name, param);
 					//	exit(127);
 					}
+			/* 	} */
 			}
 			cleanup(param);
 			exit(0);
-		//	g_status = status;
 		}
-		try_bis(cmd, param, 0);
-		reg_parent_signals();
-		//TODO: si es directorio soltar printf("%s: Is a directory"), i++, continue
-		// param->fd_in -> pipe read
-		dup2(fds[READ_END], param->fd_in);
-		// cierra pipes
-		close(fds[WRITE_END]);
-		close(fds[READ_END]);
-		waitpid(pid, &status, 0);
-		g_status = status;
+		else
+		{
+			try_bis(cmd, param, 0);
+
+			//TODO: si es directorio soltar printf("%s: Is a directory"), i++, continue
+			// param->fd_in -> pipe read
+			dup2(fds[READ_END], param->fd_in);
+			// cierra pipes
+			close(fds[WRITE_END]);
+			close(fds[READ_END]);
+			waitpid(pid, &status, 0);
+			if (status == 2)
+				g_status = 130;
+			if (status == 3)
+				g_status = 131;
+			if (status == 32512)
+				g_status = status % 255;
+		}
+
+			reg_parent_signals();
 		i++;
 		if (DEBUG)
 		{
@@ -223,7 +248,6 @@ int	cmd_execute(t_list *cmd_list, t_param *param)
 	dup2(param->default_out, STDOUT_FILENO);
 	close(param->default_in);
 	close(param->default_out);
-	printf("g_status cmd_execute = %d\n", g_status);
 	return (g_status);
 }
 

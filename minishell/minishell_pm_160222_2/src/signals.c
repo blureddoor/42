@@ -14,11 +14,7 @@ void	child_hdl(int signum)
 {
 
 	if (signum == SIGQUIT)
-	{
-		//my_perror
-		printf("Quit: 3");
-		//set status a 131?
-	}	
+		ft_putstr_fd("Quit: 3\n", 2);
 }
 
 void	reg_parent_signals()

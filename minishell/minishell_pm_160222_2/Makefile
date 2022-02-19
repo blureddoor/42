@@ -12,10 +12,10 @@ CC			=	gcc
 #RL_FLAG		=	-L/Users/$(USER)/.brew/opt/readline/lib \
 				-I/Users/$(USER)/.brew/opt/readline/include
 
-RL_FLAG		=	-L /usr/local/Cellar/readline/8.1.2/lib \
+#RL_FLAG		=	-L /usr/local/Cellar/readline/8.1.2/lib \
 				-I /usr/local/Cellar/readline/8.1.2/include 
 
-#RL_FLAG		=	-L/opt/homebrew/Cellar/readline/8.1.2/lib \
+RL_FLAG		=	-L/opt/homebrew/Cellar/readline/8.1.2/lib \
 				-I/opt/homebrew/Cellar/readline/8.1.2/include
 				
 #RL_FLAG		=	-L/Users/lvintila/.brew/Cellar/readline/8.0.4/lib \
