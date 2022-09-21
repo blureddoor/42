@@ -10,5 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <dumf.hpp>
+#include "dumf.hpp"
+
+int main()
+{
+	Agenda agenda;
+
+	agenda.dumf_loop();
+	return (0);
+}
 

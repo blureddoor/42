@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dumf.hpp                                           :+:      :+:    :+:   */
+/*   utils.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/26 22:01:35 by lvintila          #+#    #+#             */
-/*   Updated: 2022/08/26 22:05:49 by lvintila         ###   ########.fr       */
+/*   Created: 2022/09/21 20:25:31 by lvintila          #+#    #+#             */
+/*   Updated: 2022/09/21 20:34:44 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef UTILS_HPP
+#define UTILS_HPP
 
+#include <string>
 
-#ifndef DUMF_HPP
-#define DUMF_HPP
+void    rtrim(std::string &str, const char *chars = " \n");
 
-#include "contacts.hpp"
+std::string  cut_and_dot(std::string str, size_t max_len);
 
-#define MAX_CONTACTS 8
-
-class Agenda
-{
-	private:
-		Contact contacts[MAX_CONTACTS];
-		int in_use;
-
-		void add();
-		void display_search_table();
-		void search();
-		void rec_and_del_first();
-	public:
-		Agenda();
-		void dumf_loop();
-};
+bool    is_natural_number(std::string str);
 
 #endif
