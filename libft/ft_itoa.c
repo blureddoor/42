@@ -3,35 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmontese <pmontes@student.42madrid.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 10:20:57 by lvintila          #+#    #+#             */
-/*   Updated: 2020/01/15 18:50:15 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/02/24 00:26:50 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static size_t	ft_intlen(long nb)
+{
+	size_t	count;
+
+	count = 0;
+	if (nb == 0)
+	{
+		count++;
+		return (count);
+	}
+	if (nb < 0)
+	{
+		nb = nb * -1;
+		count++;
+	}
+	while (nb > 0)
+	{
+		nb = nb / 10;
+		count++;
+	}
+	return (count);
+}
+
 char	*ft_itoa(int n)
 {
-	char	*str;
+	char	*strnum;
+	size_t	len;
+	long	nb;
 
-	if (!(str = (char *)malloc(sizeof(char) * 2)))
+	nb = n;
+	len = ft_intlen(nb);
+	strnum = (char *)malloc(sizeof(char) * len + 1);
+	if (!strnum)
 		return (NULL);
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	if (n < 0)
+	strnum[len--] = '\0';
+	if (n == 0)
+		strnum[0] = '0';
+	if (nb < 0)
 	{
-		str[0] = '-';
-		str[1] = '\0';
-		str = ft_strjoin(str, ft_itoa(-n));
+		strnum[0] = '-';
+		nb = nb * -1;
 	}
-	else if (n >= 10)
-		str = ft_strjoin(ft_itoa(n / 10), ft_itoa(n % 10));
-	else if (n < 10 && n >= 0)
+	while (nb > 0)
 	{
-		str[0] = n + '0';
-		str[1] = '\0';
+		strnum[len] = (nb % 10) + '0';
+		nb = nb / 10;
+		len--;
 	}
-	return (str);
+	return (strnum);
 }

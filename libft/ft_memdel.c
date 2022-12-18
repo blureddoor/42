@@ -3,20 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lvintila <lvintila@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/24 12:59:59 by lvintila          #+#    #+#             */
-/*   Updated: 2020/02/24 20:06:41 by lvintila         ###   ########.fr       */
+/*   Created: 2021/07/04 19:00:04 by lvintila          #+#    #+#             */
+/*   Updated: 2021/07/04 19:00:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_memdel(char **s)
+void	ft_memdel(void **ap)
 {
-	if (s != NULL)
+	if (ap != NULL)
 	{
-		free(*s);
-		*s = NULL;
+		if (*ap != NULL)
+		{
+			free(*ap);
+			*ap = NULL;
+		}
 	}
 }

@@ -3,40 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmontese <pmontes@student.42madrid.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 23:02:15 by lvintila          #+#    #+#             */
-/*   Updated: 2020/01/20 17:19:22 by lvintila         ###   ########.fr       */
+/*   Updated: 2022/02/24 00:26:04 by lvintila         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+long long int	ft_atoi(const char *str)
 {
-	int				neg;
-	long long int	res;
+	int				i;
+	int				sign;
+	long long int	nbr;
 
-	res = 0;
-	while (*str == ' ' || *str == '\t' || *str == '\n'
-			|| *str == '\v' || *str == '\f' || *str == '\r')
-		str++;
-	if (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
-			neg = -1;
-		str++;
-		if (!(ft_isdigit(*str) && *str != '-'))
-			return (0);
-	}
-	while (ft_isdigit(*str))
-	{
-		res = res * 10 + *str - 48;
-		str++;
-		if (res > 2147483648 && neg == 1)
-			return (-1);
-		else if (res > 2147483648 && neg == -1)
-			return (0);
-	}
-	return (neg == -1 ? -res : res);
+	i = 0;
+	sign = 1;
+	nbr = 0;
+	if (!str[i])
+		return (0);
+	while (ft_isspace(str[i]))
+		i += 1;
+	if (str[i] == '-' || str[i] == '+')
+		if (str[i++] == '-')
+			sign = -1;
+	while (str[i] >= '0' && str[i] <= '9')
+		nbr = (nbr * 10) + (str[i++] - '0');
+	return (nbr * sign);
 }

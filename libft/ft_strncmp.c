@@ -6,7 +6,7 @@
 /*   By: lvintila <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 16:33:29 by lvintila          #+#    #+#             */
-/*   Updated: 2020/01/09 18:19:00 by lvintila         ###   ########.fr       */
+/*   Updated: 2021/04/21 18:51:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 	i = 0;
 	while (s1[i] && s2[i] && (unsigned char)s1[i] == (unsigned char)s2[i]
-			&& i < n)
+		&& i < n)
 		i++;
 	if (i == n)
 		return (0);
